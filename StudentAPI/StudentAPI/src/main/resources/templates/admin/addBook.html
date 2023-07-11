@@ -18,7 +18,7 @@
               <h5 class="card-title">Add Book...</h5>
 
               <!-- Vertical Form -->
-              <form class="row g-3" th:action="@{admin/addBook}" method="post" enctype="multipart/form-data" th:Object="${book}">
+              <form class="row g-3" th:action="@{/admin/addBook}" method="post" enctype="multipart/form-data" th:Object="${book}">
                 <div class="col-12">
                   <label for="subName" class="form-label">Subject Name</label>
                   <input type="text" name="subName" class="form-control" id="inputNanme4" th:field="*{subName}">
@@ -33,11 +33,11 @@
                 </div>
                 <div class="col-12">
                   <label for="subIcon" class="form-label">Subject Icon</label>
-                  <input type="file" name="subIcon" class="form-control" id="subIcon" th:field="*{subIcon}" accept="image/png, image/jpg" placeholder="input file...">
+                  <input type="text" name="subIcon" class="form-control" id="subIcon" th:field="*{subIcon}" accept="image/png, image/jpg" placeholder="input file...">
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset"  name="reset" class="btn btn-secondary">Reset</button>
                 </div>
               </form><!-- Vertical Form -->
 

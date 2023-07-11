@@ -26,13 +26,13 @@ public class BookController {
 	@Autowired
 	private ChapterService chapterService;
 
-	@PostMapping("/bookadds")
-	public Book addBook(@RequestBody Book Book) {
-		System.out.println("Book Panle...");
-		Book var = this.bookService.addBook(Book);
-		System.out.println("Inserted successfully ::" + var);
-		return var;
-	}
+//	@PostMapping("/bookadds")
+//	public Book addBook(@RequestBody Book Book) {
+//		System.out.println("Book Panle...");
+//		Book var = this.bookService.addBook(Book);
+//		System.out.println("Inserted successfully ::" + var);
+//		return var;
+//	}
 
 	@GetMapping("/book")
 	public List<Book> getBooks(Model model) {

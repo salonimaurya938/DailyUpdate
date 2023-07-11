@@ -1,6 +1,5 @@
 package com.sabpaisa.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sabpaisa.dto.BookDto;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.fileuploading.Fileuploading;
@@ -32,8 +32,12 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+
+	@Autowired
+	BookService bookService;
 	
-	@Autowired BookService bookService;
+	@Autowired(required = false)
+	private BookDto bookDto;
 
 	public AdminController(AdminService adminService) {
 		super();
@@ -77,42 +81,6 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("loginList", loginList);
 		return mv;
-	}
-
-	@RequestMapping("/admin/addBook")
-	public ModelAndView addBook(Model model) {
-		model.addAttribute("title", "AddBook-Student Management System");
-		System.out.println("first block..");
-		Book book = new Book();
-		model.addAttribute("book", book);
-		ModelAndView mv = new ModelAndView("admin/addBook");
-		mv.addObject("admin/addBook", new Admin());
-		return mv;
-	}
-	
-	@PostMapping("/admin/addBook")
-	public String bookSave(Book book, @RequestParam("image")MultipartFile multipartFile) throws IOException {
-		System.out.println("switching...");
-		ModelAndView mv = new ModelAndView("admin/addBook");
-		if(!multipartFile.isEmpty()) {
-			System.out.println("if column...");
-			String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
-			book.setSubIcon(fileName);
-			Book bookSave = bookService.addBook(book);
-			String uplaod= "img/"+ book.getId();
-			Fileuploading.saveFile(uplaod, fileName, multipartFile);
-			
-		}else {
-			System.out.println("else column...");
-			if(book.getSubIcon().isEmpty()) {}
-			book.getSubIcon();
-			bookService.addBook(book);
-			
-		}
-		System.out.println("return column...");
-		bookService.addBook(book);
-		return "admin/saveBook";
-		
 	}
 
 	@RequestMapping("/admin/downloadBook")
@@ -171,5 +139,51 @@ public class AdminController {
 		this.adminService.deleteAdmin(adminId);
 		System.out.println("Deleted Successfully!!!");
 	}
+	
+	
+//	.......................Book handler................
+	
+	@RequestMapping("/admin/addBook")
+	public String bookBook(Model model) {
+		model.addAttribute("title", "AddBook-Student Management System");
+		Book book = new Book();		
+		model.addAttribute("book", book);
+		return "admin/addBook";
+	}	
+	
+	@PostMapping("/admin/addBook")
+	public String insertBook(@ModelAttribute("admin/addBook") Book book)
+	{
+		System.out.println("inserting data..");		
+		bookService.addBook(book);
+		System.out.println("data inserted value ::"+bookService.addBook(book));
+		return "redirect:/admin/profile";
+	}
+	
+//	@PostMapping("/addBook")
+//	public String bookSave(@ModelAttribute("addBook") Book book, @RequestParam("subIcon")MultipartFile multipartFile) throws IOException {
+//		System.out.println("switching...");
+//		ModelAndView mv = new ModelAndView("admin/addBook");
+//		if(!multipartFile.isEmpty()) {
+//			System.out.println("if column...");
+//			String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//			book.setSubIcon(fileName);
+//			Book bookSave = bookService.addBook(book);
+//			String uplaod= "/img/"+ book.getId();
+//			Fileuploading.saveFile(uplaod, fileName, multipartFile);
+//			
+//		}else {
+//			System.out.println("else column...");
+//			if(book.getSubIcon().isEmpty()) {}
+//			book.getSubIcon();
+//			bookService.addBook(book);
+//			
+//		}
+//		System.out.println("return column...");
+//		bookService.addBook(book);
+//		return "admin/saveBook";
+//		
+//	}
+
 
 }
