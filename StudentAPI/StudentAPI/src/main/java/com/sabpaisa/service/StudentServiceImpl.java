@@ -1,0 +1,51 @@
+package com.sabpaisa.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sabpaisa.dao.StudentDao;
+import com.sabpaisa.entity.Student;
+
+@Service
+public class StudentServiceImpl implements StudentService {
+	
+	@Autowired
+	private StudentDao studentDao;
+	
+
+	@Override
+	public List<Student> getStudents() {
+		// TODO Auto-generated method stub
+		return studentDao.findAll();
+	}
+	
+	@Override
+	public Optional<Student> getStudent(int studentid) {
+		Optional<Student> getById = studentDao.findById(studentid);
+		return getById;
+	}
+
+	@Override
+	public Student addStudent(Student student) {
+		Student add=studentDao.save(student);
+		return add;
+	}
+
+	@Override
+	public Student updateStudent(Student student) {
+		 Student update=studentDao.save(student);
+		return update;
+	}
+
+	@Override
+	public void deleteStudent(int Delete_id) {
+	 Student entity= studentDao.getOne(Delete_id);
+	 studentDao.delete(entity);
+		
+	}
+	
+
+}
