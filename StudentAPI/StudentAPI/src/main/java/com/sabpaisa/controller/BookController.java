@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
+import com.sabpaisa.entity.HomeWork;
 import com.sabpaisa.service.BookService;
 import com.sabpaisa.service.ChapterService;
+import com.sabpaisa.service.HomeWorkService;
 
 @RestController
 public class BookController {
@@ -25,14 +27,20 @@ public class BookController {
 	
 	@Autowired
 	private ChapterService chapterService;
+	
+	@Autowired 
+	private HomeWorkService homeWorkService;
+	
+	
+//	Subject Controller Handler.........................................
 
-//	@PostMapping("/bookadds")
-//	public Book addBook(@RequestBody Book Book) {
-//		System.out.println("Book Panle...");
-//		Book var = this.bookService.addBook(Book);
-//		System.out.println("Inserted successfully ::" + var);
-//		return var;
-//	}
+	@PostMapping("/bookadds")
+	public Book addBook(@RequestBody Book Book) {
+		System.out.println("Book Panle...");
+		Book var = this.bookService.addBook(Book);
+		System.out.println("Inserted successfully ::" + var);
+		return var;
+	}
 
 	@GetMapping("/book")
 	public List<Book> getBooks(Model model) {
@@ -100,6 +108,47 @@ public class BookController {
 	@DeleteMapping("/cdeletes/{chapterid}")
 	public void deleteChapter(@PathVariable int chapterid) {
 		this.chapterService.deleteChapter(chapterid);
+		System.out.println("Deleted Successfully!!!");
+	}
+	
+	
+//	 HomeWork controller handler ....................
+	
+	
+	@PostMapping("/homeWorkadd")
+	public HomeWork addHomeWork(@RequestBody HomeWork homeWork) {
+		System.out.println("HomeWork Panle...");
+		HomeWork var = this.homeWorkService.addHomeWork(homeWork);
+		System.out.println("Inserted successfully ::" + var);
+		return var;
+	}
+
+	@GetMapping("/homeWorks")
+	public List<HomeWork> getHomeWorks(Model model) {
+		List<HomeWork> homeWork = homeWorkService.getHomeWorks();
+		model.addAttribute("HomeWork", homeWorkService.getHomeWorks());
+		System.out.println("Fetech All Student Data ::" + homeWork);
+		return homeWork;
+	}
+
+	@GetMapping("/homeWork/{homeWorkid}")
+	public String getHomeWork(@PathVariable("homeWorkid") int homeWorkid, Model model) {
+	       Optional<HomeWork> homeWork =this.homeWorkService.gethomeWork(homeWorkid);
+	       model.addAttribute("homeWork", homeWork);
+		return "homeWork";
+	}
+
+	@PutMapping("/homeWorkUpdate")
+	public HomeWork updateHomeWork(@RequestBody HomeWork homeWork) {
+		System.out.println("test...");
+		HomeWork var = this.homeWorkService.updateHomeWork(homeWork);
+		System.out.println("Updated successfully ::" + var);
+		return var;
+	}
+
+	@DeleteMapping("/cdeletes/{homeWorkid}")
+	public void deleteHomeWork(@PathVariable int homeWorkid) {
+		this.homeWorkService.deleteHomeWork(homeWorkid);
 		System.out.println("Deleted Successfully!!!");
 	}
 	
