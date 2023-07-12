@@ -71,7 +71,7 @@ public class BookController {
 		System.out.println("Deleted Successfully!!!");
 	}
 	
-//	 chapter controller handler ....................
+//	 Chapter controller handler ....................
 	
 	
 	@PostMapping("/Chapteradd")
@@ -150,8 +150,5 @@ public class BookController {
 	public void deleteHomeWork(@PathVariable int homeWorkid) {
 		this.homeWorkService.deleteHomeWork(homeWorkid);
 		System.out.println("Deleted Successfully!!!");
-	}
-	
-	
-		
+	}		
 }

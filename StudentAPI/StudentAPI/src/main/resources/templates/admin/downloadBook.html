@@ -1,4 +1,4 @@
-<div th:replace="master::layout(~{::section})">
+<div th:replace="base::layout(~{::section})">
 
 	<section>
 		<main id="main" class="main">
@@ -13,8 +13,39 @@
 					</ol>
 				</nav>
 			</div><!-- End Page Title -->
+			
+	<table border="2" width="100%">
+    <tr>
+        <th>Id</th>
+        <th>Subject Name</th>
+        <th>Subject Icon</th>
+        <th>Subject Title</th>
+        <th>Subject Status</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="books:${book}">
+		<td th:text="${books.id}"></td>
+		<td th:text="${books.subName}"></td>
+		<td th:text="${books.subTitle}"></td>
+		<td th:text="${books.subIcon}"></td>
+		<td th:text="${books.substatus}"></td>
+		<td>
+			
+			<button class="bg-danger"><a th:href="|@{/admin/deleteBook}|"  style="color: white;">Delete</a></button>
+			<button class="bg-success"><a href="admin/aupdate" style="color: white;">Update</a>&nbsp;</button>
+			<button class="bg-info"><a href="admin/downloadBook" style="color: white;">Download</a>&nbsp;</button>
+		</td>
+	</tr>
+	</table>
 
 		</main><!-- End #main -->
 	</section>
 
 </div>
+
+<style>
+button{
+	border-radius: 5px;
+	color:white;
+}
+</style>

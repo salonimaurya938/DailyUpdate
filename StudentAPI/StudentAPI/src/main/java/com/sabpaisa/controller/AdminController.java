@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,14 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sabpaisa.dto.BookDto;
+import com.sabpaisa.dao.BookDao;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
-import com.sabpaisa.fileuploading.Fileuploading;
+
 import com.sabpaisa.service.AdminService;
 import com.sabpaisa.service.BookService;
 
@@ -36,8 +34,8 @@ public class AdminController {
 	@Autowired
 	BookService bookService;
 	
-	@Autowired(required = false)
-	private BookDto bookDto;
+//	@Autowired
+//	private BookDao bookDao;
 
 	public AdminController(AdminService adminService) {
 		super();
@@ -81,24 +79,6 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView("home");
 		mv.addObject("loginList", loginList);
 		return mv;
-	}
-
-	@RequestMapping("/admin/downloadBook")
-	public String downloadBook(Model model) {
-		model.addAttribute("title", "Download-Student Management System");
-		return "admin/downloadBook";
-	}
-
-	@RequestMapping("/admin/deleteBook")
-	public String deleteBook(Model model) {
-		model.addAttribute("title", "DeleteBook-Student Management System");
-		return "admin/deleteBook";
-	}
-
-	@RequestMapping("/admin/aupdate")
-	public String aupdate(Model model) {
-		model.addAttribute("title", "Update-Student Management System");
-		return "admin/aupdate";
 	}
 
 	///////////////////////////// Admin Controller //////////////////////////////
@@ -159,6 +139,60 @@ public class AdminController {
 		System.out.println("data inserted value ::"+bookService.addBook(book));
 		return "redirect:/admin/profile";
 	}
+	
+	@RequestMapping("/admin/aupdate")
+	public String aupdate(Model model) {
+		System.out.println("update category......");
+		model.addAttribute("title", "Update-Student Management System");
+		Optional<Book> book1= bookService.getBook(1);
+		Book b=book1.get();
+		System.out.println("value of book:: "+b);
+		model.addAttribute("subName", b.getSubName());
+		model.addAttribute("subIcon", b.getSubIcon());
+		model.addAttribute("substatus", b.getSubstatus());
+		model.addAttribute("subTitle", b.getSubTitle());
+		Book book = new Book();		
+		model.addAttribute("update", book);
+		return "admin/aupdate";
+	}
+	
+	@PutMapping("/admin/aupdate")
+	public String updateBook(@ModelAttribute("admin/aupdate") Book book)
+	{
+		System.out.println("updating data...");		
+		bookService.updateBook(book);
+		System.out.println("data update value ::"+bookService.updateBook(book));
+		return "redirect:/admin/profile";
+	}	
+	
+	@RequestMapping("/admin/downloadBook")
+	public String downloadBook(Model model, Book book) {
+		model.addAttribute("title", "Download-Student Management System");
+		System.out.println("Showing..........book data");
+		model.addAttribute("update", book);
+		List<Book> book1= bookService.getBooks();					 
+			 model.addAttribute("book", book1);				
+		return "admin/downloadBook";
+	}
+	
+	@RequestMapping("/admin/deleteBook")
+	public String deleteBook(Model model, Book book) {
+		System.out.println("delete.............");
+		model.addAttribute("title", "DeleteBook-Student Management System");
+//		System.out.println("Deleted data..."+bookService.getBook(delete_id));
+//		bookService.deleteBook(1);
+//		model.addAttribute("delete_id", );
+		return "admin/downloadBook";
+	}
+
+	
+	
+//	Optional<Admin> userdata = adminService.getAdmin(2);
+//	Admin admin3 = userdata.get();
+//	System.out.println("Username :: " + admin3.getUsername() + "   Password ::" + admin3.getPassword());
+//	model.addAttribute("username", admin3.getUsername());
+//	model.addAttribute("email", admin3.getEmail());
+//	mv.setViewName("admin/adminDashBoard");
 	
 //	@PostMapping("/addBook")
 //	public String bookSave(@ModelAttribute("addBook") Book book, @RequestParam("subIcon")MultipartFile multipartFile) throws IOException {
