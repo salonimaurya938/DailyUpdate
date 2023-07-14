@@ -101,5 +101,22 @@ public class ControllerApi {
 		this.adminService.deleteAdmin(adminId);
 		System.out.println("Deleted Successfully!!!");
 	}	
+	
+//	login handler............
+	
+	@PostMapping("/logins")
+	public Admin saveLogin(Model model, @ModelAttribute("login") Admin admin) {      
+       Admin userData= adminService.adminlogin(admin);     
+       System.out.println("userData :: "+userData);       
+   	if (userData == null) {
+		System.out.println("error");
+	} else {
+		model.addAttribute("username", userData.getUsername());
+		model.addAttribute("email", userData.getEmail());
+		return userData;
+	}
+	return userData;
+	
+	}
 
 }

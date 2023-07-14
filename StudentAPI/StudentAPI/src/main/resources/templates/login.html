@@ -9,6 +9,7 @@
 							<img style="width: 60px;" th:src="@{/img/key.png}" alt="" />
 						</div>
 						<h1 class="text-center">Login here...</h1>
+						<h1 th:text="${errormsg}"></h1>
 						<form action="" th:action="@{/login}" method="post">
 							<div class="form-group">
 								<label for="emailAddress">Username</label> <input

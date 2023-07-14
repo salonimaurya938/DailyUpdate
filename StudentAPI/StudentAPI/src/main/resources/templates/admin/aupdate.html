@@ -12,39 +12,44 @@
 						<li class="breadcrumb-item active">Profile</li>
 					</ol>
 				</nav>
-		<div class="col-sm-6">	
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Add Book...</h5>
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Update Book...</h5>
+							<!-- Vertical Form -->
+							<form class="row g-3" th:action="@{/admin/aupdate}" method="post" th:Object="${update}">
 
-              <!-- Vertical Form -->
-              <br class="row g-3" th:action="@{/admin/aupdate}" method="post" th:Object="${update}">
-              <input type="hidden" name="id" class="form-control" id="inputNanme4"th:text="${id}">
-                <div class="col-12">
-                  <label for="subName" class="form-label">Subject Name</label>
-                  <input type="text" name="subName" class="form-control" id="inputNanme4"th:text="${subName}" th:field="*{subName}">
-                </div>
-                <div class="col-12">
-                  <label for="subTitle" class="form-label">Subject Title</label>
-                  <input type="text"  name="subTitle" class="form-control" id="subTitle" th:text="${subTitle}"  th:field="*{subTitle}"/>
-                </div>
-                <div class="col-12">
-                  <label for="subIcon" class="form-label">Subject Icon</label>
-                  <input type="text" name="subIcon" class="form-control" id="subIcon" th:text="${subIcon}" th:field="*{subIcon}" accept="image/png, image/jpg" placeholder="input file...">
-                </div>
-                  <div class="col-12">
-                  <label for="substatus" class="form-label">Subject Status</label>
-                  <input type="text" name="substatus" class="form-control" id="subStatus"  th:text="${substatus}" th:field="*{substatus}">
-                </div></br>                
-                <div class="text-center">
-                  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset"  name="reset" class="btn btn-secondary">Reset</button>
-                </div>
-              </form><!-- Vertical Form -->
+								<input type="hidden" name="id" class="form-control" id="inputNanme4" th:field="${id}">
 
-            </div>
-          </div>
-          </div>
+								<div class="col-12">
+									<label for="subName" class="form-label">Subject Name</label>
+									<input type="text" name="subName" class="form-control" id="inputNanme4"
+										th:value="${subName}" th:field="*{subName}">
+								</div>
+								<div class="col-12">
+									<label for="subTitle" class="form-label">Subject Title</label>
+									<input type="text" name="subTitle" class="form-control" id="subTitle"
+										th:value="${subTitle}" th:field="*{subTitle}">
+								</div>
+								<div class="col-12">
+									<label for="subIcon" class="form-label">Subject Icon</label>
+									<input type="text" name="subIcon" class="form-control" id="subIcon"
+										th:value="${subIcon}" th:field="*{subIcon}" accept="image/png, image/jpg" placeholder="input file...">
+								</div>
+								<div class="col-12">
+									<label for="substatus" class="form-label">Subject Status</label>
+									<input type="text" name="substatus" th:field="*{substatus}" class="form-control" id="subStatus"
+										th:value="${substatus}">
+								</div></br>
+								<div class="text-center">
+									<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+									<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+								</div>
+							</form><!-- Vertical Form -->
+
+						</div>
+					</div>
+				</div>
 			</div><!-- End Page Title -->
 
 		</main><!-- End #main -->

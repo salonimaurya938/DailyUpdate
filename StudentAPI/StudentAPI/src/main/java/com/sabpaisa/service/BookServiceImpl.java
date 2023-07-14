@@ -45,5 +45,22 @@ public class BookServiceImpl  implements BookService{
 		Book entity= bookDao.getOne(Delete_id);
 		bookDao.delete(entity);		
 	}
+
+//	@Override
+//	public List<Book> findbook(Book book) {
+//		List<Book> book1 = bookDao.findbyName(book.getSubName());
+//		return book1;
+//	}
+
+//	public List<Book> findbook(Book book) {
+//		List<Book> book1=bookDao.findbyName(book.getSubName());
+//		return book1;
+//	}
+	
+//	@Override
+//	public Book findBySubName(Book book) {		
+//		Book book1=bookDao.findByName(book.getSubName());
+//		return book1;
+//	}
 		
 }

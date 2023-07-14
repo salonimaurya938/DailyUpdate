@@ -77,10 +77,23 @@ public class AdminServiceImpl implements AdminService {
 		return list;
 	}
 	
-	public Admin adminlogin(Admin admin) {
+	public Admin adminlogin(Admin admin) {		
 		Admin findByUsername= adminDao.findByUsernameAndPassword(admin.getUsername(),admin.getPassword());		
 	    return findByUsername;
-		}		
+		}	
+	
+
+
+//	@Override
+//	public List<Admin> getAllAmin() {
+//		List<Admin> all =adminDao.getAllAmin();
+//		all.forEach(e->{
+//			System.out.println("all data.."+e);
+//		});
+//		return all;
+//	}
+	
+	
 	}	
 
 

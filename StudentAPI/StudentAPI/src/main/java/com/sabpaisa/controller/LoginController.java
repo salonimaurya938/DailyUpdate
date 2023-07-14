@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,10 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sabpaisa.dao.BookDao;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 
@@ -26,18 +25,15 @@ import com.sabpaisa.service.AdminService;
 import com.sabpaisa.service.BookService;
 
 @Controller
-public class AdminController {
+public class LoginController {
 
 	@Autowired
 	private AdminService adminService;
 
 	@Autowired
 	BookService bookService;
-	
-//	@Autowired
-//	private BookDao bookDao;
 
-	public AdminController(AdminService adminService) {
+	public LoginController(AdminService adminService) {
 		super();
 		this.adminService = adminService;
 	}
@@ -51,28 +47,17 @@ public class AdminController {
 	}
 
 	@PostMapping("/login")
-	public ModelAndView saveLogin(@ModelAttribute("login") Admin admin, Model model) {
-		System.out.println("admin :: " + admin);
-		ModelAndView mv = new ModelAndView("admin/adminDashBoard");
-		Admin a = adminService.adminlogin(admin);
-		if (a == null) {
-			ModelAndView modelAndView = new ModelAndView("admin/output1");
-			HashMap<String, Object> hashMap = new HashMap<String, Object>();
-			hashMap.put("invalid", "Error: please use valid Credential");
-			modelAndView.addObject("hashMapObject", hashMap);
-			return modelAndView;
-
-		} else {
-			Optional<Admin> userdata = adminService.getAdmin(2);
-			Admin admin3 = userdata.get();
-			System.out.println("Username :: " + admin3.getUsername() + "   Password ::" + admin3.getPassword());
-			model.addAttribute("username", admin3.getUsername());
-			model.addAttribute("email", admin3.getEmail());
-			mv.setViewName("admin/adminDashBoard");
-			return mv;
-		}
-	}
-
+	public String saveLogin(Model model, @ModelAttribute("login") Admin admin) {      
+       Admin userData= adminService.adminlogin(admin);     
+       System.out.println("userData :: "+userData);       
+   	if (userData == null) {
+		return "login";
+	} else {
+		model.addAttribute("username", userData.getUsername());
+		model.addAttribute("email", userData.getEmail());
+		return "admin/adminDashBoard";
+	}  
+  } 
 	@GetMapping("/showLogin")
 	public ModelAndView showLogin() {
 		List<Admin> loginList = adminService.fetchAdmin();
@@ -81,7 +66,7 @@ public class AdminController {
 		return mv;
 	}
 
-	///////////////////////////// Admin Controller //////////////////////////////
+	//........................ Admin Controller ...............................
 
 	@PostMapping("/adminadds")
 	public Admin addAdmin(@RequestBody Admin admin) {
@@ -120,8 +105,7 @@ public class AdminController {
 		System.out.println("Deleted Successfully!!!");
 	}
 	
-	
-//	.......................Book handler................
+//	.......................Book handler.................................
 	
 	@RequestMapping("/admin/addBook")
 	public String bookBook(Model model) {
@@ -140,23 +124,26 @@ public class AdminController {
 		return "redirect:/admin/profile";
 	}
 	
-	@RequestMapping("/admin/aupdate")
-	public String aupdate(Model model) {
+	@GetMapping("/admin/aupdate")
+	public String aupdate(Model model,Book book ) {
 		System.out.println("update category......");
-		model.addAttribute("title", "Update-Student Management System");
+		model.addAttribute("title", "Update-Student Management System");		
+//		List<Book> book2 = bookService.findbook(book); 
+//		System.out.println("book all data :"+book2);
+		
 		Optional<Book> book1= bookService.getBook(1);
 		Book b=book1.get();
 		System.out.println("value of book:: "+b);
+		model.addAttribute("id", b.getId());
 		model.addAttribute("subName", b.getSubName());
 		model.addAttribute("subIcon", b.getSubIcon());
 		model.addAttribute("substatus", b.getSubstatus());
-		model.addAttribute("subTitle", b.getSubTitle());
-		Book book = new Book();		
+		model.addAttribute("subTitle", b.getSubTitle());	
 		model.addAttribute("update", book);
 		return "admin/aupdate";
 	}
 	
-	@PutMapping("/admin/aupdate")
+	@PostMapping("/admin/aupdate")
 	public String updateBook(@ModelAttribute("admin/aupdate") Book book)
 	{
 		System.out.println("updating data...");		
@@ -179,21 +166,9 @@ public class AdminController {
 	public String deleteBook(Model model, Book book) {
 		System.out.println("delete.............");
 		model.addAttribute("title", "DeleteBook-Student Management System");
-//		System.out.println("Deleted data..."+bookService.getBook(delete_id));
-//		bookService.deleteBook(1);
-//		model.addAttribute("delete_id", );
 		return "admin/downloadBook";
 	}
 
-	
-	
-//	Optional<Admin> userdata = adminService.getAdmin(2);
-//	Admin admin3 = userdata.get();
-//	System.out.println("Username :: " + admin3.getUsername() + "   Password ::" + admin3.getPassword());
-//	model.addAttribute("username", admin3.getUsername());
-//	model.addAttribute("email", admin3.getEmail());
-//	mv.setViewName("admin/adminDashBoard");
-	
 //	@PostMapping("/addBook")
 //	public String bookSave(@ModelAttribute("addBook") Book book, @RequestParam("subIcon")MultipartFile multipartFile) throws IOException {
 //		System.out.println("switching...");

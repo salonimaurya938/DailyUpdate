@@ -25,7 +25,8 @@ public interface AdminService {
 	public Admin adminlogin(Admin admin);
 	
 	public List<Admin> fetchAdmin();
-
-//	void getbyusername(String username);
+//	
+//	public List<Admin> getAllAmin();
+////	void getbyusername(String username);
 	
 }

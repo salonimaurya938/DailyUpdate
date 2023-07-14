@@ -12,12 +12,16 @@ public interface BookService {
 
 	public List<Book> getBooks();
 
-	public Optional<Book> getBook(int Bookid);
+	public Optional<Book> getBook(int bookid);
 
-	public Book addBook(Book Book);
+	public Book addBook(Book book);
 
-	public Book updateBook(Book Book);
+	public Book updateBook(Book book);
 
 	public void deleteBook(int Delete_id);
+	
+//	public List<Book> findbook(Book book);
+
+//	public Book findBySubName(Book book); 
 
 }
