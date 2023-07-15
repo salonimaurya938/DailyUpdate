@@ -1,5 +1,6 @@
 package com.sabpaisa.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +48,14 @@ public class BookServiceImpl  implements BookService{
 	}
 
 //	@Override
-//	public List<Book> findbook(Book book) {
-//		List<Book> book1 = bookDao.findbyName(book.getSubName());
+//	public Collection<Book> getbyStatus(Book book) {
+//		Collection<Book> book1 =bookDao.findByMyClassName(book.getSubstatus());
+//		return book1;
+//	}
+
+//	@Override
+//	public List<Book> findBySubName(Book book) {
+//		List<Book> book1 = bookDao.findByName(book.getSubName());
 //		return book1;
 //	}
 

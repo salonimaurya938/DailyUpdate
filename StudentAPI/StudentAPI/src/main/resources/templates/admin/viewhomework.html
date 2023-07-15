@@ -1,0 +1,42 @@
+<div th:replace="base::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>All Question</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item">Admin</li>
+						<li class="breadcrumb-item active">Profile</li>
+					</ol>
+				</nav>
+			</div><!-- End Page Title -->			
+	<table border="2" width="100%">
+    <tr>
+        <th>Id</th>
+        <th>Question</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="questions:${question}">
+		<td th:text="${questions.id}"></td>
+		<td th:text="${questions.question}"></td>
+		<td>			
+			<button class="bg-danger"><a th:href="|@{/admin/deleteQuestio}|"  style="color: white;">Delete</a></button>
+			<button class="bg-success"><a th:href="|@{/admin/updateQuestion}|" style="color: white;">Update</a>&nbsp;</button>
+		</td>
+	</tr>
+	</table>
+
+		</main><!-- End #main -->
+	</section>
+
+</div>
+
+<style>
+button{
+	border-radius: 5px;
+	color:white;
+}
+</style>

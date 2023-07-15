@@ -1,5 +1,6 @@
 package com.sabpaisa.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +21,8 @@ public interface BookService {
 
 	public void deleteBook(int Delete_id);
 	
-//	public List<Book> findbook(Book book);
+//    public Collection<Book> getbyStatus(Book book);
 
-//	public Book findBySubName(Book book); 
+//	public List<Book> findBySubName(Book book); 
 
 }

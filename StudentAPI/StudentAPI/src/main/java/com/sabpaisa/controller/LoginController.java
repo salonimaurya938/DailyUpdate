@@ -1,13 +1,10 @@
 package com.sabpaisa.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,13 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
-
+import com.sabpaisa.entity.Chapter;
+import com.sabpaisa.entity.Student;
 import com.sabpaisa.service.AdminService;
 import com.sabpaisa.service.BookService;
+import com.sabpaisa.service.ChapterService;
 
 @Controller
 public class LoginController {
@@ -31,13 +31,16 @@ public class LoginController {
 	private AdminService adminService;
 
 	@Autowired
-	BookService bookService;
+	private BookService bookService;
+
+	@Autowired
+	private ChapterService chapterService;
 
 	public LoginController(AdminService adminService) {
 		super();
 		this.adminService = adminService;
 	}
-
+// .........................End login Controller..................................
 	@GetMapping("/login")
 	public ModelAndView login() {
 		System.out.println("Project runing mood....");
@@ -47,17 +50,20 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public String saveLogin(Model model, @ModelAttribute("login") Admin admin) {      
-       Admin userData= adminService.adminlogin(admin);     
-       System.out.println("userData :: "+userData);       
-   	if (userData == null) {
-		return "login";
-	} else {
-		model.addAttribute("username", userData.getUsername());
-		model.addAttribute("email", userData.getEmail());
-		return "admin/adminDashBoard";
-	}  
-  } 
+	public String saveLogin(Model model, @ModelAttribute("login") Admin admin) {
+		Admin userData = adminService.adminlogin(admin);
+		System.out.println("Loged in data :: " + userData);
+		if (userData == null) {
+			return "login";
+		} else {
+			model.addAttribute("id", userData.getId());
+			model.addAttribute("username", userData.getUsername());
+			model.addAttribute("email", userData.getEmail());
+			model.addAttribute("pass", userData.getPassword());
+			return "admin/adminDashBoard";
+		}
+	}
+
 	@GetMapping("/showLogin")
 	public ModelAndView showLogin() {
 		List<Admin> loginList = adminService.fetchAdmin();
@@ -65,8 +71,8 @@ public class LoginController {
 		mv.addObject("loginList", loginList);
 		return mv;
 	}
-
-	//........................ Admin Controller ...............................
+// .........................End login Controller....................................
+// ........................Start DashBoard Controller ...............................
 
 	@PostMapping("/adminadds")
 	public Admin addAdmin(@RequestBody Admin admin) {
@@ -91,12 +97,18 @@ public class LoginController {
 		return "adminDashBoard";
 	}
 
-	@PutMapping("/adminsUpdate")
-	public Admin updateAdmin(@RequestBody Admin admin) {
-		System.out.println("test...");
-		Admin var = this.adminService.updateAdmin(admin);
-		System.out.println("Updated successfully ::" + var);
-		return var;
+	@GetMapping("/admin/adminDashBoard")
+	public String adminUpdate(Model model, Admin admin) {
+		System.out.println("Update Profile runing mood....");
+		return "admin/adminDashBoard";
+	}
+
+	@PostMapping("/admin/adminDashBoard")
+	public String updateAdmin(@ModelAttribute("admin/adminDashBoard") Admin admin) {
+		System.out.println("Updating...");
+		adminService.updateAdmin(admin);
+		System.out.println("Updated successfully ::" + adminService.updateAdmin(admin));
+		return "redirect:/admin/adminDashBoard";
 	}
 
 	@DeleteMapping("/adeletes/{adminId}")
@@ -104,95 +116,43 @@ public class LoginController {
 		this.adminService.deleteAdmin(adminId);
 		System.out.println("Deleted Successfully!!!");
 	}
-	
-//	.......................Book handler.................................
-	
-	@RequestMapping("/admin/addBook")
-	public String bookBook(Model model) {
-		model.addAttribute("title", "AddBook-Student Management System");
-		Book book = new Book();		
-		model.addAttribute("book", book);
-		return "admin/addBook";
-	}	
-	
-	@PostMapping("/admin/addBook")
-	public String insertBook(@ModelAttribute("admin/addBook") Book book)
-	{
-		System.out.println("inserting data..");		
-		bookService.addBook(book);
-		System.out.println("data inserted value ::"+bookService.addBook(book));
-		return "redirect:/admin/profile";
-	}
-	
-	@GetMapping("/admin/aupdate")
-	public String aupdate(Model model,Book book ) {
-		System.out.println("update category......");
-		model.addAttribute("title", "Update-Student Management System");		
-//		List<Book> book2 = bookService.findbook(book); 
-//		System.out.println("book all data :"+book2);
-		
-		Optional<Book> book1= bookService.getBook(1);
-		Book b=book1.get();
-		System.out.println("value of book:: "+b);
-		model.addAttribute("id", b.getId());
-		model.addAttribute("subName", b.getSubName());
-		model.addAttribute("subIcon", b.getSubIcon());
-		model.addAttribute("substatus", b.getSubstatus());
-		model.addAttribute("subTitle", b.getSubTitle());	
-		model.addAttribute("update", book);
-		return "admin/aupdate";
-	}
-	
-	@PostMapping("/admin/aupdate")
-	public String updateBook(@ModelAttribute("admin/aupdate") Book book)
-	{
-		System.out.println("updating data...");		
-		bookService.updateBook(book);
-		System.out.println("data update value ::"+bookService.updateBook(book));
-		return "redirect:/admin/profile";
-	}	
-	
-	@RequestMapping("/admin/downloadBook")
-	public String downloadBook(Model model, Book book) {
-		model.addAttribute("title", "Download-Student Management System");
-		System.out.println("Showing..........book data");
-		model.addAttribute("update", book);
-		List<Book> book1= bookService.getBooks();					 
-			 model.addAttribute("book", book1);				
-		return "admin/downloadBook";
-	}
-	
-	@RequestMapping("/admin/deleteBook")
-	public String deleteBook(Model model, Book book) {
-		System.out.println("delete.............");
-		model.addAttribute("title", "DeleteBook-Student Management System");
-		return "admin/downloadBook";
+//........................End DashBoard Controller ..........................
+
+// ........................Start Chapter handler............................
+
+	@RequestMapping(value = "/admin/addchapter", method = RequestMethod.GET)
+	public String addChapter(Model model) {
+		model.addAttribute("title", "AddChapter-Student Management System");
+		Chapter chapter = new Chapter();
+		model.addAttribute("chapter", chapter);
+		return "admin/addchapter";
 	}
 
-//	@PostMapping("/addBook")
-//	public String bookSave(@ModelAttribute("addBook") Book book, @RequestParam("subIcon")MultipartFile multipartFile) throws IOException {
-//		System.out.println("switching...");
-//		ModelAndView mv = new ModelAndView("admin/addBook");
-//		if(!multipartFile.isEmpty()) {
-//			System.out.println("if column...");
-//			String fileName=StringUtils.cleanPath(multipartFile.getOriginalFilename());
-//			book.setSubIcon(fileName);
-//			Book bookSave = bookService.addBook(book);
-//			String uplaod= "/img/"+ book.getId();
-//			Fileuploading.saveFile(uplaod, fileName, multipartFile);
-//			
-//		}else {
-//			System.out.println("else column...");
-//			if(book.getSubIcon().isEmpty()) {}
-//			book.getSubIcon();
-//			bookService.addBook(book);
-//			
-//		}
-//		System.out.println("return column...");
-//		bookService.addBook(book);
-//		return "admin/saveBook";
-//		
+	@RequestMapping(value = "/admin/addchapter", method = RequestMethod.POST)
+	public String insertChapter(@ModelAttribute("admin/addchapter") Chapter chapter) {
+		System.out.println("Chapter Adding...");
+		chapterService.addChapter(chapter);
+		System.out.println("data inserted value ::" + chapterService.addChapter(chapter));
+		return "redirect:/admin/profile";
+	}
+	
+	@RequestMapping("/admin/viewchapter")
+	public String viewChapter(Model model, Chapter chapter) {
+		model.addAttribute("title", "View Chapter-Student Management System");
+		System.out.println("Showing..........Chapter data");
+		List<Chapter> chapter1 = chapterService.getChapters();
+		model.addAttribute("chapter", chapter1);
+		return "admin/viewchapter";
+	}
+
+// ........................End Chapter handler............................	
+
+//	
+//	@RequestMapping("/signup")
+//	public String signup(Model model) {
+//		model.addAttribute("title", "Registration-Student Management System");
+//		model.addAttribute("student", new Student());
+//		return "signup";
 //	}
-
-
+	
 }
