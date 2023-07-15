@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
@@ -134,13 +136,13 @@ public class ControllerApi {
 	
 //	Subject Controller Handler.........................................
 
-	@PostMapping("/bookadds")
-	public Book addBook(@RequestBody Book Book) {
-		System.out.println("Book Panle...");
-		Book var = this.bookService.addBook(Book);
-		System.out.println("Inserted successfully ::" + var);
-		return var;
-	}
+//	@PostMapping("/bookadds")
+//	public Book addBook(@RequestBody Book Book,MultipartFile subIcon) {
+//		System.out.println("Book Panle...");
+//		Book var = this.bookService.addBook(Book,subIcon);
+//		System.out.println("Inserted successfully ::" + var);
+//		return var;
+//	}
 
 	@GetMapping("/book")
 	public List<Book> getBooks(Model model) {

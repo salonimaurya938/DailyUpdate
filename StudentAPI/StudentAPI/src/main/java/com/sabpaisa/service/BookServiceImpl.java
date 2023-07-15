@@ -6,9 +6,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sabpaisa.dao.BookDao;
 import com.sabpaisa.entity.Book;
+import com.sabpaisa.entity.Images;
 
 @Service
 public class BookServiceImpl  implements BookService{
@@ -29,10 +32,19 @@ public class BookServiceImpl  implements BookService{
 		return getById;
 	}
 
+//	@Override
+//	public Book addBook(Book book) {
+//		Book add=bookDao.save(book);
+//		return add;
+//	}
+	
+
 	@Override
-	public Book addBook(Book book) {
-		Book add=bookDao.save(book);
-		return add;
+	public Book addBook(Book book, MultipartFile subIcon) {
+		System.out.println(subIcon.getOriginalFilename());
+		book.setSubIcon(subIcon.getOriginalFilename());		
+		Book uploadimg= bookDao.save(book);		
+		return uploadimg;
 	}
 
 	@Override
@@ -46,6 +58,14 @@ public class BookServiceImpl  implements BookService{
 		Book entity= bookDao.getOne(Delete_id);
 		bookDao.delete(entity);		
 	}
+
+	
+//	public Book imgUpload(Book book, MultipartFile subIcon) {
+//		System.out.println(subIcon.getOriginalFilename());
+//		book.setSubIcon(subIcon.getOriginalFilename());		
+//		Book uploadimg= bookDao.save(book);		
+//		return uploadimg;
+//	}
 
 //	@Override
 //	public Collection<Book> getbyStatus(Book book) {

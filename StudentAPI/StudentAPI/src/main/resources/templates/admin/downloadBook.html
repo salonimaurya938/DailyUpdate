@@ -1,20 +1,20 @@
-<div th:replace="base::layout(~{::section})">
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
 
 	<section>
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1>Download</h1>
+				<h1>Book Download</h1>
 				<nav>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item">Admin</li>
-						<li class="breadcrumb-item active">Profile</li>
+					<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Library</li>
+						<li class="breadcrumb-item active">View All Book</li>
 					</ol>
 				</nav>
 			</div><!-- End Page Title -->
 			
-	<table border="2" width="100%">
+	<table style="border: 2px solid #717ff5;" width="100%">
     <tr>
         <th>Id</th>
         <th>Subject Name</th>
@@ -47,5 +47,6 @@
 button{
 	border-radius: 5px;
 	color:white;
+	border: none;
 }
 </style>

@@ -14,7 +14,6 @@ import com.sabpaisa.entity.HomeWork;
 import com.sabpaisa.service.HomeWorkService;
 
 @Controller
-@RequestMapping("/admin")
 public class HomeWorkController {
 	
 	@Autowired 

@@ -1,40 +1,43 @@
-<div th:replace="base::layout(~{::section})">
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
 
 	<section>
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1>All Chapter</h1>
+				<h1>View All Chapter</h1>
 				<nav>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item">Admin</li>
-						<li class="breadcrumb-item active">Profile</li>
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">HomeWork</li>
+						<li class="breadcrumb-item active">View HomeWork</li>
 					</ol>
 				</nav>
 			</div><!-- End Page Title -->
-			
-	<table border="2" width="100%">
-    <tr>
-        <th>Id</th>
-        <th>Chapter Name</th>
-        <th>Chapter Discription</th>
-        <th>Subject ID</th>
-        <th>Action</th>
-    </tr>
-    <tr th:each="chapters:${chapter}">
-		<td th:text="${chapters.id}"></td>
-		<td th:text="${chapters.chapName}"></td>
-		<td th:text="${chapters.chapDescription}"></td>
-		<td th:text="${chapters.subid}"></td>
-		<td>
-			
-			<button class="bg-danger"><a th:href="|@{/admin/deleteChapter}|"  style="color: white;">Delete</a></button>
-			<button class="bg-success"><a th:href="|@{/admin/updateChapter}|" style="color: white;">Update</a>&nbsp;</button>
-			<button class="bg-info"><a th:href="@{/img/key.png}" download="download" style="color: white;">Download</a>&nbsp;</button>
-		</td>
-	</tr>
-	</table>
+
+			<table style="border: 4px double #717ff5;" width="100%">
+				<tr>
+					<th>Id</th>
+					<th>Chapter Name</th>
+					<th>Chapter Discription</th>
+					<th>Subject ID</th>
+					<th>Action</th>
+				</tr>
+				<tr th:each="chapters:${chapter}">
+					<td th:text="${chapters.id}"></td>
+					<td th:text="${chapters.chapName}"></td>
+					<td th:text="${chapters.chapDescription}"></td>
+					<td th:text="${chapters.subid}"></td>
+					<td>
+
+						<button class="bg-danger"><a th:href="|@{/admin/deleteChapter}|"
+								style="color: white;">Delete</a></button>
+						<button class="bg-success"><a th:href="|@{/admin/updateChapter}|"
+								style="color: white;">Update</a>&nbsp;</button>
+						<button class="bg-info"><a th:href="@{/img/key.png}" download="download"
+								style="color: white;">Download</a>&nbsp;</button>
+					</td>
+				</tr>
+			</table>
 
 		</main><!-- End #main -->
 	</section>
@@ -42,8 +45,9 @@
 </div>
 
 <style>
-button{
-	border-radius: 5px;
-	color:white;
-}
+	button {
+		border-radius: 5px;
+		color: white;
+		border: none;
+	}
 </style>

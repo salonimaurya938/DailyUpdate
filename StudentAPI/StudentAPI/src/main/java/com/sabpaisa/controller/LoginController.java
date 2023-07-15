@@ -30,8 +30,6 @@ public class LoginController {
 	@Autowired
 	private AdminService adminService;
 
-	@Autowired
-	private BookService bookService;
 
 	@Autowired
 	private ChapterService chapterService;
@@ -97,13 +95,13 @@ public class LoginController {
 		return "adminDashBoard";
 	}
 
-	@GetMapping("/admin/adminDashBoard")
+	@GetMapping("/adminDashBoard")
 	public String adminUpdate(Model model, Admin admin) {
 		System.out.println("Update Profile runing mood....");
 		return "admin/adminDashBoard";
 	}
 
-	@PostMapping("/admin/adminDashBoard")
+	@PostMapping("/adminDashBoard")
 	public String updateAdmin(@ModelAttribute("admin/adminDashBoard") Admin admin) {
 		System.out.println("Updating...");
 		adminService.updateAdmin(admin);
@@ -120,7 +118,7 @@ public class LoginController {
 
 // ........................Start Chapter handler............................
 
-	@RequestMapping(value = "/admin/addchapter", method = RequestMethod.GET)
+	@RequestMapping(value = "/addchapter", method = RequestMethod.GET)
 	public String addChapter(Model model) {
 		model.addAttribute("title", "AddChapter-Student Management System");
 		Chapter chapter = new Chapter();
@@ -128,7 +126,7 @@ public class LoginController {
 		return "admin/addchapter";
 	}
 
-	@RequestMapping(value = "/admin/addchapter", method = RequestMethod.POST)
+	@RequestMapping(value = "/addchapter", method = RequestMethod.POST)
 	public String insertChapter(@ModelAttribute("admin/addchapter") Chapter chapter) {
 		System.out.println("Chapter Adding...");
 		chapterService.addChapter(chapter);
@@ -136,7 +134,7 @@ public class LoginController {
 		return "redirect:/admin/profile";
 	}
 	
-	@RequestMapping("/admin/viewchapter")
+	@RequestMapping("/viewchapter")
 	public String viewChapter(Model model, Chapter chapter) {
 		model.addAttribute("title", "View Chapter-Student Management System");
 		System.out.println("Showing..........Chapter data");
@@ -147,7 +145,6 @@ public class LoginController {
 
 // ........................End Chapter handler............................	
 
-//	
 //	@RequestMapping("/signup")
 //	public String signup(Model model) {
 //		model.addAttribute("title", "Registration-Student Management System");

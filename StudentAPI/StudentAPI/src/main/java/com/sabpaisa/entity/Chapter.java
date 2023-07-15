@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 public class Chapter {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String chapName;
 	private String chapDescription;

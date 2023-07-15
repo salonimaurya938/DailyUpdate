@@ -83,7 +83,7 @@ public class AdminServiceImpl implements AdminService {
 		}	
 	
 
-
+    
 //	@Override
 //	public List<Admin> getAllAmin() {
 //		List<Admin> all =adminDao.getAllAmin();

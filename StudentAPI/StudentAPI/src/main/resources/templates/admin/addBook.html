@@ -1,25 +1,25 @@
-<div th:include="base::layout(~{::section})">
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
 
 	<section>
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1>Admin</h1>
+				<h1>Add Subject</h1>
 				<nav>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item">Admin</li>
-						<li class="breadcrumb-item active">Profile</li>
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Library</li>
+						<li class="breadcrumb-item active">Book</li>
 					</ol>
 				</nav>
-				<div class="col-sm-6">
+				<div class="col-sm-6 offset-md-3">
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">Add Book...</h5>
 
 							<!-- Vertical Form -->
-							<form class="row g-3" th:action="@{/admin/addBook}" method="post"
-								enctype="multipart/form-data" th:Object="${book}">
+							<form class="row g-3" th:action="@{/addBook}" method="post" enctype="multipart/form-data"
+								th:Object="${book}">
 								<div class="col-12">
 									<label for="subName" class="form-label">Subject Name</label>
 									<input type="text" name="subName" class="form-control" id="inputNanme4"
@@ -32,8 +32,7 @@
 								</div>
 								<div class="col-12">
 									<label for="subIcon" class="form-label">Subject Icon</label>
-									<input type="file" name="subIcon" class="form-control" id="subIcon"
-										th:field="*{subIcon}" accept="image/png, image/jpg" placeholder="input file...">
+									<input type="file" name="subIcon" class="form-control" id="inputNanme4">
 								</div>
 								<div class="col-12">
 									<label for="substatus" class="form-label">Subject Status</label>

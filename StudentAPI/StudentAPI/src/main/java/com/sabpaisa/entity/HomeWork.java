@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Table(name="home_work")
 public class HomeWork {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String question;
 	

@@ -1,15 +1,15 @@
-<div th:include="base::layout(~{::section})">
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
 
 	<section>
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1>Admin</h1>
+				<h1>Book Update</h1>
 				<nav>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item">Admin</li>
-						<li class="breadcrumb-item active">Profile</li>
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Library</li>
+						<li class="breadcrumb-item active">Book Update</li>
 					</ol>
 				</nav>
 				<div class="col-sm-6">
@@ -17,7 +17,7 @@
 						<div class="card-body">
 							<h5 class="card-title">Update Book...</h5>
 							<!-- Vertical Form -->
-							<form class="row g-3" th:action="@{/admin/bupdate}" method="post" th:Object="${bookUpdate}">
+							<form class="row g-3" th:action="@{/bupdate}" method="post" th:Object="${bookUpdate}">
 
 								<input type="text" name="id" class="form-control" id="inputNanme4" th:value="${id}">
 
