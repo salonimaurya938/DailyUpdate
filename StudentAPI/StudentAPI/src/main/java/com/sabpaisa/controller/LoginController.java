@@ -96,17 +96,17 @@ public class LoginController {
 	}
 
 	@GetMapping("/adminDashBoard")
-	public String adminUpdate(Model model, Admin admin) {
-		System.out.println("Update Profile runing mood....");
+	public String adminUpdate(Admin admin) {
+		System.out.println("Update Profile runing mood 2332....");
 		return "admin/adminDashBoard";
 	}
 
 	@PostMapping("/adminDashBoard")
-	public String updateAdmin(@ModelAttribute("admin/adminDashBoard") Admin admin) {
-		System.out.println("Updating...");
+	public String updateAdmin(@ModelAttribute("admin/adminDashBoard")Admin admin) {		
+		System.out.println("Updating...");		
 		adminService.updateAdmin(admin);
 		System.out.println("Updated successfully ::" + adminService.updateAdmin(admin));
-		return "redirect:/admin/adminDashBoard";
+		return "admin/adminDashBoard";
 	}
 
 	@DeleteMapping("/adeletes/{adminId}")

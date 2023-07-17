@@ -31,8 +31,8 @@
 		<td th:text="${books.substatus}"></td>
 		<td>
 			
-			<button class="bg-danger"><a th:href="|@{/admin/deleteBook}|"  style="color: white;">Delete</a></button>
-			<button class="bg-success"><a th:href="|@{/admin/bupdate}|" style="color: white;">Update</a>&nbsp;</button>
+			<button class="bg-danger"><a th:href="|@{/deleteBook/{id}(id=${books.id})}|"  style="color: white;">Delete</a></button>
+			<button class="bg-success"><a th:href="|@{/bupdate/{id}(id=${books.id})}|" style="color: white;">Update</a>&nbsp;</button>
 			<button class="bg-info"><a th:href="@{/img/key.png}" download="download" style="color: white;">Download</a>&nbsp;</button>
 		</td>
 	</tr>

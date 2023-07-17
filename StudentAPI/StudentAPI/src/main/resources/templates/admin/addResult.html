@@ -3,24 +3,24 @@
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1>Uploading Images</h1>
+				<h1>Upload Results</h1>
 				<nav>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
-						<li class="breadcrumb-item">Gallery</li>
-						<li class="breadcrumb-item active">Add Image</li>
+						<li class="breadcrumb-item">Student Result and Report Card</li>
+						<li class="breadcrumb-item active">Add Result</li>
 					</ol>
 				</nav>				
 				<div class="col-sm-6 offset-md-3">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Uploading Images...</h5>
+							<h5 class="card-title">Add Students Result...</h5>
 
 							<!-- Vertical Form -->
-							<form class="row g-3" th:action="@{/addimg}" enctype="multipart/form-data" method="POST">
+							<form class="row g-3" th:action="@{/addResult}" enctype="multipart/form-data" method="POST">
 								<div class="col-12">
-									<label for="img" class="form-label">Image</label>
-									<input type="file" name="img" class="form-control" id="inputNanme4">
+									<label for="result" class="form-label">Student Result</label>
+									<input type="file" name="result" class="form-control" id="inputNanme4">
 								</div>
 								
 								<br><br><br>
@@ -35,13 +35,12 @@
 				</div>
 			</div><!-- End Page Title -->
 			
-			
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3" th:each="im:${lists}">
 						<div class="cards mt-3">
-							<a th:href="@{'img/'+${im.imageName}}" target="_blank">
-							<img th:src="@{'img/'+${im.imageName}}" width="100%" height="100px" alt="">
+							<a th:href="@{'img/'+${im.result}}" target="_blank">
+							<img th:src="@{'img/'+${im.result}}" width="100%" height="100px" alt="">
 							</a>
 						</div>
 					</div>

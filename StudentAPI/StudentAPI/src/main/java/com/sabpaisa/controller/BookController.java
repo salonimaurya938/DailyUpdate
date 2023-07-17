@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,60 +46,59 @@ public class BookController {
 		return "admin/addBook";
 	}
 
-	@PostMapping("/addBook")
-	public String bookSave(@Validated @ModelAttribute("admin/addBook")Book book, @RequestParam("subIcon") MultipartFile subIcon) throws IOException {
-		System.out.println("switching...");				
-		Book uploadimg= bookService.addBook(book, subIcon);			
-		if(uploadimg!=null) {			
-			try {
-				File saveFile = new ClassPathResource("static/images").getFile();
-			    Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+subIcon.getOriginalFilename());
-			    System.out.println(path);
-			    Files.copy(subIcon.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
-				
-			} catch (Exception e) {
-			
-				e.printStackTrace();
-		  }			
-		}		
-		System.out.println("msg :: Image Upload Successfully");	
-		return "admin/addBook";
-		
-	}
-	
-	
 //	@PostMapping("/addBook")
-//	public String insertBook(@ModelAttribute("admin/addBook") Book book) {
-//		System.out.println("inserting data..");
-//		bookService.addBook(book);
-//		System.out.println("data inserted value ::" + bookService.addBook(book));
-//		return "redirect:/admin/profile";
+//	public String bookSave(@Validated @ModelAttribute("admin/addBook")Book book, @RequestParam("subIcon") MultipartFile subIcon) throws IOException {
+//		System.out.println("switching...");				
+//		Book uploadimg= bookService.addBook(book, subIcon);			
+//		if(uploadimg!=null) {			
+//			try {
+//				File saveFile = new ClassPathResource("static/images").getFile();
+//			    Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+subIcon.getOriginalFilename());
+//			    System.out.println(path);
+//			    Files.copy(subIcon.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+//				
+//			} catch (Exception e) {
+//			
+//				e.printStackTrace();
+//		  }			
+//		}		
+//		System.out.println("msg :: Image Upload Successfully");	
+//		return "admin/addBook";
+//		
 //	}
+	
+	
+	@PostMapping("/addBook")
+	public String insertBook(@ModelAttribute("admin/addBook") Book book) {
+		System.out.println("inserting data..");
+		bookService.addBook(book);
+		System.out.println("data inserted value ::" + bookService.addBook(book));
+		return "redirect:/admin/profile";
+	}
 
-	@RequestMapping(value="/bupdate", method = RequestMethod.GET)
-	public String updatebooks(Model model,Book book) {
+	@RequestMapping(value="/bupdate/{id}", method = RequestMethod.GET)
+	public String updatebooks(Model model,Book book,@PathVariable("id") int id) {
 		System.out.println("update method...");	
-		model.addAttribute("bookUpdate", book);
-		
-//	    List<Book> booklist=  bookService.getBooks();
-	    Optional<Book> b1= bookService.getBook(1);
-	    Book b= b1.get();
+		model.addAttribute("bookUpdate", book);	
+		Optional<Book> bookData= bookService.getBook(id);
+		Book b =bookData.get();
 	    model.addAttribute("id", b.getId());
 		model.addAttribute("subName", b.getSubName());
 		model.addAttribute("substatus", b.getSubstatus());
 		model.addAttribute("subIcon", b.getSubIcon());
-	    System.out.println("list book :: "+b1);
+		model.addAttribute("subTitle", b.getSubTitle());
+	    System.out.println("list book :: "+bookData);
 		return "admin/bupdate";
 	}
 	
 	@RequestMapping(value = "/bupdate",  method = RequestMethod.POST)
-	public String updateBook(@ModelAttribute("admin/bupdate") Book book) {
-		System.out.println("updating data...");
+	public String updateBook(@ModelAttribute("admin/bupdate")Book book) {
+		System.out.println("updating data...");	
 		bookService.updateBook(book);
-		System.out.println("data update value ::" + bookService.updateBook(book));
-		return "redirect:/admin/profile";
+		System.out.println("update successfully ::"+bookService.updateBook(book));
+		return "admin/bupdate";
 	}
-
+	
 	@RequestMapping("/downloadBook")
 	public String downloadBook(Model model, Book book) {
 		model.addAttribute("title", "Download-Student Management System");
@@ -108,10 +108,10 @@ public class BookController {
 		return "admin/downloadBook";
 	}
 
-	@RequestMapping("/deleteBook")
-	public String deleteBook(Model model, Book book) {
+	@RequestMapping("/deleteBook/{id}")
+	public String deleteBook(Model model, Book book,@PathVariable("id") int id) {
 		System.out.println("delete.............");
-		bookService.deleteBook(0);
+		bookService.deleteBook(id);
 		model.addAttribute("title", "DeleteBook-Student Management System");
 		return "admin/downloadBook";
 	}

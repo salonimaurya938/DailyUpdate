@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sabpaisa.dao.BookDao;
+import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Images;
 
@@ -32,26 +33,36 @@ public class BookServiceImpl  implements BookService{
 		return getById;
 	}
 
-//	@Override
-//	public Book addBook(Book book) {
-//		Book add=bookDao.save(book);
-//		return add;
-//	}
+	@Override
+	public Book addBook(Book book) {
+		Book add=bookDao.save(book);
+		return add;
+	}
 	
 
-	@Override
-	public Book addBook(Book book, MultipartFile subIcon) {
-		System.out.println(subIcon.getOriginalFilename());
-		book.setSubIcon(subIcon.getOriginalFilename());		
-		Book uploadimg= bookDao.save(book);		
-		return uploadimg;
-	}
+//	@Override
+//	public Book addBook(Book book, MultipartFile subIcon) {
+//		System.out.println(subIcon.getOriginalFilename());
+//		book.setSubIcon(subIcon.getOriginalFilename());		
+//		Book uploadimg= bookDao.save(book);		
+//		return uploadimg;
+//	}
 
 	@Override
 	public Book updateBook(Book book) {
-		 Book update=bookDao.save(book);
-		return update;
+		Optional<Book> bookdata = bookDao.findById(book.getId());
+		if(bookdata.isPresent()) {
+			Book newdata=bookdata.get();
+			newdata.setSubIcon(book.getSubIcon());
+			newdata.setSubName(book.getSubName());
+			newdata.setSubTitle(book.getSubTitle());
+			newdata.setSubstatus(book.getSubstatus());
+			return newdata;
+		}		
+		  book=bookDao.save(book);
+		return book;
 	}
+		
 
 	@Override
 	public void deleteBook(int Delete_id) {

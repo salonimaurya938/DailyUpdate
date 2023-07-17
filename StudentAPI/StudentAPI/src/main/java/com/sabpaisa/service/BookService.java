@@ -17,13 +17,13 @@ public interface BookService {
 
 	public Optional<Book> getBook(int bookid);
 
-//	public Book addBook(Book book);
+	public Book addBook(Book book);
 
 	public Book updateBook(Book book);
 
 	public void deleteBook(int Delete_id);
 	
-	public Book addBook(Book book, @RequestParam MultipartFile subIcon);
+//	public Book addBook(Book book, @RequestParam MultipartFile subIcon);
 	
 //    public Collection<Book> getbyStatus(Book book);
 

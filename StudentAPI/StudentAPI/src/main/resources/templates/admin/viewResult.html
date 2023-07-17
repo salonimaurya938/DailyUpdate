@@ -3,31 +3,31 @@
 	<section>
 		<main id="main" class="main">
 			<div class="pagetitle">
-				<h1>View All Question</h1>
+				<h1>View All Results</h1>
 				<nav>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="viewhomework">Admin</a></li>
-						<li class="breadcrumb-item">Gallery</li>
-						<li class="breadcrumb-item active">View All Photos</li>
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Student Result and Report Card</li>
+						<li class="breadcrumb-item active">View Result</li>
 					</ol>
-				</nav>
+				</nav>				
 			</div><!-- End Page Title -->
 			<br>
 			<table width="100%">
 				<tr class="mt-4">
 					<th>Id</th>
-					<th>Image</th>
-					<th>Image Name</th>
+					<th>Result</th>
+					<th>Result Name</th>
 					<th>Action</th>
 				</tr>
 				<tr th:each="im:${lists}">
 					<td th:text="${im.id}" class="ml-3"></td>
-					<td><a th:href="@{'img/'+${im.imageName}}" target="_blank"><img th:src="@{'img/'+${im.imageName}}" width="50%" height="120px" alt="" class="mt-2"></a></td>
-					<td th:text="${im.imageName}"></td>
+					<td><a th:href="@{'img/'+${im.result}}" target="_blank"><img th:src="@{'img/'+${im.result}}" width="50%" height="120px" alt="" class="mt-2"></a></td>
+					<td th:text="${im.result}"></td>
 					<td>
-						<button class="bg-danger"><a th:href="|@{/admin/deleteQuestio}|"
+						<button class="bg-danger"><a th:href="|@{/deleteResult/{id}(id=${im.id})}|"
 								style="color: white;">Delete</a></button>
-						<button class="bg-success"><a th:href="|@{/admin/updateQuestion}|"
+						<button class="bg-success"><a th:href="|@{/updateResult/{id}(id=${im.id})}|"
 								style="color: white;">Update</a>&nbsp;</button>
 					</td>
 				</tr>

@@ -1,4 +1,4 @@
-<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+<div xmls:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
 
 	<section>
 		<main id="main" class="main">
@@ -24,21 +24,21 @@
 								<div class="col-12">
 									<label for="subName" class="form-label">Subject Name</label>
 									<input type="text" name="subName" class="form-control" id="inputNanme4"
-										 th:field="*{subName}">
+										 th:value="${subName}">
 								</div>
 								<div class="col-12">
 									<label for="subTitle" class="form-label">Subject Title</label>
 									<input type="text" name="subTitle" class="form-control" id="subTitle"
-										 th:field="*{subTitle}">
+										 th:value="${subTitle}">
 								</div>
 								<div class="col-12">
 									<label for="subIcon" class="form-label">Subject Icon</label>
 									<input type="text" name="subIcon" class="form-control" id="subIcon"
-										 th:field="*{subIcon}" accept="image/png, image/jpg" placeholder="input file...">
+										 th:value="${subIcon}" accept="image/png, image/jpg" placeholder="input file...">
 								</div>
 								<div class="col-12">
 									<label for="substatus" class="form-label">Subject Status</label>
-									<input type="text" name="substatus" th:field="*{substatus}" class="form-control" id="subStatus"
+									<input type="text" name="substatus" th:value="${substatus}" class="form-control" id="subStatus"
 										>
 								</div></br>
 								<div class="text-center">

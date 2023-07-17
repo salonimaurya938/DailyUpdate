@@ -37,8 +37,18 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Admin updateAdmin(Admin admin) {
-		 Admin update=adminDao.save(admin);
-		return update;
+		System.out.println("Update......");			
+			Optional<Admin> adminData = adminDao.findById(admin.getId());	
+			if(adminData.isPresent()) {
+				Admin newdata=adminData.get();
+				newdata.setEmail(admin.getEmail());
+				newdata.setUsername(admin.getUsername());
+				newdata=adminDao.save(newdata);
+				return newdata;
+			}else {
+				admin = adminDao.save(admin);
+				return admin;
+			}
 	}
 
 	@Override
