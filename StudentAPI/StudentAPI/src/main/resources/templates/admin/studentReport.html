@@ -3,26 +3,26 @@
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1>Uploading Images</h1>
+				<h1>Student Report Cards</h1>
 				<nav>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
-						<li class="breadcrumb-item">Gallery</li>
-						<li class="breadcrumb-item active">Add Image</li>
+						<li class="breadcrumb-item">Report & Cards</li>
+						<li class="breadcrumb-item active">Report Cards</li>
 					</ol>
-				</nav>				
+				</nav>
 				<div class="col-sm-6 offset-md-3">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Uploading Images...</h5>
+							<h5 class="card-title">Add Report Cards...</h5>
 
 							<!-- Vertical Form -->
-							<form class="row g-3" th:action="@{/addimg}" enctype="multipart/form-data" method="POST">
+							<form class="row g-3" th:action="@{#}" method="post" enctype="multipart/form-data">
 								<div class="col-12">
-									<label for="img" class="form-label">Image</label>
-									<input type="file" name="img" class="form-control" id="inputNanme4">
+									<label for="reportCards" class="form-label">Report Cards</label>
+									<input type="text" name="reportCards" class="form-control" id="reportCards">
 								</div>
-								
+
 								<br><br><br>
 								<div class="text-center" style="text-align: center;">
 									<button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -34,19 +34,6 @@
 					</div>
 				</div>
 			</div><!-- End Page Title -->
-			
-			
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3" th:each="im:${lists}">
-						<div class="cards mt-3">
-							
-							<img th:src="@{'img/'+${im.imageName}}" width="100%" height="100px" alt="Not find this path">
-							
-						</div>
-					</div>
-				</div>
-			</div>
 
 		</main><!-- End #main -->
 	</section>

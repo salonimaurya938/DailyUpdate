@@ -1,26 +1,32 @@
-<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+<div xmls:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
 	<section>
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1>Update Results</h1>
+				<h1>Add HomeWork</h1>
 				<nav>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
-						<li class="breadcrumb-item">Student Result and Report Card</li>
-						<li class="breadcrumb-item active">Update Result</li>
+						<li class="breadcrumb-item">HomeWork</li>
+						<li class="breadcrumb-item active">Add HomeWok</li>
 					</ol>
-				</nav>				
+				</nav>
 				<div class="col-sm-6 offset-md-3">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Update Students Result...</h5>
+							<h5 class="card-title">Update Home Work...</h5>
 
 							<!-- Vertical Form -->
-							<form class="row g-3" th:action="@{/updateResult/{id}}}" enctype="multipart/form-data" method="POST">
+							<form class="row g-3" th:action="@{/updateQuestion}" method="post"
+								enctype="multipart/form-data" th:Object="${homework}">
+								
+								<input type="text" name="id" class="form-control" id="id"
+										th:value="${id}">
+								
 								<div class="col-12">
-									<label for="result" class="form-label">Student Result</label>
-									<input type="file" name="result" class="form-control" id="inputNanme4">
+									<label for="question" class="form-label">Question</label>
+									<input type="text" name="question" class="form-control" id="inputNanme4"
+										th:value="${question}">
 								</div>
 								
 								<br><br><br>
@@ -34,6 +40,7 @@
 					</div>
 				</div>
 			</div><!-- End Page Title -->
+
 		</main><!-- End #main -->
 	</section>
 

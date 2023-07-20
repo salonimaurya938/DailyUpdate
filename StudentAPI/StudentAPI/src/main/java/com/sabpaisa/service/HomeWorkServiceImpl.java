@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sabpaisa.dao.HomeWorkDao;
+import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.HomeWork;
 
 @Service
@@ -33,7 +34,15 @@ public class HomeWorkServiceImpl implements HomeWorkService{
 
 	@Override
 	public HomeWork updateHomeWork(HomeWork homeWork) {
-		return homeWorkDao.save(homeWork);
+		Optional<HomeWork> workdata = homeWorkDao.findById(homeWork.getId());	
+		if(workdata.isPresent()) {
+			HomeWork newdata=workdata.get();
+			newdata.setQuestion(homeWork.getQuestion());
+			newdata=homeWorkDao.save(newdata);
+			return newdata;
+		}		
+		homeWork=homeWorkDao.save(homeWork);
+		return homeWork;
 	}
 
 	@Override

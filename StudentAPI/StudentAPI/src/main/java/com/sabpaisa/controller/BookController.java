@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.sabpaisa.entity.Book;
+import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.service.BookService;
 
 @Controller
@@ -47,9 +48,14 @@ public class BookController {
 	}
 
 //	@PostMapping("/addBook")
-//	public String bookSave(@Validated @ModelAttribute("admin/addBook")Book book, @RequestParam("subIcon") MultipartFile subIcon) throws IOException {
-//		System.out.println("switching...");				
-//		Book uploadimg= bookService.addBook(book, subIcon);			
+//	public String bookSave(@ModelAttribute("admin/addBook")Book book, @RequestParam MultipartFile subIcon) throws IOException {
+//		System.out.println("switching...");	
+	
+//	    Book im = bookService.updateBook(book);
+//	    im.setResult(result.getOriginalFilename());
+//	    StudentResult uploadimg= studentResultDao.save(im);
+	
+//		Book uploadimg= bookService.addBook(book);			
 //		if(uploadimg!=null) {			
 //			try {
 //				File saveFile = new ClassPathResource("static/images").getFile();
@@ -66,8 +72,7 @@ public class BookController {
 //		return "admin/addBook";
 //		
 //	}
-	
-	
+		
 	@PostMapping("/addBook")
 	public String insertBook(@ModelAttribute("admin/addBook") Book book) {
 		System.out.println("inserting data..");

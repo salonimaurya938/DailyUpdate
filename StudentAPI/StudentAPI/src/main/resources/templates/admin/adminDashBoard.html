@@ -89,7 +89,7 @@
 										<!-- Profile Edit Form -->
 										<form th:action="@{/adminDashBoard}" method="post" enctype="multipart/form-data" >
 										
-											<input name="id" type="" class="form-control"
+											<input name="id" type="hidden" class="form-control"
 														id="id" th:value="${id}">
 														
 											<div class="row mb-3">
@@ -98,7 +98,7 @@
 												<div class="col-md-8 col-lg-9">
 													<img src="assets/img/profile-img.jpg" alt="Profile">
 													<div class="pt-2">
-														<a href="#" class="btn btn-primary btn-sm"
+														<a href="@|${/adminDashBoard}|" class="btn btn-primary btn-sm"
 															title="Upload new profile image"><i
 																class="bi bi-upload"></i></a>
 														<a href="#" class="btn btn-danger btn-sm"

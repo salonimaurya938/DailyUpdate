@@ -1,14 +1,18 @@
 package com.sabpaisa.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.HomeWork;
 import com.sabpaisa.service.HomeWorkService;
@@ -45,5 +49,24 @@ public class HomeWorkController {
 		model.addAttribute("question", homework1);
 		return "admin/viewhomework";
 	}
+	
+	@GetMapping("/updateQuestion/{id}")
+	public String  updateQuestion(HomeWork homeWork,@PathVariable("id") int id,Model model) {	
+		model.addAttribute("homework", homeWork);	
+		Optional<HomeWork> workData= homeWorkService.gethomeWork(id);
+		HomeWork  b =workData.get();
+	    model.addAttribute("id", b.getId());
+		model.addAttribute("question", b.getQuestion());
+		return "admin/updateQuestion";
+	}
+	
+	@PostMapping("/updateQuestion")
+	public String updateQuestions(@ModelAttribute("admin/updateQuestion")HomeWork homework) {
+		System.out.println("updating homework....");
+		homeWorkService.updateHomeWork(homework);
+		System.out.println("Update successfully .."+homeWorkService.updateHomeWork(homework));
+		return "admin/updateQuestion";
+	}
+	
 
 }

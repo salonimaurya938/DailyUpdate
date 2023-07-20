@@ -39,7 +39,6 @@ public class BookServiceImpl  implements BookService{
 		return add;
 	}
 	
-
 //	@Override
 //	public Book addBook(Book book, MultipartFile subIcon) {
 //		System.out.println(subIcon.getOriginalFilename());
@@ -50,13 +49,14 @@ public class BookServiceImpl  implements BookService{
 
 	@Override
 	public Book updateBook(Book book) {
-		Optional<Book> bookdata = bookDao.findById(book.getId());
+		Optional<Book> bookdata = bookDao.findById(book.getId());	
 		if(bookdata.isPresent()) {
 			Book newdata=bookdata.get();
 			newdata.setSubIcon(book.getSubIcon());
 			newdata.setSubName(book.getSubName());
 			newdata.setSubTitle(book.getSubTitle());
 			newdata.setSubstatus(book.getSubstatus());
+			newdata=bookDao.save(newdata);
 			return newdata;
 		}		
 		  book=bookDao.save(book);
@@ -69,7 +69,6 @@ public class BookServiceImpl  implements BookService{
 		Book entity= bookDao.getOne(Delete_id);
 		bookDao.delete(entity);		
 	}
-
 	
 //	public Book imgUpload(Book book, MultipartFile subIcon) {
 //		System.out.println(subIcon.getOriginalFilename());

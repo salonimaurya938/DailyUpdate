@@ -10,23 +10,54 @@
 						<li class="breadcrumb-item">Student Result and Report Card</li>
 						<li class="breadcrumb-item active">Add Result</li>
 					</ol>
-				</nav>				
-				<div class="col-sm-6 offset-md-3">
+				</nav>
+				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">Add Students Result...</h5>
 
 							<!-- Vertical Form -->
-							<form class="row g-3" th:action="@{/addResult}" enctype="multipart/form-data" method="POST">
-								<div class="col-12">
-									<label for="result" class="form-label">Student Result</label>
-									<input type="file" name="result" class="form-control" id="inputNanme4">
+							<form class="row g-3" th:action="@{/addResult}" enctype="multipart/form-data" method="POST" th:Object="${lists}">
+								<div class="col-sm-6">									
+									<div class="col-12">
+										<label for="name" class="form-label">Student Name</label>
+										<input type="text" name="name" class="form-control" id="name" th:field="*{name}">
+									</div>
+									<div class="col-12">
+										<label for="classes" class="form-label">Student Class</label>
+										<input type="text" name="classes" class="form-control" id="classes" th:field="*{classes}">
+									</div>
+									<div class="col-12">
+										<label for="dob" class="form-label">Student Date of Birth</label>
+										<input type="text" name="dob" class="form-control" id="dob" th:field="*{dob}">
+									</div>
+									<div class="col-12">
+										<label for="rollNo" class="form-label">Roll No</label>
+										<input type="text" name="rollNo" class="form-control" id="rollNo" th:field="*{rollNo}">
+									</div>
 								</div>
-								
-								<br><br><br>
-								<div class="text-center" style="text-align: center;">
-									<button type="submit" name="submit" class="btn btn-primary">Submit</button>
-									<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+								<div class="col-sm-6">
+									<div class="col-12">
+										<label for="division" class="form-label">Division</label>
+										<input type="text" name="division" class="form-control" id="division" th:field="*{division}">
+									</div>
+									<div class="col-12">
+										<label for="totalMarks" class="form-label">Total Marks</label>
+										<input type="text" name="totalMarks" class="form-control" id="totalMarks" th:field="*{totalMarks}">
+									</div>
+									<div class="col-12">
+										<label for="obtainedMarks" class="form-label">Obtained Marks</label>
+										<input type="text" name="obtainedMarks" class="form-control" id="obtainedMarks"th:field="*{obtainedMarks}" >
+									</div>
+									<div class="col-12">
+										<label for="result" class="form-label">Student Result</label>
+										<input type="file" name="result" class="form-control" id="result">
+									</div>
+									<br>
+									<div class="text-center" style="text-align: center;">
+										<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+										<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+									</div>
 								</div>
 							</form><!-- Vertical Form -->
 
@@ -34,19 +65,6 @@
 					</div>
 				</div>
 			</div><!-- End Page Title -->
-			
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3" th:each="im:${lists}">
-						<div class="cards mt-3">
-							<a th:href="@{'img/'+${im.result}}" target="_blank">
-							<img th:src="@{'img/'+${im.result}}" width="100%" height="100px" alt="">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
 		</main><!-- End #main -->
 	</section>
 

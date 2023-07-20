@@ -1,0 +1,53 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Holidays & Acadmic Plan</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Holidays & Acadmic Plan</li>
+						<li class="breadcrumb-item active">View Events</li>
+					</ol>
+				</nav>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">View Events</h5>
+
+							<table width="100%">
+								<tr>
+									<th>Id</th>
+									<th>Events</th>
+									<th>Action</th>
+								</tr>
+								<tr th:each="event:${events}">
+									<td th:text="${event.id}"></td>
+									<td th:text="${event.event}"></td>
+									<td>
+
+										<button class="bg-danger"><a th:href="|@{/admin/deleteChapter}|"
+												style="color: white;">Delete</a></button>
+										<button class="bg-success"><a th:href="|@{/admin/updateChapter}|"
+												style="color: white;">Update</a>&nbsp;</button>									
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+
+<style>
+	button {
+		border-radius: 5px;
+		color: white;
+		border: none;
+	}
+</style>
