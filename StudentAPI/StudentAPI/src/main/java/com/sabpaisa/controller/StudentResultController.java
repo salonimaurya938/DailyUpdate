@@ -20,12 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.sabpaisa.dao.StudentResultDao;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.fileuploading.Fileuploading;
 import com.sabpaisa.service.StudentResultService;
 
 @Controller
 public class StudentResultController {
+	
+	@Autowired
+	private StudentResultDao studentResultDao;
 	
 	@Autowired
 	private StudentResultService studentResultService;
@@ -83,6 +87,15 @@ public class StudentResultController {
 		List<StudentResult> list = studentResultService.getStudentResults();
 		model.addAttribute("lists", list);		
 		return "admin/viewResult";
+	}
+	
+	
+	@PostMapping("/deleteResult/{id}")
+	public String deleteBook(Model model,@RequestParam int id) {
+		model.addAttribute("title", "Delete-School Management System");
+		System.out.println("delete method.............");
+		studentResultDao.deleteById(id);		
+		return "login";
 	}
 	
 //	@RequestMapping("/updateResult/{id}")

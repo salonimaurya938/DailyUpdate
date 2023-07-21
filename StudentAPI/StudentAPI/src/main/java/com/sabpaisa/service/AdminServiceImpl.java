@@ -90,9 +90,22 @@ public class AdminServiceImpl implements AdminService {
 	public Admin adminlogin(Admin admin) {		
 		Admin findByUsername= adminDao.findByUsernameAndPassword(admin.getUsername(),admin.getPassword());		
 	    return findByUsername;
-		}	
-	
+		}
 
+	@Override
+	public Admin changePassword(Admin admin) {
+	Optional<Admin> adminData = adminDao.findById(admin.getId());	
+		if(adminData.isPresent()) {
+			Admin newdata=adminData.get();
+			newdata.setEmail(admin.getPassword());
+			newdata=adminDao.save(newdata);
+			return newdata;
+		}else {
+			admin = adminDao.save(admin);
+			return admin;
+		}
+	
+	}
     
 //	@Override
 //	public List<Admin> getAllAmin() {
@@ -104,6 +117,6 @@ public class AdminServiceImpl implements AdminService {
 //	}
 	
 	
-	}	
-
+	
+}
 

@@ -1,25 +1,25 @@
 package com.sabpaisa.entity;
 
-import java.sql.Time;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class TimeTable {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private Time schoolTime;
+	private String schoolTime;
 	private String sunday;
 	private String monday;
-	private String tuseday;
+	private String tuesday;
 	private String wednesday;
-	private String thrusday;
+	private String thursday;
 	private String friday;
-	private String sturday;
+	private String saturday;
 	
 	
 	public int getId() {
@@ -28,10 +28,10 @@ public class TimeTable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Time getSchoolTime() {
+	public String getSchoolTime() {
 		return schoolTime;
 	}
-	public void setSchoolTime(Time schoolTime) {
+	public void setSchoolTime(String schoolTime) {
 		this.schoolTime = schoolTime;
 	}
 	public String getSunday() {
@@ -46,11 +46,11 @@ public class TimeTable {
 	public void setMonday(String monday) {
 		this.monday = monday;
 	}
-	public String getTuseday() {
-		return tuseday;
+	public String getTuesday() {
+		return tuesday;
 	}
-	public void setTuseday(String tuseday) {
-		this.tuseday = tuseday;
+	public void setTuesday(String tuesday) {
+		this.tuesday = tuesday;
 	}
 	public String getWednesday() {
 		return wednesday;
@@ -58,11 +58,11 @@ public class TimeTable {
 	public void setWednesday(String wednesday) {
 		this.wednesday = wednesday;
 	}
-	public String getThrusday() {
-		return thrusday;
+	public String getThursday() {
+		return thursday;
 	}
-	public void setThrusday(String thrusday) {
-		this.thrusday = thrusday;
+	public void setThursday(String thursday) {
+		this.thursday = thursday;
 	}
 	public String getFriday() {
 		return friday;
@@ -70,11 +70,11 @@ public class TimeTable {
 	public void setFriday(String friday) {
 		this.friday = friday;
 	}
-	public String getSturday() {
-		return sturday;
+	public String getSaturday() {
+		return saturday;
 	}
-	public void setSturday(String sturday) {
-		this.sturday = sturday;
+	public void setSaturday(String saturday) {
+		this.saturday = saturday;
 	}
 	
 }

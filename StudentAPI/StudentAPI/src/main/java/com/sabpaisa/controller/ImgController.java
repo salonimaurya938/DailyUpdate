@@ -63,11 +63,19 @@ public class ImgController {
 		return "admin/viewimgs";
 	}
 	
-	@RequestMapping("/")
+	@RequestMapping("/updatimg")
 	public String Updateimg() {
 		
 		
 		return "";
+	}
+	
+	@PostMapping("/deleteUpload/{id}")
+	public String deleteBook(Model model,@RequestParam int id) {
+		model.addAttribute("title", "Delete-School Management System");
+		System.out.println("delete method.............");
+		uploadDao.deleteById(id);		
+		return "login";
 	}
 
 }

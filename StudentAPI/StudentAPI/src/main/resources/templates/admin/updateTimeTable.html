@@ -1,0 +1,73 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Time Table</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">School Time Table</li>
+						<li class="breadcrumb-item active">Update Time Table</li>
+					</ol>
+				</nav>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Update Time Table...</h5>
+
+							<!-- Vertical Form -->
+							<form class="row g-3" th:action="@{/updateTimeTable}" enctype="multipart/form-data" method="POST" th:Object="${timeTable}">
+								<div class="col-sm-6">	
+										<input type="text" name="id" class="form-control" id="id" th:value="${id}">
+																	
+									<div class="col-12">
+										<label for="schoolTime" class="form-label">School Time</label>
+										<input type="text" name="schoolTime" class="form-control" id="schoolTime" th:value="${schoolTime}">
+									</div>
+									<div class="col-12">
+										<label for="monday" class="form-label">Monday</label>
+										<input type="text" name="monday" class="form-control" id="monday" th:value="${monday}">
+									</div>
+									<div class="col-12">
+										<label for="tuesday" class="form-label">Tuesday</label>
+										<input type="text" name="tuesday" class="form-control" id="tuesday"  th:value="${tuesday}">
+									</div>
+									<div class="col-12">
+										<label for="wednesday" class="form-label">Wednesday</label>
+										<input type="text" name="wednesday" class="form-control" id="wednesday" th:value="${wednesday}">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-12">
+										<label for="thursday" class="form-label">Thursday</label>
+										<input type="thursday" name="thursday" class="form-control" id="thursday" th:value="${thursday}">
+									</div>
+									<div class="col-12">
+										<label for="friday" class="form-label">Friday</label>
+										<input type="text" name="friday" class="form-control" id="friday" th:value="${friday}">
+									</div>
+									<div class="col-12">
+										<label for="obtainedMarks" class="form-label">Saturday</label>
+										<input type="saturday" name="saturday" class="form-control" id="saturday"th:value="${saturday}" >
+									</div>
+									<div class="col-12">
+										<label for="sunday" class="form-label">Sunday</label>
+										<input type="text" name="sunday" class="form-control" id="sunday" th:value="${sunday}">
+									</div>
+									<br>
+									<div class="text-center" style="text-align: center;">
+										<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+										<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+									</div>
+								</div>
+							</form><!-- Vertical Form -->
+
+						</div>
+					</div>
+				</div>
+			</div><!-- End Page Title -->
+		</main><!-- End #main -->
+	</section>
+
+</div>

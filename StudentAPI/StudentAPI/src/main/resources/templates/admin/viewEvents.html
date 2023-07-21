@@ -27,10 +27,13 @@
 									<td th:text="${event.event}"></td>
 									<td>
 
-										<button class="bg-danger"><a th:href="|@{/admin/deleteChapter}|"
-												style="color: white;">Delete</a></button>
+										<form th:action="@{/deleteEvents/{id}}" method="post" th:object="${event}">
+											<input type="hidden" th:value="${event.id}" name="id" />
+											<button type="submit" value="Submit" class="btn btn-danger"
+												style="height: 15px; font-size: 10px; text-align: center;">Delete</button>
+										</form>
 										<button class="bg-success"><a th:href="|@{/admin/updateChapter}|"
-												style="color: white;">Update</a>&nbsp;</button>									
+												style="color: white;">Update</a>&nbsp;</button>
 									</td>
 								</tr>
 							</table>

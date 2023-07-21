@@ -21,12 +21,7 @@ public interface BookService {
 
 	public Book updateBook(Book book);
 
-	public void deleteBook(int Delete_id);
+	public void deleteBook(int deleteid);
 	
-//	public Book addBook(Book book, @RequestParam MultipartFile subIcon);
-	
-//    public Collection<Book> getbyStatus(Book book);
-
-//	public List<Book> findBySubName(Book book); 
 
 }

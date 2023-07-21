@@ -65,8 +65,8 @@ public class BookServiceImpl  implements BookService{
 		
 
 	@Override
-	public void deleteBook(int Delete_id) {
-		Book entity= bookDao.getOne(Delete_id);
+	public void deleteBook(int deleteid) {
+		Book entity= bookDao.getOne(deleteid);
 		bookDao.delete(entity);		
 	}
 	

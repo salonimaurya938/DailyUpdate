@@ -31,8 +31,11 @@
 											class="mt-2"></a></td>
 								<td th:text="${im.result}"></td>
 								<td>
-									<button class="bg-danger"><a th:href="|@{/deleteResult/{id}(id=${im.id})}|"
-											style="color: white;">Delete</a></button>
+									<form th:action="@{/deleteResult/{id}}" method="post" th:object="${im}">
+											<input type="hidden" th:value="${im.id}" name="id" />
+											<button type="submit" value="Submit" class="btn btn-danger"
+												style="height: 15px; font-size: 15px; text-align: center;">Delete</button>
+										</form>
 									<button class="bg-success"><a th:href="|@{/updateResult/{id}(id=${im.id})}|"
 											style="color: white;">Update</a>&nbsp;</button>
 								</td>

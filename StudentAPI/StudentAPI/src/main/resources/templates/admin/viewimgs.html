@@ -22,11 +22,15 @@
 				</tr>
 				<tr th:each="im:${lists}">
 					<td th:text="${im.id}" class="ml-3"></td>
-					<td><a th:href="@{'img/'+${im.imageName}}" target="_blank"><img th:src="@{'img/'+${im.imageName}}" width="50%" height="120px" alt="" class="mt-2"></a></td>
+					<td><a th:href="@{'img/'+${im.imageName}}" target="_blank"><img th:src="@{'img/'+${im.imageName}}"
+								width="50%" height="120px" alt="" class="mt-2"></a></td>
 					<td th:text="${im.imageName}"></td>
 					<td>
-						<button class="bg-danger"><a th:href="|@{/admin/deleteQuestio}|"
-								style="color: white;">Delete</a></button>
+						<form th:action="@{/deleteUpload/{id}}" method="post" th:object="${im}">
+							<input type="hidden" th:value="${im.id}" name="id" />
+							<button type="submit" value="Submit" class="btn btn-danger"
+								style="height: 15px; font-size: 15px; text-align: center;">Delete</button>
+						</form>
 						<button class="bg-success"><a th:href="|@{/admin/updateQuestion}|"
 								style="color: white;">Update</a>&nbsp;</button>
 					</td>

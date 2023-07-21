@@ -114,6 +114,22 @@ public class LoginController {
 		this.adminService.deleteAdmin(adminId);
 		System.out.println("Deleted Successfully!!!");
 	}
+	
+	@GetMapping("/changePassword/{id}")
+	public String changePasswords(Admin admin) {
+		System.out.println("Update password runing mood....");
+		return "adminDashBoard";
+	}
+
+	@RequestMapping("/changePassword/{id}")
+	public String ChangePassword(@ModelAttribute("adminDashBoard") Admin admin) {
+		System.out.println("Updating...");	
+		adminService.changePassword(admin);	
+		System.out.println("Change Password successfully ::" + adminService.updateAdmin(admin));
+
+		return "admin/adminDashBoard";
+	}
+	
 //........................End DashBoard Controller ..........................
 
 // ........................Start Chapter handler............................
@@ -142,6 +158,9 @@ public class LoginController {
 		model.addAttribute("chapter", chapter1);
 		return "admin/viewchapter";
 	}
+	
+		
+	
 
 // ........................End Chapter handler............................	
 

@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.sabpaisa.dao.ComplaintsDao;
+import com.sabpaisa.dao.EventsDao;
 import com.sabpaisa.entity.Complaints;
 import com.sabpaisa.entity.Events;
 
@@ -17,6 +20,9 @@ import com.sabpaisa.service.EventsService;
 
 @Controller
 public class EventsController {
+	
+	@Autowired
+	private EventsDao eventsDao;
 	
 	@Autowired
 	private ComplaintsDao complaintsDao;
@@ -44,6 +50,14 @@ public class EventsController {
 		List<Events> as= eventsService.getEvents();
 		model.addAttribute("events", as);
 		return "admin/viewEvents";
+	}
+	
+	@PostMapping("/deleteEvents/{id}")
+	public String deleteBook(Model model,@RequestParam int id) {
+		model.addAttribute("title", "DeleteBook-School Management System");
+		System.out.println("delete method.............");
+		eventsDao.deleteById(id);		
+		return "login";
 	}
 	
 	//......................................Complaints Handler...........................

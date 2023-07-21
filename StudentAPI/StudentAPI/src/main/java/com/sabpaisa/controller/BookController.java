@@ -21,12 +21,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.sabpaisa.dao.BookDao;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.service.BookService;
 
 @Controller
 public class BookController {
+	
+	@Autowired
+	private BookDao bookDao;
 	
 	@Autowired
 	private BookService bookService;
@@ -113,14 +118,15 @@ public class BookController {
 		return "admin/downloadBook";
 	}
 
-	@RequestMapping("/deleteBook/{id}")
-	public String deleteBook(Model model, Book book,@PathVariable("id") int id) {
-		System.out.println("delete.............");
-		bookService.deleteBook(id);
-		model.addAttribute("title", "DeleteBook-Student Management System");
-		return "admin/downloadBook";
-	}
 
+	@PostMapping("/deleteBook/{id}")
+	public String deleteBook(Model model,@RequestParam int id) {
+		model.addAttribute("title", "DeleteBook-School Management System");
+		System.out.println("delete method.............");
+		bookDao.deleteById(id);		
+		return "login";
+	}
+	
 //	.......................End Book handler.................................
 
 }

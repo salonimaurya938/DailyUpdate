@@ -1,0 +1,67 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Time Table</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Time Table</li>
+						<li class="breadcrumb-item active">Time Table View</li>
+					</ol>
+				</nav>
+			</div><!-- End Page Title -->
+			<div style="width: 100%;">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Time Table Details</h5>
+						<table width="100%" style="font-size: 80%;">
+							<tr>
+								<th>Sr No.</th>
+								<th>School Time</th>
+								<th>Monday</th>
+								<th>Tuesday</th>
+								<th>Wednesday</th>
+								<th>Thursday</th>
+								<th>Friday</th>
+								<th>Saturday</th>
+								<th>Sunday</th>
+								<th>Action</th>
+							</tr>
+							<tr th:each="timeTables:${timeTables}">
+								<td th:text="${timeTables.id}"></td>
+								<td th:text="${timeTables.schoolTime}"></td>
+								<td th:text="${timeTables.monday}"></td>
+								<td th:text="${timeTables.tuesday}"></td>
+								<td th:text="${timeTables.wednesday}"></td>
+								<td th:text="${timeTables.thursday}"></td>
+								<td th:text="${timeTables.friday}"></td>
+								<td th:text="${timeTables.saturday}"></td>
+								<td th:text="${timeTables.sunday}"></td>
+								<td>
+
+									<button class="bg-danger"><a th:href="|@{/deleteTimeTable/{id}(id=${timeTables.id})}|"
+											style="color: white;">Delete</a></button>
+									<button class="bg-success"><a th:href="|@{/updateTimeTable/{id}(id=${timeTables.id})}|"
+											style="color: white;">Update</a>&nbsp;</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</main><!-- End #main -->
+	</section>
+
+</div>
+
+<style>
+	button {
+		border-radius: 5px;
+		color: white;
+		border: none;
+	}
+</style>
