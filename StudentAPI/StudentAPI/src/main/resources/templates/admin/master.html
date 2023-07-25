@@ -227,7 +227,7 @@
 						</li>
 
 						<li>
-							<a class="dropdown-item d-flex align-items-center" th:href="@{/admin/adminDashBoard}">
+							<a class="dropdown-item d-flex align-items-center" th:href="@{/adminDashBoard}">
 								<i class="bi bi-person"></i>
 								<span>My Profile</span>
 							</a>
@@ -277,11 +277,29 @@
 		<ul class="sidebar-nav" id="sidebar-nav">
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="index.html">
+				<a class="nav-link collapsed" href="#">
 					<i class="bi bi-grid"></i>
 					<span>Dashboard</span>
 				</a>
 			</li><!-- End Dashboard Nav -->
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#front-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-gem"></i><span>Front Office</span><i
+						class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="front-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="admissionEnquiry">
+							<i class="bi bi-circle"></i><span>Admission Enquiry</span>
+						</a>
+					</li>
+					<li>
+						<a href="viewComplaints">
+							<i class="bi bi-circle"></i><span>Students Complaints</span>
+						</a>
+					</li>
+				</ul>
+			</li><!-- End Holidays & Academic plan Nav -->
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
 					href="admin/library">
@@ -309,7 +327,7 @@
 						</a>
 					</li>
 				</ul>
-			</li><!-- End Components Nav -->
+			</li><!-- End Library Nav -->
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
@@ -327,7 +345,7 @@
 						</a>
 					</li>
 				</ul>
-			</li><!-- End Forms Nav -->
+			</li><!-- End Gallery Nav -->
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -346,7 +364,7 @@
 						</a>
 					</li>
 				</ul>
-			</li><!-- End Tables Nav -->
+			</li><!-- End Home work Nav -->
 			
 
 			<li class="nav-item">
@@ -371,12 +389,12 @@
 						</a>
 					</li>
 					<li>
-						<a href="addmisionReport">
+						<a href="admissionReport">
 							<i class="bi bi-circle"></i><span>Addmission Report</span>
 						</a>
 					</li>
 				</ul>
-			</li><!-- End Charts Nav -->
+			</li><!-- End Result & Report Card Nav -->
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
@@ -395,7 +413,26 @@
 						</a>
 					</li>
 				</ul>
-			</li><!-- End Icons Nav -->
+			</li><!-- End Holidays & Academic plan Nav -->
+			
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#icons-nav1" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-gem"></i><span>Time Table</span><i
+						class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="icons-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="addTimeTable">
+							<i class="bi bi-circle"></i><span>Add Schedule</span>
+						</a>
+					</li>
+					<li>
+						<a href="timeTable">
+							<i class="bi bi-circle"></i><span>View TimeTable</span>
+						</a>
+					</li>
+				</ul>
+			</li><!-- End Time Tables plan Nav -->
 
 			<li class="nav-heading">Pages</li>
 

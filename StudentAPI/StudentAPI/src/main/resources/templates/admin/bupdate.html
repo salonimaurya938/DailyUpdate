@@ -1,4 +1,4 @@
-<div xmls:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
 
 	<section>
 		<main id="main" class="main">
@@ -12,7 +12,7 @@
 						<li class="breadcrumb-item active">Book Update</li>
 					</ol>
 				</nav>
-				<div class="col-sm-6">
+				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">Update Book...</h5>
@@ -21,29 +21,41 @@
 
 								<input type="text" name="id" class="form-control" id="inputNanme4" th:value="${id}">
 
-								<div class="col-12">
-									<label for="subName" class="form-label">Subject Name</label>
-									<input type="text" name="subName" class="form-control" id="inputNanme4"
-										 th:value="${subName}">
+								<div class="col-sm-6">
+									<div class="col-12">
+										<label for="subName" class="form-label">Subject Name</label>
+										<input type="text" name="subName" class="form-control" id="inputNanme4" th:value="${subName}">
+									</div>
+									<div class="col-12">
+										<label for="subTitle" class="form-label">Book Title</label>
+										<input type="text" name="subTitle" class="form-control" id="subTitle" th:value="${subTitle}">
+									</div>
+									<div class="col-12">
+										<label for="publisher" class="form-label">Publisher</label>
+										<input type="text" name="publisher" class="form-control" id="publisher" th:value="${publisher}">
+									</div>
 								</div>
-								<div class="col-12">
-									<label for="subTitle" class="form-label">Subject Title</label>
-									<input type="text" name="subTitle" class="form-control" id="subTitle"
-										 th:value="${subTitle}">
+								<div class="col-sm-6">
+									<div class="col-12">
+										<label for="author" class="form-label">Author</label>
+										<input type="text" name="author" class="form-control" id="author" th:value="${author}">
+									</div>
+									<div class="col-12">
+										<label for="subIcon" class="form-label">Subject Icon</label>
+										<input type="file" name="subIcon" class="form-control" id="inputNanme4" th:value="${subIcon}">
+									</div>
+									<div class="col-12">
+										<label for="substatus" class="form-label">Subject Status</label>
+										<select name="substatus" id="cars" class="form-control" th:value="${substatus}">
+											<option value="Active" >Active</option>
+											<option value="Passive">Inactive</option>
+										</select>
+									</div>
 								</div>
-								<div class="col-12">
-									<label for="subIcon" class="form-label">Subject Icon</label>
-									<input type="text" name="subIcon" class="form-control" id="subIcon"
-										 th:value="${subIcon}" accept="image/png, image/jpg" placeholder="input file...">
-								</div>
-								<div class="col-12">
-									<label for="substatus" class="form-label">Subject Status</label>
-									<input type="text" name="substatus" th:value="${substatus}" class="form-control" id="subStatus"
-										>
-								</div></br>
-								<div class="text-center">
+								<div class="text-center" style="text-align: center;">
 									<button type="submit" name="submit" class="btn btn-primary">Submit</button>
 									<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+									<button name="download" download class="btn btn-success"><a href="downloadBook" style="color: white;">All Book</a></button>
 								</div>
 							</form><!-- Vertical Form -->
 

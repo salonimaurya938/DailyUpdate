@@ -27,13 +27,18 @@
 									<td th:text="${event.event}"></td>
 									<td>
 
-										<form th:action="@{/deleteEvents/{id}}" method="post" th:object="${event}">
-											<input type="hidden" th:value="${event.id}" name="id" />
-											<button type="submit" value="Submit" class="btn btn-danger"
-												style="height: 15px; font-size: 10px; text-align: center;">Delete</button>
-										</form>
-										<button class="bg-success"><a th:href="|@{/admin/updateChapter}|"
-												style="color: white;">Update</a>&nbsp;</button>
+										<div class="form">
+											<form th:action="@{/deleteEvents/{id}}" method="post" th:object="${event}">
+												<input type="hidden" th:value="${event.id}" name="id" />
+												<button type="submit" value="Submit"
+													class="bg-danger">Delete</button>
+											</form>
+										</div>
+										<div class="form">
+											<button class="bg-success"><a
+													th:href="|@{/updateEvents/{id}(id=${event.id})}|"
+													style="color: white;">Update</a>&nbsp;</button>
+										</div>
 									</td>
 								</tr>
 							</table>
@@ -52,5 +57,9 @@
 		border-radius: 5px;
 		color: white;
 		border: none;
+	}
+	.form{
+		margin-left: 2px;
+		float: left;
 	}
 </style>

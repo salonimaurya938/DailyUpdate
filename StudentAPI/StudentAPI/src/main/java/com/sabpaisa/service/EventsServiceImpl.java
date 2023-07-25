@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sabpaisa.dao.EventsDao;
+import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Events;
 
 @Service
@@ -35,9 +36,21 @@ public class EventsServiceImpl implements EventsService {
 
 	@Override
 	public Events updateEvents(Events events) {
-		return eventsDao.save(events);
+		Optional<Events> data = eventsDao.findById(events.getId());		
+		if(data.isPresent()) {			
+			Events newData= data.get();
+			newData.setEvent(events.getEvent());
+			newData.setDateTime(events.getDateTime());
+			newData=eventsDao.save(newData);
+			return newData;
+		  }else {
+			  events= eventsDao.save(events);
+			  return events;
+		  }
 	}
-
+	
+	
+	
 	@Override
 	public void deleteEvents(int Delete_id) {
 		// TODO Auto-generated method stub		

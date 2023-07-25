@@ -12,7 +12,7 @@
 						<li class="breadcrumb-item active">Book</li>
 					</ol>
 				</nav>
-				<div class="col-sm-6 offset-md-3">
+				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">Add Book...</h5>
@@ -20,29 +20,41 @@
 							<!-- Vertical Form -->
 							<form class="row g-3" th:action="@{/addBook}" method="post" enctype="multipart/form-data"
 								th:Object="${book}">
-								<div class="col-12">
-									<label for="subName" class="form-label">Subject Name</label>
-									<input type="text" name="subName" class="form-control" id="inputNanme4"
-										th:field="*{subName}">
+								<div class="col-sm-6">
+									<div class="col-12">
+										<label for="subName" class="form-label">Subject Name</label>
+										<input type="text" name="subName" class="form-control" id="inputNanme4">
+									</div>
+									<div class="col-12">
+										<label for="subTitle" class="form-label">Book Title</label>
+										<input type="text" name="subTitle" class="form-control" id="subTitle">
+									</div>
+									<div class="col-12">
+										<label for="publisher" class="form-label">Publisher</label>
+										<input type="text" name="publisher" class="form-control" id="publisher">
+									</div>
 								</div>
-								<div class="col-12">
-									<label for="subTitle" class="form-label">Subject Title</label>
-									<input type="text" name="subTitle" class="form-control" id="subTitle"
-										th:field="*{subTitle}">
+								<div class="col-sm-6">
+									<div class="col-12">
+										<label for="author" class="form-label">Author</label>
+										<input type="text" name="author" class="form-control" id="author">
+									</div>
+									<div class="col-12">
+										<label for="subIcon" class="form-label">Subject Icon</label>
+										<input type="file" name="subIcon" class="form-control" id="inputNanme4">
+									</div>
+									<div class="col-12">
+										<label for="substatus" class="form-label">Subject Status</label>
+										<select name="substatus" id="cars" class="form-control">
+											<option value="Active" class="form-control" >Active</option>
+											<option value="Passive" class="form-control" >Inactive</option>
+										</select>
+									</div>
 								</div>
-								<div class="col-12">
-									<label for="subIcon" class="form-label">Subject Icon</label>
-									<input type="text" name="subIcon" class="form-control" id="inputNanme4">
-								</div>
-								<div class="col-12">
-									<label for="substatus" class="form-label">Subject Status</label>
-									<input type="text" name="substatus" class="form-control" id="subStatus"
-										th:field="*{substatus}">
-								</div>
-								<br><br><br>
 								<div class="text-center" style="text-align: center;">
 									<button type="submit" name="submit" class="btn btn-primary">Submit</button>
 									<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+									<button name="download" download class="btn btn-success"><a href="downloadBook" style="color: white;">All Book</a></button>
 								</div>
 							</form><!-- Vertical Form -->
 

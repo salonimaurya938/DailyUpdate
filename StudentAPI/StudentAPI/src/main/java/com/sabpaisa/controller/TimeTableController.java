@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sabpaisa.dao.TimeTableDao;
 import com.sabpaisa.entity.TimeTable;
 import com.sabpaisa.service.TimeTableService;
 
@@ -20,6 +22,9 @@ public class TimeTableController {
 
 	@Autowired
 	private TimeTableService timeTableService;
+	
+	@Autowired
+	private TimeTableDao timeTableDao;
 
 	@GetMapping("/timeTable")
 	public String timetableget(Model model) {
@@ -47,11 +52,11 @@ public class TimeTableController {
 	}
 
 	@RequestMapping("/updateTimeTable/{id}")
-	public String updatetimeTable(TimeTable timeTable,Model model,@PathVariable("id") int id) {
+	public String updatetimeTable(TimeTable timeTable, Model model, @PathVariable("id") int id) {
 		System.out.println("this is update page...");
 		model.addAttribute("timeTable", timeTable);
-		Optional<TimeTable> timetableData= timeTableService.getTimeTable(id);
-		TimeTable sr=timetableData.get();
+		Optional<TimeTable> timetableData = timeTableService.getTimeTable(id);
+		TimeTable sr = timetableData.get();
 		model.addAttribute("id", sr.getId());
 		model.addAttribute("schoolTime", sr.getSchoolTime());
 		model.addAttribute("monday", sr.getMonday());
@@ -61,23 +66,24 @@ public class TimeTableController {
 		model.addAttribute("friday", sr.getFriday());
 		model.addAttribute("saturday", sr.getSaturday());
 		model.addAttribute("sunday", sr.getSunday());
-		System.out.println("show data Successfully :: "+sr);
+		System.out.println("show data Successfully :: " + sr);
 		return "admin/updateTimeTable";
 	}
-	
+
 	@PostMapping("/updateTimeTable")
-	public String updateTimetable(@ModelAttribute("admin/updateTimeTable")TimeTable timeTable) {
+	public String updateTimetable(@ModelAttribute("admin/updateTimeTable") TimeTable timeTable) {
 		System.out.println("test...");
 		timeTableService.updateTimeTable(timeTable);
-		System.out.println("Update Successfully"+timeTableService.updateTimeTable(timeTable));		
+		System.out.println("Update Successfully" + timeTableService.updateTimeTable(timeTable));
 		return "admin/timeTable";
 	}
-	
+
 	@PostMapping("/deleteTimeTable/{id}")
-	public String deleteTimeTable(@PathVariable("id") int id) {
-		timeTableService.deleteTimeTable(id);
-		return "admin/timeTable"+id;
+	public String deleteTimeTable(Model model, @RequestParam int id) {
+		model.addAttribute("title", "DeleteBook-School Management System");
+		System.out.println("delete method.............");
+		timeTableDao.deleteById(id);
+		return "admin/timeTable";
 	}
-	
 
 }

@@ -27,10 +27,10 @@
 								<td th:text="${questions.id}"></td>
 								<td th:text="${questions.question}"></td>
 								<td>
-									<button class="bg-danger"><a th:href="|@{/admin/deleteQuestio}|"
-											style="color: white;">Delete</a></button>
-									<button class="bg-success"><a th:href="|@{/updateQuestion/{id}(id=${questions.id})}|"
-											style="color: white;">Update</a>&nbsp;</button>
+									<button class="btn btn-danger rounded-pill"><a th:href="|@{/admin/deleteQuestio}|"
+											style="color: white;">Delete</a></button>											
+								<button type="button" class="btn btn-primary rounded-pill"><a th:href="|@{/updateQuestion/{id}(id=${questions.id})}|"
+											style="color: white;">Update</a>&nbsp;</button>			
 								</td>
 							</tr>
 						</table>

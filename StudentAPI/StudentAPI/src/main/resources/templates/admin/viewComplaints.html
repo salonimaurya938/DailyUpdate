@@ -26,10 +26,10 @@
 								<td th:text="${lists.id}"></td>
 								<td th:text="${lists.complaint}"></td>
 								<td>
-									<button class="bg-danger"><a th:href="|@{/admin/deleteQuestio}|"
-											style="color: white;">Delete</a></button>
-									<button class="bg-success"><a th:href="|@{/admin/updateQuestion}|"
-											style="color: white;">Update</a>&nbsp;</button>
+									<form th:action="@{/deleteComplaints/{id}}" method="post" th:object="${lists}">
+											<input type="hidden" th:value="${lists.id}" name="id" />
+										<button type="submit" value="Submit" class="btn btn-danger" style="height: 30px; text-align: center;">Delete</button>
+									</form>
 								</td>
 							</tr>
 						</table>
@@ -50,3 +50,6 @@
 		border: none;
 	}
 </style>
+
+<!----  <button class="bg-success"><a th:href="|@{/updateComplaints/{id}}|"
+											style="color: white;">Update</a>&nbsp;</button>--->

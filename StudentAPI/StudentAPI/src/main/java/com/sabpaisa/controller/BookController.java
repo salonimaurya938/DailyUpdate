@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sabpaisa.dao.BookDao;
+import com.sabpaisa.dao.StudentResultDao;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.service.BookService;
@@ -52,41 +53,44 @@ public class BookController {
 		return "admin/addBook";
 	}
 
-//	@PostMapping("/addBook")
-//	public String bookSave(@ModelAttribute("admin/addBook")Book book, @RequestParam MultipartFile subIcon) throws IOException {
-//		System.out.println("switching...");	
-	
-//	    Book im = bookService.updateBook(book);
-//	    im.setResult(result.getOriginalFilename());
-//	    StudentResult uploadimg= studentResultDao.save(im);
-	
-//		Book uploadimg= bookService.addBook(book);			
-//		if(uploadimg!=null) {			
-//			try {
-//				File saveFile = new ClassPathResource("static/images").getFile();
-//			    Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+subIcon.getOriginalFilename());
-//			    System.out.println(path);
-//			    Files.copy(subIcon.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
-//				
-//			} catch (Exception e) {
-//			
-//				e.printStackTrace();
-//		  }			
-//		}		
-//		System.out.println("msg :: Image Upload Successfully");	
-//		return "admin/addBook";
-//		
-//	}
-		
 	@PostMapping("/addBook")
-	public String insertBook(@ModelAttribute("admin/addBook") Book book) {
-		System.out.println("inserting data..");
-		bookService.addBook(book);
-		System.out.println("data inserted value ::" + bookService.addBook(book));
-		return "redirect:/admin/profile";
+	public String bookSave(@ModelAttribute("admin/addBook")@RequestParam MultipartFile subIcon, String subName,String subTitle,String substatus,String publisher, String author) throws IOException {
+		System.out.println("switching...");	
+		Book book = new Book();
+	    Book im = bookService.updateBook(book);
+	    im.setSubIcon(subIcon.getOriginalFilename());
+	    im.setSubName(subName);
+	    im.setSubstatus(substatus);
+	    im.setSubTitle(subTitle);
+	    im.setPublisher(publisher);
+	    im.setAuthor(author);
+		Book subicon= bookService.addBook(book);			
+		if(subicon!=null) {			
+			try {
+				File saveFile = new ClassPathResource("static/images").getFile();
+			    Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+subIcon.getOriginalFilename());
+			    System.out.println(path);
+			    Files.copy(subIcon.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+			    bookService.addBook(book);
+			} catch (Exception e) {
+			
+				e.printStackTrace();
+		  }			
+		}		
+		System.out.println("msg :: Image Upload Successfully");	
+		return "admin/addBook";
+		
 	}
+		
+//	@PostMapping("/addBook")
+//	public String insertBook(@ModelAttribute("admin/addBook") Book book) {
+//		System.out.println("inserting data..");
+//		bookService.addBook(book);
+//		System.out.println("data inserted value ::" + bookService.addBook(book));
+//		return "redirect:/admin/profile";
+//	}
 
-	@RequestMapping(value="/bupdate/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/bupdate{id}", method = RequestMethod.GET)
 	public String updatebooks(Model model,Book book,@PathVariable("id") int id) {
 		System.out.println("update method...");	
 		model.addAttribute("bookUpdate", book);	
@@ -97,6 +101,8 @@ public class BookController {
 		model.addAttribute("substatus", b.getSubstatus());
 		model.addAttribute("subIcon", b.getSubIcon());
 		model.addAttribute("subTitle", b.getSubTitle());
+		model.addAttribute("publisher", b.getPublisher());
+		model.addAttribute("author", b.getAuthor());
 	    System.out.println("list book :: "+bookData);
 		return "admin/bupdate";
 	}
@@ -119,12 +125,12 @@ public class BookController {
 	}
 
 
-	@PostMapping("/deleteBook/{id}")
+	@PostMapping("/deleteBook{id}")
 	public String deleteBook(Model model,@RequestParam int id) {
 		model.addAttribute("title", "DeleteBook-School Management System");
 		System.out.println("delete method.............");
 		bookDao.deleteById(id);		
-		return "login";
+		return "admin/downloadBook.reload()";
 	}
 	
 //	.......................End Book handler.................................

@@ -13,7 +13,7 @@ public interface ChapterService {
 
 	public List<Chapter> getChapters();
 
-	public Optional<Chapter> getAdmin(int chapterid);
+	public Optional<Chapter> getChapter(int chapterid);
 
 	public Chapter addChapter(Chapter chapter);
 

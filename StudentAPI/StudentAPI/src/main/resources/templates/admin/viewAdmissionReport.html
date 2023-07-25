@@ -1,0 +1,78 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Result & Report Cards</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Result & Report Cards</li>
+						<li class="breadcrumb-item active">View Admission Report</li>
+					</ol>
+				</nav>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">View Admission Report</h5>
+
+							<table width="100%" style="font-size: 13px;">
+								<tr>
+									<th>Id</th>
+									<th>Name</th>
+									<th>Class Section</th>
+									<th>Father Name</th>
+									<th>Mother Name</th>
+									<th>Address</th>
+									<th>Total Fee</th>
+									<th>Paid Fee</th>
+									<th>Remain Fee</th>
+								</tr>
+								<tr th:each="datas:${data}">
+									<td th:text="${datas.id}"></td>
+									<td th:text="${datas.name}"></td>
+									<td th:text="${datas.classSection}"></td>
+									<td th:text="${datas.fatherName}"></td>
+									<td th:text="${datas.motherName}"></td>
+									<td th:text="${datas.address}"></td>
+									<td th:text="${datas.totalFee}"></td>
+									<td th:text="${datas.paidFee}"></td>
+									<td th:text="${datas.remainFee}"></td>
+									<td>
+
+										<div class="form">
+											<form th:action="@{/delete/{id}}" method="post" th:object="${data}">
+												<input type="hidden" th:value="${datas.id}" name="id" />
+												<button type="submit" value="Submit"
+													class="bg-danger">Delete</button>
+											</form>
+										</div>
+										<div class="form">
+											<button class="bg-success"><a
+													th:href="|@{/updateAdmissionReport{id}(id=${datas.id})}|"
+													style="color: white;">Update</a>&nbsp;</button>
+										</div>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+
+<style>
+	button {
+		border-radius: 5px;
+		color: white;
+		border: none;
+	}
+	.form{
+		margin-left: 2px;
+		float: left;
+	}
+</style>

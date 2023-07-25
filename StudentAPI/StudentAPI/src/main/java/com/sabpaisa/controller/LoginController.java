@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.sabpaisa.dao.ChapterDao;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
@@ -26,6 +28,9 @@ import com.sabpaisa.service.ChapterService;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private ChapterDao chapterDao;
 
 	@Autowired
 	private AdminService adminService;
@@ -58,10 +63,33 @@ public class LoginController {
 			model.addAttribute("username", userData.getUsername());
 			model.addAttribute("email", userData.getEmail());
 			model.addAttribute("pass", userData.getPassword());
-			return "admin/adminDashBoard";
+			return "admin/frontAdmin";
 		}
 	}
 
+	
+	@RequestMapping("/adminDashBoard")
+	public String adminDashBoard(Model model, @ModelAttribute("login") Admin admin){
+//		model.addAttribute("admin", admin);	
+//		Admin userData = adminService.adminlogin(admin);
+//		System.out.println("login value:: "+userData);	
+//		model.addAttribute("id", userData.getId());
+//		model.addAttribute("username", userData.getUsername());
+//		model.addAttribute("email", userData.getEmail());
+//		model.addAttribute("pass", userData.getPassword());
+		System.out.println("Admin Profile....");
+		return "admin/adminDashBoard";
+	}
+	
+
+	@RequestMapping(value = "/adminDashBoard",  method = RequestMethod.POST)
+	public String updateAdmin(@ModelAttribute("admin/bupdate")Admin admin) {
+		System.out.println("updating data...");	
+		adminService.updateAdmin(admin);
+		System.out.println("update successfully ::"+adminService.updateAdmin(admin));
+		return "admin/adminDashBoard";
+	}
+	
 	@GetMapping("/showLogin")
 	public ModelAndView showLogin() {
 		List<Admin> loginList = adminService.fetchAdmin();
@@ -94,20 +122,20 @@ public class LoginController {
 		model.addAttribute("admin", adminsDashBoard);
 		return "adminDashBoard";
 	}
-
-	@GetMapping("/adminDashBoard")
-	public String adminUpdate(Admin admin) {
-		System.out.println("Update Profile runing mood 2332....");
-		return "admin/adminDashBoard";
-	}
-
-	@PostMapping("/adminDashBoard")
-	public String updateAdmin(@ModelAttribute("admin/adminDashBoard")Admin admin) {		
-		System.out.println("Updating...");		
-		adminService.updateAdmin(admin);
-		System.out.println("Updated successfully ::" + adminService.updateAdmin(admin));
-		return "admin/adminDashBoard";
-	}
+//
+//	@GetMapping("/adminDashBoard")
+//	public String adminUpdate(Admin admin) {
+//		System.out.println("Update Profile runing mood 2332....");
+//		return "admin/adminDashBoard";
+//	}
+//
+//	@PostMapping("/adminDashBoard")
+//	public String updateAdmin(@ModelAttribute("admin/adminDashBoard")Admin admin) {		
+//		System.out.println("Updating...");		
+//		adminService.updateAdmin(admin);
+//		System.out.println("Updated successfully ::" + adminService.updateAdmin(admin));
+//		return "admin/adminDashBoard";
+//	}
 
 	@DeleteMapping("/adeletes/{adminId}")
 	public void deleteAdmin(@PathVariable int adminId) {
@@ -159,7 +187,43 @@ public class LoginController {
 		return "admin/viewchapter";
 	}
 	
+	@RequestMapping("/updateChapter{id}")
+	public String updateChapter(Model model,Chapter chapter, @PathVariable("id") int id) {
+		System.out.println("update method...");	
+		model.addAttribute("chapter", chapter);	
+		Optional<Chapter> data= chapterService.getChapter(id);
 		
+		Chapter as = data.get();
+		model.addAttribute("id", as.getId());
+		model.addAttribute("chapName", as.getChapName());
+		model.addAttribute("chapDescription", as.getChapDescription());
+		model.addAttribute("subid", as.getSubid());		
+		return "admin/updateChapter";
+	}
+	
+	@PostMapping("/updateChapter")
+	public String updateChaters(@ModelAttribute("admin/updateChapter")Chapter chapter) {
+		System.out.println("updating data...");	
+		chapterService.updateChapter(chapter);
+		System.out.println("update successfully ::"+chapterService.updateChapter(chapter));
+		return "admin/viewchapter";
+	}	
+	
+	@PostMapping("/deleteChapter/{id}")
+	public void deleteChapter(Model model,@RequestParam int id) {
+		model.addAttribute("title", "Delete-School Management System");
+		System.out.println("delete method.............");
+		chapterDao.deleteById(id);
+		System.out.println("Delete successfully...");
+	}
+	
+	
+//	@RequestMapping("/frontAdmin")
+//	public String frontAdmin(){
+//		
+//		System.out.println("Actual Admin DashBoard....");
+//		return "admin/frontAdmin";
+//	}
 	
 
 // ........................End Chapter handler............................	

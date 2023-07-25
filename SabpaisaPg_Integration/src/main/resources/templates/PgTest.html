@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<body>
+
+	<form th:action="@{${URL}}" th:method="post">
+
+		<input type="text" name="encData" th:value="${encData}"> <input
+			type="text" name="clientCode" th:value="${clientCode}"> <input
+			type="submit" id="submitButton" name="submit">
+
+
+	</form>
+</body>
+</html>

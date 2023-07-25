@@ -63,7 +63,7 @@ public class ImgController {
 		return "admin/viewimgs";
 	}
 	
-	@RequestMapping("/updatimg")
+	@RequestMapping("/updateImg/{id}")
 	public String Updateimg() {
 		
 		

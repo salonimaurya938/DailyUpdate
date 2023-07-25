@@ -74,7 +74,31 @@ public class StudentResult {
 	public void setObTainedMarks(String obtainedMarks) {
 		this.obtainedMarks = obtainedMarks;
 	}
+	public StudentResult(int id, String name, String classes, String dob, String rollNo, String division,
+			String totalMarks, String obtainedMarks, String result) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.classes = classes;
+		this.dob = dob;
+		this.rollNo = rollNo;
+		this.division = division;
+		this.totalMarks = totalMarks;
+		this.obtainedMarks = obtainedMarks;
+		this.result = result;
+	}
+	@Override
+	public String toString() {
+		return "StudentResult [id=" + id + ", name=" + name + ", classes=" + classes + ", dob=" + dob + ", rollNo="
+				+ rollNo + ", division=" + division + ", totalMarks=" + totalMarks + ", obtainedMarks=" + obtainedMarks
+				+ ", result=" + result + "]";
+	}
+	public StudentResult() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 		
+	
 	
 
 }

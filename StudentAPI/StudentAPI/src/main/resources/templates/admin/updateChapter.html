@@ -1,0 +1,56 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Update Chapter</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Admin</a></li>
+						<li class="breadcrumb-item">Library</li>
+						<li class="breadcrumb-item active">Chapter</li>
+					</ol>
+				</nav>
+				<div class="col-sm-6 offset-md-3">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Update Chapter...</h5>
+
+							<!-- Vertical Form -->
+							<form class="row g-3" th:action="@{/updateChapter}" modelAttribute="ADDCHAPTERS" method="POST" enctype="multipart/form-data" th:Object="${chapter}">
+								
+								<input type="text" name="id" class="form-control" id="inputNanme4"
+										th:value="${id}">
+								
+								<div class="col-12">
+									<label for="chapName" class="form-label">Chapter Name</label>
+									<input type="text" name="chapName" class="form-control" id="inputNanme4"
+										th:value="${chapName}">
+								</div>
+								<div class="col-12">
+									<label for="chapDescription" class="form-label">Chapter Description</label>
+									<input type="text" name="chapDescription" class="form-control" id="chapDescription"
+										th:value="${chapDescription}">
+								</div>
+								<div class="col-12">
+									<label for="subid" class="form-label">Subject ID</label>
+									<input type="text" name="subid" class="form-control" id="subid"
+										th:value="${subid}" placeholder="input file...">
+								</div>
+								<br><br><br>
+								<div class="text-center" style="text-align: center;">
+									<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+									<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+								</div>
+							</form><!-- Vertical Form -->
+
+						</div>
+					</div>
+				</div>
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+
+</div>

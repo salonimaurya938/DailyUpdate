@@ -13,32 +13,43 @@
 					</ol>
 				</nav>
 			</div><!-- End Page Title -->
-
-			<table style="border: 4px double #717ff5;" width="100%">
-				<tr>
-					<th>Id</th>
-					<th>Chapter Name</th>
-					<th>Chapter Discription</th>
-					<th>Subject ID</th>
-					<th>Action</th>
-				</tr>
-				<tr th:each="chapters:${chapter}">
-					<td th:text="${chapters.id}"></td>
-					<td th:text="${chapters.chapName}"></td>
-					<td th:text="${chapters.chapDescription}"></td>
-					<td th:text="${chapters.subid}"></td>
-					<td>
-
-						<button class="bg-danger"><a th:href="|@{/admin/deleteChapter}|"
-								style="color: white;">Delete</a></button>
-						<button class="bg-success"><a th:href="|@{/admin/updateChapter}|"
-								style="color: white;">Update</a>&nbsp;</button>
-						<button class="bg-info"><a th:href="@{/img/key.png}" download="download"
-								style="color: white;">Download</a>&nbsp;</button>
-					</td>
-				</tr>
-			</table>
-
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">All Chapter Details</h5>
+						<table width="100%">
+							<tr>
+								<th>Id</th>
+								<th>Chapter Name</th>
+								<th>Chapter Discription</th>
+								<th>Subject ID</th>
+								<th>Action</th>
+							</tr>
+							<tr th:each="chapters:${chapter}">
+								<td th:text="${chapters.id}"></td>
+								<td th:text="${chapters.chapName}"></td>
+								<td th:text="${chapters.chapDescription}"></td>
+								<td th:text="${chapters.subid}"></td>
+								<td>
+									<div class="form">
+										<form th:action="@{/deleteChapter/{id}}" method="post" th:object="${chapter}">
+											<input type="hidden" th:value="${chapters.id}" name="id" />
+											<button type="submit" value="Submit" class="bg-danger">Delete</button>
+										</form>
+									</div>
+									<div class="form">
+										<button class="bg-success"><a
+												th:href="|@{/updateChapter{id}(id=${chapters.id})}|"
+												style="color: white;">Update</a>&nbsp;</button>
+										<button class="bg-primary"><a th:href="@{/img/key.png}" download="pdf"
+												style="color: white;">Download</a>&nbsp;</button>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
 		</main><!-- End #main -->
 	</section>
 
@@ -49,5 +60,10 @@
 		border-radius: 5px;
 		color: white;
 		border: none;
+	}
+
+	.form {
+		float: left;
+		margin-left: 2px;
 	}
 </style>

@@ -194,7 +194,7 @@ public class ControllerApi {
 
 	@GetMapping("/chapter/{chapterid}")
 	public String getChapter(@PathVariable("chapterid") int chapterid, Model model) {
-	       Optional<Chapter> chapter =this.chapterService.getAdmin(chapterid);
+	       Optional<Chapter> chapter =this.chapterService.getChapter(chapterid);
 	       model.addAttribute("chapter", chapter);
 		return "chapter";
 	}

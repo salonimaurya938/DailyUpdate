@@ -17,12 +17,14 @@
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">Book Details</h5>
-						<table width="100%" style="font-size: 70%;">
+						<table width="100%" style="font-size: 14px;">
 							<tr>
 								<th>Id</th>
 								<th>Subject Name</th>
 								<th>Subject Icon</th>
-								<th>Subject Title</th>
+								<th>Book Title</th>
+								<th>Publisher</th>
+								<th>Author Name</th>
 								<th>Subject Status</th>
 								<th>Action</th>
 							</tr>
@@ -30,17 +32,21 @@
 								<td th:text="${books.id}"></td>
 								<td th:text="${books.subName}"></td>
 								<td th:text="${books.subTitle}"></td>
-								<td th:text="${books.subIcon}"></td>
+								<td th:text="${books.publisher}"></td>
+								<td th:text="${books.author}"></td>
+								<td th:text="${books.subIcon}"></td>								
 								<td th:text="${books.substatus}"></td>
 								<td>
-									<form th:action="@{/deleteBook/{id}}" method="post" th:object="${book}">
-										<input type="hidden" th:value="${books.id}" name="id"/>
-										<button type="submit" value="Submit" class="btn btn-danger" style="height: 15px; font-size: small; text-align: center;">Delete</button>
+									<div class="form">
+										<form th:action="@{/deleteBook{id}}" method="post" th:object="${book}">
+										<input type="hidden" th:value="${books.id}" name="id" />
+										<button type="submit" value="Submit" class="bg-danger">Delete</button>
 									</form>
-									<button class="bg-success"><a th:href="|@{/bupdate/{id}(id=${books.id})}|"
+									</div><div class="form">
+									<button class="bg-success"><a th:href="|@{/bupdate{id}(id=${books.id})}|"
 											style="color: white;">Update</a>&nbsp;</button>
 									<button class="bg-info"><a th:href="@{/img/key.png}" download="download"
-											style="color: white;">Download</a>&nbsp;</button>
+											style="color: white;">Download</a>&nbsp;</button></div>
 								</td>
 							</tr>
 						</table>
@@ -58,5 +64,9 @@
 		border-radius: 5px;
 		color: white;
 		border: none;
+	}
+	.form{
+		float: left;
+		margin-left: 2px;
 	}
 </style>

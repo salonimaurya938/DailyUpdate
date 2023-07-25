@@ -41,11 +41,16 @@
 								<td th:text="${timeTables.saturday}"></td>
 								<td th:text="${timeTables.sunday}"></td>
 								<td>
-
-									<button class="bg-danger"><a th:href="|@{/deleteTimeTable/{id}(id=${timeTables.id})}|"
-											style="color: white;">Delete</a></button>
-									<button class="bg-success"><a th:href="|@{/updateTimeTable/{id}(id=${timeTables.id})}|"
+									<div class="form">
+										<form th:action="@{/deleteTimeTable/{id}}" method="post" th:object="${timeTables}">
+											<input type="hidden" th:value="${timeTables.id}" name="id" />
+											<button type="submit" value="Submit" class="bg-danger">Delete</button>
+										</form>
+									</div>
+									<div class="form">
+										<button class="bg-success"><a th:href="|@{/updateTimeTable/{id}(id=${timeTables.id})}|"
 											style="color: white;">Update</a>&nbsp;</button>
+									</div>																		
 								</td>
 							</tr>
 						</table>
@@ -63,5 +68,9 @@
 		border-radius: 5px;
 		color: white;
 		border: none;
+	}
+	.form{
+		margin-left: 2px;
+		float: left;
 	}
 </style>
