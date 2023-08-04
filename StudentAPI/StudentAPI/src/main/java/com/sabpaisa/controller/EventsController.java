@@ -59,7 +59,7 @@ public class EventsController {
 		return "admin/viewEvents";
 	}
 	
-	@RequestMapping("/updateEvents/{id}")
+	@RequestMapping("/updateEvents{id}")
 	public String updateEvents(Model model,Events events,@PathVariable("id") int id) {
 		System.out.println("update method...");	
 		model.addAttribute("eventsUpdate", events);	
@@ -80,7 +80,7 @@ public class EventsController {
 		return "admin/viewEvents";
 	}
 	
-	@PostMapping("/deleteEvents/{id}")
+	@PostMapping("/deleteEvents{id}")
 	public String deleteBook(Model model,@RequestParam int id) {
 		model.addAttribute("title", "DeleteBook-School Management System");
 		System.out.println("delete method.............");
@@ -89,6 +89,23 @@ public class EventsController {
 	}
 	
 	//......................................Complaints Handler...........................
+	
+	@GetMapping("/addComplaints")
+	public String addComplaints(Model model,Complaints complaints) {		
+		model.addAttribute("title", "Holidays Plan-Student Management System");
+		model.addAttribute("events", complaints);		
+		return "admin/addComplaints";
+	}
+	
+	@PostMapping("/addComplaints")
+	public String addComplaints(@ModelAttribute("admin/addComplaints") Complaints complaints) {		
+		complaintsDao.save(complaints);		
+		System.out.println("Data Insrted Successfully :: "+complaintsDao.save(complaints));		
+		return "admin/addComplaints";
+	}
+	
+	
+	
 	
 	@RequestMapping("/viewComplaints")
 	public String complaintsView(Model model, Complaints complaints) {
@@ -99,7 +116,7 @@ public class EventsController {
 		return "admin/viewComplaints";
 	}
 	
-	@RequestMapping("/updateComplaints/{id}")
+	@RequestMapping("/updateComplaints{id}")
 	public String  complaintsupdate(Model model,Complaints complaints,@PathVariable("id") int id) {
 		System.out.println("update method...");	
 		model.addAttribute("complaintsUpdate", complaints);	
@@ -119,7 +136,7 @@ public class EventsController {
 		return "admin/viewComplaints";
 	}
 	
-	@PostMapping("/deleteComplaints/{id}")
+	@PostMapping("/deleteComplaints{id}")
 	public String  deleteComplaints(Model model,@RequestParam int id)
 	{
 		model.addAttribute("title", "Delete-School Management System");
@@ -127,6 +144,12 @@ public class EventsController {
 		complaintsDao.deleteById(id);
 		return "admin/viewComplaints";
 	}	
+	
+	@RequestMapping("/addComplaints")
+	public String addComplaints() {
+		
+		return "admin/addComplaints";
+	}
 
 
 }

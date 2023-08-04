@@ -14,31 +14,31 @@
 				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Admission Enquiry...</h5>
+							<h5 class="card-title">Update Enquiry...</h5>
 
 							<!-- Vertical Form -->
-							<form class="row g-3" th:action="@{/admissionEnquiry}" enctype="multipart/form-data"
-								method="POST" th:Object="${admission}">
+							<form class="row g-3" th:action="@{/updateAdmissionEnquiry{id}}" enctype="multipart/form-data" method="POST" th:Object="${admissionEnquiryData}">
+								<input type="text" name="id" class="form-control" id="id" th:value="${id}">
 								<div class="col-sm-6">
 									<div class="col-12">
 										<label for="name" class="form-label">Full Name</label>
-										<input type="text" name="name" class="form-control" id="name">
+										<input type="text" name="name" class="form-control" id="name" th:value="${name}">
 									</div>
 									<div class="col-12">
 										<label for="mob" class="form-label">Phone Number</label>
-										<input type="text" name="mob" class="form-control" id="mob">
+										<input type="text" name="mob" class="form-control" id="mob" th:value="${mob}">
 									</div>
 									<div class="col-12">
 										<label for="address" class="form-label">Address</label>
-										<input type="text" name="address" class="form-control" id="address">
+										<input type="text" name="address" class="form-control" id="address" th:value="${address}">
 									</div>
 									<div class="col-12">
 										<label for="email" class="form-label">Email</label>
-										<input type="text" name="email" class="form-control" id="email">
+										<input type="text" name="email" class="form-control" id="email" th:value="${email}">
 									</div>
 									<div class="col-12">
 										<label for="classes" class="form-label">Class</label>
-										<select name="classes" id="cars" class="form-control">
+										<select name="classes" id="cars" class="form-control" th:value="${classes}">
 											<option value="Active" class="form-control" >Class 1</option>
 											<option value="Passive" class="form-control" >Class 2</option>
 											<option value="Active" class="form-control" >Class 3</option>
@@ -49,15 +49,15 @@
 								<div class="col-sm-6">									
 									<div class="col-12">
 										<label for="description" class="form-label">Discription</label>
-										<textarea name="description" class="form-control" id="description"></textarea>
+										<textarea name="description" class="form-control" id="description" th:value="${description}"></textarea>
 									</div>
 									<div class="col-12">
 										<label for="dateTime" class="form-label">Date and Time</label>
-										<input type="datetime-local" name="dateTime" class="form-control" id="date">
+										<input type="datetime-local" name="dateTime" class="form-control" id="date" th:value="${dateTime}">
 									</div>
 									<div class="col-12">
 										<label for="assigned" class="form-label">Assigned</label>
-										<select name="assigned" id="cars" class="form-control">
+										<select name="assigned" id="cars" class="form-control" th:value="${assigned}">
 											<option value="Active" class="form-control" >Active</option>
 											<option value="Passive" class="form-control" >Inactive</option>
 											<option value="Active" class="form-control" >Active</option>

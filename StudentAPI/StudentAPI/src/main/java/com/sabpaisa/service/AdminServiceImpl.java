@@ -80,7 +80,8 @@ public class AdminServiceImpl implements AdminService {
 //			getAdmin(1);
 //			return new ModelAndView("admin/adminDashBoard");
 //		}		
-//	}	
+//	}
+	
 	public List<Admin> fetchAdmin() {
 		List<Admin> list=adminDao.findAll();
 		System.out.println("all data:: "+ list);

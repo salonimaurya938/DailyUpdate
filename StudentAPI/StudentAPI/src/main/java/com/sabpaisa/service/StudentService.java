@@ -17,7 +17,9 @@ public interface StudentService {
 	
 	public Student updateStudent(Student student);
 	
-	public void deleteStudent(int Delete_id);	
+	public void deleteStudent(int Delete_id);
+	
+	public Student studentLogin(Student student);
 	
 
 }

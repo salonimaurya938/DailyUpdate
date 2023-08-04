@@ -17,7 +17,7 @@
 							<h5 class="card-title">Update Complaints</h5>
 
 							<!-- Vertical Form -->
-							<form class="row g-3" th:action="@{/updateComplaints/{id}}" method="post" enctype="multipart/form-data" th:object="${complaintsUpdate}">
+							<form class="row g-3" th:action="@{/updateComplaints{id}}" method="post" enctype="multipart/form-data" th:object="${complaintsUpdate}">
 								<input type="text" name="id" class="form-control" id="id" th:value="${id}">
 								<div class="col-12">
 									<label for="complaint" class="form-label">Update Complaints</label>

@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sabpaisa.dao.AdmissionEnquiryDao;
 import com.sabpaisa.dao.AdmissionReportDao;
+import com.sabpaisa.entity.AdmissionEnquiry;
 import com.sabpaisa.entity.AdmissionReport;
+import com.sabpaisa.service.AdmissionEnquiryService;
 import com.sabpaisa.service.AdmissionReportService;
 
 @Controller
@@ -25,6 +28,7 @@ public class AdmissionReportController {
 	
 	@Autowired
 	private AdmissionReportDao admissionReportDao;
+	
 
 	@GetMapping("/viewAdmissionReport")
 	public String admission(Model model) {
@@ -84,18 +88,6 @@ public class AdmissionReportController {
 		admissionReportDao.deleteById(id);
 		return "admin";
 	}
-	
-// ...........................................Admission Enquiry.....................................
-	
-	
-	
-	
-	@GetMapping("/admissionEnquiry")
-	public String admissionEnquiry(Model model) {
-		model.addAttribute("title", "Admission : Enquiry");	
-		return "admin/admissionEnquiry";
-	}
-	
 	
 
 }

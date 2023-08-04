@@ -28,7 +28,7 @@
 									<td>
 
 										<div class="form">
-											<form th:action="@{/deleteEvents/{id}}" method="post" th:object="${event}">
+											<form th:action="@{/deleteEvents{id}}" method="post" th:object="${event}">
 												<input type="hidden" th:value="${event.id}" name="id" />
 												<button type="submit" value="Submit"
 													class="bg-danger">Delete</button>
@@ -36,7 +36,7 @@
 										</div>
 										<div class="form">
 											<button class="bg-success"><a
-													th:href="|@{/updateEvents/{id}(id=${event.id})}|"
+													th:href="|@{/updateEvents{id}(id=${event.id})}|"
 													style="color: white;">Update</a>&nbsp;</button>
 										</div>
 									</td>

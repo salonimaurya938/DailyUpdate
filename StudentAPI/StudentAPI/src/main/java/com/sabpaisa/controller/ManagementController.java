@@ -143,4 +143,9 @@ public class ManagementController {
 		System.out.println("registration handler...");
 		return "signup";
 	}
+//	@RequestMapping("/studentDashboard")
+//	public String studentDashboard(){
+//		System.out.println("studentDashboard handler...");
+//		return "admin/studentDashboard";
+//	}
 }

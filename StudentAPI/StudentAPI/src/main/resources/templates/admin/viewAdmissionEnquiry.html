@@ -1,0 +1,81 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Result & Report Cards</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Result & Report Cards</li>
+						<li class="breadcrumb-item active">View Admission Enquiry</li>
+					</ol>
+				</nav>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">View Admission Enquiry</h5>
+
+							<table width="100%" style="font-size: 13px;">
+								<tr>
+									<th>Id</th>
+									<th>Name</th>
+									<th>Classes</th>
+									<th>Phone</th>
+									<th>Email</th>
+									<th>Address</th>
+									<th>Description</th>
+									<th>Date Time</th>
+									<th>Assigned</th>
+									<th>Source</th>
+									<th>Reference</th>
+								</tr>
+								<tr th:each="enDatas:${enData}">
+									<td th:text="${enDatas.id}"></td>
+									<td th:text="${enDatas.name}"></td>
+									<td th:text="${enDatas.classes}"></td>
+									<td th:text="${enDatas.mob}"></td>
+									<td th:text="${enDatas.email}"></td>
+									<td th:text="${enDatas.address}"></td>
+									<td th:text="${enDatas.description}"></td>
+									<td th:text="${enDatas.dateTime}"></td>
+									<td th:text="${enDatas.assigned}"></td>
+									<td th:text="${enDatas.source}"></td>
+									<td th:text="${enDatas.reference}"></td>
+								    <td>
+									<div class="form">
+												<form th:action="@{/deleteEnquiry{id}" method="post" th:object="${data}">
+												<input type="hidden" th:value="${enDatas.id}" name="id" />
+												<button type="submit" value="Submit" class="bg-danger">Delete</button>
+											</form>
+										</div>
+										<div class="form">
+											<button class="bg-success"><a
+													th:href="|@{/updateAdmissionEnquiry{id}(id=${enDatas.id})}|"
+													style="color: white;">Update</a>&nbsp;</button>
+										</div>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+
+<style>
+	button {
+		border-radius: 5px;
+		color: white;
+		border: none;
+	}
+
+	.form {
+		margin-left: 1px;
+		float: left;
+	}
+</style>

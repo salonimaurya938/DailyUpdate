@@ -40,7 +40,7 @@ public class BookController {
 	@RequestMapping("/home")
 	public String home(Model model) {
 		model.addAttribute("title","Home-Smart content manager");
-		return "admin/home";
+		return "home";
 	}
 	
 //	.......................Start Book handler.................................

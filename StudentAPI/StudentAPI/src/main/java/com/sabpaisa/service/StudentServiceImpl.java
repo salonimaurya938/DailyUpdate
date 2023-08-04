@@ -18,7 +18,6 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public List<Student> getStudents() {
-		// TODO Auto-generated method stub
 		return studentDao.findAll();
 	}
 	
@@ -45,6 +44,13 @@ public class StudentServiceImpl implements StudentService {
 	 Student entity= studentDao.getOne(Delete_id);
 	 studentDao.delete(entity);
 		
+	}
+
+	@Override
+	public Student studentLogin(Student student) {
+		Student studentData = studentDao.findByEmailAndPassword(student.getEmail(), student.getPassword());
+		System.out.println("Student value "+studentData);
+		return studentData;
 	}
 	
 
