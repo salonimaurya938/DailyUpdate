@@ -81,10 +81,11 @@ public class EventsController {
 	}
 	
 	@PostMapping("/deleteEvents{id}")
-	public String deleteBook(Model model,@RequestParam int id) {
+	public String deleteBook(Model model,@RequestParam int id, @ModelAttribute("admin/viewEvents") Events events) {
 		model.addAttribute("title", "DeleteBook-School Management System");
 		System.out.println("delete method.............");
-		eventsDao.deleteById(id);		
+		eventsDao.deleteById(id);
+		
 		return "admin/viewEvents";
 	}
 	
@@ -103,10 +104,7 @@ public class EventsController {
 		System.out.println("Data Insrted Successfully :: "+complaintsDao.save(complaints));		
 		return "admin/addComplaints";
 	}
-	
-	
-	
-	
+		
 	@RequestMapping("/viewComplaints")
 	public String complaintsView(Model model, Complaints complaints) {
 		model.addAttribute("title", "Students Complaints-School Management System");
@@ -137,7 +135,7 @@ public class EventsController {
 	}
 	
 	@PostMapping("/deleteComplaints{id}")
-	public String  deleteComplaints(Model model,@RequestParam int id)
+	public String  deleteComplaints(@ModelAttribute("admin/viewComplaints") Model model, @RequestParam int id)
 	{
 		model.addAttribute("title", "Delete-School Management System");
 		System.out.println("delete method.............");

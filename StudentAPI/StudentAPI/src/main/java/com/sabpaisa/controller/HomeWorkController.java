@@ -37,7 +37,7 @@ public class HomeWorkController {
 		System.out.println("Inserting data..");
 		homeWorkService.addHomeWork(homeWork);
 		System.out.println("data inserted value ::" + homeWorkService.addHomeWork(homeWork));
-		return "redirect:/admin/viewhomework";
+		return "redirect:/admin/addhomework";
 	}
 	
 	@RequestMapping("/viewhomework")

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sabpaisa.dao.StudentDao;
+import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Student;
 
 @Service
@@ -48,9 +49,8 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Student studentLogin(Student student) {
-		Student studentData = studentDao.findByEmailAndPassword(student.getEmail(), student.getPassword());
-		System.out.println("Student value "+studentData);
-		return studentData;
+		Student findByUsername= studentDao.findByEmailAndPassword(student.getEmail(),student.getPassword());		
+	    return findByUsername;
 	}
 	
 

@@ -57,22 +57,27 @@ public class LoginController {
 	@PostMapping("/login")
 	public String saveLogin(Model model, @ModelAttribute("login") Admin admin, Student student) {
 		Admin userData = adminService.adminlogin(admin);
-		Student studentData = studentService.studentLogin(student);
+		Student userData1 = studentService.studentLogin(student);
+	    
+//	    Student std = studentData.get(id);
+//	    System.out.println("email"+ std.getEmail());
 
 		System.out.println("Loged in data :: " + userData);
-		System.out.println("Student login data :: " + studentData);
+		System.out.println("Student login data :: " + userData1);
 		if (userData != null) {
 			model.addAttribute("id", userData.getId());
 			model.addAttribute("username", userData.getUsername());
 			model.addAttribute("email", userData.getEmail());
 			model.addAttribute("pass", userData.getPassword());
 			return "admin/adminDashBoard";
-		} else if (studentData != null) {
-			System.out.println("student part" + studentData);
-			model.addAttribute("name", studentData.getStudentName());
-			model.addAttribute("email", studentData.getEmail());
-			return "student/studentDashboard";
-		} else {
+		}
+//		} else if (studentData != null) {
+//			System.out.println("student part" + studentData);
+//			model.addAttribute("name", studentData.getStudentName());
+//			model.addAttribute("email", studentData.getEmail());
+//			return "student/studentDashboard";
+//		} 
+		else {
 			return "login";
 		}
 	}
@@ -150,11 +155,11 @@ public class LoginController {
 		return "adminDashBoard";
 	}
 
-	@GetMapping("/adminDashBoard")
-	public String adminUpdate(Admin admin) {
-		System.out.println("Update Profile runing mood 2332....");
-		return "admin/adminDashBoard";
-	}
+//	@GetMapping("/adminDashBoard")
+//	public String adminUpdate(Admin admin) {
+//		System.out.println("Update Profile runing mood 2332....");
+//		return "admin/adminDashBoard";
+//	}
 
 	@PostMapping("/adminDashBoard")
 	public String updateAdmin(@ModelAttribute("admin/adminDashBoard") Admin admin) {

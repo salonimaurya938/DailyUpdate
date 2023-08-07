@@ -4114,9 +4114,9 @@
 						<div class="container text-center">
 							<img style="width: 60px;" th:src="@{/img/key.png}" alt="" />
 						</div>
-						<h1 class="text-center">Admin Login here...</h1>
+						<h1 class="text-center">Student Login here...</h1>
 						<h1 th:text="${errormsg}"></h1>
-						<form action="" th:action="@{/login}" method="post">
+						<form action="" th:action="@{/studentLogin}" method="post">
 							<div class="form-group">
 								<label for="emailAddress">Username</label> <input type="text" required name="username"
 									class="form-control" id="username" aria-describedby="emailHelp"
@@ -4136,10 +4136,8 @@
 				</div>
 				
 				<button type="submit" class="btn bg-primary"><a href="studentLogin" style="color: white;">Student Login</a></button>
-				<button type="submit" class="btn bg-info"><a href="login" style="color: white;">Admin Login</a></button>
-				<button type="submit" class="btn bg-primary "><a href="teacherlogin" style="color: white;">Teacher Login</a></button>
 				<button type="submit" class="btn bg-info  text-light"><a href="parentLogin" style="color: white;">Parent Login</a></button>
-		                                                           <!-- /wp:shortcode -->
+		                                                              <!-- /wp:shortcode -->
                                                                             </div>
                                                                         </div>
                                                                     </div>

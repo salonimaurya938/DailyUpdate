@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sabpaisa.dao.StudentDao;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
@@ -43,6 +45,9 @@ public class ControllerApi {
 	
 	@Autowired 
 	private HomeWorkService homeWorkService;
+	
+	@Autowired
+	private StudentDao studendDao;
 	
 	///////////////////////////// Student Controller //////////////////////////////
 
@@ -252,6 +257,6 @@ public class ControllerApi {
 	public void deleteHomeWork(@PathVariable int homeWorkid) {
 		this.homeWorkService.deleteHomeWork(homeWorkid);
 		System.out.println("Deleted Successfully!!!");
-	}			
-
+	}	
+	
 }
