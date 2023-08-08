@@ -1,0 +1,49 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="student/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+			<div class="pagetitle">
+				<h1>View All Results</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Student Result and Report Card</li>
+						<li class="breadcrumb-item active">View Result</li>
+					</ol>
+				</nav>
+			</div><!-- End Page Title -->
+			<br>
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">View Result</h5>
+						<table width="100%">
+							<tr class="mt-4">
+								<th>Id</th>
+								<th>Result</th>
+								<th>Result Name</th>								
+							</tr>
+							<tr th:each="im:${lists}">
+								<td th:text="${im.id}" class="ml-3"></td>
+								<td><a th:href="@{'images/'+${im.result}}" target="_blank"><img
+											th:src="@{'images/'+${im.result}}" width="50%" height="120px" alt=""
+											class="mt-2"></a></td>
+								<td th:text="${im.result}"></td>								
+							</tr>
+						</table>
+
+					</div>
+				</div>
+			</div>
+</div><!-- End Page Title -->
+</main><!-- End #main -->
+</section>
+</div>
+
+<style>
+	button {
+		border-radius: 5px;
+		color: white;
+		border: none;
+	}
+</style>

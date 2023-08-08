@@ -1,0 +1,64 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="student/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Book Download</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Library</li>
+						<li class="breadcrumb-item active">View All Book</li>
+					</ol>
+				</nav>
+			</div><!-- End Page Title -->
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Book Details</h5>
+						<table width="100%" style="font-size: 14px;">
+							<tr>
+								<th>Id</th>
+								<th>Subject Name</th>
+								<th>Subject Icon</th>
+								<th>Book Title</th>
+								<th>Publisher</th>
+								<th>Author Name</th>
+								<th>Subject Status</th>
+								<th>Action</th>
+							</tr>
+							<tr th:each="books:${book}">
+								<td th:text="${books.id}"></td>
+								<td th:text="${books.subName}"></td>
+								<td th:text="${books.subIcon}"></td>
+								<td th:text="${books.subTitle}"></td>
+								<td th:text="${books.publisher}"></td>
+								<td th:text="${books.author}"></td>																
+								<td th:text="${books.substatus}"></td>
+								<td>
+									<button class="bg-info"><a th:href="@{/img/key.png}" download="download"
+											style="color: white;">Download</a>&nbsp;</button></div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</main><!-- End #main -->
+	</section>
+
+</div>
+
+<style>
+	button {
+		border-radius: 5px;
+		color: white;
+		border: none;
+	}
+	.form{
+		float: left;
+		margin-left: 2px;
+	}
+</style>

@@ -1,0 +1,44 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="student/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>View All Question</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="viewhomework">Admin</a></li>
+						<li class="breadcrumb-item">Library</li>
+						<li class="breadcrumb-item active">View All Homework</li>
+					</ol>
+				</nav>
+			</div><!-- End Page Title -->
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">All Student Complaints</h5>
+						<table width="100%">
+							<tr>
+								<th>Id</th>
+								<th>Question</th>								
+							</tr>
+							<tr th:each="questions:${question}">
+								<td th:text="${questions.id}"></td>
+								<td th:text="${questions.question}"></td>								
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</main><!-- End #main -->
+	</section>
+
+</div>
+
+<style>
+	button {
+		border-radius: 5px;
+		color: white;
+		border: none;
+	}
+</style>
