@@ -1,0 +1,156 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Online Courses</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Online Courses</li>
+					</ol>
+				</nav>
+				<!-- Button trigger start modal -->
+				<button type="button" class="btn btn-success btnss" data-bs-toggle="modal"
+					data-bs-target="#staticBackdrop">
+					Add Courses
+				</button>
+				<!-- Button trigger end modal -->
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h2 class="card-title">Online Courses...</h2>
+
+							<!-- Button trigger start modal -->
+
+							<!-- Modal -->
+							<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+								data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="staticBackdropLabel">Upload Courses</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<div class="modal-body" style="padding: 24px;">
+											<form class="row g-3" th:action="@{/uploadCourses}"
+												modelAttribute="UPLOADCOURSES" method="POST"
+												enctype="multipart/form-data" th:Object="${chapter}">
+												<div class="col-12">
+													<label for="title" class="form-label">Course Title</label>
+													<input type="text" name="title" class="form-control" id="title"
+														placeholder="Enter Your Course Title...">
+												</div>
+												<div class="col-12">
+													<label for="discription" class="form-label">Course
+														Description</label>
+													<input type="text" name="discription" class="form-control"
+														id="discription" placeholder="Enter Your Course Description...">
+												</div>
+												<div class="col-12">
+													<label for="lesson" class="form-label">Lesson
+													</label>
+													<input type="text" name="lesson" class="form-control" id="lesson"
+														placeholder="Enter Your Lesson...">
+												</div>
+												<div class="col-12">
+													<label for="classes" class="form-label">Class</label>
+													<select name="classes" id="cars" class="form-control">
+														<option value="Class 1" class="form-control">Class 1</option>
+														<option value="Class 2" class="form-control">Class 2</option>
+														<option value="Class 3" class="form-control">Class 3</option>
+														<option value="Class 4" class="form-control">Class 4</option>
+													</select>
+												</div>
+												<div class="col-12">
+													<label for="uploadCourse" class="form-label">Upload Courses</label>
+													<input type="file" name="uploadCourse" class="form-control"
+														id="uploadCourse" placeholder="input file...">
+												</div>
+												<br><br><br>
+												<div class="text-center" style="text-align: center;">
+													<button type="submit" name="submit"
+														class="btn btn-success">Submit</button>
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Close</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- HTML5 Input Form Elements end Modals-->
+
+							<!---Table start-->
+							<table width="100%" class="tbl">
+								<tr class="mt-4">
+									<th>Id</th>
+									<th>Video</th>
+									<th>Video Name</th>
+									<th>Course Title</th>
+									<th>Course Discription</th>
+									<th>Lesson</th>
+									<th>Class</th>
+									<th>Action</th>
+								</tr>
+								<tr th:each="im:${data}">
+									<td th:text="${im.id}" class="ml-3"></td>
+									<td><a th:href="@{'img/'+${im.uploadCourse}}" target="_blank">
+											<video width="100%" height="80px" controls
+												style="border-radius: 6px; margin-top: 5px;">
+												<source th:src="@{'img/'+${im.uploadCourse}}" type="video/mp4">
+												<source th:src="@{'img/'+${im.uploadCourse}}" type="video/ogg">
+												Your browser does not support HTML video.
+											</video>
+										</a>
+									</td>
+									<td th:text="${im.uploadCourse}"></td>
+									<td th:text="${im.title}"></td>
+									<td th:text="${im.discription}"></td>
+									<td th:text="${im.lesson}"></td>
+									<td th:text="${im.classes}"></td>
+									<td>
+										<div class="btnform">
+											<form th:action="@{/deletesUploads{id}}" method="post" th:object="${im}">
+												<input type="hidden" th:value="${im.id}" name="id" />
+												<button type="submit" value="Submit"
+													class="btn btn-danger">Delete</button>
+											</form>
+										</div>
+										<div class="btnform">
+											<button class="btn btn-success"><a
+													th:href="|@{/updateUploadCourse{id}(id=${im.id})}|"
+													style="color: white;">Update</a>&nbsp;</button>
+										</div>
+
+									</td>
+								</tr>
+							</table>
+							<!---Table end-->
+
+						</div>
+					</div>
+				</div>
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+
+<style>
+	.btnss {
+		margin-left: 780px;
+		margin-bottom: 5px;
+	}
+
+	.btnform{
+		width: 30%;
+		float: left;
+	}
+	.tbl{
+		font-size: 12px;
+	}
+</style>

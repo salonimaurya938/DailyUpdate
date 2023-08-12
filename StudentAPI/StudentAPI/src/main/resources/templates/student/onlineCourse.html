@@ -17,16 +17,20 @@
 
 							<div class="container">
 								<div class="row">
-									<div class="col-md-3">
+									<div class="col-md-3" th:each="im:${data}">
+										<div>										
+											<video width="100%" height="110px" controls
+												style="border-radius: 6px; margin-top: 5px;">
+												<source th:src="@{'img/'+${im.uploadCourse}}" type="video/mp4">
+												<source th:src="@{'img/'+${im.uploadCourse}}" type="video/ogg">
+												Your browser does not support HTML video.
+											</video>										
+										</div>
 										<div>
-										<video src="img/ronisha.mp4" controls autoplay height="200px" width="100%"></video>
-									</div>
-									<div>
-										<h4>Classroom Management:</h4>
-										<p>Participants will learn classroom management strategies and skills that will
-											benefit their students. They will learn how to create structure and routines
-										</p>
-									</div>
+											<h5 th:text="${im.title}"></h5>
+											<p th:text="${im.discription}"></p>
+											<span>Class:</span><span th:text="${im.classes}"></span>
+										</div>
 									</div>
 								</div>
 							</div>

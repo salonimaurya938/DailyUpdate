@@ -1,0 +1,80 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Online Courses</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Online Courses</li>
+					</ol>
+				</nav>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h2 class="card-title">Online Courses...</h2>
+
+							<!-- Button trigger start modal -->
+
+							<!-- Modal -->
+							<div class="modal-body" style="padding: 24px;">
+								<form class="row g-3" th:action="@{/updateUploadCourse}" modelAttribute="UPLOADCOURSES"
+									method="POST" enctype="multipart/form-data" th:Object="${data}">
+									<input type="text" name="title" class="form-control" id="id" th:value="${id}">
+									<div class="col-12">
+										<label for="title" class="form-label">Course Title</label>
+										<input type="text" name="title" class="form-control" id="title"
+											th:value="${title}" placeholder="Enter Your Course Title...">
+									</div>
+									<div class="col-12">
+										<label for="discription" class="form-label">Course
+											Description</label>
+										<input type="text" name="discription" class="form-control"
+											th:value="${discription}" id="discription"
+											placeholder="Enter Your Course Description...">
+									</div>
+									<div class="col-12">
+										<label for="lesson" class="form-label">Lesson
+										</label>
+										<input type="text" name="lesson" class="form-control" id="lesson"
+											th:value="${lesson}" placeholder="Enter Your Lesson...">
+									</div>
+									<div class="col-12">
+										<label for="classes" class="form-label">Class</label>
+										<select name="classes" id="cars" class="form-control">
+											<option value="Class 1" class="form-control">Class 1</option>
+											<option value="Class 2" class="form-control">Class 2</option>
+											<option value="Class 3" class="form-control">Class 3</option>
+											<option value="Class 4" class="form-control">Class 4</option>
+										</select>
+									</div>
+									<div class="col-12">
+										<label for="uploadCourse" class="form-label">Upload Courses</label>
+										<input type="file" name="uploadCourse" class="form-control"
+											th:value="${uploadCourse}" id="uploadCourse" placeholder="input file...">
+									</div>
+									<br><br><br>
+									<div class="text-center" style="text-align: center;">
+										<button type="submit" name="submit" class="btn btn-success">Submit</button>
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">Close</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+
+<style>
+	.btnss {
+		margin-left: 780px;
+		margin-bottom: 5px;
+	}
+</style>

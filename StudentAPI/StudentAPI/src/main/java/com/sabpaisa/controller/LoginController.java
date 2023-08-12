@@ -1,8 +1,15 @@
 package com.sabpaisa.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,15 +21,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sabpaisa.dao.ChapterDao;
+import com.sabpaisa.dao.UploadCourseDao;
 import com.sabpaisa.entity.Admin;
+import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.Student;
+import com.sabpaisa.entity.UploadCourses;
 import com.sabpaisa.service.AdminService;
 import com.sabpaisa.service.ChapterService;
 import com.sabpaisa.service.StudentService;
+import com.sabpaisa.service.UploadCourseService;
 
 @Controller
 public class LoginController {
@@ -38,6 +50,12 @@ public class LoginController {
 
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private UploadCourseService uploadCourseService;
+	
+	@Autowired
+	private UploadCourseDao uploadCourseDao;
 
 	public LoginController(AdminService adminService, StudentService studentService) {
 		super();
@@ -80,6 +98,11 @@ public class LoginController {
 		else {
 			return "login";
 		}
+	}
+	
+	@RequestMapping("/uploadCourses")
+	public String uploadCourse() {
+		return "admin/uploadCourses";
 	}
 
 //	@PostMapping("/login")
@@ -223,12 +246,11 @@ public class LoginController {
 		return "admin/viewchapter";
 	}
 
-	@RequestMapping("/updateChapter{id}")
+	@GetMapping("/updateChapter{id}")
 	public String updateChapter(Model model, Chapter chapter, @PathVariable("id") int id) {
 		System.out.println("update method...");
 		model.addAttribute("chapter", chapter);
 		Optional<Chapter> data = chapterService.getChapter(id);
-
 		Chapter as = data.get();
 		model.addAttribute("id", as.getId());
 		model.addAttribute("chapName", as.getChapName());
@@ -270,5 +292,126 @@ public class LoginController {
 //		model.addAttribute("student", new Student());
 //		return "signup";
 //	}
+	
+//............................UploadCourse handler.................................
+	
+	
+	
+	@RequestMapping(value = "/uploadCourses", method = RequestMethod.GET)
+	public String adduploadCourse(Model model) {
+		model.addAttribute("title", "UploadCourse-Student Management System");
+		UploadCourses uplodeVideo = new UploadCourses();
+		model.addAttribute("uplodeVideo", uplodeVideo);
+		List<UploadCourses> data = uploadCourseService.getUploadCourse();
+		model.addAttribute("data", data);
+		return "admin/uploadCourses";
+	}
 
+	
+	@PostMapping("/uploadCourses")
+	public String uploadCourse(@ModelAttribute("admin/uploadCourses")@RequestParam MultipartFile uploadCourse, String title,String discription,String classes,String lesson, Model model) throws IOException {
+		System.out.println("switching...");	
+		UploadCourses upload = new UploadCourses();
+		UploadCourses im = uploadCourseService.updateUploadCourse(upload);
+	    im.setUploadCourse(uploadCourse.getOriginalFilename());
+	    im.setTitle(title);
+	    im.setDiscription(discription);
+	    im.setClasses(classes);
+	    im.setLesson(lesson);	
+		UploadCourses video= uploadCourseService.addUploadCourse(upload);			
+		if(uploadCourse!=null) {			
+			try {
+				File saveFile = new ClassPathResource("static/img").getFile();
+			    Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+uploadCourse.getOriginalFilename());
+			    System.out.println(path);
+			    Files.copy(uploadCourse.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+			    uploadCourseService.addUploadCourse(upload);
+			} catch (Exception e) {
+			
+				e.printStackTrace();
+		  }			
+		}		
+		System.out.println("msg ::  Video Upload Successfully");	
+		return "admin/uploadCourses";		
+	}
+	
+//	@RequestMapping(value = "/uploadCourse", method = RequestMethod.POST)
+//	public String insertuploadCourse(@ModelAttribute("admin/uploadCourse") UploadCourses uploadCourses) {
+//		System.out.println("uploadCourse Adding...");
+//		uploadCourseService.addUploadCourse(uploadCourses);
+//		System.out.println("data inserted value ::" + uploadCourseService.addUploadCourse(uploadCourses));
+//		return "admin/uploadCourse";
+//	}
+
+	@RequestMapping("/viewUploadCourse")
+	public String viewUploadCourses(Model model, UploadCourses viewUploadCourse) {
+		model.addAttribute("title", "View Chapter-Student Management System");
+		System.out.println("Showing..........Chapter data");
+		List<UploadCourses> uploadCourses = uploadCourseService.getUploadCourse();
+		model.addAttribute("uploadCourses", uploadCourses);
+		return "admin/viewUploadCourse";
+	}
+
+	@GetMapping("/updateUploadCourse{id}")
+	public String updateuploadCourse(Model model,UploadCourses uploadCourses, @PathVariable("id") int id) {
+		System.out.println("update method...");
+		model.addAttribute("data", uploadCourses);
+		Optional<UploadCourses> data = uploadCourseService.getUploadCourse(id);
+		UploadCourses as = data.get();
+		model.addAttribute("id", as.getId());
+		model.addAttribute("title", as.getTitle());
+		model.addAttribute("discription", as.getDiscription());
+		model.addAttribute("class", as.getClasses());
+		model.addAttribute("lesson", as.getLesson());
+		model.addAttribute("upload", as.getUploadCourse());
+		return "admin/updateUploadCourse";
+	}
+
+	@PostMapping("/updateUploadCourse")
+	public String updateCourse(@ModelAttribute("admin/updateUploadCourse")@RequestParam MultipartFile uploadCourse, String title,String discription,String classes,String lesson, Model model) throws IOException {
+		System.out.println("switching...");	
+		UploadCourses upload = new UploadCourses();
+		UploadCourses im = uploadCourseService.updateUploadCourse(upload);
+	    im.setUploadCourse(uploadCourse.getOriginalFilename());
+	    im.setTitle(title);
+	    im.setDiscription(discription);
+	    im.setClasses(classes);
+	    im.setLesson(lesson);	
+		UploadCourses video= uploadCourseService.updateUploadCourse(upload);			
+		if(uploadCourse!=null) {			
+			try {
+				File saveFile = new ClassPathResource("static/img").getFile();
+			    Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+uploadCourse.getOriginalFilename());
+			    System.out.println(path);
+			    Files.copy(uploadCourse.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
+			    uploadCourseService.updateUploadCourse(upload);
+			    List<UploadCourses> data = uploadCourseService.getUploadCourse();
+				model.addAttribute("data", data);
+			} catch (Exception e) {
+			
+				e.printStackTrace();
+		  }			
+		}		
+		System.out.println("msg ::  update Successfully");	
+		return "admin/uploadCourses";		
+	}
+
+	@PostMapping("/deletesUploads{id}")
+	public String deleteuploadCourse(Model model, @RequestParam int id) {
+		model.addAttribute("title", "Delete-School Management System");
+		System.out.println("delete method.............");
+		uploadCourseDao.deleteById(id);
+		List<UploadCourses> data = uploadCourseService.getUploadCourse();
+		model.addAttribute("data", data);
+		System.out.println("Delete successfully...");
+		return "admin/uploadCourses";
+	}
+
+	//...............................Fee Controller................................
+	
+	@RequestMapping("/fee")
+	public String fee() {
+		return "admin/fee";
+	}
+	
 }

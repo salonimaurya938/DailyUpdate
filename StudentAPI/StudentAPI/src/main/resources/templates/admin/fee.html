@@ -1,0 +1,84 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Add Fee Master</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Add Fee Master</li>
+					</ol>
+				</nav>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h2 class="card-title">Add Fee...</h2>
+
+							<!-- Button trigger start modal -->
+
+							<!-- Modal -->
+							<div class="modal-body" style="padding: 24px;">
+								
+							<form class="row g-3" th:action="@{/updateResult}" enctype="multipart/form-data" method="POST" th:Object="${lists}">
+								<div class="col-sm-6">									
+									<div class="col-12">
+										<label for="name" class="form-label">Student Name</label>
+										<input type="text" name="name" class="form-control" id="name" th:value="${name}">
+									</div>
+									<div class="col-12">
+										<label for="classes" class="form-label">Student Class</label>
+										<select name="classes" id="cars" class="form-control">
+											<option value="Class 1" class="form-control">Class 1</option>
+											<option value="Class 2" class="form-control">Class 2</option>
+											<option value="Class 3" class="form-control">Class 3</option>
+											<option value="Class 4" class="form-control">Class 4</option>
+										</select>
+									</div>
+									<div class="col-12">
+										<label for="rollNo" class="form-label">Roll No</label>
+										<input type="text" name="rollNo" class="form-control" id="rollNo" th:value="${rollNo}">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="col-12">
+										<label for="division" class="form-label">Fee Amount</label>
+										<input type="text" name="division" class="form-control" id="division" th:value="${division}">
+									</div>
+									<div class="col-12">
+										<label for="totalMarks" class="form-label">Due Date</label>
+										<input type="text" name="totalMarks" class="form-control" id="totalMarks" th:value="${totalMarks}">
+									</div>
+									<div class="col-12">
+										<label for="classes" class="form-label">Fee Type</label>
+										<select name="classes" id="cars" class="form-control">
+											<option value="School Fee" class="form-control">School Fee</option>
+											<option value="Bus Fee" class="form-control">Bus Fee</option>
+											<option value="Exam Fee" class="form-control">Exam Fee</option>
+											<option value="Hostal fee" class="form-control">Hostal fee</option>
+										</select>
+									</div>
+									<br>
+									<div class="text-center" style="text-align: center;">
+										<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+										<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+									</div>
+								</div>
+							</form><!-- Vertical Form 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+
+<style>
+	.btnss {
+		margin-left: 780px;
+		margin-bottom: 5px;
+	}
+</style>

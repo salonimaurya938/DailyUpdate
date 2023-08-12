@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.entity.TimeTable;
+import com.sabpaisa.entity.UploadCourses;
 import com.sabpaisa.dao.StudentDao;
 import com.sabpaisa.dao.UploadDao;
 import com.sabpaisa.entity.Admin;
@@ -32,6 +33,7 @@ import com.sabpaisa.service.HomeWorkService;
 import com.sabpaisa.service.StudentResultService;
 import com.sabpaisa.service.StudentService;
 import com.sabpaisa.service.TimeTableService;
+import com.sabpaisa.service.UploadCourseService;
 
 @Controller
 public class StudentLoginController {
@@ -62,6 +64,9 @@ public class StudentLoginController {
 	
 	@Autowired
 	private TimeTableService timeTableService;
+	
+	@Autowired
+	private UploadCourseService uploadCourseService;
 	
 	
 //	@RequestMapping("/register")
@@ -208,7 +213,9 @@ public class StudentLoginController {
 	}
 	//.........................Online Courses...................
 	@RequestMapping("/onlineCourse")
-	public String onlineCourse() {
+	public String onlineCourse(Model model) {
+		List<UploadCourses> data = uploadCourseService.getUploadCourse();
+		model.addAttribute("data", data);
 		return "student/onlineCourse";
 	}
 	
