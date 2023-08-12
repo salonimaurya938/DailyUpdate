@@ -129,8 +129,10 @@ public class BookController {
 	public String deleteBook(Model model,@RequestParam int id) {
 		model.addAttribute("title", "DeleteBook-School Management System");
 		System.out.println("delete method.............");
-		bookDao.deleteById(id);		
-		return "admin/downloadBook.reload()";
+		bookDao.deleteById(id);	
+		List<Book> book1 = bookService.getBooks();
+		model.addAttribute("book", book1);
+		return "admin/downloadBook";
 	}
 	
 //	.......................End Book handler.................................

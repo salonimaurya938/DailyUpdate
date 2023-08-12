@@ -26,11 +26,19 @@
 							<tr th:each="questions:${question}">
 								<td th:text="${questions.id}"></td>
 								<td th:text="${questions.question}"></td>
-								<td>
-									<button class="btn btn-danger rounded-pill"><a th:href="|@{/admin/deleteQuestio}|"
-											style="color: white;">Delete</a></button>											
-								<button type="button" class="btn btn-primary rounded-pill"><a th:href="|@{/updateQuestion/{id}(id=${questions.id})}|"
-											style="color: white;">Update</a>&nbsp;</button>			
+								<td>																
+										<div class="form">
+											<form th:action="@{/deleteQuestion{id}}" method="post" th:object="${question}">
+												<input type="hidden" th:value="${questions.id}" name="id" />
+												<button type="submit" value="Submit"
+													class="bg-danger" onclick="reloadPage()">Delete</button>
+											</form>
+										</div>
+										<div class="form">
+											<button class="bg-success"><a
+													th:href="|@{/updateQuestion/{id}(id=${questions.id})}|"
+													style="color: white;">Update</a>&nbsp;</button>
+										</div>																			
 								</td>
 							</tr>
 						</table>
@@ -47,5 +55,9 @@
 		border-radius: 5px;
 		color: white;
 		border: none;
+	}
+	.form{
+		margin-left: 2px;
+		float: left;
 	}
 </style>

@@ -1,0 +1,60 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="student/master::layout(~{::section})">
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Online Course</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Student</a></li>
+						<li class="breadcrumb-item">Online Course</li>
+					</ol>
+				</nav>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Courses</h5>
+
+							<div class="container">
+								<div class="row">
+									<div class="col-md-3">
+										<div>
+										<video src="img/ronisha.mp4" controls autoplay height="200px" width="100%"></video>
+									</div>
+									<div>
+										<h4>Classroom Management:</h4>
+										<p>Participants will learn classroom management strategies and skills that will
+											benefit their students. They will learn how to create structure and routines
+										</p>
+									</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+
+<style>
+	button {
+		border-radius: 5px;
+		color: white;
+		border: none;
+	}
+
+	.form {
+		margin-left: 2px;
+		float: left;
+	}
+</style>
+
+<script>
+	function reloadPage() {
+		location.reload(true);
+	}
+</script>

@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.entity.TimeTable;
+import com.sabpaisa.dao.StudentDao;
 import com.sabpaisa.dao.UploadDao;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
@@ -36,6 +38,9 @@ public class StudentLoginController {
 	
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	public StudentDao studentDao;
 	
 	@Autowired
 	private BookService bookService;
@@ -93,10 +98,10 @@ public class StudentLoginController {
 		return ma;
 	}	
 	
-	@RequestMapping("/studentLogin")
+	@PostMapping("/studentLogin")
 	public String Studentlogin(Model model, @ModelAttribute("studentLogin") Student student) {
-		Optional<Student> datas=studentService.getStudent(1);
-	    Student d=datas.get();
+		Optional<Student> getById = studentDao.findById(1);
+	    Student d=getById.get();
 	    String email=d.getEmail();
 	    String pass=d.getPassword();
 	   if(email!=null && pass!=null) {
@@ -116,9 +121,18 @@ public class StudentLoginController {
 //	}
 	
 	@RequestMapping("/myProfile")
-	public String studentProfile() {
-		
-		return "student/myProfile";
+	public String studentProfile(Model model, Student student) {
+		Optional<Student> getById = studentDao.findById(1);
+	    if(getById.isPresent()) {
+	    	Student d=getById.get();
+	    	 model.addAttribute("id", d.getId());
+				model.addAttribute("username", d.getStudentName());
+				model.addAttribute("email", d.getEmail());
+				model.addAttribute("mob", d.getMob());
+				model.addAttribute("pass", d.getPassword());	
+				return "student/myProfile";
+	    }		
+		return "student/studentDashboard";
 	}
 	
 //	@GetMapping("/students ")
@@ -192,4 +206,10 @@ public class StudentLoginController {
 		model.addAttribute("timeTables", as);
 		return "student/viewTimeTable";
 	}
+	//.........................Online Courses...................
+	@RequestMapping("/onlineCourse")
+	public String onlineCourse() {
+		return "student/onlineCourse";
+	}
+	
 }

@@ -74,7 +74,9 @@ public class ImgController {
 	public String deleteBook(Model model,@RequestParam int id) {
 		model.addAttribute("title", "Delete-School Management System");
 		System.out.println("delete method.............");
-		uploadDao.deleteById(id);		
+		uploadDao.deleteById(id);
+		List<Images> list = uploadDao.findAll();
+		model.addAttribute("lists", list);	
 		return "login";
 	}
 

@@ -162,16 +162,20 @@ public class LoginController {
 //	}
 
 	@PostMapping("/adminDashBoard")
-	public String updateAdmin(@ModelAttribute("admin/adminDashBoard") Admin admin) {
+	public String updateAdmin(@ModelAttribute("admin/adminDashBoard") Admin admin,Model model) {
 		System.out.println("Updating...");
 		adminService.updateAdmin(admin);
+		List<Admin> admins = adminService.getAdmins();
+		model.addAttribute("admins", adminService.getAdmins());
 		System.out.println("Updated successfully ::" + adminService.updateAdmin(admin));
 		return "admin/adminDashBoard";
 	}
 
 	@DeleteMapping("/adeletes/{adminId}")
-	public void deleteAdmin(@PathVariable int adminId) {
+	public void deleteAdmin(@PathVariable int adminId, Model model) {
 		this.adminService.deleteAdmin(adminId);
+		List<Admin> admins = adminService.getAdmins();
+		model.addAttribute("admins", adminService.getAdmins());
 		System.out.println("Deleted Successfully!!!");
 	}
 
@@ -246,6 +250,8 @@ public class LoginController {
 		model.addAttribute("title", "Delete-School Management System");
 		System.out.println("delete method.............");
 		chapterDao.deleteById(id);
+		List<Chapter> chapter1 = chapterService.getChapters();
+		model.addAttribute("chapter", chapter1);
 		System.out.println("Delete successfully...");
 	}
 

@@ -13,19 +13,29 @@
 				</nav>
 			</div><!-- End Page Title -->
 			<br>
-			<table width="100%">
-				<tr class="mt-4">
-					<th>Id</th>
-					<th>Image</th>
-					<th>Image Name</th>
-				</tr>
-				<tr th:each="im:${lists}">
-					<td th:text="${im.id}" class="ml-3"></td>
-					<td><a th:href="@{'img/'+${im.imageName}}" target="_blank"><img th:src="@{'img/'+${im.imageName}}"
-								width="50%" height="120px" alt="" class="mt-2"></a></td>
-					<td th:text="${im.imageName}"></td>
-				</tr>
-			</table>
+			<section class="section">
+				<p>
+					Use the following pattern to add the Bootstrap icons to anywhere in your project.
+					<code>&lt;i class=&quot;bi <strong>alarm-fille</strong>&quot;&gt;&lt;/i&gt;</code> Replace the bold
+					part with the below icon names.
+					Check the <a href="https://icons.getbootstrap.com/" target="_blank">Official website</a> for more
+					info.
+				</p>
+
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3" th:each="im:${lists}">
+							<div class="cards mt-3">
+
+								<img th:src="@{'img/'+${im.imageName}}" width="100%" height="100px"
+									alt="Not find this path">
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</section>
 		</main><!-- End #main -->
 	</section>
 </div>
@@ -36,7 +46,8 @@
 		color: white;
 		border: none;
 	}
-	.form{
+
+	.form {
 		float: left;
 		margin-left: 2px;
 	}

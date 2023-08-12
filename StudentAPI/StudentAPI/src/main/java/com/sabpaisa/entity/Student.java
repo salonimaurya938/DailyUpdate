@@ -1,14 +1,15 @@
 package com.sabpaisa.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Entity;
 
 @Table(name="student_register")
 @Entity
 public class Student {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -28,6 +29,11 @@ public class Student {
 	}
 
 
+	public Student() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -84,13 +90,6 @@ public class Student {
 				+ ", mob=" + mob + "]";
 	}
 
-
-	public Student() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	
 	
 }
 

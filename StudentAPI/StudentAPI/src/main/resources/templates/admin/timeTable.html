@@ -42,7 +42,7 @@
 								<td th:text="${timeTables.sunday}"></td>
 								<td>
 									<div class="form">
-										<form th:action="@{/deleteTimeTable/{id}}" method="post" th:object="${timeTables}">
+										<form th:action="@{/deleteTimeTable{id}}" method="post" th:object="${timeTables}">
 											<input type="hidden" th:value="${timeTables.id}" name="id" />
 											<button type="submit" value="Submit" class="bg-danger">Delete</button>
 										</form>

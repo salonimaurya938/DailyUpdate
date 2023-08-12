@@ -11,17 +11,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sabpaisa.dao.HomeWorkDao;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.HomeWork;
+import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.service.HomeWorkService;
+import com.sun.jdi.Method;
 
 @Controller
 public class HomeWorkController {
 	
 	@Autowired 
 	private HomeWorkService homeWorkService;
+	
+	@Autowired
+	private HomeWorkDao homeWorkDao;
 //	.......................Start Book handler.................................
 
 	@RequestMapping("/addhomework")
@@ -50,13 +57,14 @@ public class HomeWorkController {
 		return "admin/viewhomework";
 	}
 	
-	@GetMapping("/updateQuestion/{id}")
+	@GetMapping("/updateQuestion{id}")
 	public String  updateQuestion(HomeWork homeWork,@PathVariable("id") int id,Model model) {	
 		model.addAttribute("homework", homeWork);	
 		Optional<HomeWork> workData= homeWorkService.gethomeWork(id);
 		HomeWork  b =workData.get();
 	    model.addAttribute("id", b.getId());
 		model.addAttribute("question", b.getQuestion());
+		model.addAttribute("homework", homeWork);
 		return "admin/updateQuestion";
 	}
 	
@@ -66,6 +74,16 @@ public class HomeWorkController {
 		homeWorkService.updateHomeWork(homework);
 		System.out.println("Update successfully .."+homeWorkService.updateHomeWork(homework));
 		return "admin/updateQuestion";
+	}
+	
+	@PostMapping("/deleteQuestion{id}")
+	public String delete(Model model,@RequestParam int id) {
+		model.addAttribute("title", "Delete-School Management System");
+		System.out.println("delete method.............");
+		homeWorkDao.deleteById(id);
+		List<HomeWork> homework1 = homeWorkService.getHomeWorks();
+		model.addAttribute("question", homework1);
+		return "admin/viewhomework";
 	}
 	
 

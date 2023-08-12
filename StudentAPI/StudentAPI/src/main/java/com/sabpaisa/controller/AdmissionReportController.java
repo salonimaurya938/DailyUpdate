@@ -86,6 +86,8 @@ public class AdmissionReportController {
 		model.addAttribute("title", "Delete-School Management System");
 		System.out.println("delete method.............");
 		admissionReportDao.deleteById(id);
+		List<AdmissionReport> as = addReportService.getAdmissionReport();
+		model.addAttribute("data", as);
 		return "admin";
 	}
 	

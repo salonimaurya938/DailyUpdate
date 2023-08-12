@@ -106,7 +106,9 @@ public class StudentResultController {
 		model.addAttribute("title", "Delete-School Management System");
 		System.out.println("delete method.............");
 		studentResultDao.deleteById(id);
-		return "login";
+		List<StudentResult> list = studentResultService.getStudentResults();
+		model.addAttribute("lists", list);
+		return "admin/viewResult";
 	}
 
 //	@RequestMapping("/updateResult/{id}")

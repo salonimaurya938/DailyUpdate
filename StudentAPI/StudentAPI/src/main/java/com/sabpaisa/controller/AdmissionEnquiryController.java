@@ -85,6 +85,8 @@ public class AdmissionEnquiryController {
 		model.addAttribute("title", "Delete-School Management System");
 		System.out.println("delete method.............");
 		admissionEnquiryDao.deleteById(id);
+		List<AdmissionEnquiry> data1 = admissionEnquiryService.getAdmissionEnquiry();
+		model.addAttribute("enData", data1);
 		return "admin/viewAdmissionEnquiry";
 	}
 	

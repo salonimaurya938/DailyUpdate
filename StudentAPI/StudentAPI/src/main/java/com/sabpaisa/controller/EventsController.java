@@ -85,7 +85,8 @@ public class EventsController {
 		model.addAttribute("title", "DeleteBook-School Management System");
 		System.out.println("delete method.............");
 		eventsDao.deleteById(id);
-		
+		List<Events> as= eventsService.getEvents();
+		model.addAttribute("events", as);
 		return "admin/viewEvents";
 	}
 	

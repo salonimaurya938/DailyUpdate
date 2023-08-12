@@ -51,7 +51,7 @@ public class TimeTableController {
 		return "admin/addTimeTable";
 	}
 
-	@RequestMapping("/updateTimeTable/{id}")
+	@RequestMapping("/updateTimeTable{id}")
 	public String updatetimeTable(TimeTable timeTable, Model model, @PathVariable("id") int id) {
 		System.out.println("this is update page...");
 		model.addAttribute("timeTable", timeTable);
@@ -78,11 +78,13 @@ public class TimeTableController {
 		return "admin/timeTable";
 	}
 
-	@PostMapping("/deleteTimeTable/{id}")
+	@PostMapping("/deleteTimeTable{id}")
 	public String deleteTimeTable(Model model, @RequestParam int id) {
 		model.addAttribute("title", "DeleteBook-School Management System");
 		System.out.println("delete method.............");
 		timeTableDao.deleteById(id);
+		List<TimeTable> as = timeTableService.getTimeTables();
+		model.addAttribute("timeTables", as);
 		return "admin/timeTable";
 	}
 

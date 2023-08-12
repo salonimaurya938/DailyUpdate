@@ -17,9 +17,8 @@
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">Time Table Details</h5>
-						<table width="100%" style="font-size: 80%;">
+						<table width="100%" style="font-size: 80%" HSPACE=3 VSPACE=4>
 							<tr>
-								<th>Sr No.</th>
 								<th>School Time</th>
 								<th>Monday</th>
 								<th>Tuesday</th>
@@ -27,10 +26,9 @@
 								<th>Thursday</th>
 								<th>Friday</th>
 								<th>Saturday</th>
-								<th>Sunday</th>								
+								<th>Sunday</th>
 							</tr>
 							<tr th:each="timeTables:${timeTables}">
-								<td th:text="${timeTables.id}"></td>
 								<td th:text="${timeTables.schoolTime}"></td>
 								<td th:text="${timeTables.monday}"></td>
 								<td th:text="${timeTables.tuesday}"></td>
@@ -38,7 +36,7 @@
 								<td th:text="${timeTables.thursday}"></td>
 								<td th:text="${timeTables.friday}"></td>
 								<td th:text="${timeTables.saturday}"></td>
-								<td th:text="${timeTables.sunday}"></td>								
+								<td th:text="${timeTables.sunday}"></td>
 							</tr>
 						</table>
 					</div>
@@ -56,8 +54,19 @@
 		color: white;
 		border: none;
 	}
-	.form{
+
+	.form {
 		margin-left: 2px;
 		float: left;
+	}
+
+	table,
+	th,
+	td {
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	table{
+		border-spacing: 30px;
 	}
 </style>
