@@ -9,6 +9,6 @@ import com.sabpaisa.entity.Student;
 @Repository
 public interface StudentDao extends JpaRepository<Student, Integer> {
 	
-	Student findByEmailAndPassword(String email, String password);
+	public Student findByEmailAndPassword(String email, String password);
 
 }

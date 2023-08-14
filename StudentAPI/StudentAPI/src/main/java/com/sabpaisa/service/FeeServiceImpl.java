@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sabpaisa.dao.feeDao;
+import com.sabpaisa.entity.Events;
 import com.sabpaisa.entity.Fee;
 
 @Service
@@ -23,20 +24,32 @@ public class FeeServiceImpl implements FeeService {
 
 	@Override
 	public Optional<Fee> getfee(int id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		Optional<Fee> fee = feeDao.findById(id);
+		return fee;
 	}
 
 	@Override
 	public Fee addBook(Fee fee) {
-		// TODO Auto-generated method stub
-		return null;
+		Fee fees = feeDao.save(fee);
+		return fees;
 	}
 
 	@Override
 	public Fee updatefee(Fee fee) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Fee> data = feeDao.findById(fee.getId());		
+		if(data.isPresent()) {			
+			Fee newData= data.get();
+			newData.setFee(fee.getFee());
+			newData.setClasses(fee.getClasses());
+			newData.setDate(fee.getDate());
+			newData.setRollNo(fee.getRollNo());
+			newData.setFeeType(fee.getFeeType());
+			newData=feeDao.save(newData);
+			return newData;
+		  }else {
+			  fee= feeDao.save(fee);
+			  return fee;
+		  }
 	}
 
 	@Override

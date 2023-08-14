@@ -75,13 +75,11 @@ public class LoginController {
 	@PostMapping("/login")
 	public String saveLogin(Model model, @ModelAttribute("login") Admin admin, Student student) {
 		Admin userData = adminService.adminlogin(admin);
-		Student userData1 = studentService.studentLogin(student);
-	    
-//	    Student std = studentData.get(id);
-//	    System.out.println("email"+ std.getEmail());
-
 		System.out.println("Loged in data :: " + userData);
-		System.out.println("Student login data :: " + userData1);
+//		Student userData1 = studentService.studentLogin(student);	    
+//	    Student std = studentData.get(id);
+//	    System.out.println("email"+ std.getEmail());		
+//		System.out.println("Student login data :: " + userData1);
 		if (userData != null) {
 			model.addAttribute("id", userData.getId());
 			model.addAttribute("username", userData.getUsername());

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -105,10 +106,11 @@ public class StudentLoginController {
 	
 	@PostMapping("/studentLogin")
 	public String Studentlogin(Model model, @ModelAttribute("studentLogin") Student student) {
-		Optional<Student> getById = studentDao.findById(1);
-	    Student d=getById.get();
+		System.out.println(student);
+		Student d = studentService.studentLogin(student);
 	    String email=d.getEmail();
 	    String pass=d.getPassword();
+	    System.out.println("student data "+d);
 	   if(email!=null && pass!=null) {
 		   model.addAttribute("id", d.getId());
 			model.addAttribute("username", d.getStudentName());
@@ -120,24 +122,25 @@ public class StudentLoginController {
 		return "studentLogin";
 	}
 	
-//	@RequestMapping("/studentDashboard")
-//	public String Student() {
-//		return "student/studentDashboard";
-//	}
-	
 	@RequestMapping("/myProfile")
-	public String studentProfile(Model model, Student student) {
-		Optional<Student> getById = studentDao.findById(1);
-	    if(getById.isPresent()) {
-	    	Student d=getById.get();
-	    	 model.addAttribute("id", d.getId());
+	public String Student() {
+		ModelAndView ma = new ModelAndView("myProfile");
+		return "student/myProfile";
+	}
+	
+	@PostMapping("/myProfile")
+	public String studentProfile(Model model,@ModelAttribute("myProfile") @RequestBody Student student) {
+		System.out.println(student);
+		Student d = studentService.studentLogin(student);
+	    if(d!=null) {	    	
+	    	    model.addAttribute("id", d.getId());
 				model.addAttribute("username", d.getStudentName());
 				model.addAttribute("email", d.getEmail());
 				model.addAttribute("mob", d.getMob());
 				model.addAttribute("pass", d.getPassword());	
 				return "student/myProfile";
 	    }		
-		return "student/studentDashboard";
+		return "student/myProfile";
 	}
 	
 //	@GetMapping("/students ")
@@ -162,6 +165,7 @@ public class StudentLoginController {
 		model.addAttribute("book", book1);
 		return "student/viewBook";
 	}
+	
 	//..................Chapter Controller..............................
 	@RequestMapping("/viewchapters")
 	public String viewChapters(Model model, Chapter chapter) {
