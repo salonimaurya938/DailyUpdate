@@ -11,66 +11,144 @@
 						<li class="breadcrumb-item">Add Fee Master</li>
 					</ol>
 				</nav>
+				<!-- Button trigger start modal -->
+				<button type="button" class="btn btn-success btnss" data-bs-toggle="modal"
+					data-bs-target="#staticBackdrop">
+					Add Fee
+				</button>
+				<!-- Button trigger end modal -->
 				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
-							<h2 class="card-title">Add Fee...</h2>
+							<h2 class="card-title">Fee Details...</h2>
 
 							<!-- Button trigger start modal -->
 
 							<!-- Modal -->
-							<div class="modal-body" style="padding: 24px;">
-								
-							<form class="row g-3" th:action="@{/updateResult}" enctype="multipart/form-data" method="POST" th:Object="${lists}">
-								<div class="col-sm-6">									
-									<div class="col-12">
-										<label for="name" class="form-label">Student Name</label>
-										<input type="text" name="name" class="form-control" id="name" th:value="${name}">
-									</div>
-									<div class="col-12">
-										<label for="classes" class="form-label">Student Class</label>
-										<select name="classes" id="cars" class="form-control">
-											<option value="Class 1" class="form-control">Class 1</option>
-											<option value="Class 2" class="form-control">Class 2</option>
-											<option value="Class 3" class="form-control">Class 3</option>
-											<option value="Class 4" class="form-control">Class 4</option>
-										</select>
-									</div>
-									<div class="col-12">
-										<label for="rollNo" class="form-label">Roll No</label>
-										<input type="text" name="rollNo" class="form-control" id="rollNo" th:value="${rollNo}">
+							<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+								data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="staticBackdropLabel">Add Fee...</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<div class="modal-body" style="padding: 24px;">
+
+											<form class="row g-3" th:action="@{/fee}"
+												enctype="multipart/form-data" method="POST" th:Object="${lists}">
+												<div class="col-sm-6">
+													<div class="col-12">
+														<label for="name" class="form-label">Student Name</label>
+														<input type="text" name="name" class="form-control" id="name">
+													</div>
+													<div class="col-12">
+														<label for="classes" class="form-label">Student Class</label>
+														<select name="classes" id="cars" class="form-control">
+															<option value="Class 1" class="form-control">Class 1
+															</option>
+															<option value="Class 2" class="form-control">Class 2
+															</option>
+															<option value="Class 3" class="form-control">Class 3
+															</option>
+															<option value="Class 4" class="form-control">Class 4
+															</option>
+														</select>
+													</div>
+													<div class="col-12">
+														<label for="rollNo" class="form-label">Roll No</label>
+														<input type="text" name="rollNo" class="form-control"
+															id="rollNo">
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="col-12">
+														<label for="fee" class="form-label">Fee Amount</label>
+														<input type="text" name="fee" class="form-control"
+															id="fee">
+													</div>
+													<div class="col-12">
+														<label for="date" class="form-label">Due Date</label>
+														<input type="date" name="date" class="form-control"
+															id="date">
+													</div>
+													<div class="col-12">
+														<label for="feeType" class="form-label">Fee Type</label>
+														<select name="feeType" id="feeType" class="form-control">
+															<option value="School Fee" class="form-control">School Fee
+															</option>
+															<option value="Bus Fee" class="form-control">Bus Fee
+															</option>
+															<option value="Exam Fee" class="form-control">Exam Fee
+															</option>
+															<option value="Hostal fee" class="form-control">Hostal fee
+															</option>
+														</select>
+													</div>
+													<br>
+													<div class="text-center" style="text-align: center;">
+													<button type="submit" name="submit"
+														class="btn btn-success">Submit</button>
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Close</button>
+												</div>
+												</div>
+											</form><!-- Vertical Form -->
+											
+											
+											
+										</div>
 									</div>
 								</div>
-								<div class="col-sm-6">
-									<div class="col-12">
-										<label for="division" class="form-label">Fee Amount</label>
-										<input type="text" name="division" class="form-control" id="division" th:value="${division}">
-									</div>
-									<div class="col-12">
-										<label for="totalMarks" class="form-label">Due Date</label>
-										<input type="text" name="totalMarks" class="form-control" id="totalMarks" th:value="${totalMarks}">
-									</div>
-									<div class="col-12">
-										<label for="classes" class="form-label">Fee Type</label>
-										<select name="classes" id="cars" class="form-control">
-											<option value="School Fee" class="form-control">School Fee</option>
-											<option value="Bus Fee" class="form-control">Bus Fee</option>
-											<option value="Exam Fee" class="form-control">Exam Fee</option>
-											<option value="Hostal fee" class="form-control">Hostal fee</option>
-										</select>
-									</div>
-									<br>
-									<div class="text-center" style="text-align: center;">
-										<button type="submit" name="submit" class="btn btn-primary">Submit</button>
-										<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
-									</div>
-								</div>
-							</form><!-- Vertical Form 
 							</div>
-						</div>
-					</div>
-				</div>
-			</div><!-- End Page Title -->
+							<!-- HTML5 Input Form Elements end Modals-->
+
+											<!---Table start-->
+											<table width="100%" class="tbl">
+												<tr class="mt-4">
+													<th>Id</th>
+													<th>Student Name</th>
+													<th>Roll No</th>					
+													<th>Fee Amount</th>
+													<th>Due Date</th>
+													<th>Fee Type</th>
+													<th>Class</th>
+													<th>Action</th>
+												</tr>
+												<tr th:each="im:${data}">
+													<td th:text="${im.id}"></td>									
+													<td th:text="${im.name}"></td>
+													<td th:text="${im.rollNo}"></td>	
+													<td th:text="${im.fee}"></td>
+													<td th:text="${im.date}"></td>
+													<td th:text="${im.feeType}"></td>
+													<td th:text="${im.classes}"></td>												
+													<td>
+														<div class="btnform">
+															<form th:action="@{/deletesUploads{id}}" method="post"
+																th:object="${im}">
+																<input type="hidden" th:value="${im.id}" name="id" />
+																<button type="submit" value="Submit"
+																	class="btn btn-danger">Delete</button>
+															</form>
+														</div>
+														<div class="btnform">
+															<button class="btn btn-success"><a
+																	th:href="|@{/updateUploadCourse{id}(id=${im.id})}|"
+																	style="color: white;">Update</a>&nbsp;</button>
+														</div>
+
+													</td>
+												</tr>
+											</table>
+											<!---Table end-->
+
+										</div>
+									</div>
+								</div>
+							</div><!-- End Page Title -->
 
 		</main><!-- End #main -->
 	</section>
@@ -80,5 +158,14 @@
 	.btnss {
 		margin-left: 780px;
 		margin-bottom: 5px;
+	}
+
+	.btnform {
+		width: 30%;
+		float: left;
+	}
+
+	.tbl {
+		font-size: 12px;
 	}
 </style>

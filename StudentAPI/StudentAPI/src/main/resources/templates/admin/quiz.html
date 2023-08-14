@@ -1,0 +1,152 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Add Quiz</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Add Quiz</li>
+					</ol>
+				</nav>
+				<!-- Button trigger start modal -->
+				<button type="button" class="btn btn-success btnss" data-bs-toggle="modal"
+					data-bs-target="#staticBackdrop">
+					Add Quiz
+				</button>
+				<!-- Button trigger end modal -->
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h2 class="card-title">Quiz Details...</h2>
+
+							<!-- Button trigger start modal -->
+
+							<!-- Modal -->
+							<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+								data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="staticBackdropLabel">Add Quiz...</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<div class="modal-body" style="padding: 24px;">
+
+											<form class="row g-3" th:action="@{/quiz}"
+												enctype="multipart/form-data" method="POST" th:Object="${quiz}">												
+													<div class="col-12">
+														<label for="question" class="form-label">Question</label>
+														<input type="text" name="question" class="form-control" id="question">
+													</div>
+			
+													<div class="col-12">
+														<label for="op1" class="form-label">First Option</label>
+														<input type="text" name="op1" class="form-control"
+															id="op1">
+													</div>												
+													<div class="col-12">
+														<label for="op2" class="form-label">Second Option</label>
+														<input type="text" name="op2" class="form-control"
+															id="op4">
+													</div>
+													<div class="col-12">
+														<label for="op3" class="form-label">Third Option</label>
+														<input type="text" name="op3" class="form-control"
+															id="op3">
+													</div>
+													<div class="col-12">
+														<label for="op4" class="form-label">fourth Option</label>
+														<input type="text" name="op4" class="form-control"
+															id="op4">
+													</div>
+													<div class="col-12">
+														<label for="correctAnswer" class="form-label">Correct Answer</label>
+														<input type="text" name="correctAnswer" class="form-control"
+															id="correctAnswer">
+													</div>
+													<br>
+													<div class="text-center" style="text-align: center;">
+													<button type="submit" name="submit"
+														class="btn btn-success">Submit</button>
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Close</button>
+												</div>
+												</div>
+											</form><!-- Vertical Form -->											
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- HTML5 Input Form Elements end Modals-->
+
+											<!---Table start-->
+											<table width="100%" class="tbl">
+												<tr class="mt-4">
+													<th>Id</th>
+													<th>Question</th>
+													<th>First Option</th>
+													<th>Second Option</th>
+													<th>Third Option</th>
+													<th>Fourth Option</th>
+													<th>Correct Answer</th>
+													<th>Action</th>
+												</tr>
+								
+												<tr th:each="quizs:${quiz}">
+													<td th:text="${quizs.id}" class="ml-3"></td>
+													<td th:text="${quizs.question}"></td>
+													<td th:text="${quizs.op1}"></td>
+													<td th:text="${quizs.op2}"></td>
+													<td th:text="${quizs.op3}"></td>
+													<td th:text="${quizs.op4}"></td>
+													<td th:text="${quizs.correctAnswer}"></td>
+													<td>
+														<div class="btnform">
+															<form method="post"
+																th:object="${quiz}">
+																<input type="hidden" th:value="${quizs.id}" name="id" />
+																<button type="submit" value="Submit"
+																	class="btn btn-danger">Delete</button>
+															</form>
+														</div>
+														<div class="btnform">
+															<button class="btn btn-success"><a
+																	th:href="|@{/updateQuiz{id}(id=${quizs.id})}|"
+																	style="color: white;">Update</a>&nbsp;</button>
+														</div>
+
+													</td>
+												</tr>
+											</table>
+											<!---Table end-->
+
+										</div>
+									</div>
+								</div>
+							</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+
+<style>
+	.btnss {
+		margin-left: 780px;
+		margin-bottom: 5px;
+	}
+
+	.btnform {
+		width: 30%;
+		float: left;
+	}
+
+	.tbl {
+		font-size: 12px;
+	}
+</style>

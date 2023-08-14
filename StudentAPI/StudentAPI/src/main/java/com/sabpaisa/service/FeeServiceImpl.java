@@ -29,7 +29,7 @@ public class FeeServiceImpl implements FeeService {
 	}
 
 	@Override
-	public Fee addBook(Fee fee) {
+	public Fee addfee(Fee fee) {
 		Fee fees = feeDao.save(fee);
 		return fees;
 	}

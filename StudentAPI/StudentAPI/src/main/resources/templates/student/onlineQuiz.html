@@ -1,0 +1,80 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="student/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Online Quiz</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Student</a></li>
+						<li class="breadcrumb-item"> Quiz</li>
+					</ol>
+				</nav>
+				<div th:each="im:${quiz}">
+					<i><h4><span th:text="${count}"></span> </span><span th:text="${im.question}"></span></h4></i>	
+									
+					<input type="radio" name="answer" onclick="quizfun(this)" id="op1" value="Saloni">
+					<label for="css" id="option1">Ram</label><br>
+					
+					<input type="radio" name="answer" onclick="quizfun(this)" value="op2">
+					<label for="css" id="option1">Sita</label><br>
+					
+					<input type="radio" name="answer" onclick="quizfun(this)" value="op3">
+					<label for="css" id="option1">Krishna</label><br>
+					
+					<input type="radio" name="answer" onclick="quizfun(this)" value="op4">	
+					<label for="css" id="option1">Radha</label><br>						
+				</div>
+				
+				
+
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+
+<script>
+	
+	function quizfun(x){
+	var options=x.value;
+	
+	options 
+	
+	alert(option1);
+	}
+	
+	function startQuiz(){
+		currentQuestionIndex=0;
+		score=0;
+		nextButton.innerHTML="Next";
+		showQuestion();
+	}
+	
+	function showQuestion(){
+		let currentQuestion=question[currentQuestionIndex];
+		let questionNo = currentQuestionIndex+1;
+		questionElement.innerHTML= questionNo +". "+currentQuestion.question;
+	}
+	
+</script>
+
+<style>
+	.quiz{		
+		height: 32px;
+		width: 20%;
+		background: #4154f1;
+		color: aliceblue;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+		border-radius: 8px;
+		padding-left: 10px;
+		padding-top :2px;
+		margin-top: 7px;
+	}
+	
+	.quiz:hover{
+		background: lightskyblue;
+		color: #4154f1;
+	}
+</style>

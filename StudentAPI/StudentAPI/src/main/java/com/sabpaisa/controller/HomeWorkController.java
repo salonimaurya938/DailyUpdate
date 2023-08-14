@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sabpaisa.dao.HomeWorkDao;
-import com.sabpaisa.entity.Book;
-import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.HomeWork;
-import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.service.HomeWorkService;
-import com.sun.jdi.Method;
 
 @Controller
 public class HomeWorkController {

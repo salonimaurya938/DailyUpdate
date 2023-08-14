@@ -14,7 +14,7 @@ public interface FeeService {
 
 	public Optional<Fee> getfee(int id);
 
-	public Fee addBook(Fee fee);
+	public Fee addfee(Fee fee);
 
 	public Fee updatefee(Fee fee);
 

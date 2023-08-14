@@ -27,10 +27,12 @@ import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.Events;
 import com.sabpaisa.entity.HomeWork;
 import com.sabpaisa.entity.Images;
+import com.sabpaisa.entity.Quiz;
 import com.sabpaisa.service.BookService;
 import com.sabpaisa.service.ChapterService;
 import com.sabpaisa.service.EventsService;
 import com.sabpaisa.service.HomeWorkService;
+import com.sabpaisa.service.QuizService;
 import com.sabpaisa.service.StudentResultService;
 import com.sabpaisa.service.StudentService;
 import com.sabpaisa.service.TimeTableService;
@@ -68,6 +70,9 @@ public class StudentLoginController {
 	
 	@Autowired
 	private UploadCourseService uploadCourseService;
+	
+	@Autowired
+	private QuizService quizService;
 	
 	
 //	@RequestMapping("/register")
@@ -222,5 +227,15 @@ public class StudentLoginController {
 		model.addAttribute("data", data);
 		return "student/onlineCourse";
 	}
+	//.........................Online Quiz...................
+		@RequestMapping("/onlineQuiz")
+		public String onlineQuiz(Model model) {
+			List<Quiz> data = quizService.getQuiz();
+			model.addAttribute("quiz", data);
+//			int a=1;
+//			model.addAttribute("count", a);
+//			a++;
+			return "student/onlineQuiz";
+		}
 	
 }

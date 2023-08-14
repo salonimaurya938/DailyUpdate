@@ -25,14 +25,20 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sabpaisa.dao.ChapterDao;
+import com.sabpaisa.dao.QuizDao;
 import com.sabpaisa.dao.UploadCourseDao;
+import com.sabpaisa.dao.feeDao;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
+import com.sabpaisa.entity.Fee;
+import com.sabpaisa.entity.Quiz;
 import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.UploadCourses;
 import com.sabpaisa.service.AdminService;
 import com.sabpaisa.service.ChapterService;
+import com.sabpaisa.service.FeeService;
+import com.sabpaisa.service.QuizService;
 import com.sabpaisa.service.StudentService;
 import com.sabpaisa.service.UploadCourseService;
 
@@ -56,6 +62,18 @@ public class LoginController {
 	
 	@Autowired
 	private UploadCourseDao uploadCourseDao;
+	
+	@Autowired
+	private QuizService quizService;
+	
+	@Autowired
+	private QuizDao quizDao;
+	
+	@Autowired 
+	private FeeService feeService;
+	
+	@Autowired
+	private feeDao feeDao;
 
 	public LoginController(AdminService adminService, StudentService studentService) {
 		super();
@@ -407,9 +425,104 @@ public class LoginController {
 
 	//...............................Fee Controller................................
 	
-	@RequestMapping("/fee")
-	public String fee() {
+	@RequestMapping(value = "/fee", method = RequestMethod.GET)
+	public String addFee(Model model) {
+		model.addAttribute("title", "AddQuiz-School Management System");
+		Fee fee = new Fee();
+		model.addAttribute("quiz", fee);
+		List<Fee> fees = feeService.getfee();
+		model.addAttribute("data", fees);
+		return "admin/fee";
+	}
+
+	@RequestMapping(value = "/fee", method = RequestMethod.POST)
+	public String insertfee(@ModelAttribute("admin/fee") Fee fee,Model model) {
+		System.out.println("fee Adding...");
+		feeService.addfee(fee);
+		System.out.println("data inserted value ::" + feeService.addfee(fee));	
+		List<Fee> fees = feeService.getfee();
+		model.addAttribute("data", fees);
 		return "admin/fee";
 	}
 	
+	@PostMapping("/deletesfee{id}")
+	public String deletefee(Model model, @RequestParam int id) {
+		model.addAttribute("title", "Delete-School Management System");
+		System.out.println("delete method.............");
+		feeDao.deleteById(id);
+		List<Fee> data = feeService.getfee();
+		model.addAttribute("data", data);
+		System.out.println("Delete successfully...");
+		return "admin/fee";
+	}
+
+	//...............................Quiz Controller................................
+	
+	@RequestMapping(value = "/quiz", method = RequestMethod.GET)
+	public String addQuiz(Model model) {
+		model.addAttribute("title", "AddQuiz-School Management System");
+		Quiz quiz = new Quiz();
+		model.addAttribute("quiz", quiz);
+		List<Quiz> quizs = quizService.getQuiz();
+		model.addAttribute("quiz", quizs);
+		return "admin/quiz";
+	}
+
+	@RequestMapping(value = "/quiz", method = RequestMethod.POST)
+	public String insertQuiz(@ModelAttribute("admin/quiz") Quiz quiz,Model model) {
+		System.out.println("Quiz Adding...");
+		quizService.addQuiz(quiz);
+		System.out.println("data inserted value ::" + quizService.addQuiz(quiz));		
+		return "admin/quiz";
+	}
+	
+//	@RequestMapping("/viewQuiz")
+//	public String viewquiz(Model model, Quiz quiz) {
+//		model.addAttribute("title", "View Quiz Details-School Management System");
+//		System.out.println("Quiz Details ...");
+//		List<Quiz> quizs = quizService.getQuiz();
+//		model.addAttribute("datas", quizs);
+//		return "admin/viewQuiz";
+//	}
+	
+	@GetMapping("/updateQuiz{id}")
+	public String updateQuiz(Model model, Chapter chapter, @PathVariable("id") int id) {
+		System.out.println("update method...");
+		model.addAttribute("chapter", chapter);
+		Optional<Quiz> data = quizService.getQuizId(id);
+		Quiz as = data.get();
+		model.addAttribute("id", as.getId());
+		model.addAttribute("question", as.getQuestion());
+		model.addAttribute("op1", as.getOp1());
+		model.addAttribute("op2", as.getOp2());
+		model.addAttribute("op3", as.getOp3());
+		model.addAttribute("op4", as.getOp4());
+		model.addAttribute("correctAnswer", as.getCorrectAnswer());
+		return "admin/updateQuiz";
+	}
+
+	@PostMapping("/updateQuiz")
+	public String updateQuiz(@ModelAttribute("admin/updateQuiz") Quiz quiz,Model model) {
+		System.out.println("updating data...");
+		quizService.updateQuiz(quiz);
+		System.out.println("update successfully ::" + quizService.updateQuiz(quiz));
+		
+		List<Quiz> quizs = quizService.getQuiz();
+		model.addAttribute("quiz", quizs);
+		
+		return "admin/quiz";
+	}
+	
+	@PostMapping("/deleteQuiz{id}")
+	public String deleteQuiz(Model model, @RequestParam int id) {
+		model.addAttribute("title", "Delete-School Management System");
+		System.out.println("delete method.............");
+		quizDao.deleteById(id);
+		List<Quiz> quizs = quizService.getQuiz();
+		model.addAttribute("quiz", quizs);
+		System.out.println("Delete successfully...");
+		return "admin/quiz";
+	}
+	
+		
 }
