@@ -4,13 +4,7 @@
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1 class="h1font">Online Quiz Test</h1>
-				<nav>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="adminDashBoard">Student</a></li>
-						<li class="breadcrumb-item"> Quiz</li>
-					</ol>
-				</nav>
+				<h1 class="h1font" style="font-size: 35px; margin-top: 8px">Online Quiz Test</h1>				
 				<div id="outer">
 				<!--	<span id="s">00</span>
 					<span>:</span>
@@ -18,18 +12,30 @@
 					<span>:</span>
 					<span id="h">00</span>
 					<span>Total Time-</span>-->
-
-					<form action="#" id="f1">
-						<h3>Q.1 What is Javascript ?</h3>
-						<b>A.</b><input type="radio" name="op1" value="Object Oriented" onchange="f1(this)" />Object
-						Oriented
-						<br /><b>B.</b><input type="radio" name="op1" value="Object Based" onchange="f1(this)" />Object
-						Based
-						<br /><b>C.</b><input type="radio" name="op1" value="Structured"
-							onchange="f1(this)" />Structured
-						<br /><b>D.</b><input type="radio" name="op1" value="All" onchange="f1(this)" />All
+					
+					<div>
+						<form action="#" id="f1">
+						<h3>Q.1<span th:text="${question}"></span></h3>
+						<b>A.</b><input type="radio" name="op1" value="Object Oriented" onchange="f1(this)" th:value="${op1}"/><span th:text="${op1}"></span>
+						<br /><b>B.</b><input type="radio" name="op1" value="Object Based" onchange="f1(this)" th:value="${op2}"/><span th:text="${op2}"></span>
+						<br /><b>C.</b><input type="radio" name="op1" value="Structured" onchange="f1(this)" th:value="${op3}"/><span th:text="${op3}"></span>
+						<br /><b>D.</b><input type="radio" name="op1" value="All"        onchange="f1(this)" th:value="${op4}" /><span th:text="${op4}"></span>
+						<input type="hidden" id="correctAnswer" value="${quizs.correctAnswer}">
 					</form>
+					
+					<!--
+						<div th:each="quizs,id:${quiz}">
+						<form action="#" id="f1">
+						<h3>Q.1<span th:text="${question}"></span></h3>
+						<b>A.</b><input type="radio" name="op1" value="Object Oriented" onchange="f1(this)" th:value="${quizs.op1}"/><span th:text="${quizs.op1}"></span>
+						<br /><b>B.</b><input type="radio" name="op1" value="Object Based" onchange="f1(this)" th:value="${quizs.op2}"/><span th:text="${quizs.op2}"></span>
+						<br /><b>C.</b><input type="radio" name="op1" value="Structured" onchange="f1(this)" th:value="${quizs.op3}"/><span th:text="${quizs.op3}"></span>
+						<br /><b>D.</b><input type="radio" name="op1" value="All"        onchange="f1(this)" th:value="${quizs.op4}" /><span th:text="${quizs.op4}"></span>
+						<input type="hidden" id="correctAnswer" value="${quizs.correctAnswer}">
+					</form>
+					-->
 
+					</div>
 					<form action="#" id="f2" style="display:none;" value="Object Based">
 						<h3>Q.2 What is C ?</h3>
 						<b>A.</b><input type="radio" name="op2" onchange="f2(this)" value="Object Orienter" />Object
@@ -91,7 +97,8 @@
 	var c = 0;
 	//form 1
 	function f1(x) {
-		if (x.value == "Object Oriented") {
+		var correctAnswer =  document.getElementById("correctAnswer").value;
+		if (x.value == correctAnswer) {
 			c++;
 		}
 		else {
@@ -139,54 +146,14 @@
 	function submit() {
 		document.write("<div style='line-height:6;'><h1 style='color:maroon;font-size:80px;text-align:center;'>Thank You !</h1></div>")
 	}
-	//Digital Clock
-	var hh = 1, mm = 3, ss = 60;
-	function sw() {
-		ss--;
-		if (ss > 9) {
-			return ss;
-		}
-		else {
-			return '0' + ss;
-		}
-	}
-	function timer() {
 
-		var x = sw();
-		document.getElementById("h").innerText = '0' + hh;
-		document.getElementById("m").innerText = mm;
-		document.getElementById("s").innerText = x;
-		window.setTimeout(timer, 10)
-
-		if (x == 0) {
-			ss = 60;
-			mm--;
-			document.getElementById("h").innerText = '0' + hh;
-			document.getElementById("s").innerText = ss;
-			document.getElementById("m").innerText = mm;
-		}
-		if (mm == 0) {
-			mm = 60;
-			hh--;
-			document.getElementById("s").innerText = ss;
-			document.getElementById("m").innerText = mm;
-			document.getElementById("h").innerText = hh;
-		}
-		if (hh == 0 && mm == 0) {
-			if (x == 0) {
-				document.write("<div style='text-align:center;'><br/><br/><br/><br/><br/><big style='font-size:30px;'>Your Time is Over and Test submmited</big><br/><big style='color:maroon;font-size:80px;'>Thank You !</big></div>")
-			}
-		}
-	}
-	window.onload = timer;
 </script>
 
 <style>
 	.h1font{
 		text-align: center;
 		color: darkblue;
-		/*font-size: 45px;*/
-	}
+		}
 
 	#outer {
 		height: 340px;
@@ -194,7 +161,7 @@
 		box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 		margin: 0px auto;
 		padding: 1% 5%;
-		padding-top: 10px;
+		padding-top: 50px;
 		/*font-size: 28px;/*/
 	}
 

@@ -19,7 +19,7 @@
 						<h5 class="card-title">Time Table Details</h5>
 						<table width="100%" style="font-size: 80%;">
 							<tr>
-								<th>Sr No.</th>
+								<th>Sr.No.</th>
 								<th>School Time</th>
 								<th>Monday</th>
 								<th>Tuesday</th>
@@ -30,8 +30,8 @@
 								<th>Sunday</th>
 								<th>Action</th>
 							</tr>
-							<tr th:each="timeTables:${timeTables}">
-								<td th:text="${timeTables.id}"></td>
+							<tr th:each="im,id:${timeTables}">
+								<td th:text="${id.count}"></td>
 								<td th:text="${timeTables.schoolTime}"></td>
 								<td th:text="${timeTables.monday}"></td>
 								<td th:text="${timeTables.tuesday}"></td>
@@ -42,15 +42,17 @@
 								<td th:text="${timeTables.sunday}"></td>
 								<td>
 									<div class="form">
-										<form th:action="@{/deleteTimeTable{id}}" method="post" th:object="${timeTables}">
+										<form th:action="@{/deleteTimeTable{id}}" method="post"
+											th:object="${timeTables}">
 											<input type="hidden" th:value="${timeTables.id}" name="id" />
 											<button type="submit" value="Submit" class="bg-danger">Delete</button>
 										</form>
 									</div>
 									<div class="form">
-										<button class="bg-success"><a th:href="|@{/updateTimeTable/{id}(id=${timeTables.id})}|"
-											style="color: white;">Update</a>&nbsp;</button>
-									</div>																		
+										<button class="bg-success"><a
+												th:href="|@{/updateTimeTable/{id}(id=${timeTables.id})}|"
+												style="color: white;">Update</a>&nbsp;</button>
+									</div>
 								</td>
 							</tr>
 						</table>
@@ -69,7 +71,8 @@
 		color: white;
 		border: none;
 	}
-	.form{
+
+	.form {
 		margin-left: 2px;
 		float: left;
 	}

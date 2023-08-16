@@ -231,7 +231,19 @@ public class StudentLoginController {
 		@RequestMapping("/onlineQuiz")
 		public String onlineQuiz(Model model) {
 			List<Quiz> data = quizService.getQuiz();
+			Optional<Quiz> getById= quizService.getQuizId(1);
+			if(getById.isPresent()) {
+				Quiz ids=getById.get();
+				model.addAttribute("id", ids.getId());
+				model.addAttribute("question", ids.getQuestion());
+				model.addAttribute("op1", ids.getOp1());
+				model.addAttribute("op2", ids.getOp2());
+				model.addAttribute("op3", ids.getOp3());
+				model.addAttribute("op4", ids.getOp4());
+			}			
 			model.addAttribute("quiz", data);
+			int a = 1;
+			model.addAttribute("count", a++);
 //			int a=1;
 //			model.addAttribute("count", a);
 //			a++;

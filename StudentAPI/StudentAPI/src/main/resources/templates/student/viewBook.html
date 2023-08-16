@@ -28,8 +28,8 @@
 								<th>Subject Status</th>
 								<th>Action</th>
 							</tr>
-							<tr th:each="books:${book}">
-								<td th:text="${books.id}"></td>
+							<tr th:each="books,id:${book}">
+								<td th:text="${id.count}"></td>
 								<td th:text="${books.subName}"></td>
 								<td th:text="${books.subIcon}"></td>
 								<td th:text="${books.subTitle}"></td>

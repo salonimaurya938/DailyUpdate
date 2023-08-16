@@ -143,6 +143,17 @@ public class ManagementController {
 		System.out.println("registration handler...");
 		return "signup";
 	}
+	
+	@RequestMapping("/calender")
+	public String calender(){
+		System.out.println("registration handler...");
+		return "admin/calender";
+	}
+	@RequestMapping("/calenderStd")
+	public String calenderstd(){
+		System.out.println("registration handler...");
+		return "student/calenderStd";
+	}
 //	@RequestMapping("/studentDashboard")
 //	public String studentDashboard(){
 //		System.out.println("studentDashboard handler...");

@@ -108,7 +108,7 @@
 											<!---Table start-->
 											<table width="100%" class="tbl">
 												<tr class="mt-4">
-													<th>Id</th>
+													<th>Sr.No</th>
 													<th>Student Name</th>
 													<th>Roll No</th>					
 													<th>Fee Amount</th>
@@ -117,8 +117,8 @@
 													<th>Class</th>
 													<th>Action</th>
 												</tr>
-												<tr th:each="im:${data}">
-													<td th:text="${im.id}"></td>									
+												<tr th:each="im,iterationStatus:${data}">
+													<td th:text="${iterationStatus.count}"></td>									
 													<td th:text="${im.name}"></td>
 													<td th:text="${im.rollNo}"></td>	
 													<td th:text="${im.fee}"></td>
