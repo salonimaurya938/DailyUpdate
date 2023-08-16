@@ -4,30 +4,82 @@
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1>Online Quiz</h1>
+				<h1 class="h1font">Online Quiz Test</h1>
 				<nav>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="adminDashBoard">Student</a></li>
 						<li class="breadcrumb-item"> Quiz</li>
 					</ol>
 				</nav>
-				<div th:each="im:${quiz}">
-					<i><h4><span th:text="${count}"></span> </span><span th:text="${im.question}"></span></h4></i>	
-									
-					<input type="radio" name="answer" onclick="quizfun(this)" id="op1" value="Saloni">
-					<label for="css" id="option1">Ram</label><br>
-					
-					<input type="radio" name="answer" onclick="quizfun(this)" value="op2">
-					<label for="css" id="option1">Sita</label><br>
-					
-					<input type="radio" name="answer" onclick="quizfun(this)" value="op3">
-					<label for="css" id="option1">Krishna</label><br>
-					
-					<input type="radio" name="answer" onclick="quizfun(this)" value="op4">	
-					<label for="css" id="option1">Radha</label><br>						
+				<div id="outer">
+				<!--	<span id="s">00</span>
+					<span>:</span>
+					<span id="m">00</span>
+					<span>:</span>
+					<span id="h">00</span>
+					<span>Total Time-</span>-->
+
+					<form action="#" id="f1">
+						<h3>Q.1 What is Javascript ?</h3>
+						<b>A.</b><input type="radio" name="op1" value="Object Oriented" onchange="f1(this)" />Object
+						Oriented
+						<br /><b>B.</b><input type="radio" name="op1" value="Object Based" onchange="f1(this)" />Object
+						Based
+						<br /><b>C.</b><input type="radio" name="op1" value="Structured"
+							onchange="f1(this)" />Structured
+						<br /><b>D.</b><input type="radio" name="op1" value="All" onchange="f1(this)" />All
+					</form>
+
+					<form action="#" id="f2" style="display:none;" value="Object Based">
+						<h3>Q.2 What is C ?</h3>
+						<b>A.</b><input type="radio" name="op2" onchange="f2(this)" value="Object Orienter" />Object
+						Orienter
+						<br /><b>B.</b><input type="radio" name="op2" onchange="f2(this)" value="Object Based" />Object
+						Based
+						<br /><b>C.</b><input type="radio" name="op2" onchange="f2(this)"
+							value="Structured" />Structured
+						<br /><b>D.</b><input type="radio" name="op2" onchange="f2(this)" value="All" />All
+					</form>
+
+					<form action="#" id="f3" style="display:none;">
+						<h3>Q.3 What is jQuery ?</h3>
+						<b>A.</b><input type="radio" name="op3" onchange="f3(this)" value="Object Orienter" />Object
+						Orienter
+						<br><b>B.</b><input type="radio" name="op3" onchange="f3(this)" value="Object Based" />Object
+						Based
+						<br /><b>C.</b><input type="radio" name="op3" onchange="f3(this)"
+							value="Structured" />Structured
+						<br /><b>D.</b><input type="radio" name="op3" onchange="f3(this)" value="All" />All
+					</form>
+
+					<form action="#" id="f4" style="display:none;">
+						<h3>Q.4 What is C# ?</h3>
+						<b>A.</b><input type="radio" name="op4" onchange="f4(this)" value="Object Orienter" />Object
+						Orienter
+						<br /><b>B.</b><input type="radio" name="op4" onchange="f4(this)" value="Object Based" />Object
+						Based
+						<br /><b>C.</b><input type="radio" name="op4" onchange="f4(this)"
+							value="Structured" />Structured
+						<br /><b>D.</b><input type="radio" name="op4" onchange="f4(this)" value="All" />All
+					</form>
+
+					<form action="#" id="f5" style="display:none;">
+						<h3>Q.5 What is Javascript ?</h3>
+						<b>A.</b><input type="radio" name="op5" onchange="f5(this)" value="Object Orienter" />Object
+						Orienter
+						<br /><b>B.</b><input type="radio" name="op5" onchange="f5(this)" value="Object Based" />Object
+						Based
+						<br /><b>C.</b><input type="radio" name="op5" onchange="f5(this)"
+							value="Structured" />Structured
+						<br /><b>D.</b><input type="radio" name="op5" onchange="f5(this)" value="All" />All
+					</form>
+
+					<button onclick="pre();" id="pr" style="float:left;">Previous</button>
+					<button onclick="submit();" id="sub" style="float:right;display: none;">Submit</button>
+					<button onclick="next();" id="nx" style="float:right;margin-right:1%;">Next</button>
 				</div>
-				
-				
+
+
 
 			</div><!-- End Page Title -->
 
@@ -36,45 +88,124 @@
 </div>
 
 <script>
-	
-	function quizfun(x){
-	var options=x.value;
-	
-	options 
-	
-	alert(option1);
+	var c = 0;
+	//form 1
+	function f1(x) {
+		if (x.value == "Object Oriented") {
+			c++;
+		}
+		else {
+			c = 0;
+		}
+		alert("right: " + c)
 	}
-	
-	function startQuiz(){
-		currentQuestionIndex=0;
-		score=0;
-		nextButton.innerHTML="Next";
-		showQuestion();
+	//form 2
+
+	//previous
+	var i = 1;
+	function pre() {
+		document.getElementById("f" + i).style.display = "none";
+		i--;
+		if (i >= 1) {
+			document.getElementById("f" + i).style.display = "block";
+		}
+		else {
+			i = 1;
+			document.getElementById("f" + i).style.display = "block";
+			alert("No More Question Available");
+		}
 	}
-	
-	function showQuestion(){
-		let currentQuestion=question[currentQuestionIndex];
-		let questionNo = currentQuestionIndex+1;
-		questionElement.innerHTML= questionNo +". "+currentQuestion.question;
+	//Next function
+	function next() {
+		document.getElementById("f" + i).style.display = "none";
+		i++;
+		if (i <= 5) {
+			document.getElementById("f" + i).style.display = "block";
+		}
+		else {
+			i = 5;
+			document.getElementById("f" + i).style.display = "block";
+			var s;
+			s = confirm("Are you want to Submit ?");
+			if (s) {
+				document.getElementById("sub").style.display = "block";
+				document.getElementById("nx").style.display = "none";
+				document.getElementById("pr").style.display = "none";
+			}
+		}
 	}
-	
+
+	//Submit
+	function submit() {
+		document.write("<div style='line-height:6;'><h1 style='color:maroon;font-size:80px;text-align:center;'>Thank You !</h1></div>")
+	}
+	//Digital Clock
+	var hh = 1, mm = 3, ss = 60;
+	function sw() {
+		ss--;
+		if (ss > 9) {
+			return ss;
+		}
+		else {
+			return '0' + ss;
+		}
+	}
+	function timer() {
+
+		var x = sw();
+		document.getElementById("h").innerText = '0' + hh;
+		document.getElementById("m").innerText = mm;
+		document.getElementById("s").innerText = x;
+		window.setTimeout(timer, 10)
+
+		if (x == 0) {
+			ss = 60;
+			mm--;
+			document.getElementById("h").innerText = '0' + hh;
+			document.getElementById("s").innerText = ss;
+			document.getElementById("m").innerText = mm;
+		}
+		if (mm == 0) {
+			mm = 60;
+			hh--;
+			document.getElementById("s").innerText = ss;
+			document.getElementById("m").innerText = mm;
+			document.getElementById("h").innerText = hh;
+		}
+		if (hh == 0 && mm == 0) {
+			if (x == 0) {
+				document.write("<div style='text-align:center;'><br/><br/><br/><br/><br/><big style='font-size:30px;'>Your Time is Over and Test submmited</big><br/><big style='color:maroon;font-size:80px;'>Thank You !</big></div>")
+			}
+		}
+	}
+	window.onload = timer;
 </script>
 
 <style>
-	.quiz{		
-		height: 32px;
-		width: 20%;
-		background: #4154f1;
-		color: aliceblue;
-		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-		border-radius: 8px;
-		padding-left: 10px;
-		padding-top :2px;
-		margin-top: 7px;
+	.h1font{
+		text-align: center;
+		color: darkblue;
+		/*font-size: 45px;*/
 	}
+
+	#outer {
+		height: 340px;
+		width: 70%;
+		box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+		margin: 0px auto;
+		padding: 1% 5%;
+		padding-top: 10px;
+		/*font-size: 28px;/*/
+	}
+
+	button {
+		font-size: 20px;
+		padding: 1.5% 3%;
+		background: darkblue;
+		color: white;
+		border: none;
+		border-radius: 5px;
+	}
+
 	
-	.quiz:hover{
-		background: lightskyblue;
-		color: #4154f1;
-	}
 </style>
