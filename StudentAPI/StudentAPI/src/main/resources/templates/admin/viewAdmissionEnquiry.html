@@ -44,7 +44,7 @@
 									<td th:text="${enDatas.reference}"></td>
 								    <td>
 									<div class="form">
-												<form th:action="@{/deleteEnquiry{id}" method="post" th:object="${data}">
+												<form method="post" th:object="${data}">
 												<input type="hidden" th:value="${enDatas.id}" name="id" />
 												<button type="submit" value="Submit" class="bg-danger">Delete</button>
 											</form>

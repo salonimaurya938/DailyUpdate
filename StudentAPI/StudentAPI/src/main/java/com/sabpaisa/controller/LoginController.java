@@ -23,15 +23,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMethodMappingNamingStrategy;
 
 import com.sabpaisa.dao.ChapterDao;
+import com.sabpaisa.dao.OptionDao;
 import com.sabpaisa.dao.QuizDao;
 import com.sabpaisa.dao.UploadCourseDao;
 import com.sabpaisa.dao.feeDao;
+import com.sabpaisa.dto.QuizRequest;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.Fee;
+import com.sabpaisa.entity.Option;
 import com.sabpaisa.entity.Quiz;
 import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.UploadCourses;
@@ -74,6 +78,7 @@ public class LoginController {
 	
 	@Autowired
 	private feeDao feeDao;
+	
 
 	public LoginController(AdminService adminService, StudentService studentService) {
 		super();
@@ -82,16 +87,16 @@ public class LoginController {
 	}
 
 // .........................End login Controller..................................
-	@GetMapping("/login")
+	@GetMapping("/admLogin")
 	public ModelAndView login() {
 		System.out.println("Project runing mood....");
-		ModelAndView ma = new ModelAndView("login");
-		ma.addObject("login", new Admin());
+		ModelAndView ma = new ModelAndView("admLogin");
+		ma.addObject("admLogin", new Admin());
 		return ma;
 	}
 
-	@PostMapping("/login")
-	public String saveLogin(Model model, @ModelAttribute("login") Admin admin, Student student) {
+	@PostMapping("/admLogin")
+	public String saveLogin(Model model, @ModelAttribute("admLogin") Admin admin, Student student) {
 		Admin userData = adminService.adminlogin(admin);
 		System.out.println("Loged in data :: " + userData);
 //		Student userData1 = studentService.studentLogin(student);	    
@@ -112,7 +117,7 @@ public class LoginController {
 //			return "student/studentDashboard";
 //		} 
 		else {
-			return "login";
+			return "admLogin";
 		}
 	}
 	
@@ -194,11 +199,11 @@ public class LoginController {
 		return "adminDashBoard";
 	}
 
-//	@GetMapping("/adminDashBoard")
-//	public String adminUpdate(Admin admin) {
-//		System.out.println("Update Profile runing mood 2332....");
-//		return "admin/adminDashBoard";
-//	}
+	@RequestMapping("/adminProfile")
+	public String adminProfile(Admin admin) {
+		System.out.println("admin Profile....");
+		return "admin/adminProfile";
+	}
 
 	@PostMapping("/adminDashBoard")
 	public String updateAdmin(@ModelAttribute("admin/adminDashBoard") Admin admin,Model model) {
@@ -462,17 +467,19 @@ public class LoginController {
 	public String addQuiz(Model model) {
 		model.addAttribute("title", "AddQuiz-School Management System");
 		Quiz quiz = new Quiz();
+		Option option = new Option();
 		model.addAttribute("quiz", quiz);
 		List<Quiz> quizs = quizService.getQuiz();
 		model.addAttribute("quiz", quizs);
+		model.addAttribute("option", option);
 		return "admin/quiz";
 	}
 
 	@RequestMapping(value = "/quiz", method = RequestMethod.POST)
-	public String insertQuiz(@ModelAttribute("admin/quiz") Quiz quiz,Model model) {
+	public String insertQuiz(@ModelAttribute("admin/quiz") Quiz quiz,Model model, @RequestBody QuizRequest request) {
 		System.out.println("Quiz Adding...");
-		quizService.addQuiz(quiz);
-		System.out.println("data inserted value ::" + quizService.addQuiz(quiz));		
+		Quiz quizs =  quizDao.save(request.getQuiz());		
+		System.out.println("data inserted value ::" + quizs);		
 		return "admin/quiz";
 	}
 	
@@ -490,14 +497,15 @@ public class LoginController {
 		System.out.println("update method...");
 		model.addAttribute("chapter", chapter);
 		Optional<Quiz> data = quizService.getQuizId(id);
+		Optional<Option> optdata = quizService.getOptionId(id);
 		Quiz as = data.get();
+		Option rs = optdata.get();
 		model.addAttribute("id", as.getId());
 		model.addAttribute("question", as.getQuestion());
-		model.addAttribute("op1", as.getOp1());
-		model.addAttribute("op2", as.getOp2());
-		model.addAttribute("op3", as.getOp3());
-		model.addAttribute("op4", as.getOp4());
-		model.addAttribute("correctAnswer", as.getCorrectAnswer());
+		model.addAttribute("op1", rs.getOp1());
+		model.addAttribute("op2", rs.getOp2());
+		model.addAttribute("op3", rs.getOp3());
+		model.addAttribute("op4", rs.getOp4());
 		return "admin/updateQuiz";
 	}
 

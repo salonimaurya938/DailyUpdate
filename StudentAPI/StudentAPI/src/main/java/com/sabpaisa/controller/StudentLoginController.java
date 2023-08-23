@@ -19,6 +19,8 @@ import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.entity.TimeTable;
 import com.sabpaisa.entity.UploadCourses;
+import com.sabpaisa.dao.OptionDao;
+import com.sabpaisa.dao.QuizDao;
 import com.sabpaisa.dao.StudentDao;
 import com.sabpaisa.dao.UploadDao;
 import com.sabpaisa.entity.Admin;
@@ -74,6 +76,12 @@ public class StudentLoginController {
 	@Autowired
 	private QuizService quizService;
 	
+	@Autowired
+	private QuizDao quizDao;
+	
+	@Autowired
+	private OptionDao optionDao;
+	
 	
 //	@RequestMapping("/register")
 //	public String StudentRegistration() {
@@ -101,16 +109,16 @@ public class StudentLoginController {
 		return "viewRegistration";
 	}
 	
-	@GetMapping("/studentLogin")
+	@GetMapping("/login")
 	public ModelAndView studentlogin() {
 		System.out.println("Project runing mood....");
-		ModelAndView ma = new ModelAndView("studentLogin");
+		ModelAndView ma = new ModelAndView("login");
 		ma.addObject("login", new Student());
 		return ma;
 	}	
 	
-	@PostMapping("/studentLogin")
-	public String Studentlogin(Model model, @ModelAttribute("studentLogin") Student student) {
+	@PostMapping("/login")
+	public String Studentlogin(Model model, @ModelAttribute("login") Student student) {
 		System.out.println(student);
 		Student d = studentService.studentLogin(student);
 	    String email=d.getEmail();
@@ -124,7 +132,7 @@ public class StudentLoginController {
 			model.addAttribute("pass", d.getPassword());
 			return "student/studentDashboard";
 	   }else
-		return "studentLogin";
+		return "login";
 	}
 	
 	@RequestMapping("/myProfile")
@@ -230,20 +238,20 @@ public class StudentLoginController {
 	//.........................Online Quiz...................
 		@RequestMapping("/onlineQuiz")
 		public String onlineQuiz(Model model) {
-			List<Quiz> data = quizService.getQuiz();
-			Optional<Quiz> getById= quizService.getQuizId(1);
-			if(getById.isPresent()) {
-				Quiz ids=getById.get();
-				model.addAttribute("id", ids.getId());
-				model.addAttribute("question", ids.getQuestion());
-				model.addAttribute("op1", ids.getOp1());
-				model.addAttribute("op2", ids.getOp2());
-				model.addAttribute("op3", ids.getOp3());
-				model.addAttribute("op4", ids.getOp4());
-			}			
-			model.addAttribute("quiz", data);
-			int a = 1;
-			model.addAttribute("count", a++);
+			List<Quiz> quiz = quizDao.findAll();
+			System.out.println(quiz);
+//			optionDao.
+			//Optional<Quiz> getById= quizService.getQuizId(1);
+//			if(getById.isPresent()) {
+//				Quiz ids=getById.get();
+//				model.addAttribute("id", ids.getId());
+//				model.addAttribute("question", ids.getQuestion());
+//				model.addAttribute("op1", ids.getOp1());
+//				model.addAttribute("op2", ids.getOp2());
+//				model.addAttribute("op3", ids.getOp3());
+//				model.addAttribute("op4", ids.getOp4());
+//			}			
+			model.addAttribute("quiz", quiz);			
 //			int a=1;
 //			model.addAttribute("count", a);
 //			a++;

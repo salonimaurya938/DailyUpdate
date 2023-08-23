@@ -2,89 +2,37 @@
 
 	<section>
 		<main id="main" class="main">
-
 			<div class="pagetitle">
-				<h1 class="h1font" style="font-size: 35px; margin-top: 8px">Online Quiz Test</h1>				
-				<div id="outer">
-				<!--	<span id="s">00</span>
-					<span>:</span>
-					<span id="m">00</span>
-					<span>:</span>
-					<span id="h">00</span>
-					<span>Total Time-</span>-->
-					
-					<div>
-						<form action="#" id="f1">
-						<h3>Q.1<span th:text="${question}"></span></h3>
-						<b>A.</b><input type="radio" name="op1" value="Object Oriented" onchange="f1(this)" th:value="${op1}"/><span th:text="${op1}"></span>
-						<br /><b>B.</b><input type="radio" name="op1" value="Object Based" onchange="f1(this)" th:value="${op2}"/><span th:text="${op2}"></span>
-						<br /><b>C.</b><input type="radio" name="op1" value="Structured" onchange="f1(this)" th:value="${op3}"/><span th:text="${op3}"></span>
-						<br /><b>D.</b><input type="radio" name="op1" value="All"        onchange="f1(this)" th:value="${op4}" /><span th:text="${op4}"></span>
-						<input type="hidden" id="correctAnswer" value="${quizs.correctAnswer}">
-					</form>
-					
-					<!--
-						<div th:each="quizs,id:${quiz}">
-						<form action="#" id="f1">
-						<h3>Q.1<span th:text="${question}"></span></h3>
-						<b>A.</b><input type="radio" name="op1" value="Object Oriented" onchange="f1(this)" th:value="${quizs.op1}"/><span th:text="${quizs.op1}"></span>
-						<br /><b>B.</b><input type="radio" name="op1" value="Object Based" onchange="f1(this)" th:value="${quizs.op2}"/><span th:text="${quizs.op2}"></span>
-						<br /><b>C.</b><input type="radio" name="op1" value="Structured" onchange="f1(this)" th:value="${quizs.op3}"/><span th:text="${quizs.op3}"></span>
-						<br /><b>D.</b><input type="radio" name="op1" value="All"        onchange="f1(this)" th:value="${quizs.op4}" /><span th:text="${quizs.op4}"></span>
-						<input type="hidden" id="correctAnswer" value="${quizs.correctAnswer}">
-					</form>
-					-->
-
-					</div>
-					<form action="#" id="f2" style="display:none;" value="Object Based">
-						<h3>Q.2 What is C ?</h3>
-						<b>A.</b><input type="radio" name="op2" onchange="f2(this)" value="Object Orienter" />Object
-						Orienter
-						<br /><b>B.</b><input type="radio" name="op2" onchange="f2(this)" value="Object Based" />Object
-						Based
-						<br /><b>C.</b><input type="radio" name="op2" onchange="f2(this)"
-							value="Structured" />Structured
-						<br /><b>D.</b><input type="radio" name="op2" onchange="f2(this)" value="All" />All
-					</form>
-
-					<form action="#" id="f3" style="display:none;">
-						<h3>Q.3 What is jQuery ?</h3>
-						<b>A.</b><input type="radio" name="op3" onchange="f3(this)" value="Object Orienter" />Object
-						Orienter
-						<br><b>B.</b><input type="radio" name="op3" onchange="f3(this)" value="Object Based" />Object
-						Based
-						<br /><b>C.</b><input type="radio" name="op3" onchange="f3(this)"
-							value="Structured" />Structured
-						<br /><b>D.</b><input type="radio" name="op3" onchange="f3(this)" value="All" />All
-					</form>
-
-					<form action="#" id="f4" style="display:none;">
-						<h3>Q.4 What is C# ?</h3>
-						<b>A.</b><input type="radio" name="op4" onchange="f4(this)" value="Object Orienter" />Object
-						Orienter
-						<br /><b>B.</b><input type="radio" name="op4" onchange="f4(this)" value="Object Based" />Object
-						Based
-						<br /><b>C.</b><input type="radio" name="op4" onchange="f4(this)"
-							value="Structured" />Structured
-						<br /><b>D.</b><input type="radio" name="op4" onchange="f4(this)" value="All" />All
-					</form>
-
-					<form action="#" id="f5" style="display:none;">
-						<h3>Q.5 What is Javascript ?</h3>
-						<b>A.</b><input type="radio" name="op5" onchange="f5(this)" value="Object Orienter" />Object
-						Orienter
-						<br /><b>B.</b><input type="radio" name="op5" onchange="f5(this)" value="Object Based" />Object
-						Based
-						<br /><b>C.</b><input type="radio" name="op5" onchange="f5(this)"
-							value="Structured" />Structured
-						<br /><b>D.</b><input type="radio" name="op5" onchange="f5(this)" value="All" />All
-					</form>
-
-					<button onclick="pre();" id="pr" style="float:left;">Previous</button>
-					<button onclick="submit();" id="sub" style="float:right;display: none;">Submit</button>
-					<button onclick="next();" id="nx" style="float:right;margin-right:1%;">Next</button>
-				</div>
-
+				<h1 class="h1font" style="font-size: 35px; margin-top: 8px">Online Quiz Test</h1>
+				<header class="headerTop bg-primary">
+					<div class="left-title">Online Test</div>
+					<div class="right-title">Total Questions: <span id="tque"></span></div>
+					<div class="clearfix"></div>
+				</header>
+				<div class="content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-12">
+								<div id="result" class="quiz-body">
+									<form name="quizForm" onSubmit="">
+										<fieldset class="form-group">
+											<h4><span id="qid">1.</span> <span id="question"></span></h4>
+											<div class="option-block-container" id="question-options">
+											</div> <!-- End of option block -->
+										</fieldset>
+										<button name="previous" id="previous" class="btn btn-success">Previous</button>
+										&nbsp;
+										<button name="next" id="next" class="btn btn-success">Next</button>
+									</form>
+								</div>
+							</div> <!-- End of col-sm-12 -->
+						</div> <!-- End of row -->
+					</div> <!-- ENd of container fluid -->
+				</div> <!-- End of content -->
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+				<script
+					src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+				<script src="app.js"></script>
 
 
 			</div><!-- End Page Title -->
@@ -92,87 +40,185 @@
 		</main><!-- End #main -->
 	</section>
 </div>
-
-<script>
-	var c = 0;
-	//form 1
-	function f1(x) {
-		var correctAnswer =  document.getElementById("correctAnswer").value;
-		if (x.value == correctAnswer) {
-			c++;
-		}
-		else {
-			c = 0;
-		}
-		alert("right: " + c)
-	}
-	//form 2
-
-	//previous
-	var i = 1;
-	function pre() {
-		document.getElementById("f" + i).style.display = "none";
-		i--;
-		if (i >= 1) {
-			document.getElementById("f" + i).style.display = "block";
-		}
-		else {
-			i = 1;
-			document.getElementById("f" + i).style.display = "block";
-			alert("No More Question Available");
-		}
-	}
-	//Next function
-	function next() {
-		document.getElementById("f" + i).style.display = "none";
-		i++;
-		if (i <= 5) {
-			document.getElementById("f" + i).style.display = "block";
-		}
-		else {
-			i = 5;
-			document.getElementById("f" + i).style.display = "block";
-			var s;
-			s = confirm("Are you want to Submit ?");
-			if (s) {
-				document.getElementById("sub").style.display = "block";
-				document.getElementById("nx").style.display = "none";
-				document.getElementById("pr").style.display = "none";
+<script th:inline="javascript">
+	/* Created and coded by Abhilash Narayan */
+	/* Quiz source: w3schools.com */
+	/*<![CDATA[*/
+    var quizs = /*[[${quiz}]]*/ '{}';
+    /*]]>*/
+	alert("Text");	
+	console.log(quizs);	
+	console.log(typeof quizs);
+	let quiz = JSON.parse(quizs);
+	console.log(quiz);
+	var quizApp = function () {
+		this.score = 0;
+		this.qno = 1;
+		this.currentque = 0;
+		var totalque = quiz. length;
+		this.displayQuiz = function (cque) {
+			this.currentque = cque;
+			if (this.currentque < totalque) {
+				$("#tque").html(totalque);
+				$("#previous").attr("disabled", false);
+				$("#next").attr("disabled", false);
+				$("#qid").html(quiz[this.currentque].id + '.');
+				$("#question").html(quizs.Quiz[this.currentque].question);
+				$("#question-options").html("");
+				for (var key in quiz[this.currentque].options[0]) {
+					if (quiz.Quiz[this.currentque].options[0].hasOwnProperty(key)) {
+						$("#question-options").append(
+							"<div class='form-check option-block'>" +
+							"<label class='form-check-label'>" +
+							"<input type='radio' class='form-check-input' name='option' id='q" + key + "' value='" + quiz.JS[this.currentque].options[0][key] + "'><span id='optionval'>" +
+							quiz.Quiz[this.currentque].options[0][key] +
+							"</span></label>"
+						);
+					}
+				}
+			}
+			if (this.currentque <= 0) {
+				$("#previous").attr("disabled", true);
+			}
+			if (this.currentque >= totalque) {
+				$('#next').attr('disabled', true);
+				for (var i = 0; i < totalque; i++) {
+					this.score = this.score + quiz.Quiz[i].score;
+				}
+				return this.showResult(this.score);
 			}
 		}
+		this.showResult = function (scr) {
+			$("#result").addClass('result');
+			$("#result").html("<h1 class='res-header'>Total Score: &nbsp;" + scr + '/' + totalque + "</h1>");
+			for (var j = 0; j < totalque; j++) {
+				var res;
+				if (quiz.Quiz[j].score == 0) {
+					res = '<span class="wrong">' + quiz.Quiz[j].score + '</span><i class="fa fa-remove c-wrong"></i>';
+				} else {
+					res = '<span class="correct">' + quiz.Quiz[j].score + '</span><i class="fa fa-check c-correct"></i>';
+				}
+				$("#result").append(
+					'<div class="result-question"><span>Q ' + quiz.Quiz[j].id + '</span> &nbsp;' + quiz.Quiz[j].question + '</div>' +
+					'<div><b>Correct answer:</b> &nbsp;' + quiz.Quiz[j].answer + '</div>' +
+					'<div class="last-row"><b>Score:</b> &nbsp;' + res +
+					'</div>'
+				);
+			}
+		}
+		this.checkAnswer = function (option) {
+			var answer = quiz.Quiz[this.currentque].answer;
+			option = option.replace(/</g, "&lt;") //for <
+			option = option.replace(/>/g, "&gt;") //for >
+			option = option.replace(/"/g, "&quot;")
+			if (option == quiz.Quiz[this.currentque].answer) {
+				if (quiz.Quiz[this.currentque].score == "") {
+					quiz.Quiz[this.currentque].score = 1;
+					quiz.Quiz[this.currentque].status = "correct";
+				}
+			} else {
+				quiz.Quiz[this.currentque].status = "wrong";
+			}
+		}
+		this.changeQuestion = function (cque) {
+			this.currentque = this.currentque + cque;
+			this.displayQuiz(this.currentque);
+		}
 	}
-
-	//Submit
-	function submit() {
-		document.write("<div style='line-height:6;'><h1 style='color:maroon;font-size:80px;text-align:center;'>Thank You !</h1></div>")
-	}
+	var jsq = new quizApp();
+	var selectedopt;
+	$(document).ready(function () {
+		jsq.displayQuiz(0);
+		$('#question-options').on('change', 'input[type=radio][name=option]', function (e) {
+			//var radio = $(this).find('input:radio');
+			$(this).prop("checked", true);
+			selectedopt = $(this).val();
+		});
+	});
+	$('#next').click(function (e) {
+		e.preventDefault();
+		if (selectedopt) {
+			jsq.checkAnswer(selectedopt);
+		}
+		jsq.changeQuestion(1);
+	});
+	$('#previous').click(function (e) {
+		e.preventDefault();
+		if (selectedopt) {
+			jsq.checkAnswer(selectedopt);
+		}
+		jsq.changeQuestion(-1);
+	});
 
 </script>
-
 <style>
-	.h1font{
-		text-align: center;
-		color: darkblue;
-		}
-
-	#outer {
-		height: 340px;
-		width: 70%;
-		box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-		margin: 0px auto;
-		padding: 1% 5%;
-		padding-top: 50px;
-		/*font-size: 28px;/*/
+	.content {
+		margin-top: 54px;
 	}
 
-	button {
-		font-size: 20px;
-		padding: 1.5% 3%;
-		background: darkblue;
-		color: white;
-		border: none;
-		border-radius: 5px;
+	.headerTop {
+		padding: 15px;
+		position: relative;
+		top: 40px;
+		width: 100%;
+		z-index: 9999;
 	}
 
-	
+	.left-title {
+		width: 50%;
+		color: #fff;
+		font-size: 18px;
+		float: left;
+	}
+
+	.right-title {
+		width: 50%;
+		text-align: right;
+		float: right;
+		color: #fff;
+	}
+
+	.quiz-body {
+		margin-top: 15px;
+		padding-bottom: 50px;
+	}
+
+	.option-block-container {
+		margin-top: 20px;
+		max-width: 420px;
+	}
+
+	.option-block {
+		padding: 10px;
+		background: aliceblue;
+		border: 1px solid #84c5fe;
+		margin-bottom: 10px;
+		cursor: pointer;
+	}
+
+	.result-question {
+		font-weight: bold;
+	}
+
+	.c-wrong {
+		margin-left: 20px;
+		color: #ff0000;
+	}
+
+	.c-correct {
+		margin-left: 20px;
+		color: green;
+	}
+
+	.last-row {
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 25px;
+		margin-bottom: 25px;
+	}
+
+	.res-header {
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 15px;
+		padding-bottom: 15px;
+	}
 </style>

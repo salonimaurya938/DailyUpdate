@@ -16,16 +16,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sabpaisa.dao.QuizDao;
 import com.sabpaisa.dao.StudentDao;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.HomeWork;
+import com.sabpaisa.entity.Quiz;
 import com.sabpaisa.entity.Student;
 import com.sabpaisa.service.AdminService;
 import com.sabpaisa.service.BookService;
 import com.sabpaisa.service.ChapterService;
 import com.sabpaisa.service.HomeWorkService;
+import com.sabpaisa.service.QuizService;
 import com.sabpaisa.service.StudentService;
 
 @RestController
@@ -48,6 +51,12 @@ public class ControllerApi {
 	
 	@Autowired
 	private StudentDao studendDao;
+	
+	@Autowired
+	private QuizService quizService;
+	
+	@Autowired
+	private QuizDao quizDao;
 	
 	///////////////////////////// Student Controller //////////////////////////////
 
@@ -258,5 +267,17 @@ public class ControllerApi {
 		this.homeWorkService.deleteHomeWork(homeWorkid);
 		System.out.println("Deleted Successfully!!!");
 	}	
+	
+
+	@GetMapping("/quizs")
+	public List<Quiz> getquiz(Model model) {
+		List<Quiz> quiz = quizDao.findAll();
+		model.addAttribute("quiz", quiz);
+		System.out.println("Fetech All quz Data ::" + quiz);
+		return quizDao.findAll();
+	}
+	
+	
+
 	
 }
