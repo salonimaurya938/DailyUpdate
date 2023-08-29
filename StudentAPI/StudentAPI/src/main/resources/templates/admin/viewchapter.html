@@ -19,14 +19,14 @@
 						<h5 class="card-title">All Chapter Details</h5>
 						<table width="100%">
 							<tr>
-								<th>Id</th>
+								<th>Sr.no.</th>
 								<th>Chapter Name</th>
 								<th>Chapter Discription</th>
 								<th>Subject ID</th>
 								<th>Action</th>
 							</tr>
-							<tr th:each="chapters:${chapter}">
-								<td th:text="${chapters.id}"></td>
+							<tr th:each="chapters,id:${chapter}">
+								<td th:text="${id.count}"></td>
 								<td th:text="${chapters.chapName}"></td>
 								<td th:text="${chapters.chapDescription}"></td>
 								<td th:text="${chapters.subid}"></td>

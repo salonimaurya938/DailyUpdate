@@ -3331,6 +3331,16 @@
 			text-decoration: none;
 			font-size: 16px;
 		}
+
+		#formid {
+			width: 55%;
+			height: 70vh;
+			box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+			border-radius: 7px;
+			padding: 40px;
+			margin-left: 20%;
+			margin-top: 20px;
+		}
 	</style>
 	<link rel='stylesheet' id='ba79952dd57b6a36f6f0025c145548e2-css'
 		href='//fonts.googleapis.com/css?family=Raleway:500&#038;subset=latin-ext' type='text/css' media='all' />
@@ -3914,11 +3924,6 @@
 					</div>
 				</header>
 				<!---End Header -->
-
-
-
-
-
 				<!-- ** Breadcrumb ** -->
 				<section class="main-title-section-wrapper aligncenter">
 					<div class="main-title-section-bg"></div>
@@ -3968,20 +3973,18 @@
 																					class="woocommerce-notices-wrapper">
 																				</div>
 
-
-
-
-
-																				<div class="col-md-6 offset-md-3">
+																				<div class="col-md-6 offset-md-3" id="formid">
+																					
 																					<div class="my-card mt-5 radius">
+																						
 																						<div
-																							class="container text-center">
-																							<img style="width: 60px;"
+																							class="container">
+																							<img style="width: 60px; margin-left: 20%;"
 																								th:src="@{/img/key.png}"
 																								alt="" />
 																						</div>
-																						<h1 class="text-center">Student
-																							Login here...</h1>
+																						<h3 class="text-center">Student
+																							Login here...</h3>
 																						<h1 th:text="${errormsg}"></h1>
 																						<form action=""
 																							th:action="@{/login}"
@@ -4008,28 +4011,25 @@
 																									aria-describedby="emailHelp"
 																									placeholder="Enter password...">
 																							</div>
-																							<div
-																								class="container text-center">
+																							<div class="container text-center">
 																								<button type="submit"
 																									class="btn bg-primary ">Submit</button>
 																								<button type="reset"
 																									class="btn bg-info  text-light">Reset</button>
 																							</div>
-																						</form>
-																					</div>
-																				</div>
-
-																				<button type="submit"
+																								<button type="submit"
 																					class="btn bg-primary"><a
-																						href="studentLogin"
+																						href="login"
 																						style="color: white;">Student
 																						Login</a></button>
 																				<button type="submit"
 																					class="btn bg-info  text-light"><a
 																						href="parentLogin"
 																						style="color: white;">Parent
-																						Login</a></button>
-																				<!-- /wp:shortcode -->
+																						Login</a></button>																							
+																						</form>
+																					</div>
+																				</div>																																		<!-- /wp:shortcode -->
 																			</div>
 																		</div>
 																	</div>

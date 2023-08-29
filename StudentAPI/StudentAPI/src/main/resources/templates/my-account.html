@@ -3331,6 +3331,16 @@
 			text-decoration: none;
 			font-size: 16px;
 		}
+		
+		#formid {
+			width: 66%;
+			height: 88vh;
+			box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+			border-radius: 7px;
+			padding: 40px;
+			margin-left: 20%;
+			margin-top: 20px;
+		}
 	</style>
 	<link rel='stylesheet' id='ba79952dd57b6a36f6f0025c145548e2-css'
 		href='//fonts.googleapis.com/css?family=Raleway:500&#038;subset=latin-ext' type='text/css' media='all' />
@@ -4024,18 +4034,18 @@
 																					class="woocommerce-notices-wrapper">
 																				</div>
 
-																				<h2>Login</h2>
+																				<h2>Register</h2>
 
-																				<div class="col-md-12 ">
+																				<div class="col-md-12" id="formid">
 																					<div class="my-card mt-2 radius">
 																						<div
 																							class="container text-center">
-																							<img style="width: 60px;"
+																							<img style="width: 60px; margin-left: 24%;"
 																								th:src="@{/img/membership.png}"
 																								alt="" />
 																						</div>
-																						<h1 class="text-center">Register
-																							Here...</h1>
+																						<h3 class="text-center">Register
+																							Here...</h3>
 																						<form action=""
 																							th:action="@{/my-account}"
 																							method="post"

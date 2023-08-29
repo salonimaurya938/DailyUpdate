@@ -89,7 +89,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	public Admin adminlogin(Admin admin) {		
-		Admin findByUsername= adminDao.findByUsernameAndPassword(admin.getUsername(),admin.getPassword());		
+		Admin findByUsername= adminDao.findByUsernameAndPassword(admin.getUsername(),admin.getPassword());	
+		System.out.println("admin data :: "+findByUsername);
 	    return findByUsername;
 		}
 

@@ -3,6 +3,7 @@ package com.sabpaisa.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,5 +28,6 @@ public interface AdminService {
 	public List<Admin> fetchAdmin();
  
 	public Admin changePassword(Admin admin);
+	
 	
 }

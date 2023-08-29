@@ -1,20 +1,14 @@
 package com.sabpaisa.controller;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.entity.TimeTable;
@@ -23,7 +17,6 @@ import com.sabpaisa.dao.OptionDao;
 import com.sabpaisa.dao.QuizDao;
 import com.sabpaisa.dao.StudentDao;
 import com.sabpaisa.dao.UploadDao;
-import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.Events;
@@ -82,7 +75,6 @@ public class StudentLoginController {
 	@Autowired
 	private OptionDao optionDao;
 	
-	
 //	@RequestMapping("/register")
 //	public String StudentRegistration() {
 //		return "register";
@@ -94,7 +86,7 @@ public class StudentLoginController {
 		model.addAttribute("students", student);		
 		return "my-account";
 	}
-	
+ 	
 	@PostMapping("/my-account")
 	public String addstudent(@ModelAttribute("admin/addEvents") Student student) {		
 		studentService.addStudent(student);		
@@ -136,15 +128,19 @@ public class StudentLoginController {
 	}
 	
 	@RequestMapping("/myProfile")
-	public String Student() {
+	public String Student(Student student) {
 		ModelAndView ma = new ModelAndView("myProfile");
+		System.out.println("my profile...");
+		Student d = studentService.studentLogin(student);
+		System.out.println("student value"+d);
 		return "student/myProfile";
 	}
 	
 	@PostMapping("/myProfile")
-	public String studentProfile(Model model,@ModelAttribute("myProfile") @RequestBody Student student) {
-		System.out.println(student);
+	public String studentProfile(Model model,@ModelAttribute("myProfile")Student student) {
+		System.out.println("my profile...");
 		Student d = studentService.studentLogin(student);
+		System.out.println("student value"+d);
 	    if(d!=null) {	    	
 	    	    model.addAttribute("id", d.getId());
 				model.addAttribute("username", d.getStudentName());
@@ -240,7 +236,6 @@ public class StudentLoginController {
 		public String onlineQuiz(Model model) {
 			List<Quiz> quiz = quizDao.findAll();
 			System.out.println(quiz);
-//			optionDao.
 			//Optional<Quiz> getById= quizService.getQuizId(1);
 //			if(getById.isPresent()) {
 //				Quiz ids=getById.get();

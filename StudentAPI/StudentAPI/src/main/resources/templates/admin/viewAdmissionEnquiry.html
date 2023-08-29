@@ -18,7 +18,7 @@
 
 							<table width="100%" style="font-size: 13px;">
 								<tr>
-									<th>Id</th>
+									<th>Sr.no.</th>
 									<th>Name</th>
 									<th>Classes</th>
 									<th>Phone</th>
@@ -30,8 +30,8 @@
 									<th>Source</th>
 									<th>Reference</th>
 								</tr>
-								<tr th:each="enDatas:${enData}">
-									<td th:text="${enDatas.id}"></td>
+								<tr th:each="enDatas,id:${enData}">
+									<td th:text="${id.count}"></td>
 									<td th:text="${enDatas.name}"></td>
 									<td th:text="${enDatas.classes}"></td>
 									<td th:text="${enDatas.mob}"></td>

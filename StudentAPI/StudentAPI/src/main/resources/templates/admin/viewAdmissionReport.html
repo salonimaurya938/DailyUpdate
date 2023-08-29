@@ -18,7 +18,7 @@
 
 							<table width="100%" style="font-size: 13px;">
 								<tr>
-									<th>Id</th>
+									<th>Sr.no.</th>
 									<th>Name</th>
 									<th>Class Section</th>
 									<th>Father Name</th>
@@ -28,8 +28,8 @@
 									<th>Paid Fee</th>
 									<th>Remain Fee</th>
 								</tr>
-								<tr th:each="datas:${data}">
-									<td th:text="${datas.id}"></td>
+								<tr th:each="datas,id:${data}">
+									<td th:text="${id.count}"></td>
 									<td th:text="${datas.name}"></td>
 									<td th:text="${datas.classSection}"></td>
 									<td th:text="${datas.fatherName}"></td>

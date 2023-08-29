@@ -22,8 +22,8 @@
 									<th>Events</th>
 									<th>Action</th>
 								</tr>
-								<tr th:each="event:${events}">
-									<td th:text="${event.id}"></td>
+								<tr th:each="event,id:${events}">
+									<td th:text="${id.count}"></td>
 									<td th:text="${event.event}"></td>
 									<td>
 

@@ -96,7 +96,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/admLogin")
-	public String saveLogin(Model model, @ModelAttribute("admLogin") Admin admin, Student student) {
+	public String saveLogin(Model model, @ModelAttribute("admLogin") Admin admin) {
 		Admin userData = adminService.adminlogin(admin);
 		System.out.println("Loged in data :: " + userData);
 //		Student userData1 = studentService.studentLogin(student);	    

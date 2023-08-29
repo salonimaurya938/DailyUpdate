@@ -11,9 +11,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +30,8 @@ import com.sabpaisa.dao.StudentResultDao;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.service.BookService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class BookController {
@@ -46,13 +51,15 @@ public class BookController {
 //	.......................Start Book handler.................................
 
 	@RequestMapping("/addBook")
-	public String bookBook(Model model) {
+	public String bookBook(Model model,HttpSession session) {
 		model.addAttribute("title", "AddBook-Student Management System");
+		 session.setAttribute("attributeName", "attributeValue");
 		Book book = new Book();
 		model.addAttribute("book", book);
 		return "admin/addBook";
 	}
 
+	
 	@PostMapping("/addBook")
 	public String bookSave(@ModelAttribute("admin/addBook")@RequestParam MultipartFile subIcon, String subName,String subTitle,String substatus,String publisher, String author) throws IOException {
 		System.out.println("switching...");	
@@ -115,15 +122,14 @@ public class BookController {
 		return "admin/bupdate";
 	}
 	
-	@RequestMapping("/downloadBook")
+	@GetMapping("/downloadBook")
 	public String downloadBook(Model model, Book book) {
 		model.addAttribute("title", "Download-Student Management System");
-		System.out.println("Showing..........book data");
+		System.out.println("BookData....");		
 		List<Book> book1 = bookService.getBooks();
 		model.addAttribute("book", book1);
-		return "admin/downloadBook";
+		return findPaginated(1, model);
 	}
-
 
 	@PostMapping("/deleteBook{id}")
 	public String deleteBook(Model model,@RequestParam int id) {
@@ -135,6 +141,32 @@ public class BookController {
 		return "admin/downloadBook";
 	}
 	
-//	.......................End Book handler.................................
+//	@GetMapping("/page/{pageNo}")
+//	public String findPaginated(@PathVariable(value="pageNo")int pageNo, Model model)
+//	{
+//		System.out.println("Pagination...");
+//		int pageSize = 5;
+//		System.out.println(pageSize);
+//		Page<Book> page = bookService.findPaginated(pageNo, pageSize);
+//		System.out.println(page);
+//		List<Book> listBook = page.getContent();	
+//		System.out.println(listBook);
+//		model.addAttribute("currentPage", pageNo);
+//		model.addAttribute("totalPages", page.getTotalPages());
+//		model.addAttribute("totalItems", page.getTotalElements());
+//		model.addAttribute("listBook", listBook);		
+//		return "admin/downloadBook";
+//	}	
+	@GetMapping("/page{pageNo}")
+	public String findPaginated(@PathVariable(value="pageNo")int pageNo, Model model)
+	{
+		System.out.println("Pagination...");
 
+		 int pageSize = 5; // Number of items per page
+	     Page<Book> page = bookDao.findAll(PageRequest.of(pageNo - 1, pageSize));
+	     model.addAttribute("page", page);	
+		return "admin/downloadBook";
+	}
+	
+//	.......................End Book handler.................................
 }

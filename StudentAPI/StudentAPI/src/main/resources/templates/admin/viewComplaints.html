@@ -45,12 +45,12 @@
 						<h5 class="card-title">All Student Complaints</h5>
 						<table width="100%">
 							<tr>
-								<th>Id</th>
+								<th>Sr.no.</th>
 								<th>Complaints</th>
 								<th>Action</th>
 							</tr>
-							<tr th:each="lists:${lists}">
-								<td th:text="${lists.id}"></td>
+							<tr th:each="lists,id:${lists}">
+								<td th:text="${id.count}"></td>
 								<td th:text="${lists.complaint}"></td>
 								<td>
 									<form th:action="@{/deleteComplaints/{id}}" method="post" th:object="${lists}">

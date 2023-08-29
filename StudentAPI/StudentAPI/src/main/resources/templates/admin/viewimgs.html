@@ -15,13 +15,13 @@
 			<br>
 			<table width="100%">
 				<tr class="mt-4">
-					<th>Id</th>
+					<th>Sr.no.</th>
 					<th>Image</th>
 					<th>Image Name</th>
 					<th>Action</th>
 				</tr>
-				<tr th:each="im:${lists}">
-					<td th:text="${im.id}" class="ml-3"></td>
+				<tr th:each="im,id:${lists}">
+					<td th:text="${id.count}" class="ml-3"></td>
 					<td><a th:href="@{'img/'+${im.imageName}}" target="_blank"><img th:src="@{'img/'+${im.imageName}}"
 								width="50%" height="120px" alt="" class="mt-2"></a></td>
 					<td th:text="${im.imageName}"></td>

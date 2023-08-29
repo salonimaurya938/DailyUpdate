@@ -2,7 +2,6 @@
 
 	<section>
 		<main id="main" class="main">
-
 			<div class="pagetitle">
 				<h1>Book Download</h1>
 				<nav>
@@ -19,7 +18,7 @@
 						<h5 class="card-title">Book Details</h5>
 						<table width="100%" style="font-size: 14px;">
 							<tr>
-								<th>Id</th>
+								<th>Sr.No</th>
 								<th>Subject Name</th>
 								<th>Subject Icon</th>
 								<th>Book Title</th>
@@ -28,29 +27,83 @@
 								<th>Subject Status</th>
 								<th>Action</th>
 							</tr>
-							<tr th:each="books:${book}">
-								<td th:text="${books.id}"></td>
+							<tr th:each="books,id:${book}">
+								<td th:text="${id.count}"></td>
 								<td th:text="${books.subName}"></td>
 								<td th:text="${books.subTitle}"></td>
 								<td th:text="${books.publisher}"></td>
 								<td th:text="${books.author}"></td>
-								<td th:text="${books.subIcon}"></td>								
+								<td th:text="${books.subIcon}"></td>
 								<td th:text="${books.substatus}"></td>
 								<td>
 									<div class="form">
 										<form th:action="@{/deleteBook{id}}" method="post" th:object="${book}">
-										<input type="hidden" th:value="${books.id}" name="id" />
-										<button type="submit" value="Submit" class="bg-danger">Delete</button>
-									</form>
-									</div><div class="form">
-									<button class="bg-success"><a th:href="|@{/bupdate{id}(id=${books.id})}|"
-											style="color: white;">Update</a>&nbsp;</button>
-									<button class="bg-info"><a th:href="@{/img/key.png}" download="download"
-											style="color: white;">Download</a>&nbsp;</button></div>
+											<input type="hidden" th:value="${books.id}" name="id" />
+											<button type="submit" value="Submit" class="bg-danger">Delete</button>
+										</form>
+									</div>
+									<div class="form">
+										<button class="bg-success"><a th:href="|@{/bupdate{id}(id=${books.id})}|"
+												style="color: white;">Update</a>&nbsp;</button>
+										<button class="bg-info"><a th:href="@{/img/key.png}" download="download"
+												style="color: white;">Download</a>&nbsp;</button>
+									</div>
 								</td>
 							</tr>
 						</table>
+						<!-- Pagination links -->
+						<div th:if="${page.totalPages > 1}">
+							<div class="pagination">
+								<div th:class="${page.number == 0} ? 'disabled'">
+									<a th:href="@{/page/1}" aria-label="First">
+										<span aria-hidden="true">&laquo;&laquo;</span>
+									</a>
+								</div>
+								<div th:class="${page.number == 0} ? 'disabled'">
+									<a th:href="@{/page{pageNo}(pageNo=${page.number})}" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</div>
+								<div th:each="i : ${#numbers.sequence(1, page.totalPages)}"
+									th:class="${page.number == i-1} ? 'active'">
+									<a th:href="@{/page{pageNo}(pageNo=${i})}" th:text="${i}">1</a>
+								</div>
+								<div th:class="${page.number == page.totalPages - 1} ? 'disabled'">
+									<a th:href="@{/page{pageNo}(pageNo=${page.number + 2})}" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</div>
+								<div th:class="${page.number == page.totalPages - 1} ? 'disabled'">
+									<a th:href="@{/page{pageNo}(pageNo=${page.totalPages})}" aria-label="Last">
+										<span aria-hidden="true">&raquo;&raquo;</span>
+									</a>
+								</div>
+							</div>
+						</div>
 					</div>
+					<!--
+					<div th:if ="${totalPage > 1}">
+							<div class="row col-sm-10">
+								<div class="col-sm-2">
+									Total Rows :[[${totalItems}]]
+								</div>
+								<div class="col-sm-1">
+									<span th:each="i:${#numbers.sequence(1, totalPages)}">
+										<a th:if="${currentPage != i}"  th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+										<span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+									</span>
+								</div>
+								<div class="col-sm-1">
+									<a th:if="${currentPage < totalPages}"  th:href="@{'/page/' + ${currentPage + i}}">Next</a>
+									<span th:unless="${currentPage < totalPages}">Next</span> 
+								</div>
+								<div class="col-sm-1">
+									<a th:if="${currentPage < totalPages}"  th:href="@{'/page/' + ${totalPages}}">Last</a>
+									<span th:unless="${currentPage < totalPages}">Last</span>
+								</div>
+							</div>
+						</div>
+						-->
 				</div>
 			</div>
 
@@ -65,7 +118,8 @@
 		color: white;
 		border: none;
 	}
-	.form{
+
+	.form {
 		float: left;
 		margin-left: 2px;
 	}

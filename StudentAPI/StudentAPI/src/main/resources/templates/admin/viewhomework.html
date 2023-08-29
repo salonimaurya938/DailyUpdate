@@ -19,12 +19,12 @@
 						<h5 class="card-title">All Student Complaints</h5>
 						<table width="100%">
 							<tr>
-								<th>Id</th>
+								<th>Sr.no.</th>
 								<th>Question</th>
 								<th>Action</th>
 							</tr>
-							<tr th:each="questions:${question}">
-								<td th:text="${questions.id}"></td>
+							<tr th:each="questions,id:${question}">
+								<td th:text="${id.count}"></td>
 								<td th:text="${questions.question}"></td>
 								<td>																
 										<div class="form">

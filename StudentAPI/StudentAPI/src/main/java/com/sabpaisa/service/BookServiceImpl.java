@@ -1,10 +1,13 @@
 package com.sabpaisa.service;
 
+import java.awt.print.Pageable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,6 +71,13 @@ public class BookServiceImpl  implements BookService{
 	public void deleteBook(int deleteid) {
 		Book entity= bookDao.getOne(deleteid);
 		bookDao.delete(entity);		
+	}
+
+	@Override
+	public Page<Book> findPaginated(int pageNo, int pageSize) {
+		PageRequest pageable = PageRequest.of(pageNo, pageSize);
+		System.out.println("pageable Data"+ pageable);
+		return this.bookDao.findAll(pageable) ;
 	}
 	
 //	public Book imgUpload(Book book, MultipartFile subIcon) {
