@@ -1,0 +1,224 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="student/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+			<div class="pagetitle">
+				<h1 class="h1font" style="font-size: 35px; margin-top: 8px">Online Quiz Test</h1>
+				<header class="headerTop bg-primary">
+					<div class="left-title">Online Test</div>
+					<div class="right-title">Total Questions: <span id="tque"></span></div>
+					<div class="clearfix"></div>
+				</header>
+				<div class="content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-12">
+								<div id="result" class="quiz-body">
+									<form name="quizForm" onSubmit="">
+										<fieldset class="form-group">
+											<h4><span id="qid">1.</span><span id="question"><!--Question--></span></h4>
+											<div class="option-block-container" id="question-options">
+											</div> <!-- End of option block -->
+										</fieldset>
+										<button name="previous" id="previous" class="btn btn-success">Previous</button>
+										&nbsp;
+										<button name="next" id="next" class="btn btn-success">Next</button>
+									</form>
+								</div>
+							</div> <!-- End of col-sm-12 -->
+						</div> <!-- End of row -->
+					</div> <!-- ENd of container fluid -->
+				</div> <!-- End of content -->
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+				<script
+					src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+				<script src="app.js"></script>
+
+
+			</div><!-- End Page Title -->
+
+		</main><!-- End #main -->
+	</section>
+</div>
+<script th:inline="javascript">
+	/* Created and coded by Abhilash Narayan */
+	/* Quiz source: w3schools.com */
+	/*<![CDATA[*/
+    var quiz = /*[[${quiz}]]*/ '{}';
+    /*]]>*/
+	alert("Text");	
+	console.log(quiz);	
+	console.log(typeof quiz);	
+
+	var quizApp = function () {
+		this.score = 0;
+		this.qno = 1;
+		this.currentque = 0;
+		var totalque = quiz.length;
+		this.displayQuiz = function (cque) {
+			this.currentque = cque;
+			if (this.currentque < totalque) {
+				$("#tque").html(totalque);
+				$("#previous").attr("disabled", false);
+				$("#next").attr("disabled", false);
+				$("#qid").html(quiz[this.currentque].id + '.');
+				$("#question").html(quiz[this.currentque].question);
+				$("#question-options").html("");
+				$('#question-options:nth-child(4)').hide();
+				for (var key in quiz[this.currentque].option[0]) {
+					if (quiz[this.currentque].option[0].hasOwnProperty(key)) {
+						$("#question-options").append(
+							"<div class='form-check option-block'>" +
+							"<label class='form-check-label'>" +
+							"<input type='radio' class='form-check-input' name='option' id='q" + key + "' value='" + quiz[this.currentque].option[0][key] + "'><span id='optionval'>" +
+							quiz[this.currentque].option[0][key] +
+							"</span></label>"
+						);
+					}
+				}
+			}
+			if (this.currentque <= 0) {
+				$("#previous").attr("disabled", true);
+			}
+			if (this.currentque >= totalque) {
+				$('#next').attr('disabled', true);
+				for (var i = 0; i < totalque; i++) {
+					this.score = this.score + quiz.Quiz[i].score;
+				}
+				return this.showResult(this.score);
+			}
+		}
+		this.showResult = function (scr) {
+			$("#result").addClass('result');
+			$("#result").html("<h1 class='res-header'>Total Score: &nbsp;" + scr + '/' + totalque + "</h1>");
+			for (var j = 0; j < totalque; j++) {
+				var res;
+				if (quiz.Quiz[j].score == 0) {
+					res = '<span class="wrong">' + quiz.Quiz[j].score + '</span><i class="fa fa-remove c-wrong"></i>';
+				} else {
+					res = '<span class="correct">' + quiz.Quiz[j].score + '</span><i class="fa fa-check c-correct"></i>';
+				}
+				$("#result").append(
+					'<div class="result-question"><span>Q ' + quiz.Quiz[j].id + '</span> &nbsp;' + quiz.Quiz[j].question + '</div>' +
+					'<div><b>Correct answer:</b> &nbsp;' + quiz.Quiz[j].answer + '</div>' +
+					'<div class="last-row"><b>Score:</b> &nbsp;' + res +
+					'</div>'
+				);
+			}
+		}
+		this.checkAnswer = function (option) {
+			var answer = quiz.Quiz[this.currentque].answer;
+			option = option.replace(/</g, "&lt;") //for <
+			option = option.replace(/>/g, "&gt;") //for >
+			option = option.replace(/"/g, "&quot;")
+			if (option == quiz.Quiz[this.currentque].answer) {
+				if (quiz.Quiz[this.currentque].score == "") {
+					quiz.Quiz[this.currentque].score = 1;
+					quiz.Quiz[this.currentque].status = "correct";
+				}
+			} else {
+				quiz.Quiz[this.currentque].status = "wrong";
+			}
+		}
+		this.changeQuestion = function (cque) {
+			this.currentque = this.currentque + cque;
+			this.displayQuiz(this.currentque);
+		}
+	}
+	var jsq = new quizApp();
+	var selectedopt;
+	$(document).ready(function () {
+		jsq.displayQuiz(0);
+		$('#question-options').on('change', 'input[type=radio][name=option]', function (e) {
+			//var radio = $(this).find('input:radio');
+			$(this).prop("checked", true);
+			selectedopt = $(this).val();
+		});
+	});
+	$('#next').click(function (e) {
+		e.preventDefault();
+		if (selectedopt) {
+			jsq.checkAnswer(selectedopt);
+		}
+		jsq.changeQuestion(1);
+	});
+	$('#previous').click(function (e) {
+		e.preventDefault();
+		if (selectedopt) {
+			jsq.checkAnswer(selectedopt);
+		}
+		jsq.changeQuestion(-1);
+	});
+
+</script>
+<style>
+	.content {
+		margin-top: 54px;
+	}
+
+	.headerTop {
+		padding: 15px;
+		position: relative;
+		top: 40px;
+		width: 100%;
+		z-index: 9999;
+	}
+
+	.left-title {
+		width: 50%;
+		color: #fff;
+		font-size: 18px;
+		float: left;
+	}
+
+	.right-title {
+		width: 50%;
+		text-align: right;
+		float: right;
+		color: #fff;
+	}
+
+	.quiz-body {
+		margin-top: 15px;
+		padding-bottom: 50px;
+	}
+
+	.option-block-container {
+		margin-top: 20px;
+		max-width: 420px;
+	}
+
+	.option-block {
+		padding: 10px;
+		background: aliceblue;
+		border: 1px solid #84c5fe;
+		margin-bottom: 10px;
+		cursor: pointer;
+	}
+
+	.result-question {
+		font-weight: bold;
+	}
+
+	.c-wrong {
+		margin-left: 20px;
+		color: #ff0000;
+	}
+
+	.c-correct {
+		margin-left: 20px;
+		color: green;
+	}
+
+	.last-row {
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 25px;
+		margin-bottom: 25px;
+	}
+
+	.res-header {
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 15px;
+		padding-bottom: 15px;
+	}
+</style>

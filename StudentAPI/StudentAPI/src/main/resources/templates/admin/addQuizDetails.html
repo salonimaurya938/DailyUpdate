@@ -1,0 +1,155 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Add Quiz Details</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Add Quiz Details</li>
+					</ol>
+				</nav>
+				<!-- Button trigger start modal -->
+				<button type="button" class="btn btn-success btnss" data-bs-toggle="modal"
+					data-bs-target="#staticBackdrop">
+					Add QuizDetails
+				</button>
+				<!-- Button trigger end modal -->
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h2 class="card-title">Questions...</h2>
+
+							<!-- Button trigger start modal -->
+
+							<!-- Modal -->
+							<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+								data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+								aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="staticBackdropLabel">Add Quiz Details...</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<div class="modal-body" style="padding: 24px;">
+
+											<form class="row g-3" th:action="@{/addQuizDetails}" enctype="multipart/form-data"
+												method="POST" th:Object="${quiz}">
+												<div class="col-12">
+													<label for="subject" class="form-label">Subject</label>
+													<input type="text" name="subject" class="form-control" id="subject">
+												</div>
+
+												<div class="col-12">
+													<label for="totalTime" class="form-label">Total Time</label>
+													<input type="text" name="totalTime" class="form-control"
+														id="totalTime">
+												</div>
+												<div class="col-12">
+													<label for="marks" class="form-label">Marks</label>
+													<input type="text" name="marks" class="form-control" id="marks">
+												</div>
+												<div class="col-12">
+													<label for="classes" class="form-label">Class</label>
+													<select name="classes" id="cars" class="form-control">
+														<option value="Class 1" class="form-control">Class 1</option>
+														<option value="Class 2" class="form-control">Class 2</option>
+														<option value="Class 3" class="form-control">Class 3</option>
+														<option value="Class 4" class="form-control">Class 4</option>
+													</select>
+												</div>
+												<div class="col-12">
+													<label for="negativeMarks" class="form-label">Negative Marks</label>
+													<select name="negativeMarks" id="cars" class="form-control">
+														<option value="Negative Marking" class="form-control">Yes
+														</option>
+														<option value="No Negative Marking" class="form-control">No
+														</option>
+													</select>
+												</div>
+												<div class="col-12">
+													<label for="title" class="form-label">Subject Description</label>
+													<input type="text" name="title" class="form-control" id="title">
+												</div>
+												<br>
+												<div class="text-center" style="text-align: center;">
+													<button type="submit" name="submit"
+														class="btn btn-success">Submit</button>
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Close</button>
+												</div>
+										</div>
+										</form><!-- Vertical Form -->
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- HTML5 Input Form Elements end Modals-->
+
+						<!---Table start-->
+						<table width="100%" class="tbl">
+							<tr class="mt-4">
+								<th>Id</th>
+								<th>Subject</th>
+								<th>Total time</th>
+								<th>Marks</th>
+								<th>Class</th>
+								<th>Sub Description</th>
+								<th>Negative Mark</th>
+								<th>Action</th>
+							</tr>
+
+							<tr th:each="quizs:${quizDetails}">
+								<td th:text="${quizs.id}" class="ml-3"></td>
+								<td th:text="${quizs.subject}"></td>
+								<td th:text="${quizs.totalTime}"></td>
+								<td th:text="${quizs.marks}"></td>
+								<td th:text="${quizs.classes}"></td>
+								<td th:text="${quizs.title}"></td>
+								<td th:text="${quizs.negativeMarks}"></td>
+								<td>
+									<div class="btnform">
+										<form method="post" th:object="${quiz}">
+											<input type="hidden" th:value="${quizs.id}" name="id" />
+											<button type="submit" value="Submit" class="btn btn-danger">Delete</button>
+										</form>
+									</div>
+									<div class="btnform">
+										<button class="btn btn-success"><a
+												th:href="|@{/updateQuiz{id}(id=${quizs.id})}|"
+												style="color: white;">Update</a>&nbsp;</button>
+									</div>
+								</td>
+							</tr>
+						</table>
+						<!---Table end-->
+
+					</div>
+				</div>
+			</div>
+</div><!-- End Page Title -->
+
+</main><!-- End #main -->
+</section>
+</div>
+
+<style>
+	.btnss {
+		margin-left: 84%;
+		margin-bottom: 5px;
+	}
+
+	.btnform {
+		width: 30%;
+		float: left;
+	}
+
+	.tbl {
+		font-size: 12px;
+	}
+</style>

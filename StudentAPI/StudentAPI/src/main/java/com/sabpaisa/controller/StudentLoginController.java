@@ -15,6 +15,7 @@ import com.sabpaisa.entity.TimeTable;
 import com.sabpaisa.entity.UploadCourses;
 import com.sabpaisa.dao.OptionDao;
 import com.sabpaisa.dao.QuizDao;
+import com.sabpaisa.dao.QuizDetailsDao;
 import com.sabpaisa.dao.StudentDao;
 import com.sabpaisa.dao.UploadDao;
 import com.sabpaisa.entity.Book;
@@ -23,10 +24,12 @@ import com.sabpaisa.entity.Events;
 import com.sabpaisa.entity.HomeWork;
 import com.sabpaisa.entity.Images;
 import com.sabpaisa.entity.Quiz;
+import com.sabpaisa.entity.QuizDetails;
 import com.sabpaisa.service.BookService;
 import com.sabpaisa.service.ChapterService;
 import com.sabpaisa.service.EventsService;
 import com.sabpaisa.service.HomeWorkService;
+import com.sabpaisa.service.QuizDetailsServices;
 import com.sabpaisa.service.QuizService;
 import com.sabpaisa.service.StudentResultService;
 import com.sabpaisa.service.StudentService;
@@ -74,6 +77,12 @@ public class StudentLoginController {
 	
 	@Autowired
 	private OptionDao optionDao;
+	
+	@Autowired
+	private QuizDetailsDao quizDetailsDao;
+	
+	@Autowired
+	private QuizDetailsServices quizDetailsServices;
 	
 //	@RequestMapping("/register")
 //	public String StudentRegistration() {
@@ -125,6 +134,11 @@ public class StudentLoginController {
 			return "student/studentDashboard";
 	   }else
 		return "login";
+	}
+	
+	@RequestMapping("/studentDashboard")
+	public String dashBoard() {
+		return "student/studentDashboard";
 	}
 	
 	@RequestMapping("/myProfile")
@@ -232,25 +246,45 @@ public class StudentLoginController {
 		return "student/onlineCourse";
 	}
 	//.........................Online Quiz...................
+	
+//		@RequestMapping("/onlineQuiz")
+//		public String onlineQuiz(Model model) {
+//			List<Quiz> quiz = quizDao.findAll();
+//			System.out.println(quiz);
+//			//Optional<Quiz> getById= quizService.getQuizId(1);
+////			if(getById.isPresent()) {
+////				Quiz ids=getById.get();
+////				model.addAttribute("id", ids.getId());
+////				model.addAttribute("question", ids.getQuestion());
+////				model.addAttribute("op1", ids.getOp1());
+////				model.addAttribute("op2", ids.getOp2());
+////				model.addAttribute("op3", ids.getOp3());
+////				model.addAttribute("op4", ids.getOp4());
+////			}			
+//			model.addAttribute("quiz", quiz);			
+////			int a=1;
+////			model.addAttribute("count", a);
+////			a++;
+//			return "student/onlineQuiz";
+//		}
+	
 		@RequestMapping("/onlineQuiz")
-		public String onlineQuiz(Model model) {
-			List<Quiz> quiz = quizDao.findAll();
-			System.out.println(quiz);
-			//Optional<Quiz> getById= quizService.getQuizId(1);
-//			if(getById.isPresent()) {
-//				Quiz ids=getById.get();
-//				model.addAttribute("id", ids.getId());
-//				model.addAttribute("question", ids.getQuestion());
-//				model.addAttribute("op1", ids.getOp1());
-//				model.addAttribute("op2", ids.getOp2());
-//				model.addAttribute("op3", ids.getOp3());
-//				model.addAttribute("op4", ids.getOp4());
-//			}			
-			model.addAttribute("quiz", quiz);			
-//			int a=1;
-//			model.addAttribute("count", a);
-//			a++;
+		public String quizDetails(Model model) {
+			List<QuizDetails> quizDetails=quizDetailsServices.getQuizDetails();
+			model.addAttribute("quizDetails", quizDetails);	
+			System.out.println(quizDetails);
 			return "student/onlineQuiz";
+		}
+		
+		
+		
+		@RequestMapping("/testQuiz")
+		public String quizss(Model model) {
+			System.out.println("Quiz Section...");
+			List<Quiz> quiz = quizDao.findAll();
+			model.addAttribute("quiz", quiz);
+			System.out.println("Fetech All quiz Data ::" + quiz);
+		return "student/testQuiz";
 		}
 	
 }

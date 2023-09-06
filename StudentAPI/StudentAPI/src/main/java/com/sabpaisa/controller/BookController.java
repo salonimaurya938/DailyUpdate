@@ -61,7 +61,7 @@ public class BookController {
 
 	
 	@PostMapping("/addBook")
-	public String bookSave(@ModelAttribute("admin/addBook")@RequestParam MultipartFile subIcon, String subName,String subTitle,String substatus,String publisher, String author) throws IOException {
+	public String bookSave(@ModelAttribute("admin/addBook")@RequestParam MultipartFile subIcon, String subName,String subTitle,String substatus,String publisher, String author ,String bookIssueDate,String bookSubmitDate,String classes) throws IOException {
 		System.out.println("switching...");	
 		Book book = new Book();
 	    Book im = bookService.updateBook(book);
@@ -71,6 +71,9 @@ public class BookController {
 	    im.setSubTitle(subTitle);
 	    im.setPublisher(publisher);
 	    im.setAuthor(author);
+	    im.setBookIssueDate(bookIssueDate);
+	    im.setBookSubmitDate(bookSubmitDate);
+	    im.setClasses(classes);
 		Book subicon= bookService.addBook(book);			
 		if(subicon!=null) {			
 			try {

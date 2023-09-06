@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 
-@Table(name="library_book")
+@Table(name="book")
 @Entity
 public class Book {
 
@@ -20,18 +20,10 @@ public class Book {
 	private String subTitle;
 	private String subIcon;
 	private String substatus;
+	private String bookIssueDate;
+	private String bookSubmitDate;
+	private String classes;
 	
-	public Book(int id, String subName, String publisher, String author, String subTitle, String subIcon,
-			String substatus) {
-		super();
-		this.id = id;
-		this.subName = subName;
-		this.publisher = publisher;
-		this.author = author;
-		this.subTitle = subTitle;
-		this.subIcon = subIcon;
-		this.substatus = substatus;
-	}
 
 	public int getId() {
 		return id;
@@ -88,11 +80,52 @@ public class Book {
 	public void setSubstatus(String substatus) {
 		this.substatus = substatus;
 	}
+	
+	public String getBookIssueDate() {
+		return bookIssueDate;
+	}
 
+	public void setBookIssueDate(String bookIssueDate) {
+		this.bookIssueDate = bookIssueDate;
+	}
+
+	public String getBookSubmitDate() {
+		return bookSubmitDate;
+	}
+
+	public void setBookSubmitDate(String bookSubmitDate) {
+		this.bookSubmitDate = bookSubmitDate;
+	}
+
+	public String getClasses() {
+		return classes;
+	}
+
+	public void setClasses(String classes) {
+		this.classes = classes;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", subName=" + subName + ", publisher=" + publisher + ", author=" + author
-				+ ", subTitle=" + subTitle + ", subIcon=" + subIcon + ", substatus=" + substatus + "]";
+				+ ", subTitle=" + subTitle + ", subIcon=" + subIcon + ", substatus=" + substatus + ", bookIssueDate="
+				+ bookIssueDate + ", bookSubmitDate=" + bookSubmitDate + ", classes=" + classes + "]";
+	}
+	
+	public Book(int id, String subName, String publisher, String author, String subTitle, String subIcon,
+			String substatus, String bookIssueDate, String bookSubmitDate, String classes) {
+		super();
+		this.id = id;
+		this.subName = subName;
+		this.publisher = publisher;
+		this.author = author;
+		this.subTitle = subTitle;
+		this.subIcon = subIcon;
+		this.substatus = substatus;
+		this.bookIssueDate = bookIssueDate;
+		this.bookSubmitDate = bookSubmitDate;
+		this.classes = classes;
 	}
 
 	public Book() {

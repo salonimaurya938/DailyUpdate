@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Table(name="admin_login")
+@Table(name="admin")
 @Entity
 public class Admin {
 	

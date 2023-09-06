@@ -37,12 +37,11 @@ public class ImgController {
 		System.out.println(img.getOriginalFilename());	
 		
 		Images im = new Images();
-		im.setImageName(img.getOriginalFilename());
-		
+		im.setImageName(img.getOriginalFilename());		
 		Images uploadimg= uploadDao.save(im);
 		if(uploadimg!=null) {			
 			try {
-				File saveFile = new ClassPathResource("static/img").getFile();
+				File saveFile = new ClassPathResource("static/assets/img").getFile();
 			    Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+img.getOriginalFilename());
 			    System.out.println(path);
 			    Files.copy(img.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);

@@ -4,7 +4,7 @@
 		<main id="main" class="main">
 
 			<div class="pagetitle">
-				<h1>Book Download</h1>
+				<h1>Book Details</h1>
 				<nav>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
@@ -26,12 +26,16 @@
 													alt="" class="mt-2"></a>
 										</div>
 										<div style="margin-top: 8px;">
-										<h6><span>Author Name : </span><span th:text="${books.author}"></span></h6>									
-										<span>Discription : </span><span th:text="${books.subTitle}"></span><br>										
-										<span>Publiser : </span><span th:text="${books.publisher}"></span>
+										<h6><span><b>Book Name </b> : </span><span th:text="${books.subName}"></span></h6>
+										<span><b>Author Name </b> : </span><span th:text="${books.author}"></span><br>									
+										<span><b>Discription </b> : </span><span th:text="${books.subTitle}"></span><br>										
+										<span><b>Publiser</b> : </span><span th:text="${books.publisher}"></span><br>
+										<span><b>Issue Date</b> : </span><span th:text="${books.bookIssueDate}"></span><br>
+										<span><b>Submision Date</b> : </span><span th:text="${books.bookSubmitDate}"></span><br>
+										<span><b>Class</b> : </span><span th:text="${books.classes}"></span>&ensp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;&emsp;&emsp;
+										<a href="https://www.javatpoint.com/spring-boot-tutorial" style="color: white;"><i class="bi bi-eye-fill" style="color: darkorange;"></i></a>
 										</div>
-										<button class="bg-success"><a th:href="@{/img/key.png}" download="download"
-											style="color: white;">Download</a>&nbsp;</button>
+										
 									</div>
 								</div>
 							</div>

@@ -2,8 +2,8 @@
 
 	<section>
 		<main id="main" class="main">
-			<div class="pagetitle">
-				<h1>Book Download</h1>
+			<div class="pagetitle" style="font-size: small;">
+				<h1>Book Details</h1>
 				<nav>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
@@ -11,12 +11,18 @@
 						<li class="breadcrumb-item active">View All Book</li>
 					</ol>
 				</nav>
+				<div class="search-bar">
+					<form class="search-form d-flex align-items-center" method="POST">
+						<input type="text" name="query" id="search-bar" placeholder="Search" title="Enter search keyword">
+						<button type="submit" title="Search"><i class="bi bi-search"></i></button>
+					</form>
+				</div><!-- End Search Bar -->
 			</div><!-- End Page Title -->
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">Book Details</h5>
-						<table width="100%" style="font-size: 14px;">
+						<table width="100%" style="font-size: 14px;" id="word-list">
 							<tr>
 								<th>Sr.No</th>
 								<th>Subject Name</th>
@@ -25,28 +31,36 @@
 								<th>Publisher</th>
 								<th>Author Name</th>
 								<th>Subject Status</th>
+								<th>Book Issue</th>
+								<th>Book Submission</th>
 								<th>Action</th>
 							</tr>
 							<tr th:each="books,id:${book}">
 								<td th:text="${id.count}"></td>
 								<td th:text="${books.subName}"></td>
+								<td th:text="${books.subIcon}"></td>
 								<td th:text="${books.subTitle}"></td>
 								<td th:text="${books.publisher}"></td>
 								<td th:text="${books.author}"></td>
-								<td th:text="${books.subIcon}"></td>
 								<td th:text="${books.substatus}"></td>
+								<td th:text="${books.bookIssueDate}"></td>
+								<td th:text="${books.bookSubmitDate}"></td>
 								<td>
 									<div class="form">
 										<form th:action="@{/deleteBook{id}}" method="post" th:object="${book}">
 											<input type="hidden" th:value="${books.id}" name="id" />
-											<button type="submit" value="Submit" class="bg-danger">Delete</button>
+											<button type="submit" value="Submit" class="bg-light"><i
+													class="bi bi-trash3 text-danger"></i></button>
 										</form>
 									</div>
 									<div class="form">
-										<button class="bg-success"><a th:href="|@{/bupdate{id}(id=${books.id})}|"
-												style="color: white;">Update</a>&nbsp;</button>
-										<button class="bg-info"><a th:href="@{/img/key.png}" download="download"
-												style="color: white;">Download</a>&nbsp;</button>
+										<button class="bg-light"><a th:href="|@{/bupdate{id}(id=${books.id})}|"
+												style="color: white;"><i
+													class="bi bi-pencil-square text-success"></i></a>&nbsp;</button>
+										<button class="bg-light"><a
+												href="https://www.javatpoint.com/spring-boot-tutorial"
+												download="download" style="color: white;"><i
+													class="bi bi-eye-fill text-info"></i></a>&nbsp;</button>
 									</div>
 								</td>
 							</tr>
@@ -123,4 +137,22 @@
 		float: left;
 		margin-left: 2px;
 	}
+	
 </style>
+<script>
+        const searchBar = document.getElementById('search-bar');
+        const wordList = document.getElementById('word-list');
+        const items = wordList.getElementsByTagName('li');
+
+        searchBar.addEventListener('input', () => {
+            const searchTerm = searchBar.value.toLowerCase();
+            for (const item of items) {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            }
+        });
+    </script>

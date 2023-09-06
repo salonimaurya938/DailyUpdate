@@ -9,6 +9,6 @@ import com.sabpaisa.entity.Admin;
 @Repository
 public interface AdminDao extends JpaRepository<Admin, Integer> {
 	
-	Admin  findByUsernameAndPassword(String username, String password);
+	public Admin  findByUsernameAndPassword(String username, String password);
 
 }

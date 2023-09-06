@@ -1,5 +1,6 @@
 package com.sabpaisa.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +32,9 @@ import com.sabpaisa.service.ChapterService;
 import com.sabpaisa.service.HomeWorkService;
 import com.sabpaisa.service.QuizService;
 import com.sabpaisa.service.StudentService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class ControllerApi {
@@ -269,14 +274,50 @@ public class ControllerApi {
 	}	
 	
 
-	@GetMapping("/quizs")
+	@GetMapping("/quizss")
 	public List<Quiz> getquiz(Model model) {
 		List<Quiz> quiz = quizDao.findAll();
 		model.addAttribute("quiz", quiz);
-		System.out.println("Fetech All quz Data ::" + quiz);
+		System.out.println("Fetech All quiz Data ::" + quiz);
 		return quizDao.findAll();
 	}
 	
+	//..................................................................................
+	@GetMapping("/sessionSpring")
+	public String process(Model model,HttpSession session) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) session.getAttribute("this is session");
+		System.out.println("session1...");
+		if(messages==null) {
+			messages=new ArrayList<>();	
+			System.out.println("session2...");
+		}
+		System.out.println("session3...");
+		model.addAttribute("sessionMessages", messages);
+		return "redirect:/";
+	}
+	@PostMapping("/sessionSpring")
+	public String Proccess(@RequestParam("msg") String msg, HttpServletRequest request) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) request.getSession().getAttribute(msg);
+		System.out.println("session4...");
+		if(messages==null) {
+			messages=new ArrayList<>();	
+			System.out.println("session5...");
+			request.getSession().setAttribute("MY_SESSION_MSG", messages);
+		}
+		System.out.println("session6...");
+		messages.add(msg);
+        request.getSession().setAttribute("NOTES_SESSION", messages);
+        return "redirect:/index";
+		
+	}
+	
+	@PostMapping("/destorySpring")
+	public String destorySession(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/";
+	}
 	
 
 	

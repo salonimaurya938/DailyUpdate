@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +38,19 @@ import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.Fee;
 import com.sabpaisa.entity.Option;
 import com.sabpaisa.entity.Quiz;
+import com.sabpaisa.entity.QuizDetails;
 import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.UploadCourses;
 import com.sabpaisa.service.AdminService;
 import com.sabpaisa.service.ChapterService;
 import com.sabpaisa.service.FeeService;
+import com.sabpaisa.service.QuizDetailsServices;
 import com.sabpaisa.service.QuizService;
 import com.sabpaisa.service.StudentService;
 import com.sabpaisa.service.UploadCourseService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -79,6 +85,9 @@ public class LoginController {
 	@Autowired
 	private feeDao feeDao;
 	
+	@Autowired
+	private QuizDetailsServices quizDetailsServices;
+	
 
 	public LoginController(AdminService adminService, StudentService studentService) {
 		super();
@@ -87,38 +96,33 @@ public class LoginController {
 	}
 
 // .........................End login Controller..................................
-	@GetMapping("/admLogin")
+	@GetMapping("/adminlogin")
 	public ModelAndView login() {
 		System.out.println("Project runing mood....");
-		ModelAndView ma = new ModelAndView("admLogin");
-		ma.addObject("admLogin", new Admin());
+		ModelAndView ma = new ModelAndView("adminlogin");
+		ma.addObject("adminlogin", new Admin());
 		return ma;
 	}
 
-	@PostMapping("/admLogin")
-	public String saveLogin(Model model, @ModelAttribute("admLogin") Admin admin) {
+	@PostMapping("/adminlogin")
+	public String saveLogin(Model model, @ModelAttribute("adminlogin") Admin admin) {
 		Admin userData = adminService.adminlogin(admin);
-		System.out.println("Loged in data :: " + userData);
-//		Student userData1 = studentService.studentLogin(student);	    
-//	    Student std = studentData.get(id);
-//	    System.out.println("email"+ std.getEmail());		
-//		System.out.println("Student login data :: " + userData1);
+		System.out.println("Admin login :: " + userData);
+		//Admin userData = adminDao.findByUsernameAndPassword(admin.getUsername(),admin.getPassword());
 		if (userData != null) {
 			model.addAttribute("id", userData.getId());
 			model.addAttribute("username", userData.getUsername());
 			model.addAttribute("email", userData.getEmail());
 			model.addAttribute("pass", userData.getPassword());
 			return "admin/adminDashBoard";
+		}else {
+			return "adminlogin";
 		}
-//		} else if (studentData != null) {
-//			System.out.println("student part" + studentData);
-//			model.addAttribute("name", studentData.getStudentName());
-//			model.addAttribute("email", studentData.getEmail());
-//			return "student/studentDashboard";
-//		} 
-		else {
-			return "admLogin";
-		}
+	}
+	
+	@RequestMapping("/adminDashBoard")
+	public String dashBoard() {
+		return "admin/adminDashBoard";
 	}
 	
 	@RequestMapping("/uploadCourses")
@@ -467,11 +471,10 @@ public class LoginController {
 	public String addQuiz(Model model) {
 		model.addAttribute("title", "AddQuiz-School Management System");
 		Quiz quiz = new Quiz();
-		Option option = new Option();
 		model.addAttribute("quiz", quiz);
 		List<Quiz> quizs = quizService.getQuiz();
 		model.addAttribute("quiz", quizs);
-		model.addAttribute("option", option);
+		System.out.println("quiz details.. "+quizs);
 		return "admin/quiz";
 	}
 
@@ -530,6 +533,63 @@ public class LoginController {
 		model.addAttribute("quiz", quizs);
 		System.out.println("Delete successfully...");
 		return "admin/quiz";
+	}
+	
+	@RequestMapping(value="/addQuizDetails", method = RequestMethod.GET)
+	public String addQuizs(Model model) {
+		model.addAttribute("title", "AddQuizDetails-School Management System");
+		QuizDetails quizdetails = new QuizDetails();
+		model.addAttribute("quizdetails", quizdetails);
+		List<QuizDetails> quizDetails = quizDetailsServices.getQuizDetails();
+		model.addAttribute("quizDetails", quizDetails);
+		System.out.println("Quiz Details section...");
+		return "admin/addQuizDetails";
+	}
+	
+	@RequestMapping(value = "/addQuizDetails", method = RequestMethod.POST)
+	public String insertedQuizDetails(@ModelAttribute("admin/addQuizDetails") QuizDetails quizDetails,Model model) {
+		System.out.println("Quiz Adding...");
+		QuizDetails quizs =  quizDetailsServices.addQuizDetails(quizDetails);		
+		System.out.println("data inserted value ::" + quizs);		
+		return "admin/quiz";
+	}
+
+	
+	//.....................................Session Controller................................
+	@GetMapping("/sessions")
+	public String process(Model model,HttpSession session) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) session.getAttribute("this is session");
+		System.out.println("session1...");
+		if(messages==null) {
+			messages=new ArrayList<>();	
+			System.out.println("session2...");
+		}
+		System.out.println("session3...");
+		model.addAttribute("sessionMessages", messages);
+		return "redirect:/";
+	}
+	@PostMapping("/sessions")
+	public String Proccess(@RequestParam("msg") String msg, HttpServletRequest request) {
+		@SuppressWarnings("unchecked")
+		List<String> messages = (List<String>) request.getSession().getAttribute(msg);
+		System.out.println("session4...");
+		if(messages==null) {
+			messages=new ArrayList<>();	
+			System.out.println("session5...");
+			request.getSession().setAttribute("MY_SESSION_MSG", messages);
+		}
+		System.out.println("session6...");
+		messages.add(msg);
+        request.getSession().setAttribute("NOTES_SESSION", messages);
+        return "redirect:/index";
+		
+	}
+	
+	@PostMapping("/destoryss")
+	public String destorySession(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/";
 	}
 	
 		

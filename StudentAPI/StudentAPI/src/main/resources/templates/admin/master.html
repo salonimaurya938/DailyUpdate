@@ -46,9 +46,9 @@
 	<header id="header" class="header fixed-top d-flex align-items-center">
 
 		<div class="d-flex align-items-center justify-content-between">
-			<a href="index.html" class="logo d-flex align-items-center">
-				<img src="assets/img/logo.png" alt="">
-				<span class="d-none d-lg-block">Ronisha</span>
+			<a href="index.html" class="logo">
+				<img src="/img/school logo.png" height="20%" width="80%" class="attachment-full size-full" alt
+					decoding="async" />
 			</a>
 			<i class="bi bi-list toggle-sidebar-btn"></i>
 		</div><!-- End Logo -->
@@ -69,147 +69,6 @@
 					</a>
 				</li><!-- End Search Icon-->
 
-				<li class="nav-item dropdown">
-
-					<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-						<i class="bi bi-bell"></i>
-						<span class="badge bg-primary badge-number">4</span>
-					</a><!-- End Notification Icon -->
-
-					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-						<li class="dropdown-header">
-							You have 4 new notifications
-							<a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-						</li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li class="notification-item">
-							<i class="bi bi-exclamation-circle text-warning"></i>
-							<div>
-								<h4>Lorem Ipsum</h4>
-								<p>Quae dolorem earum veritatis oditseno</p>
-								<p>30 min. ago</p>
-							</div>
-						</li>
-
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li class="notification-item">
-							<i class="bi bi-x-circle text-danger"></i>
-							<div>
-								<h4>Atque rerum nesciunt</h4>
-								<p>Quae dolorem earum veritatis oditseno</p>
-								<p>1 hr. ago</p>
-							</div>
-						</li>
-
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li class="notification-item">
-							<i class="bi bi-check-circle text-success"></i>
-							<div>
-								<h4>Sit rerum fuga</h4>
-								<p>Quae dolorem earum veritatis oditseno</p>
-								<p>2 hrs. ago</p>
-							</div>
-						</li>
-
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li class="notification-item">
-							<i class="bi bi-info-circle text-primary"></i>
-							<div>
-								<h4>Dicta reprehenderit</h4>
-								<p>Quae dolorem earum veritatis oditseno</p>
-								<p>4 hrs. ago</p>
-							</div>
-						</li>
-
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-						<li class="dropdown-footer">
-							<a href="#">Show all notifications</a>
-						</li>
-
-					</ul><!-- End Notification Dropdown Items -->
-
-				</li><!-- End Notification Nav -->
-
-				<li class="nav-item dropdown">
-
-					<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-						<i class="bi bi-chat-left-text"></i>
-						<span class="badge bg-success badge-number">3</span>
-					</a><!-- End Messages Icon -->
-
-					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-						<li class="dropdown-header">
-							You have 3 new messages
-							<a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-						</li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li class="message-item">
-							<a href="#">
-								<img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-								<div>
-									<h4>Maria Hudson</h4>
-									<p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-									<p>4 hrs. ago</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li class="message-item">
-							<a href="#">
-								<img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-								<div>
-									<h4>Anna Nelson</h4>
-									<p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-									<p>6 hrs. ago</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li class="message-item">
-							<a href="#">
-								<img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-								<div>
-									<h4>David Muldon</h4>
-									<p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-									<p>8 hrs. ago</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li class="dropdown-footer">
-							<a href="#">Show all messages</a>
-						</li>
-
-					</ul><!-- End Messages Dropdown Items -->
-
-				</li><!-- End Messages Nav -->
-
 				<li class="nav-item dropdown pe-3">
 
 					<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -219,16 +78,16 @@
 
 					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 						<li class="dropdown-header">
-							<h6 th:text="${username}"></h6>
-							<span th:text="${email}"></span>
+							<h6 th:text="${username}" class="text-success"></h6>
+							<span th:text="${email}" class="text-warning"></span>
 						</li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
 
 						<li>
-							<a class="dropdown-item d-flex align-items-center" href="#">
-								<i class="bi bi-person"></i>
+							<a class="dropdown-item d-flex align-items-center" href="adminProfile">
+								<i class="bi bi-person-circle text-success"></i>
 								<span>My Profile</span>
 							</a>
 						</li>
@@ -238,7 +97,7 @@
 
 						<li>
 							<a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-								<i class="bi bi-gear"></i>
+								<i class="bi bi-gear text-danger"></i>
 								<span>Account Settings</span>
 							</a>
 						</li>
@@ -248,7 +107,7 @@
 
 						<li>
 							<a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-								<i class="bi bi-question-circle"></i>
+								<i class="bi bi-question-circle text-info"></i>
 								<span>Need Help?</span>
 							</a>
 						</li>
@@ -258,7 +117,7 @@
 
 						<li>
 							<a class="dropdown-item d-flex align-items-center" href="../login">
-								<i class="bi bi-box-arrow-right"></i>
+								<i class="bi bi-box-arrow-right text-warning"></i>
 								<span>Sign Out</span>
 							</a>
 						</li>
@@ -277,75 +136,91 @@
 		<ul class="sidebar-nav" id="sidebar-nav">
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#">
-					<i class="bi bi-grid"></i>
+				<a class="nav-link collapsed" href="adminDashBoard">
+					<i class="bi bi-grid text-primary"></i>
 					<span>Dashboard</span>
 				</a>
 			</li><!-- End Dashboard Nav -->
 			<li class="nav-item">
+				<a class="nav-link collapsed" href="adminProfile">
+					<i class="bi bi-person-circle text-success"></i>
+					<span>My Profile</span>
+				</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#front-nav" data-bs-toggle="collapse" href="#">
-					<i class="bi bi-gem"></i><span>Front Office</span><i class="bi bi-chevron-down ms-auto"></i>
+					<i class="bi bi-telephone text-info"></i><span>Enquiry Zone</span><i
+						class="bi bi-chevron-down ms-auto"></i>
 				</a>
 				<ul id="front-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 					<li>
 						<a href="admissionEnquiry">
-							<i class="bi bi-circle"></i><span>Admission Enquiry</span>
+							<i class="bi bi-circle"></i><span>Add Enquiry</span>
 						</a>
 					</li>
 					<li>
-						<a href="viewComplaints">
-							<i class="bi bi-circle"></i><span>Students Complaints</span>
+						<a href="viewAdmissionEnquiry">
+							<i class="bi bi-circle"></i><span>Enquiry Details</span>
 						</a>
 					</li>
 				</ul>
-			</li><!-- End Holidays & Academic plan Nav -->
+			</li><!--end front office -->
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#front-student" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-mortarboard text-warning"></i><span>Student</span><i
+						class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="front-student" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="newAdmission">
+							<i class="bi bi-circle"></i><span>New Addmission</span>
+						</a>
+					</li>
+					<li>
+						<a href="newAdmission">
+							<i class="bi bi-circle"></i><span>Admission Details</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="bi bi-circle"></i><span>Course Management</span>
+						</a>
+					</li>
+				</ul>
+			</li><!-- End Student-->
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
 					href="admin/library">
-					<i class="bi bi-menu-button-wide"></i><span>Library</span><i class="bi bi-chevron-down ms-auto"></i>
+					<i class="bi bi-menu-button-wide text-danger"></i><span>Library</span><i
+						class="bi bi-chevron-down ms-auto"></i>
 				</a>
 				<ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 					<li>
 						<a href="addBook">
-							<i class="bi bi-circle"></i><span>Book Add</span>
+							<i class="bi bi-circle"></i><span>Add Book</span>
 						</a>
 					</li>
 					<li>
 						<a href="downloadBook">
-							<i class="bi bi-circle"></i><span>View Book</span>
+							<i class="bi bi-circle"></i><span>Book List</span>
 						</a>
 					</li>
 					<li>
 						<a href="addchapter">
-							<i class="bi bi-circle"></i><span>Chapter Add</span>
+							<i class="bi bi-circle"></i><span>Add Lession</span>
 						</a>
 					</li>
 					<li>
 						<a href="viewchapter">
-							<i class="bi bi-circle"></i><span>View Chapter</span>
+							<i class="bi bi-circle"></i><span>Lession List</span>
 						</a>
 					</li>
 				</ul>
 			</li><!-- End Library Nav -->
-			<!-- Start Online Course -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="uploadCourses">
-					<i class="bi bi-fast-forward-circle"></i>
-					<span>Online Course</span>
-				</a>
-			</li>
-			<!-- End Online Course -->
-			<!-- Start Online Course -->
-			<li class="nav-item">
-				<a class="nav-link collapsed" href="quiz">
-					<i class="bi bi-fast-forward-circle"></i>
-					<span>Online Quiz</span>
-				</a>
-			</li>
-			<!-- End Online Course -->
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-					<i class="bi bi-journal-text"></i><span>Gallery</span><i class="bi bi-chevron-down ms-auto"></i>
+					<i class="bi bi-file-image-fill" style="color: blueviolet;"></i><span>Gallery</span><i
+						class="bi bi-chevron-down ms-auto"></i>
 				</a>
 				<ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 					<li>
@@ -355,7 +230,7 @@
 					</li>
 					<li>
 						<a href="viewimgs">
-							<i class="bi bi-circle"></i><span>View image</span>
+							<i class="bi bi-circle"></i><span>View Image</span>
 						</a>
 					</li>
 				</ul>
@@ -363,7 +238,7 @@
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-					<i class="bi bi-layout-text-window-reverse"></i><span>Home work</span><i
+					<i class="bi bi-layout-text-window-reverse" style="color:darkblue;"></i><span>Home work</span><i
 						class="bi bi-chevron-down ms-auto"></i>
 				</a>
 				<ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -383,7 +258,7 @@
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-					<i class="bi bi-bar-chart"></i><span>Result & Report Card</span><i
+					<i class="bi bi-bar-chart" style="color:lightcoral; "></i><span>Result & Report Card</span><i
 						class="bi bi-chevron-down ms-auto"></i>
 				</a>
 				<ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -407,7 +282,7 @@
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-					<i class="bi bi-gem"></i><span>Holidays & Academic plan</span><i
+					<i class="bi bi-calendar3-event" style="color:brown; "></i><span>Holidays & Academic plan</span><i
 						class="bi bi-chevron-down ms-auto"></i>
 				</a>
 				<ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -426,7 +301,8 @@
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" data-bs-target="#icons-nav1" data-bs-toggle="collapse" href="#">
-					<i class="bi bi-calendar"></i><span>Time Table</span><i class="bi bi-chevron-down ms-auto"></i>
+					<i class="bi bi-calendar" style="color:hotpink; "></i><span>Time Table</span><i
+						class="bi bi-chevron-down ms-auto"></i>
 				</a>
 				<ul id="icons-nav1" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 					<li>
@@ -441,20 +317,56 @@
 					</li>
 				</ul>
 			</li><!-- End Time Tables plan Nav -->
+			
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#tables-fee" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-cash-coin" style="color:darkblue;"></i><span>Fee Management</span><i
+						class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="tables-fee" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="addFee">
+							<i class="bi bi-circle"></i><span>Add Fee</span>
+						</a>
+					</li>
+					<li>
+						<a href="feeDetails">
+							<i class="bi bi-circle"></i><span>Fee Details</span>
+						</a>
+					</li>
+				</ul>
+			</li><!-- End FeeManagement Nav -->
 
 			<li class="nav-heading">Pages</li>
 
+			<!-- Start Online Course -->
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="uploadCourses">
+					<i class="bi bi-fast-forward-circle" style="color:springgreen; "></i>
+					<span>Online Course</span>
+				</a>
+			</li>
+			<!-- End Online Course -->
+			<!-- Start Online Course -->
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="quiz">
+					<i class="bi bi-patch-question" style="color:orangered; "></i>
+					<span>Online Quiz</span>
+				</a>
+			</li>
+			<!-- End Online Course -->
+
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="calender">
-					<i class="bi bi-card-list"></i>
+					<i class="bi bi-calendar-heart" style="color:teal; "></i>
 					<span>Circulor and Calendar</span>
 				</a>
 			</li><!-- End Calender Page Nav -->
 
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="notic.html">
-					<i class="bi bi-envelope"></i>
-					<span>Notic</span>
+					<i class="bi bi-app-indicator" style="color:fuchsia; "></i>
+					<span>Notice Board</span>
 				</a>
 			</li><!-- End Notic page -->
 

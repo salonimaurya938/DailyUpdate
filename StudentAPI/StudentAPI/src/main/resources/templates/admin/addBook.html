@@ -1,6 +1,5 @@
 <div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
 
-
 	<section>
 		<main id="main" class="main">
 
@@ -35,6 +34,21 @@
 										<label for="publisher" class="form-label">Publisher</label>
 										<input type="text" name="publisher" class="form-control" id="publisher">
 									</div>
+									<div class="col-12">
+										<label for="classes" class="form-label">Class</label>
+										<select name="classes" id="cars" class="form-control">
+											<option value="Class 1" class="form-control" >Class 1</option>
+											<option value="Class 2" class="form-control" >Class 2</option>
+											<option value="Class 3" class="form-control" >Class 3</option>
+											<option value="Class 4" class="form-control" >Class 4</option>
+											<option value="Class 5" class="form-control" >Class 5</option>
+											<option value="Class 6" class="form-control" >Class 6</option>
+										</select>
+									</div>
+									<div class="col-12">
+										<label for="bookIssueDate" class="form-label">Book Issue Date</label>
+										<input type="date" name="bookIssueDate" class="form-control" id="bookIssueDate">
+									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="col-12">
@@ -52,12 +66,17 @@
 											<option value="Passive" class="form-control" >Inactive</option>
 										</select>
 									</div>
-								</div>
+									<div class="col-12">
+										<label for="bookSubmitDate" class="form-label">Book submisson date</label>
+										<input type="date" name="bookSubmitDate" class="form-control" id="bookSubmitDate">
+									</div>
+							<br>
 								<div class="text-center" style="text-align: center;">
 									<button type="submit" name="submit" class="btn btn-primary">Submit</button>
 									<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
-									<button name="download" download class="btn btn-success"><a href="downloadBook" style="color: white;">All Book</a></button>
+									<button name="allbook" download class="btn btn-success"><a th:href="@{/downloadBook}" style="color: white;">All Book</a></button>
 								</div>
+							</div>
 							</form><!-- Vertical Form -->
 
 						</div>

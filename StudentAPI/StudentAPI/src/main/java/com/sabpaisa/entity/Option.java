@@ -12,7 +12,7 @@ public class Option {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	private int id;
 	private String op1;
 	private String op2;
 	private String op3;
@@ -23,22 +23,14 @@ public class Option {
 		super();
 	}
 	
-	public Option(int id, String op1, String op2, String op3, String op4, String correctAnswer) {
+	
+	public Option(String op1, String op2, String op3, String op4, String correctAnswer) {
 		super();
-		this.id = id;
 		this.op1 = op1;
 		this.op2 = op2;
 		this.op3 = op3;
 		this.op4 = op4;
 		this.correctAnswer = correctAnswer;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getOp1() {
@@ -76,11 +68,11 @@ public class Option {
 
 	@Override
 	public String toString() {
-		return "Option [id=" + id + ", op1=" + op1 + ", op2=" + op2 + ", op3=" + op3 + ", op4=" + op4
-				+ ", correctAnswer=" + correctAnswer + "]";
+		return "Option [op1=" + op1 + ", op2=" + op2 + ", op3=" + op3 + ", op4=" + op4 + ", correctAnswer="
+				+ correctAnswer + "]";
 	}
 
-	
+
 	
 	
 }
