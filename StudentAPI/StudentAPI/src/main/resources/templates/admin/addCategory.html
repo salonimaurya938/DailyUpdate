@@ -1,0 +1,108 @@
+<div xmls:th="http://www.thymeleaf.org"
+	th:replace="admin/master::layout(~{::section})">
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Online Zone</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Online Zone</li>
+						<li class="breadcrumb-item active">Add Category</li>
+					</ol>
+				</nav>
+				<!-- Button trigger start modal -->
+				<button type="button" class="btn btn-success btnss"
+					data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+					Add Quiz</button>
+				<!-- Button trigger end modal -->
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-body">
+							<h2 class="card-title">Quiz Details...</h2>
+
+							<!-- Button trigger start modal -->
+
+							<!-- Modal -->
+							<div class="modal fade" id="staticBackdrop"
+								data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+								aria-labelledby="staticBackdropLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="staticBackdropLabel">Add
+												Quiz Category...</h5>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body" style="padding: 24px;">
+
+											<!-- Vertical Form -->
+											<form class="row g-3" th:action="@{/addCategory}"
+												method="post" enctype="multipart/form-data"
+												th:object="${category}">
+												<div class="col-12">
+													<label for="category" class="form-label">Category
+														Name</label> <input type="text" name="category"
+														class="form-control" id="category">
+												</div>
+												<br> <br> <br>
+												<div class="text-center" style="text-align: center;">
+													<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+													<button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+												</div>
+											</form>
+											<!-- Vertical Form -->
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- HTML5 Input Form Elements end Modals-->
+
+							<!---Table start-->
+							<table width="100%" class="tbl">
+								<tr class="mt-4">
+									<th>Id</th>
+									<th>Category Name</th>
+									<th>Action</th>
+								</tr>
+								<tr th:each="sub,id:${cate}">
+									<td th:text="${id.count}" class="ml-3"></td>
+									<td th:text="${sub.category}"></td>
+									<td>
+										<div class="btnform">
+											<button class="btn btn-success">
+												<a th:href="|@{/updateCate{id}(id=${sub.id})}|"
+													style="color: white;">Update</a>&nbsp;
+											</button>
+										</div>
+
+									</td>
+								</tr>
+							</table>
+							<!---Table end-->
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Page Title -->
+
+		</main>
+		<!-- End #main -->
+	</section>
+</div>
+
+<style>
+.btnss {
+	margin-left: 780px;
+	margin-bottom: 5px;
+}
+
+.btnform {
+	width: 30%;
+	float: left;
+}
+
+</style>

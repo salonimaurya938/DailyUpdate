@@ -4,8 +4,8 @@
 		<main id="main" class="main">
 			<div class="pagetitle">
 				<h1 class="h1font" style="font-size: 35px; margin-top: 8px">Online Quiz Test</h1>
-				<header class="headerTop bg-primary">
-					<div class="left-title">Online Test</div>
+				<header class="headerTop bg-info" style="border-radius: 5px;">
+					<div class="left-title">Online Test <span style="margin-left:50%;">Total Time: 20min</span></div>
 					<div class="right-title">Total Questions: <span id="tque"></span></div>
 					<div class="clearfix"></div>
 				</header>
@@ -20,9 +20,9 @@
 											<div class="option-block-container" id="question-options">
 											</div> <!-- End of option block -->
 										</fieldset>
-										<button name="previous" id="previous" class="btn btn-success">Previous</button>
+										<button name="previous" id="previous" class="btn btn-info">Previous</button>
 										&nbsp;
-										<button name="next" id="next" class="btn btn-success">Next</button>
+										<button name="next" id="next" class="btn btn-info">Next</button>
 									</form>
 								</div>
 							</div> <!-- End of col-sm-12 -->
@@ -33,10 +33,7 @@
 				<script
 					src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 				<script src="app.js"></script>
-
-
 			</div><!-- End Page Title -->
-
 		</main><!-- End #main -->
 	</section>
 </div>
@@ -64,7 +61,6 @@
 				$("#qid").html(quiz[this.currentque].id + '.');
 				$("#question").html(quiz[this.currentque].question);
 				$("#question-options").html("");
-				$('#question-options:nth-child(4)').hide();
 				for (var key in quiz[this.currentque].option[0]) {
 					if (quiz[this.currentque].option[0].hasOwnProperty(key)) {
 						$("#question-options").append(
@@ -82,42 +78,42 @@
 			}
 			if (this.currentque >= totalque) {
 				$('#next').attr('disabled', true);
-				for (var i = 0; i < totalque; i++) {
-					this.score = this.score + quiz.Quiz[i].score;
+				for (var i = 1; i < totalque; i++) {
+					this.score = this.score + quiz[i].score;
 				}
 				return this.showResult(this.score);
 			}
 		}
 		this.showResult = function (scr) {
 			$("#result").addClass('result');
-			$("#result").html("<h1 class='res-header'>Total Score: &nbsp;" + scr + '/' + totalque + "</h1>");
+			$("#result").html("<h1 class='res-header'>Total Score: &nbsp;" + scr.length + '/' + totalque + "</h1>");
 			for (var j = 0; j < totalque; j++) {
 				var res;
-				if (quiz.Quiz[j].score == 0) {
-					res = '<span class="wrong">' + quiz.Quiz[j].score + '</span><i class="fa fa-remove c-wrong"></i>';
+				if (quiz[j].score == 0) {
+					res = '<span class="wrong">' + quiz[j].score + '</span><i class="fa fa-remove c-wrong"></i>';
 				} else {
-					res = '<span class="correct">' + quiz.Quiz[j].score + '</span><i class="fa fa-check c-correct"></i>';
+					res = '<span class="correct">' + quiz[j].score + '</span><i class="fa fa-check c-correct"></i>';
 				}
 				$("#result").append(
-					'<div class="result-question"><span>Q ' + quiz.Quiz[j].id + '</span> &nbsp;' + quiz.Quiz[j].question + '</div>' +
-					'<div><b>Correct answer:</b> &nbsp;' + quiz.Quiz[j].answer + '</div>' +
+					'<div class="result-question"><span>Q ' + quiz[j].id + '</span> &nbsp;' + quiz[j].question + '</div>' +
+					'<div><b>Correct answer:</b> &nbsp;' + quiz[j].answer + '</div>' +
 					'<div class="last-row"><b>Score:</b> &nbsp;' + res +
 					'</div>'
 				);
 			}
 		}
 		this.checkAnswer = function (option) {
-			var answer = quiz.Quiz[this.currentque].answer;
+			var answer = quiz[this.currentque].answer;
 			option = option.replace(/</g, "&lt;") //for <
 			option = option.replace(/>/g, "&gt;") //for >
 			option = option.replace(/"/g, "&quot;")
-			if (option == quiz.Quiz[this.currentque].answer) {
-				if (quiz.Quiz[this.currentque].score == "") {
-					quiz.Quiz[this.currentque].score = 1;
-					quiz.Quiz[this.currentque].status = "correct";
+			if (option == quiz[this.currentque].answer) {
+				if (quiz[this.currentque].score == "") {
+					quiz[this.currentque].score = 1;
+					quiz[this.currentque].status = "correct";
 				}
 			} else {
-				quiz.Quiz[this.currentque].status = "wrong";
+				quiz[this.currentque].status = "wrong";
 			}
 		}
 		this.changeQuestion = function (cque) {
@@ -161,7 +157,7 @@
 		position: relative;
 		top: 40px;
 		width: 100%;
-		z-index: 9999;
+		/*z-index: 9999;*/
 	}
 
 	.left-title {

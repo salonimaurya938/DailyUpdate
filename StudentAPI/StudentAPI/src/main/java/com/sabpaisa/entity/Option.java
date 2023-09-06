@@ -17,20 +17,19 @@ public class Option {
 	private String op2;
 	private String op3;
 	private String op4;
-	private String correctAnswer;	
+	
 	
 	public Option() {
 		super();
 	}
 	
-	
-	public Option(String op1, String op2, String op3, String op4, String correctAnswer) {
+	public Option(int id, String op1, String op2, String op3, String op4) {
 		super();
+		this.id = id;
 		this.op1 = op1;
 		this.op2 = op2;
 		this.op3 = op3;
 		this.op4 = op4;
-		this.correctAnswer = correctAnswer;
 	}
 
 	public String getOp1() {
@@ -58,21 +57,9 @@ public class Option {
 		this.op4 = op4;
 	}
 
-	public String getCorrectAnswer() {
-		return correctAnswer;
-	}
-
-	public void setCorrectAnswer(String correctAnswer) {
-		this.correctAnswer = correctAnswer;
-	}
-
 	@Override
 	public String toString() {
-		return "Option [op1=" + op1 + ", op2=" + op2 + ", op3=" + op3 + ", op4=" + op4 + ", correctAnswer="
-				+ correctAnswer + "]";
-	}
-
-
-	
+		return "Option [id=" + id + ", op1=" + op1 + ", op2=" + op2 + ", op3=" + op3 + ", op4=" + op4 + "]";
+	}	
 	
 }

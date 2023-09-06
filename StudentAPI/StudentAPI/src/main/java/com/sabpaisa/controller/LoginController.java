@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMethodMappingNamingStrategy;
 
+import com.sabpaisa.dao.CategoryDao;
 import com.sabpaisa.dao.ChapterDao;
 import com.sabpaisa.dao.OptionDao;
 import com.sabpaisa.dao.QuizDao;
@@ -34,6 +35,7 @@ import com.sabpaisa.dao.feeDao;
 import com.sabpaisa.dto.QuizRequest;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Book;
+import com.sabpaisa.entity.Category;
 import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.Fee;
 import com.sabpaisa.entity.Option;
@@ -87,6 +89,9 @@ public class LoginController {
 	
 	@Autowired
 	private QuizDetailsServices quizDetailsServices;
+	
+	@Autowired
+	private CategoryDao categoryDao;
 	
 
 	public LoginController(AdminService adminService, StudentService studentService) {
@@ -475,6 +480,9 @@ public class LoginController {
 		List<Quiz> quizs = quizService.getQuiz();
 		model.addAttribute("quiz", quizs);
 		System.out.println("quiz details.. "+quizs);
+		List<Category> data= categoryDao.findAll();
+		model.addAttribute("cate", data);
+		System.out.println("Category value..."+data);
 		return "admin/quiz";
 	}
 
@@ -590,6 +598,24 @@ public class LoginController {
 	public String destorySession(HttpServletRequest request) {
 		request.getSession().invalidate();
 		return "redirect:/";
+	}
+	
+	//.......................................Add Category............................
+	
+	@RequestMapping(value ="/addCategory", method= RequestMethod.GET)
+	public String addCategory(Category category,Model model) {		
+		System.out.println("Category Section...");	
+		List<Category> data= categoryDao.findAll();
+		model.addAttribute("cate", data);
+		System.out.println("Category value..."+data);
+		return "admin/addCategory";
+	}
+	
+	@RequestMapping(value ="/addCategory", method= RequestMethod.POST)
+	public String insertCategory(@ModelAttribute("admin/addCategory")Category category) {		
+		Category add=categoryDao.save(category); 
+		System.out.println("insert Category data..."+add);		
+		return "admin/addCategory";
 	}
 	
 		

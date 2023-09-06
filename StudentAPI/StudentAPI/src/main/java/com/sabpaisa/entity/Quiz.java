@@ -21,7 +21,12 @@ public class Quiz {
 	private String question;	
 	@OneToMany(targetEntity=Option.class)  
 	@JoinColumn(name = "oq_fk", referencedColumnName = "id")
-	private List<Option> option;
+	private List<Option> option;	
+	private String answer;
+	private String category;
+	private String score;
+	private String status;
+	
 	
 	public int getId() {
 		return id;
@@ -45,28 +50,60 @@ public class Quiz {
 	public void setOption(List<Option> option) {
 		this.option = option;
 	}
+	
+	public String getCategory() {
+		return category;
+	}
 
-	public Quiz(int id, String question, List<Option> option) {
-		super();
-		this.id = id;
-		this.question = question;
-		this.option = option;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
-	
+	public String getAnswer() {
+		return answer;
+	}
 
-	@Override
-	public String toString() {
-		return "Quiz [id=" + id + ", question=" + question + ", option=" + option + "]";
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Quiz() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
+
+	public Quiz(int id, String question, List<Option> option, String answer, String category, String score,
+			String status) {
+		super();
+		this.id = id;
+		this.question = question;
+		this.option = option;
+		this.answer = answer;
+		this.category = category;
+		this.score = score;
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Quiz [id=" + id + ", question=" + question + ", option=" + option + ", answer=" + answer + ", category="
+				+ category + ", score=" + score + ", status=" + status + "]";
+	}		
 
 }
