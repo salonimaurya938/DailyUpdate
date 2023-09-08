@@ -15,18 +15,21 @@
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">View Events</h5>
-
-							<table width="100%">
+							<table>
+							<thead>
 								<tr>
-									<th>Id</th>
+									<th>Sr.no</th>
 									<th>Events</th>								
 								</tr>
-								<tr th:each="event:${events}">
-									<td th:text="${event.id}"></td>
+							</thead>
+							<tbody>
+								<tr th:each="event,id:${events}">
+									<td th:text="${id.count}"></td>
 									<td th:text="${event.event}"></td>								
 								</tr>
+								<!-- Add more rows as needed -->
+							</tbody>
 							</table>
-
 						</div>
 					</div>
 				</div>
@@ -45,6 +48,41 @@
 	.form{
 		margin-left: 2px;
 		float: left;
+	}
+	/* Define some basic table styles */
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	th,
+	td {
+		padding: 12px 15px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	/* Style the table header */
+	th {
+		background-color: #f2f2f2;
+		color: #333;
+	}
+
+	/* Style alternating rows */
+	tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	/* Style table rows on hover */
+	tr:hover {
+		background-color: #ddd;
+	}
+
+	/* Add some spacing and center-align text in the first column */
+	td:first-child {
+		padding-left: 10px;
+		/*text-align: center;*/
 	}
 </style>
 

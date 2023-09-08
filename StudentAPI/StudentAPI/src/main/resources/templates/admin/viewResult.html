@@ -18,13 +18,16 @@
 					<div class="card-body">
 						<h5 class="card-title">View Result</h5>
 						<table width="100%">
-							<tr class="mt-4">
+							<thead>
+								<tr class="mt-4">
 								<th>Sr.no.</th>
 								<th>Result</th>
 								<th>Result Name</th>
 								<th>Action</th>
 							</tr>
-							<tr th:each="im,id:${lists}">
+							</thead>
+							<tbody>
+								<tr th:each="im,id:${lists}">
 								<td th:text="${id.count}" class="ml-3"></td>
 								<td><a th:href="@{'img/'+${im.result}}" target="_blank"><img
 											th:src="@{'img/'+${im.result}}" width="50%" height="120px" alt=""
@@ -40,6 +43,7 @@
 											style="color: white;">Update</a>&nbsp;</button>
 								</td>
 							</tr>
+							</tbody>
 						</table>
 
 					</div>
@@ -56,4 +60,40 @@
 		color: white;
 		border: none;
 	}
+	/* Define some basic table styles */
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+th,
+td {
+	padding: 12px 15px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+/* Style the table header */
+th {
+	background-color: #f2f2f2;
+	color: #333;
+}
+
+/* Style alternating rows */
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+/* Style table rows on hover */
+tr:hover {
+	background-color: #ddd;
+}
+
+/* Add some spacing and center-align text in the first column */
+td:first-child {
+	padding-left: 10px;
+	/*text-align: center;*/
+}
+
 </style>

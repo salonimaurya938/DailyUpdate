@@ -20,7 +20,7 @@
 				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-body">
-							<h2 class="card-title">Questions...</h2>
+							<h2 class="card-title">Quiz Details Add...</h2>
 
 							<!-- Button trigger start modal -->
 
@@ -93,7 +93,8 @@
 
 						<!---Table start-->
 						<table width="100%" class="tbl">
-							<tr class="mt-4">
+							<thead>
+								<tr class="mt-4">
 								<th>Id</th>
 								<th>Subject</th>
 								<th>Total time</th>
@@ -103,8 +104,10 @@
 								<th>Negative Mark</th>
 								<th>Action</th>
 							</tr>
+							</thead>
 
-							<tr th:each="quizs:${quizDetails}">
+							<tbody>
+								<tr th:each="quizs:${quizDetails}">
 								<td th:text="${quizs.id}" class="ml-3"></td>
 								<td th:text="${quizs.subject}"></td>
 								<td th:text="${quizs.totalTime}"></td>
@@ -126,6 +129,7 @@
 									</div>
 								</td>
 							</tr>
+							</tbody>
 						</table>
 						<!---Table end-->
 
@@ -151,5 +155,39 @@
 
 	.tbl {
 		font-size: 12px;
+	}
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	th,
+	td {
+		padding: 12px 15px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	/* Style the table header */
+	th {
+		background-color: #f2f2f2;
+		color: #333;
+	}
+
+	/* Style alternating rows */
+	tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	/* Style table rows on hover */
+	tr:hover {
+		background-color: #ddd;
+	}
+
+	/* Add some spacing and center-align text in the first column */
+	td:first-child {
+		padding-left: 10px;
+		/*text-align: center;*/
 	}
 </style>

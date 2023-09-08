@@ -16,48 +16,54 @@
 						<div class="card-body">
 							<h5 class="card-title">View Admission Enquiry</h5>
 
-							<table width="100%" style="font-size: 13px;">
-								<tr>
-									<th>Sr.no.</th>
-									<th>Name</th>
-									<th>Classes</th>
-									<th>Phone</th>
-									<th>Email</th>
-									<th>Address</th>
-									<th>Description</th>
-									<th>Date Time</th>
-									<th>Assigned</th>
-									<th>Source</th>
-									<th>Reference</th>
-								</tr>
-								<tr th:each="enDatas,id:${enData}">
-									<td th:text="${id.count}"></td>
-									<td th:text="${enDatas.name}"></td>
-									<td th:text="${enDatas.classes}"></td>
-									<td th:text="${enDatas.mob}"></td>
-									<td th:text="${enDatas.email}"></td>
-									<td th:text="${enDatas.address}"></td>
-									<td th:text="${enDatas.description}"></td>
-									<td th:text="${enDatas.dateTime}"></td>
-									<td th:text="${enDatas.assigned}"></td>
-									<td th:text="${enDatas.source}"></td>
-									<td th:text="${enDatas.reference}"></td>
-								    <td>
-									<div class="form">
+							<table width="100%" style="font-size: 80%" HSPACE=3 VSPACE=4>
+								<thead>
+									<tr>
+										<th>Sr.no.</th>
+										<th>Name</th>
+										<th>Classes</th>
+										<th>Phone</th>
+										<th>Email</th>
+										<th>Address</th>
+										<th>Description</th>
+										<th>Date Time</th>
+										<th>Assigned</th>
+										<th>Source</th>
+										<th>Reference</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="enDatas,id:${enData}">
+										<td th:text="${id.count}"></td>
+										<td th:text="${enDatas.name}"></td>
+										<td th:text="${enDatas.classes}"></td>
+										<td th:text="${enDatas.mob}"></td>
+										<td th:text="${enDatas.email}"></td>
+										<td th:text="${enDatas.address}"></td>
+										<td th:text="${enDatas.description}"></td>
+										<td th:text="${enDatas.dateTime}"></td>
+										<td th:text="${enDatas.assigned}"></td>
+										<td th:text="${enDatas.source}"></td>
+										<td th:text="${enDatas.reference}"></td>
+										<td>
+											<div class="form">
 												<form method="post" th:object="${data}">
-												<input type="hidden" th:value="${enDatas.id}" name="id" />
-												<button type="submit" value="Submit" class="bg-danger">Delete</button>
-											</form>
-										</div>
-										<div class="form">
-											<button class="bg-success"><a
-													th:href="|@{/updateAdmissionEnquiry{id}(id=${enDatas.id})}|"
-													style="color: white;">Update</a>&nbsp;</button>
-										</div>
-									</td>
-								</tr>
+													<input type="hidden" th:value="${enDatas.id}" name="id" />
+													<button type="submit" value="Submit"
+														class="bg-danger">Delete</button>
+												</form>
+											</div>
+											<div class="form">
+												<button class="bg-success"><a
+														th:href="|@{/updateAdmissionEnquiry{id}(id=${enDatas.id})}|"
+														style="color: white;">Update</a>&nbsp;</button>
+											</div>
+										</td>
+									</tr>
+									<!-- Add more rows as needed -->
+								</tbody>
 							</table>
-
 						</div>
 					</div>
 				</div>
@@ -78,4 +84,41 @@
 		margin-left: 1px;
 		float: left;
 	}
+
+	/* Define some basic table styles */
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	th,
+	td {
+		padding: 12px 15px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	/* Style the table header */
+	th {
+		background-color: #f2f2f2;
+		color: #333;
+	}
+
+	/* Style alternating rows */
+	tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	/* Style table rows on hover */
+	tr:hover {
+		background-color: #ddd;
+	}
+
+	/* Add some spacing and center-align text in the first column */
+	td:first-child {
+		padding-left: 10px;
+		/*text-align: center;*/
+	}
+	
 </style>

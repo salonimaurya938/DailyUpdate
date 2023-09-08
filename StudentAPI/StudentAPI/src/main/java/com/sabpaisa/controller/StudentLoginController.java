@@ -1,6 +1,8 @@
 package com.sabpaisa.controller;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,17 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.entity.TimeTable;
 import com.sabpaisa.entity.UploadCourses;
+import com.sabpaisa.dao.CategoryDao;
 import com.sabpaisa.dao.OptionDao;
 import com.sabpaisa.dao.QuizDao;
 import com.sabpaisa.dao.QuizDetailsDao;
 import com.sabpaisa.dao.StudentDao;
 import com.sabpaisa.dao.UploadDao;
 import com.sabpaisa.entity.Book;
+import com.sabpaisa.entity.Category;
 import com.sabpaisa.entity.Chapter;
 import com.sabpaisa.entity.Events;
 import com.sabpaisa.entity.HomeWork;
@@ -83,6 +88,9 @@ public class StudentLoginController {
 	
 	@Autowired
 	private QuizDetailsServices quizDetailsServices;
+	
+	@Autowired
+	private CategoryDao categoryDao;
 	
 //	@RequestMapping("/register")
 //	public String StudentRegistration() {
@@ -245,7 +253,8 @@ public class StudentLoginController {
 		model.addAttribute("data", data);
 		return "student/onlineCourse";
 	}
-	//.........................Online Quiz...................
+	
+	//..............................Online Quiz...........................
 	
 //		@RequestMapping("/onlineQuiz")
 //		public String onlineQuiz(Model model) {
@@ -279,11 +288,28 @@ public class StudentLoginController {
 		
 		
 		@RequestMapping("/testQuiz")
-		public String quizss(Model model) {
+		public String quizss(Model model,Quiz quz) {
 			System.out.println("Quiz Section...");
-			List<Quiz> quiz = quizDao.findAll();
-			model.addAttribute("quiz", quiz);
-			System.out.println("Fetech All quiz Data ::" + quiz);
+			//List<Quiz> cates= quizDao.findQuizCount();
+	    	//System.out.println("Get data by query ..."+cates);
+			//List<Quiz> quiz = quizDao.findAll();
+			//model.addAttribute("quiz", quiz);		
+			//System.out.println("Fetech All quiz Data ::" + quiz);			
+			List<Quiz> quizs = quizService.getQuiz();
+//			Optional<Quiz> id = quizDao.findById(quz.getId());
+			Quiz a=quizs.get(1);
+			String catequiz=a.getCategory();
+			System.out.println(catequiz);
+			List<Category> datas= categoryDao.findAll();		
+			Category a1=datas.get(1);
+			String catetbl=a1.getCategory();
+			System.out.println(catetbl);
+			if(catequiz==catetbl) {
+				List<Quiz> quiz1 = quizService.getQuiz();
+				model.addAttribute("quiz", quiz1);
+				System.out.println("only selected data..."+quiz1);
+			}		
+			
 		return "student/testQuiz";
 		}
 	

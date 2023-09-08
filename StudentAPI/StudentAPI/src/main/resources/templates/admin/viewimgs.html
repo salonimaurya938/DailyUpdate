@@ -14,13 +14,16 @@
 			</div><!-- End Page Title -->
 			<br>
 			<table width="100%">
-				<tr class="mt-4">
+				<thead>
+					<tr class="mt-4">
 					<th>Sr.no.</th>
 					<th>Image</th>
 					<th>Image Name</th>
 					<th>Action</th>
 				</tr>
-				<tr th:each="im,id:${lists}">
+				</thead>
+				<tbody>
+					<tr th:each="im,id:${lists}">
 					<td th:text="${id.count}" class="ml-3"></td>
 					<td><a th:href="@{'img/'+${im.imageName}}" target="_blank"><img th:src="@{'img/'+${im.imageName}}"
 								width="50%" height="120px" alt="" class="mt-2"></a></td>
@@ -39,19 +42,56 @@
 
 					</td>
 				</tr>
+				</tbody>
 			</table>
 		</main><!-- End #main -->
 	</section>
 </div>
-
 <style>
-	button {
-		border-radius: 5px;
-		color: white;
-		border: none;
-	}
-	.form{
-		float: left;
-		margin-left: 2px;
-	}
+	/* Define some basic table styles */
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+th,
+td {
+	padding: 12px 15px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+/* Style the table header */
+th {
+	background-color: #f2f2f2;
+	color: #333;
+}
+
+/* Style alternating rows */
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+/* Style table rows on hover */
+tr:hover {
+	background-color: #ddd;
+}
+
+/* Add some spacing and center-align text in the first column */
+td:first-child {
+	padding-left: 10px;
+	/*text-align: center;*/
+}
+
+button {
+	border-radius: 5px;
+	color: white;
+	border: none;
+}
+
+.form {
+	float: left;
+	margin-left: 2px;
+}
 </style>
