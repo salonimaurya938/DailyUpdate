@@ -75,6 +75,13 @@
 													<label for="title" class="form-label">Subject Description</label>
 													<input type="text" name="title" class="form-control" id="title">
 												</div>
+												<div class="col-12">
+													<label for="category" class="form-label">Category</label> <select
+														name="classes" id="cars" class="form-control">
+														<option th:each="Sub : ${cate}" th:value="${Sub.category}"
+															th:text="${Sub.category}" class="form-control"></option>
+													</select>
+												</div>
 												<br>
 												<div class="text-center" style="text-align: center;">
 													<button type="submit" name="submit"
@@ -102,6 +109,7 @@
 								<th>Class</th>
 								<th>Sub Description</th>
 								<th>Negative Mark</th>
+								<th>Category</th>
 								<th>Action</th>
 							</tr>
 							</thead>
@@ -115,6 +123,7 @@
 								<td th:text="${quizs.classes}"></td>
 								<td th:text="${quizs.title}"></td>
 								<td th:text="${quizs.negativeMarks}"></td>
+								<td th:text="${quizs.category}"></td>
 								<td>
 									<div class="btnform">
 										<form method="post" th:object="${quiz}">

@@ -5,24 +5,28 @@
 			<div class="pagetitle">
 				<h1 class="h1font" style="font-size: 35px; margin-top: 8px">Online Quiz Test</h1>
 				<header class="headerTop bg-info" style="border-radius: 5px;">
-					<div class="left-title">Online Test <span style="margin-left:50%;">Total Time: 20min</span></div>
+					<div class="left-title">Online Test <div id="timer" class="display-4">00:00</div></div>
 					<div class="right-title">Total Questions: <span id="tque"></span></div>
 					<div class="clearfix"></div>
 				</header>
 				<div class="content">
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-sm-12" >
 								<div id="result" class="quiz-body">
-									<form name="quizForm" onSubmit="">
+									<form name="quizForm" onSubmit="" th:object="${category}">
+										<span th:text="${cat}"></span>
 										<fieldset class="form-group">
 											<h4><span id="qid">1.</span><span id="question"><!--Question--></span></h4>
 											<div class="option-block-container" id="question-options">
 											</div> <!-- End of option block -->
 										</fieldset>
+										<div class="container mt-5">
 										<button name="previous" id="previous" class="btn btn-info">Previous</button>
 										&nbsp;
 										<button name="next" id="next" class="btn btn-info">Next</button>
+										&nbsp;
+										 <button id="startButton" class="btn btn-primary">Start</button>
 									</form>
 								</div>
 							</div> <!-- End of col-sm-12 -->
@@ -41,11 +45,13 @@
 	/* Created and coded by Abhilash Narayan */
 	/* Quiz source: w3schools.com */
 	/*<![CDATA[*/
-    var quiz = /*[[${quiz}]]*/ '{}';
+    var quiz = /*[[${questionOption}]]*/ '{}';
     /*]]>*/
-	alert("Text");	
+	
+	
 	console.log(quiz);	
 	console.log(typeof quiz);	
+	
 
 	var quizApp = function () {
 		this.score = 0;
@@ -59,7 +65,7 @@
 				$("#previous").attr("disabled", false);
 				$("#next").attr("disabled", false);
 				$("#qid").html(quiz[this.currentque].id + '.');
-				$("#question").html(quiz[this.currentque].question);
+				$("#question").html(quiz[this.currentque].question);				
 				$("#question-options").html("");
 				for (var key in quiz[this.currentque].option[0]) {
 					if (quiz[this.currentque].option[0].hasOwnProperty(key)) {
@@ -147,6 +153,65 @@
 	});
 
 </script>
+
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const timerDisplay = document.getElementById("timer");
+  const startButton = document.getElementById("startButton");
+  const resetButton = document.getElementById("resetButton");
+  let endTime;
+  let timerInterval;
+
+  function startTimer(durationInSeconds) {
+    endTime = new Date().getTime() + durationInSeconds * 1000;
+    timerInterval = setInterval(updateTimer, 1000);
+    console.log("timeInterval :: " +timerInterval);
+    console.log("end time :: " +endTime);
+    startButton.disabled = true;
+  }
+
+  function updateTimer() {
+    const currentTime = new Date().getTime();
+    const timeLeft = endTime - currentTime;
+    console.log("current time :: "+currentTime);
+    console.log("time left :: "+timeLeft);
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timerDisplay.textContent = "00:00";
+      startButton.disabled = false;
+      // Handle timer completion actions here
+    } else {
+      const minutes = Math.floor(timeLeft / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      console.log("minutes :: "+minutes);
+      console.log("seconds :: "+seconds);
+
+
+      const formattedMinutes = String(minutes).padStart(2, "0");
+      const formattedSeconds = String(seconds).padStart(2, "0");
+
+      console.log("formattedMinutes :: "+formattedMinutes);
+      console.log("formattedSeconds :: "+formattedSeconds);
+      timerDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
+    }
+  }
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    timerDisplay.textContent = "00:00";
+    startButton.disabled = false;
+  }
+ var a = 1 * 60;
+  startButton.addEventListener("click", function () {
+    startTimer(a); // Set the countdown duration in seconds (e.g., 5 minutes)
+  });
+
+  resetButton.addEventListener("click", resetTimer);
+});
+
+    </script>
+
 <style>
 	.content {
 		margin-top: 54px;

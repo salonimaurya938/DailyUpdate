@@ -19,9 +19,7 @@ public class QuizDetails {
 	private String title;
 	private String marks;
 	private String negativeMarks;
-	@ManyToOne(targetEntity = Quiz.class)
-	@JoinColumn(name = "quizs_fk", referencedColumnName = "id")
-	private Quiz quiz;
+	private String category;
 	
 	public int getId() {
 		return id;
@@ -53,12 +51,6 @@ public class QuizDetails {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Quiz getQuiz() {
-		return quiz;
-	}
-	public void setQuiz(Quiz quiz) {
-		this.quiz = quiz;
-	}	
 	public String getMarks() {
 		return marks;
 	}
@@ -71,13 +63,20 @@ public class QuizDetails {
 	public void setNegativeMarks(String negativeMarks) {
 		this.negativeMarks = negativeMarks;
 	}
+		
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	
 	public QuizDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public QuizDetails(int id, String subject, String totalTime, String classes, String title, String marks,
-			String negativeMarks, Quiz quiz) {
+			String negativeMarks, String category) {
 		super();
 		this.id = id;
 		this.subject = subject;
@@ -86,13 +85,13 @@ public class QuizDetails {
 		this.title = title;
 		this.marks = marks;
 		this.negativeMarks = negativeMarks;
-		this.quiz = quiz;
+		this.category = category;
 	}
 	@Override
 	public String toString() {
 		return "QuizDetails [id=" + id + ", subject=" + subject + ", totalTime=" + totalTime + ", classes=" + classes
-				+ ", title=" + title + ", marks=" + marks + ", negativeMarks=" + negativeMarks + ", quiz=" + quiz + "]";
-	}
-	
+				+ ", title=" + title + ", marks=" + marks + ", negativeMarks=" + negativeMarks + ", category="
+				+ category + "]";
+	}	
 	
 }

@@ -18,8 +18,8 @@
 					<div class="card-body">
 						<h5 class="card-title">Time Table Details</h5>
 						<table width="100%" style="font-size: 80%;">
-							<tr>
-								<th>Sr.No.</th>
+							<thead>
+								<tr>
 								<th>School Time</th>
 								<th>Monday</th>
 								<th>Tuesday</th>
@@ -30,16 +30,17 @@
 								<th>Sunday</th>
 								<th>Action</th>
 							</tr>
-							<tr th:each="im,id:${timeTables}">
-								<td th:text="${id.count}"></td>
-								<td th:text="${timeTables.schoolTime}"></td>
-								<td th:text="${timeTables.monday}"></td>
-								<td th:text="${timeTables.tuesday}"></td>
-								<td th:text="${timeTables.wednesday}"></td>
-								<td th:text="${timeTables.thursday}"></td>
-								<td th:text="${timeTables.friday}"></td>
-								<td th:text="${timeTables.saturday}"></td>
-								<td th:text="${timeTables.sunday}"></td>
+							</thead>
+							<tbody>
+								<tr th:each="timeTables:${timeTables}">
+									<td th:text="${timeTables.schoolTime}"></td>
+									<td th:text="${timeTables.monday}"></td>
+									<td th:text="${timeTables.tuesday}"></td>
+									<td th:text="${timeTables.wednesday}"></td>
+									<td th:text="${timeTables.thursday}"></td>
+									<td th:text="${timeTables.friday}"></td>
+									<td th:text="${timeTables.saturday}"></td>
+									<td th:text="${timeTables.sunday}"></td>
 								<td>
 									<div class="form">
 										<form th:action="@{/deleteTimeTable{id}}" method="post"
@@ -55,6 +56,7 @@
 									</div>
 								</td>
 							</tr>
+							</tbody>
 						</table>
 					</div>
 				</div>
@@ -75,5 +77,40 @@
 	.form {
 		margin-left: 2px;
 		float: left;
+	}
+	/* Define some basic table styles */
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	th,
+	td {
+		padding: 12px 15px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+
+	/* Style the table header */
+	th {
+		background-color: #cfc1df;
+		color: #333;
+	}
+
+	/* Style alternating rows */
+	tr:nth-child(even) {
+		background-color: #f5f3f9;
+	}
+
+	/* Style table rows on hover */
+	tr:hover {
+		background-color: #ddd;
+	}
+
+	/* Add some spacing and center-align text in the first column */
+	td:first-child {
+		padding-left: 10px;
+		/*text-align: center;*/
 	}
 </style>

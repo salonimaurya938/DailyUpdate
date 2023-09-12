@@ -1,5 +1,6 @@
 package com.sabpaisa.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.sabpaisa.entity.Student;
@@ -282,35 +285,49 @@ public class StudentLoginController {
 			List<QuizDetails> quizDetails=quizDetailsServices.getQuizDetails();
 			model.addAttribute("quizDetails", quizDetails);	
 			System.out.println(quizDetails);
+			List<Category> cate = categoryDao.findAll();
+			model.addAttribute("cate", cate);
 			return "student/onlineQuiz";
 		}
 		
 		
-		
-		@RequestMapping("/testQuiz")
-		public String quizss(Model model,Quiz quz) {
+		@RequestMapping(value ="/testQuiz{category}", method=RequestMethod.GET)
+		public String quizss(Model model,Quiz quz, @PathVariable("category") String category) {
 			System.out.println("Quiz Section...");
-			//List<Quiz> cates= quizDao.findQuizCount();
-	    	//System.out.println("Get data by query ..."+cates);
-			//List<Quiz> quiz = quizDao.findAll();
-			//model.addAttribute("quiz", quiz);		
-			//System.out.println("Fetech All quiz Data ::" + quiz);			
-			List<Quiz> quizs = quizService.getQuiz();
-//			Optional<Quiz> id = quizDao.findById(quz.getId());
-			Quiz a=quizs.get(1);
-			String catequiz=a.getCategory();
-			System.out.println(catequiz);
-			List<Category> datas= categoryDao.findAll();		
-			Category a1=datas.get(1);
-			String catetbl=a1.getCategory();
-			System.out.println(catetbl);
-			if(catequiz==catetbl) {
-				List<Quiz> quiz1 = quizService.getQuiz();
-				model.addAttribute("quiz", quiz1);
-				System.out.println("only selected data..."+quiz1);
-			}		
-			
+			List<Quiz> quiz = quizDao.findAll();
+			model.addAttribute("quiz", quiz);		
+			System.out.println("Fetech All quiz Data ::" + quiz);				
+			System.out.println("Category..."+category);			
+			List<Quiz> newQuestionList = new ArrayList<>();			
+			List<Quiz> quiz1 = quizDao.findAll();	
+			Quiz quiz2 = null ;
+			for(Quiz question : quiz1){
+				if(question.getCategory().equalsIgnoreCase(category)){
+					quiz2=new Quiz();
+					quiz2.setQuestion(question.getQuestion());
+					quiz2.setAnswer(question.getAnswer());
+					quiz2.setCategory(question.getCategory());
+					quiz2.setOption(question.getOption());
+					quiz2.setId(question.getId());
+					quiz2.setScore(question.getScore());
+					quiz2.setStatus(question.getStatus());
+					newQuestionList.add(quiz2);
+				}
+			}
+			System.out.println("new quiz list.."+newQuestionList);
+			model.addAttribute("questionOption", newQuestionList);
 		return "student/testQuiz";
+		}
+		
+		
+		@PostMapping("/testQuiz")
+		public String quizDetail(@ModelAttribute("student/testQuiz")Model model) {	
+			System.out.println("post method...");
+//			Optional<Category> data= categoryDao.findById(id);
+//			Category b =data.get();
+//		    model.addAttribute("id", b.getId());	
+//		    model.addAttribute("cat", b.getCategory());
+			return "student/testQuiz";
 		}
 	
 }

@@ -4,22 +4,36 @@
 		<main id="main" class="main">
 			<div class="pagetitle">
 				<h1 class="h1font" style="font-size: 35px; margin-top: 8px">Online Quiz Test</h1>
-					<div class="row">
-				<div class="col-lg-12">
-					<div class="card">
-						<div class="card-body">
-							<h5 class="card-title">Start Quiz...</h5>
-							<div class="alert alert-success alert-dismissible fade show" role="alert" th:each="quizDetail,id:${quizDetails}">
-								<b><span class="">Subject : </span><span th:text="${quizDetail.subject}"><!--General Knowledge--></span>
-								<span style="margin-left: 90%;">Marks : <span th:text="${quizDetail.marks}">20</span></span><br></b>
-								<span>Total Time : <span th:text="${quizDetail.totalTime}"><!--20 min--></span></span><br>
-								<span>Class : </span><span th:text="${quizDetail.classes}"><!--Class 1--></span><br>	
-								<span th:text="${quizDetail.negativeMarks}"><!--Class 1--></span><br>						 
-								<span  th:text="${quizDetail.title}"> <!--Content Word discription--></span>
-								<br><button type="button" class="text-light" style="border: none; border-radius: 8px; margin-left: 86%; background-color:darkgreen;padding: 5px;"><a th:href="@{/testQuiz}" class="text-light">Start Quiz ></a></button>
-							</div>			
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Start Quiz...</h5>
+								<div th:each="categoris:${cate}" class="alert alert-success alert-dismissible fade show"
+									role="alert">
+									<div th:each="quizDetail,id:${quizDetails}">
+										<div th:if="${categoris.category}==${quizDetail.category}">
+											<b><span class="">Subject : </span><span
+													th:text="${quizDetail.subject}"><!--General Knowledge--></span>
+												<span style="margin-left: 90%;">Marks : <span
+														th:text="${quizDetail.marks}">20</span></span><br></b>
+											<span>Total Time : <span
+													th:text="${quizDetail.totalTime}"><!--20 min--></span></span><br>
+											<span>Class : </span><span
+												th:text="${quizDetail.classes}"><!--Class 1--></span><br>
+											<span>Category : </span><span
+												th:text="${categoris.category}"><!--Class 1--></span><br>
+											<span th:text="${quizDetail.negativeMarks}"><!--Class 1--></span><br>
+											<span th:text="${quizDetail.title}"> <!--Content Word discription--></span>
+											<br><button type="button" id="startButton" class="text-light"
+												style="border: none; border-radius: 8px; margin-left: 90%; background-color:darkgreen;padding: 5px;">
+												<a th:href="|@{/testQuiz{category}(category=${categoris.category})}|"
+													class="text-light">Start Quiz ></a></button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>					
 		</main><!-- End #main -->
 	</section>
 </div>

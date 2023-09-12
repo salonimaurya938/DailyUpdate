@@ -33,7 +33,9 @@
 												<i class="bi bi-telephone"></i>
 											</div>
 											<div class="ps-3">
-												<h6>145</h6>
+												<span>
+													<h6 th:text="${#lists.size(enq)}"></h6>
+												</span>
 												<span class="text-success small pt-1 fw-bold"><a
 														href="admissionEnquiry">New Enquiry+</a></span>
 											</div>
@@ -56,7 +58,7 @@
 												<i class="bi bi-mortarboard"></i>
 											</div>
 											<div class="ps-3">
-												<h6>200</h6>
+												<h6 th:text="${#lists.size(admission)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a href="newAdmission"
 														style="color:limegreen;">New Addmission+</a></span>
 											</div>
@@ -78,7 +80,7 @@
 												<i class="bi bi-menu-button-wide"></i>
 											</div>
 											<div class="ps-3">
-												<h6>1244</h6>
+												<h6 th:text="${#lists.size(addBook)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a href="addBook"
 														style="color:darkorange;">Add Book+</a></span>
 											</div>
@@ -101,7 +103,7 @@
 												<i class="bi bi-book-half"></i>
 											</div>
 											<div class="ps-3">
-												<h6>15</h6>
+												<h6 th:text="${#lists.size(chapter)}">15</h6>
 												<span class="text-success small pt-1 fw-bold"><a href="addchapter">Add
 														Chapter+</a></span>
 											</div>
@@ -124,7 +126,7 @@
 												<i class="bi bi-fast-forward-circle"></i>
 											</div>
 											<div class="ps-3">
-												<h6>200</h6>
+												<h6 th:text="${#lists.size(course)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a href="uploadCourses"
 														style="color:limegreen;">Upload Course+</a></span>
 											</div>
@@ -146,7 +148,7 @@
 												<i class="bi bi-patch-question"></i>
 											</div>
 											<div class="ps-3">
-												<h6>10</h6>
+												<h6 th:text="${#lists.size(cate)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a href="quiz"
 														style="color:darkorange;">Add Quiz+</a></span>
 											</div>
@@ -169,7 +171,7 @@
 												<i class="bi bi-file-image-fill"></i>
 											</div>
 											<div class="ps-3">
-												<h6>1345</h6>
+												<h6 th:text="${#lists.size(img)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a href="addimg">Add
 														Photos+</a></span>
 											</div>
@@ -193,7 +195,7 @@
 												<i class="bi bi-pencil-square"></i>
 											</div>
 											<div class="ps-3">
-												<h6>200</h6>
+												<h6 th:text="${#lists.size(homework)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a href="addhomework"
 														style="color:limegreen;">Add Homework+</a></span>
 											</div>
@@ -215,7 +217,7 @@
 												<i class="bi bi-bar-chart"></i>
 											</div>
 											<div class="ps-3">
-												<h6>1244</h6>
+												<h6 th:text="${#lists.size(result)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a href="addResult"
 														style="color:darkorange;">Add Result+</a></span>
 											</div>
@@ -238,7 +240,7 @@
 												<i class="bi bi-bar-chart"></i>
 											</div>
 											<div class="ps-3">
-												<h6>15</h6>
+												<h6 th:text="${#lists.size(report)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a
 														href="studentReport">Add Report+</a></span>
 											</div>
@@ -261,7 +263,7 @@
 												<i class="bi bi-calendar3-event"></i>
 											</div>
 											<div class="ps-3">
-												<h6>200</h6>
+												<h6 th:text="${#lists.size(event)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a href="addEvents"
 														style="color:limegreen;">Add Event+</a></span>
 											</div>
@@ -283,7 +285,7 @@
 												<i class="bi bi-calendar"></i>
 											</div>
 											<div class="ps-3">
-												<h6>10</h6>
+												<h6 th:text="${#lists.size(timetable)}"></h6>
 												<span class="text-success small pt-1 fw-bold"><a href="timeTable"
 														style="color:darkorange;">Add Schedule+</a></span>
 											</div>
