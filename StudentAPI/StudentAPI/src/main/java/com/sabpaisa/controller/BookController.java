@@ -64,7 +64,7 @@ public class BookController {
 	public String bookSave(@ModelAttribute("admin/addBook")@RequestParam MultipartFile subIcon, String subName,String subTitle,String substatus,String publisher, String author ,String bookIssueDate,String bookSubmitDate,String classes) throws IOException {
 		System.out.println("switching...");	
 		Book book = new Book();
-	    Book im = bookService.updateBook(book);
+	    Book im = bookService.addBook(book);
 	    im.setSubIcon(subIcon.getOriginalFilename());
 	    im.setSubName(subName);
 	    im.setSubstatus(substatus);

@@ -23,218 +23,306 @@
 					<div class="modal-dialog modal-fullscreen">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="staticBackdropLabel">New Admission</h5>
+								<h4 class="modal-title" id="staticBackdropLabel" style="color: navy;">New Student
+									Admission</h4>
 								<button type="button" class="btn-close" data-bs-dismiss="modal"
 									aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
 								<div class="container">
-									<div class="row">
-										<div class="col-md-12 ">
-											<div class="my-card mt-2 radius">
-												<form action="" th:action="@{/newAdmission}" method="post"
-													th:object="${user}">
-													<div class="row">
-														<div class="col-sm-6 firstSecondPart">
-															<div class="form-group">
-																<label for="admissionNo">Admission NO</label> <input
-																	type="text" required name="admissionNo"
-																	class="form-control" id="admissionNo"
-																	aria-describedby="emailHelp"
-																	placeholder="Enter AdmissionNo...">
-															</div>															
-															<div class="form-group">
-																<label for="name">Student Name</label> <input
-																	type="text" required name="name"
-																	class="form-control" id="name"
-																	aria-describedby="emailHelp"
-																	placeholder="Enter Student Name...">
-															</div>															
-															<div class="form-group">
-																<label for="fname">Father Name</label> <input
-																	type="text" required name="fname"
-																	class="form-control" id="fname"
-																	aria-describedby="emailHelp"
-																	placeholder="Enter Student Name...">
-															</div>
-															<div class="form-group">
-																<label for="mname">Mother Name</label> <input
-																	type="text" required name="mname"
-																	class="form-control" id="mname"
-																	aria-describedby="emailHelp"
-																	placeholder="Enter Student Name...">
-															</div>
-															<div class="form-group">
-																<label for="mob">Mobile</label> <input type="text"
-																	class="form-control" required name="mob" id="mob"
-																	aria-describedby="emailHelp"
-																	placeholder="Enter Mobile...">
-															</div>
-															<div class="form-group">
-																<label for="username">Date of Birth</label> <input
-																	type="datetime" required name="dob"
-																	class="form-control" id="dob"
-																	aria-describedby="emailHelp"
-																	placeholder="Enter Date of Birth...">
-															</div>
-															<div class="form-group">
-																<label for="classes">Class</label> <input type="text"
-																	required name="classes" class="form-control"
-																	id="class" aria-describedby="emailHelp"
-																	placeholder="Enter which class...">
-															</div>
-															<div class="form-group">
-																<label for="address">Home Address</label> <input
-																	type="text" required name="address"
-																	class="form-control" id="address"
-																	aria-describedby="emailHelp"
-																	placeholder="Enter your Home Address...">
-															</div>
-															<div class="form-group">
-																<label for="emailAddress">Email address</label> <input
-																	type="email" required name="email"
-																	class="form-control" id="email"
-																	aria-describedby="emailHelp"
-																	placeholder="Enter email...">
-															</div>
-														</div>													
-														
-														
-														
-														<div class="col-sm-6 firstSecondPart">
-															<div class="form-group">
-																<label for="username">Police Station</label> <input
-																	type="text" required name="name"
-																	class="form-control" id="name"
-																	aria-describedby="emailHelp"
-																	placeholder="Enter your roll number...">
-															</div>
-															<div class="form-group">
-																<label for="username">Post Office</label> <input type="text"
-																	required name="height" class="form-control"
-																	id="height" aria-describedby="emailHelp"
-																	placeholder="Enter your height...">
-															</div>
-															<div class="form-group">
-																<label for="username">District</label> <input type="text"
-																	required name="wieght" class="form-control"
-																	id="weight" aria-describedby="emailHelp"
-																	placeholder="Enter your wight...">
-																<div class="form-group">
-																	<label for="password">State</label> <input
-																		type="password" class="form-control" required
-																		name="password" id="password"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your password...">
-																</div>
-																<div class="form-group">
-																	<label for="username">pincode</label> <input
-																		type="text" required name="classid"
-																		class="form-control" id="classid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your class id...">
-																</div>
-																<div class="form-group">
-																	<label for="username">Contact No</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																<div class="form-group">
-																	<label for="username">AadharCard No</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																<div class="form-group">
-																	<label for="username">Contact No</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																<div class="form-group">
-																	<label for="username">Father Qulification</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																<div class="form-group">
-																	<label for="username">Mother Qulification</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																<div class="form-group">
-																	<label for="username">Father Occupation</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																<div class="form-group">
-																	<label for="username">Mother Occupation</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																	<div class="form-group">
-																	<label for="username">Local Guardian</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																	<div class="form-group">
-																	<label for="username">Relation with students</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																	<div class="form-group">
-																	<label for="username">Contact No</label> <input
-																		type="text" required name="parentid"
-																		class="form-control" id="parentid"
-																		aria-describedby="emailHelp"
-																		placeholder="Enter your parent id...">
-																</div>
-																
-																<div class="form-group form-check text-center">
-																	<input type="checkbox" name="agreement" required
-																		class="form-check-input" />
-																	<label class="agreemet">Accept
-																		terms and conditions </label>
-																</div>
-																<div class="container text-center">
-																	<button type="submit"
-																		class="btn bg-primary ">Submit</button>
-																	<button type="reset"
-																		class="btn bg-info  text-light">Reset</button>
-																	<button type="button" class="btn btn-secondary"
-																		data-bs-dismiss="modal">Close</button>
-																</div>
-															</div>
+									<div class="my-card mt-2 radius">
+										<form action="" th:action="@{/newAdmission}" method="post" th:object="${user}">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="col-sm-2" style=" height: 220px; float: left;"></div>
+													<div class="col-sm-2" style=" height: 220px; float: left;">
+														<div class="form-group">
+															<label for="files" class="btn"
+																style="height:135px; width:120px; background-color: aliceblue; border:double navy;">
+																<img th:src="@{assetsfront/img/img22.png}" height="100%"
+																	width="100%" alt="Not found Path...">
+															</label>
+															<input id="files" style="visibility:hidden;" type="file">
+															<p id="imgName"></p>
 														</div>
-												</form>
+													</div>
+													<div class="col-sm-1" style=" height: 220px; float: left;"></div>
+													<div class="col-sm-2" style=" height: 220px; float: left;">
+														<div class="form-group">
+															<label for="filess" class="btn"
+																style="height:135px; width:120px; background-color: aliceblue; border:double navy;">
+																<img th:src="@{assetsfront/img/img22.png}" height="100%"
+																	width="100%" alt="Not found Path...">
+															</label>
+															<input id="filess" style="visibility:hidden;" type="file">
+															<p id="pimg"></p>
+														</div>
+													</div>
+													<div class="col-sm-1" style=" height: 220px; float: left;"></div>
+													<div class="col-sm-2" style="height: 220px; float: left;">
+														<div class="form-group">
+															<label for="filesss" class="btn"
+																style="height:135px; width:120px; background-color: aliceblue; border:double navy;">
+																<img th:src="@{assetsfront/img/img22.png}" height="100%"
+																	width="100%" alt="Not found Path...">
+															</label>
+															<input id="filesss" style="visibility:hidden;" type="file">
+															<p id="mimg"></p>
+														</div>
+													</div>
+													<div class="col-sm-2" style="height: 220px; float: left;"></div>
+												</div>
 											</div>
-										</div>
+											<div class="row">
+												<div class="col-sm-6 firstSecondPart">
+													<div class="form-group">
+														<label for="admissionNo">Admission NO</label> <input type="text"
+															required name="admissionNo"
+															class="form-control inputbox inputbox" id="admissionNo"
+															aria-describedby="emailHelp"
+															placeholder="Enter AdmissionNo...">
+													</div>
+													<div class="form-group">
+														<label for="name">Student Name</label> <input type="text"
+															required name="name" class="form-control inputbox" id="name"
+															aria-describedby="emailHelp"
+															placeholder="Enter Student Name...">
+													</div>
+													<div class="form-group">
+														<label for="fname">Father Name</label> <input type="text"
+															required name="fname" class="form-control inputbox"
+															id="fname" aria-describedby="emailHelp"
+															placeholder="Enter Father Name...">
+													</div>
+													<div class="form-group">
+														<label for="mname">Mother Name</label> <input type="text"
+															required name="mname" class="form-control inputbox"
+															id="mname" aria-describedby="emailHelp"
+															placeholder="Enter Mother Name...">
+													</div>
+													<div class="form-group">
+														<label for="username">Date of Birth</label> <input
+															type="datetime" required name="dob"
+															class="form-control inputbox" id="dob"
+															aria-describedby="emailHelp"
+															placeholder="Enter Date of Birth...">
+													</div>
+													<div class="form-group">
+														<label for="username">Gender</label> <input type="datetime"
+															required name="dob" class="form-control inputbox" id="dob"
+															aria-describedby="emailHelp"
+															placeholder="Enter Date of Birth...">
+													</div>
+													<div class="form-group">
+														<label for="username">Blood Group</label> <input type="text"
+															required name="bloodGroup" class="form-control inputbox"
+															id="bloodGroup" aria-describedby="bloodGroup"
+															placeholder="Enter Blood Group...">
+													</div>
+													<div class="form-group">
+														<label for="classes">Class</label> <input type="text" required
+															name="classes" class="form-control inputbox" id="class"
+															aria-describedby="emailHelp"
+															placeholder="Enter which class...">
+													</div>
+													<div class="form-group">
+														<label for="address">Home Address</label> <input type="text"
+															required name="address" class="form-control inputbox"
+															id="address" aria-describedby="emailHelp"
+															placeholder="Enter your Home Address...">
+													</div>
+													<div class="form-group">
+														<label for="emailAddress">Email address</label> <input
+															type="email" required name="email"
+															class="form-control inputbox" id="email"
+															aria-describedby="emailHelp" placeholder="Enter email...">
+													</div>
+												</div>
+
+												<div class="col-sm-6 firstSecondPart">
+													<div class="form-group">
+														<label for="district">District</label> <input type="text"
+															required name="district" class="form-control inputbox"
+															id="district" aria-describedby="emailHelp"
+															placeholder="Enter your District...">
+													</div>
+													<div class="form-group">
+														<label for="state">State</label> <input type="text"
+															class="form-control inputbox" required name="state"
+															id="state" aria-describedby="emailHelp"
+															placeholder="Enter your state...">
+													</div>
+													<div class="form-group">
+														<label for="pincode">pincode</label> <input type="text" required
+															name="pincode" class="form-control inputbox" id="pincode"
+															aria-describedby="emailHelp"
+															placeholder="Enter your Pincode...">
+													</div>
+													<div class="form-group">
+														<label for="username">Contact No</label> <input type="text"
+															required name="smob" class="form-control inputbox" id="smod"
+															aria-describedby="emailHelp"
+															placeholder="Enter your mobile number...">
+													</div>
+													<div class="form-group">
+														<label for="aadharNo">AadharCard No</label> <input type="text"
+															required name="aadharNo" class="form-control inputbox"
+															id="aadharNo" aria-describedby="emailHelp"
+															placeholder="Enter your Aadhar number...">
+													</div>
+													<div class="form-group">
+														<label for="fqulification">Father Qulification</label> <input
+															type="text" required name="fqulification"
+															class="form-control inputbox" id="fqulification"
+															aria-describedby="emailHelp"
+															placeholder="Enter your father qulification...">
+													</div>
+													<div class="form-group">
+														<label for="mqulification">Mother Qulification</label> <input
+															type="text" required name="mqulification"
+															class="form-control inputbox" id="mqulification"
+															aria-describedby="emailHelp"
+															placeholder="Enter your Mother qulification...">
+													</div>
+													<div class="form-group">
+														<label for="foccupation">Father Occupation</label> <input
+															type="text" required name="foccupation"
+															class="form-control inputbox" id="foccupation"
+															aria-describedby="emailHelp"
+															placeholder="Enter your father occupation...">
+													</div>
+													<div class="form-group">
+														<label for="moccupation">Mother Occupation</label> <input
+															type="text" required name="moccupation"
+															class="form-control inputbox" id="moccupation"
+															aria-describedby="emailHelp"
+															placeholder="Enter your Mother occupation...">
+													</div>
+													<div class="form-group">
+														<label for="pmob">Contact No</label> <input type="text" required
+															name="pmob" class="form-control inputbox" id="pmob"
+															aria-describedby="emailHelp"
+															placeholder="Enter your parent Mobile number...">
+													</div>
+												</div>
+											</div><br><br>
+											<div class="row">
+												<div class="col-sm-12">
+													<h4 style="color: navy;">Fee Section</h4>
+													<p>Fees refer to the costs associated with attending an educational
+														institution, such as a school.
+														schools offer financial assistance or scholarships to help
+														students from lower-income families access education.
+													</p>
+												</div>
+											</div>
+											<br>
+											<div class="row">
+												<div class="col-sm-7">
+													<div class="form-group">
+														<label for="receiptNo">Receipt No</label> <input type="text"
+															required name="receiptNo" class="form-control inputbox"
+															id="receiptNo" aria-describedby="emailHelp"
+															placeholder="Enter Receipt No...">
+													</div>
+													<div class="form-group">
+														<label for="amount">Amount</label> <input type="text" required
+															name="amount" class="form-control inputbox" id="amount"
+															aria-describedby="emailHelp" placeholder="Enter Amount...">
+													</div>													
+													<div class="form-group">
+														<label for="rollNo">Roll No</label> <input type="text" required
+															name="rollNo" class="form-control inputbox" id="rollNo"
+															aria-describedby="emailHelp"
+															placeholder="Enter Date of Birth...">
+													</div>
+												</div>
+												<div class="col-sm-5">
+													<div class="form-group">
+														<label for="admissionNo">Registration No</label> <input type="text"
+															required name="admissionNo" class="form-control inputbox"
+															id="admissionNo" aria-describedby="emailHelp"
+															placeholder="Enter Date of Birth...">
+													</div>													
+													<div class="form-group">
+														<label for="classAdmittedto">Class Admitted to</label> <input
+															type="text" required name="classAdmittedto"
+															class="form-control inputbox" id="classAdmittedto"
+															aria-describedby="emailHelp"
+															placeholder="Enter Father Name...">
+													</div>
+													<div class="form-group">
+														<label for="section">Class Section</label> <input type="text"
+															required name="section" class="form-control inputbox"
+															id="section" aria-describedby="emailHelp"
+															placeholder="Enter Mother Name...">
+													</div>
+
+												</div>
+											</div>
+											<br><br>
+											<div class="form-group form-check text-center">
+												<input type="checkbox" name="agreement" required
+													class="form-check-input"/>
+												<label class="agreemet">Accept
+													terms and conditions </label>
+											</div>
+											<div class="container text-center">
+												<button type="submit" class="btn btn-primary">Submit</button>
+												<button type="reset" class="btn btn-info  text-light">Reset</button>
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Close</button>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
-
 						</div>
 					</div>
+
 				</div>
 			</div>
-		</main>
-	</section>
+</div>
+</div>
 
-	<style>
+<style>
+	.inputbox {
+		border-radius: unset;
+		border: 2px solid #969799;
+		margin-bottom: 8px;
+	}
 
-	</style>
+	/*.picborder{
+	     height:15%;
+	     width:28%;
+	     background-color: aliceblue; 
+	     border-style:double navy;
+	     float: left;
+	     margin: 5%;
+   }*/
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+
+	$("#files").change(function () {
+		filename1 = this.files[0].name;
+		console.log(filename1);
+		$("#imgName").text(filename1);
+	});
+
+	$("#filess").change(function () {
+		filenames = this.filess[0].name;
+		console.log(filenames);
+		$("#pimg").text(filenames);
+	});
+
+	$("#filesss").change(function () {
+		filenamess = this.filesss[0].name;
+		console.log(filenamess);
+		$("#mimg").text(filenamess);
+	});
+
+</script>
+
+</main>
+</section>

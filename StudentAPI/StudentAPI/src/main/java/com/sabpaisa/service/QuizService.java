@@ -26,5 +26,7 @@ public interface QuizService {
 	public Option addOption(Option option);
 	
 	public Optional<Option> getOptionId(int id);
+	
+	public Quiz updateQuizwhenClick(Quiz quiz);
 
 }

@@ -1,8 +1,8 @@
 package com.sabpaisa.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,13 +19,13 @@ public class Quiz {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String question;	
-	@OneToMany(targetEntity=Option.class)  
-	@JoinColumn(name = "oq_fk", referencedColumnName = "id")
-	private List<Option> option;	
 	private String answer;
 	private String category;
-	private String score;
+	private String score="0";
 	private String status;
+	@OneToMany(targetEntity=Option.class)  
+	@JoinColumn(name = "oq_fk", referencedColumnName = "id")
+	private List<Option> option = new ArrayList<>();	
 	
 	
 	public int getId() {
@@ -42,13 +42,6 @@ public class Quiz {
 	
 	public void setQuestion(String question) {
 		this.question = question;
-	}
-	public List<Option> getOption() {
-		return option;
-	}
-
-	public void setOption(List<Option> option) {
-		this.option = option;
 	}
 	
 	public String getCategory() {
@@ -82,22 +75,30 @@ public class Quiz {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public List<Option> getOption() {
+		return option;
+	}
+
+	public void setOption(List<Option> option) {
+		this.option = option;
+	}
 
 	public Quiz() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	public Quiz(int id, String question, List<Option> option, String answer, String category, String score,
-			String status) {
+		
+	public Quiz(int id, String question, String answer, String category, String score, String status,
+			List<Option> option) {
 		super();
 		this.id = id;
 		this.question = question;
-		this.option = option;
 		this.answer = answer;
 		this.category = category;
 		this.score = score;
 		this.status = status;
+		this.option = option;
 	}
 
 	@Override

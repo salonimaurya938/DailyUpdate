@@ -1,0 +1,59 @@
+<div xmls:th="http://www.thymeleaf.org" th:replace="admin/master::layout(~{::section})">
+
+	<section>
+		<main id="main" class="main">
+
+			<div class="pagetitle">
+				<h1>Add Banner</h1>
+				<p th:text="${session.attributeName}"></p>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="adminDashBoard">Admin</a></li>
+						<li class="breadcrumb-item">Website Add Banner</li>
+						<li class="breadcrumb-item active">Banner</li>
+					</ol>
+				</nav>
+           </div>           
+           <div class="col-sm-12">
+					<div class="card">
+						<div class="card-body table-responsive">
+							<h5 class="card-title">View Admission Report</h5>
+
+							<table width="100%" style="font-size: 13px;">
+								<thead>
+									<tr>
+									<th>Sr.no.</th>
+									<th>Banner</th>
+									<th>Page Name</th>
+									<th>Action</th>									
+								</tr>
+								</thead>
+								<tbody>
+									<tr th:each="datas,id:${data}">
+									<td th:text="${id.count}"></td>
+									<td th:text="${datas.name}"></td>									
+									<td>
+
+										<div class="form">
+											<form th:action="@{/delete/{id}}" method="post" th:object="${data}">
+												<input type="hidden" th:value="${datas.id}" name="id" />
+												<button type="submit" value="Submit" class="bg-danger">Delete</button>
+											</form>
+										</div>
+										<div class="form">
+											<button class="bg-success"><a
+													th:href="|@{/updateAdmissionReport{id}(id=${datas.id})}|"
+													style="color: white;">Update</a>&nbsp;</button>
+										</div>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+
+		</main><!-- End #main -->
+	</section>
+</div>

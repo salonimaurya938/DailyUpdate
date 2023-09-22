@@ -1,11 +1,17 @@
 package com.sabpaisa.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -318,7 +325,25 @@ public class ControllerApi {
 		request.getSession().invalidate();
 		return "redirect:/";
 	}
+//	
+//	@PostMapping(value="/quizUpdateScore")
+//	 private Quiz getFormData(Quiz request) {
+//		
+//		System.out.println("testing ..."+ request);
+//		
+//		return request;
+//   }
 	
+//	@PostMapping(value = "/quizUpdateScore", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public String processJsonData(@RequestBody Quiz requestData) {    	
+//        // Use requestData object in your controller logic
+//    	
+//    	String score = requestData.getScore();
+//        String status = requestData.getStatus();
+//        System.out.println("socre :: "+score + "\n  stauts :: "+ status);    	
+//        return requestData.getScore();
+//    }
 
-	
+    
+
 }

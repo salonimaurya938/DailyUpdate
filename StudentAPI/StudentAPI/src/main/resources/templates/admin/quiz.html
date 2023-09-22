@@ -15,6 +15,8 @@
 				<button type="button" class="btn btn-success btnss" data-bs-toggle="modal"
 					data-bs-target="#staticBackdrop">
 					Add Quiz</button>
+				 <button type="button" class="btn btn-warning btnss"><img th:src="@{../../img/key.png}" height="20px" width="70px"/></button>
+					
 				<!-- Button trigger end modal -->
 				<div class="col-sm-12">
 					<div class="card">
@@ -67,7 +69,7 @@
 												</div>
 												<div class="col-12">
 													<label for="category" class="form-label">Category</label> <select
-														name="classes" id="cars" class="form-control">
+														name="category" id="cars" class="form-control">
 														<option th:each="Sub : ${cate}" th:value="${Sub.category}"
 															th:text="${Sub.category}" class="form-control"></option>
 													</select>
@@ -95,39 +97,29 @@
 								<tr class="mt-4">
 								<th>Id</th>
 								<th>Question</th>
+								<th>Correct Answer</th>
 								<th>First Option</th>
 								<th>Second Option</th>
 								<th>Third Option</th>
-								<th>Fourth Option</th>
-								<th>Correct Answer</th>
+								<th>Fourth Option</th>								
 								<th>Action</th>
 							</tr>
 							</thead>
 
 							<tbody>
-								<tr th:each="quizs:${quiz}">
-								<td th:text="${quizs.id}" class="ml-3"></td>
-								<td th:text="${quizs.question}"></td>
-								<!--<td th:text="${quizs.op1}"></td>
-													<td th:text="${quizs.op2}"></td>
-													<td th:text="${quizs.op3}"></td>
-													<td th:text="${quizs.op4}"></td>
-													<td th:text="${quizs.correctAnswer}"></td>-->
-								<td>
-									<div class="btnform">
-										<form method="post" th:object="${quiz}">
-											<input type="hidden" th:value="${quizs.id}" name="id" />
-											<button type="submit" value="Submit" class="btn btn-danger">Delete</button>
-										</form>
-									</div>
-									<div class="btnform">
-										<button class="btn btn-success">
-											<a th:href="|@{/updateQuiz{id}(id=${quizs.id})}|"
-												style="color: white;">Update</a>&nbsp;
-										</button>
-									</div>
-
-								</td>
+								<tr th:each="quizs,id:${quiz}">
+										
+								<td th:text="${id.count}" class="ml-3"></td>
+								<td th:text="${quizs.question}"></td>					
+								<td th:text="${quizs.answer}"></td>					
+								
+							
+									   <!--   <td th:text="${option.op1}"></td>
+										  <td th:text="${option.op2}"></td>
+										  <td th:text="${option.op3}"></td>
+										  <td th:text="${option.op4}"></td>-->
+										
+							
 							</tr>
 							</tbody>
 						</table>

@@ -44,10 +44,11 @@ public class QuizServiceImpl implements QuizService {
 		if(data.isPresent()) {			
 			Quiz newData= data.get();
 			newData.setQuestion(quiz.getQuestion());
-//			newData.setOp1(quiz.getOp1());
-//			newData.setOp2(quiz.getOp2());
-//			newData.setOp3(quiz.getOp3());
-//			newData.setOp4(quiz.getOp4());
+			newData.setAnswer(quiz.getAnswer());
+			newData.setCategory(quiz.getCategory());
+			newData.setOption(quiz.getOption());
+			newData.setScore(quiz.getScore());
+			newData.setStatus(quiz.getStatus());;
 			newData=quizDao.save(newData);
 			return newData;
 		  }else {
@@ -58,8 +59,7 @@ public class QuizServiceImpl implements QuizService {
 
 	@Override
 	public void deleteQuiz(int id) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -78,6 +78,20 @@ public class QuizServiceImpl implements QuizService {
 	public Optional<Option> getOptionId(int id) {
 		Optional<Option> getById= optionDao.findById(id);
 		return getById;
+	}
+	
+	@Override
+	public Quiz updateQuizwhenClick(Quiz quiz) {
+		Optional<Quiz> data = quizDao.findById(quiz.getId());		
+		if(data.isPresent()) {			
+			Quiz newData= data.get();
+			newData.setScore("1");
+			newData=quizDao.save(newData);
+			return newData;
+		  }else {
+			  quiz= quizDao.save(quiz);
+			  return quiz;
+		  }
 	}
 
 }

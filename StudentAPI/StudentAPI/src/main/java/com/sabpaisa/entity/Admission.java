@@ -21,10 +21,9 @@ public class Admission {
 	private String dob;
 	private String gender;
 	private String bloodGroup;
+	private String classes;
 	private String address;
 	private String gmail;
-	private String policeStation;
-	private String postoffice;
 	private String district;
 	private String state;
 	private String pincode;
@@ -33,18 +32,15 @@ public class Admission {
 	private String fqulification;
 	private String mqulification;
 	private String foccupation;
-	private String moccupation;
-	private String localGuardian;
-	private String relationWithStudent;
 	private String pmob;
 	private String receiptNo;
 	private String amount;
-	private String datedNo;
 	private String stdName;
 	private String AdmissionNo2;
 	private String dateofadmission;
 	private String classAdmittedinto;
 	private String section;
+	private String rollNo;
 	
 	public int getId() {
 		return id;
@@ -112,18 +108,7 @@ public class Admission {
 	public void setGmail(String gmail) {
 		this.gmail = gmail;
 	}
-	public String getPoliceStation() {
-		return policeStation;
-	}
-	public void setPoliceStation(String policeStation) {
-		this.policeStation = policeStation;
-	}
-	public String getPostoffice() {
-		return postoffice;
-	}
-	public void setPostoffice(String postoffice) {
-		this.postoffice = postoffice;
-	}
+	
 	public String getDistrict() {
 		return district;
 	}
@@ -172,24 +157,6 @@ public class Admission {
 	public void setFoccupation(String foccupation) {
 		this.foccupation = foccupation;
 	}
-	public String getMoccupation() {
-		return moccupation;
-	}
-	public void setMoccupation(String moccupation) {
-		this.moccupation = moccupation;
-	}
-	public String getLocalGuardian() {
-		return localGuardian;
-	}
-	public void setLocalGuardian(String localGuardian) {
-		this.localGuardian = localGuardian;
-	}
-	public String getRelationWithStudent() {
-		return relationWithStudent;
-	}
-	public void setRelationWithStudent(String relationWithStudent) {
-		this.relationWithStudent = relationWithStudent;
-	}
 	public String getPmob() {
 		return pmob;
 	}
@@ -208,12 +175,7 @@ public class Admission {
 	public void setAmount(String amount) {
 		this.amount = amount;
 	}
-	public String getDatedNo() {
-		return datedNo;
-	}
-	public void setDatedNo(String datedNo) {
-		this.datedNo = datedNo;
-	}
+	
 	public String getStdName() {
 		return stdName;
 	}
@@ -243,67 +205,23 @@ public class Admission {
 	}
 	public void setSection(String section) {
 		this.section = section;
+	}	
+	public String getClasses() {
+		return classes;
 	}
-		
-	public Admission(int id, String admissionNo, String stdProfile, String name, String fname, String mname,
-			String dob, String gender, String bloodGroup, String address, String gmail, String policeStation,
-			String postoffice, String district, String state, String pincode, String smob, String aadharNo,
-			String fqulification, String mqulification, String foccupation, String moccupation, String localGuardian,
-			String relationWithStudent, String pmob, String receiptNo, String amount, String datedNo, String stdName,
-			String admissionNo2, String dateofadmission, String classAdmittedinto, String section) {
-		super();
-		this.id = id;
-		this.admissionNo = admissionNo;
-		this.stdProfile = stdProfile;
-		this.name = name;
-		this.fname = fname;
-		this.mname = mname;
-		this.dob = dob;
-		this.gender = gender;
-		this.bloodGroup = bloodGroup;
-		this.address = address;
-		this.gmail = gmail;
-		this.policeStation = policeStation;
-		this.postoffice = postoffice;
-		this.district = district;
-		this.state = state;
-		this.pincode = pincode;
-		this.smob = smob;
-		this.aadharNo = aadharNo;
-		this.fqulification = fqulification;
-		this.mqulification = mqulification;
-		this.foccupation = foccupation;
-		this.moccupation = moccupation;
-		this.localGuardian = localGuardian;
-		this.relationWithStudent = relationWithStudent;
-		this.pmob = pmob;
-		this.receiptNo = receiptNo;
-		this.amount = amount;
-		this.datedNo = datedNo;
-		this.stdName = stdName;
-		AdmissionNo2 = admissionNo2;
-		this.dateofadmission = dateofadmission;
-		this.classAdmittedinto = classAdmittedinto;
-		this.section = section;
+	public void setClasses(String classes) {
+		this.classes = classes;
 	}
-		
+	public String getRollNo() {
+		return rollNo;
+	}
+	public void setRollNo(String rollNo) {
+		this.rollNo = rollNo;
+	}
 	public Admission() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	@Override
-	public String toString() {
-		return "Addmission [id=" + id + ", admissionNo=" + admissionNo + ", stdProfile=" + stdProfile + ", name=" + name
-				+ ", fname=" + fname + ", mname=" + mname + ", dob=" + dob + ", gender=" + gender + ", bloodGroup="
-				+ bloodGroup + ", address=" + address + ", gmail=" + gmail + ", policeStation=" + policeStation
-				+ ", postoffice=" + postoffice + ", district=" + district + ", state=" + state + ", pincode=" + pincode
-				+ ", smob=" + smob + ", aadharNo=" + aadharNo + ", fqulification=" + fqulification + ", mqulification="
-				+ mqulification + ", foccupation=" + foccupation + ", moccupation=" + moccupation + ", localGuardian="
-				+ localGuardian + ", relationWithStudent=" + relationWithStudent + ", pmob=" + pmob + ", receiptNo="
-				+ receiptNo + ", amount=" + amount + ", datedNo=" + datedNo + ", stdName=" + stdName + ", AdmissionNo2="
-				+ AdmissionNo2 + ", dateofadmission=" + dateofadmission + ", classAdmittedinto=" + classAdmittedinto
-				+ ", section=" + section + "]";
-	}	
+
 	 
 }

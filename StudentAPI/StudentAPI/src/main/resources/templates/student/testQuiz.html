@@ -5,42 +5,45 @@
 			<div class="pagetitle">
 				<h1 class="h1font" style="font-size: 35px; margin-top: 8px">Online Quiz Test</h1>
 				<header class="headerTop bg-info" style="border-radius: 5px;">
-					<div class="left-title">Online Test <div id="timer" class="display-4">00:00</div></div>
+					<div class="left-title">Online Test</div>
 					<div class="right-title">Total Questions: <span id="tque"></span></div>
+					<div  class="display-4 fs-5 text-light" th:each="quizDetail,id:${timebyCate}">
+						<span th:text="${quizDetail.totalTime}" th:value="${quizDetail.totalTime}"  id="timer"></span>min</div>
 					<div class="clearfix"></div>
+			
+			  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>  
+
 				</header>
 				<div class="content">
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-sm-12" >
 								<div id="result" class="quiz-body">
-									<form name="quizForm" onSubmit="" th:object="${category}">
+									<form name="quizForm" th:action="@{/testQuiz}" onSubmit="" th:object="${category}" id="formId" enctype="multipart/form-data">
 										<span th:text="${cat}"></span>
 										<fieldset class="form-group">
-											<h4><span id="qid">1.</span><span id="question"><!--Question--></span></h4>
-											<div class="option-block-container" id="question-options">
+											<h4><span id="qid">1</span>.											
+											<span id="question"><!--Question--></span></h4>																						
+											<div class="option-block-container" id="question-options">													
 											</div> <!-- End of option block -->
-										</fieldset>
+										</fieldset>										
 										<div class="container mt-5">
 										<button name="previous" id="previous" class="btn btn-info">Previous</button>
 										&nbsp;
 										<button name="next" id="next" class="btn btn-info">Next</button>
-										&nbsp;
-										 <button id="startButton" class="btn btn-primary">Start</button>
 									</form>
 								</div>
 							</div> <!-- End of col-sm-12 -->
 						</div> <!-- End of row -->
 					</div> <!-- ENd of container fluid -->
 				</div> <!-- End of content -->
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-				<script
-					src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-				<script src="app.js"></script>
+				
 			</div><!-- End Page Title -->
 		</main><!-- End #main -->
 	</section>
 </div>
+<!--............................... Start JQuery.................................... -->
+
 <script th:inline="javascript">
 	/* Created and coded by Abhilash Narayan */
 	/* Quiz source: w3schools.com */
@@ -64,7 +67,8 @@
 				$("#tque").html(totalque);
 				$("#previous").attr("disabled", false);
 				$("#next").attr("disabled", false);
-				$("#qid").html(quiz[this.currentque].id + '.');
+				$("#qid").html(quiz[this.currentque].id);
+				//$("#qid1").html(quiz[this.currentque].id + '.').val();
 				$("#question").html(quiz[this.currentque].question);				
 				$("#question-options").html("");
 				for (var key in quiz[this.currentque].option[0]) {
@@ -117,6 +121,7 @@
 				if (quiz[this.currentque].score == "") {
 					quiz[this.currentque].score = 1;
 					quiz[this.currentque].status = "correct";
+					
 				}
 			} else {
 				quiz[this.currentque].status = "wrong";
@@ -153,8 +158,60 @@
 	});
 
 </script>
+<!--............................... End JQuery.................................... -->
+<!--............................... Start AjaxCode.................................... -->
+<script>
 
-    <script>
+		/*$(document).on('click', function (e) {
+			var myData = {
+				"x": $("#qid").val,
+				"y": $("#question-options").val
+			}
+			console.log(myData);
+				$.ajax({
+					type: "POST",
+					contentType: 'application/json; charset=utf-8',
+					dataType: 'json',
+					url: "/testQuiz", //assuming your controller is configured to accept requests on this URL
+					data: JSON.stringify(myData), // This converts the payLoad to Json to pass along to Controller
+					success: function (result) {
+						
+						// do what ever you want with data
+					}
+				});*/	
+       
+        $(document).ready(function () {
+            $("#question-options").click(function () {
+			   var qid=document.getElementById("qid").innerHTML; 
+			   var question = document.getElementById("question").innerHTML;
+			   var option = document.querySelector('input[name="option"]:checked').value;
+			  	      
+                var formData = {
+			    id : qid,
+                question : question,
+                option: option              
+                };
+                var jsonData = JSON.stringify(formData);   
+                console.log(formData);           
+                $.ajax({
+					url: '/testQuiz',
+                    type: "POST",
+                    contentType: "application/json",                   
+                    data: jsonData, //send data directly                          
+                    processData: false,
+					success: function (response) {
+						console.log(response);
+					},
+					error: function (error) {						
+						console.error(error);
+					}
+                });
+            });
+        });
+</script>
+<!--............................... End AjaxCode.................................... -->
+<!--............................... Start JavaScript.................................... -->
+<script>
   document.addEventListener("DOMContentLoaded", function () {
   const timerDisplay = document.getElementById("timer");
   const startButton = document.getElementById("startButton");
@@ -165,16 +222,16 @@
   function startTimer(durationInSeconds) {
     endTime = new Date().getTime() + durationInSeconds * 1000;
     timerInterval = setInterval(updateTimer, 1000);
-    console.log("timeInterval :: " +timerInterval);
-    console.log("end time :: " +endTime);
+    //console.log("timeInterval :: " +timerInterval);
+    //console.log("end time :: " +endTime);
     startButton.disabled = true;
   }
 
   function updateTimer() {
     const currentTime = new Date().getTime();
     const timeLeft = endTime - currentTime;
-    console.log("current time :: "+currentTime);
-    console.log("time left :: "+timeLeft);
+  //  console.log("current time :: "+currentTime);
+   // console.log("time left :: "+timeLeft);
 
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
@@ -184,15 +241,15 @@
     } else {
       const minutes = Math.floor(timeLeft / (1000 * 60));
       const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-      console.log("minutes :: "+minutes);
-      console.log("seconds :: "+seconds);
+      //console.log("minutes :: "+minutes);
+     //// console.log("seconds :: "+seconds);
 
 
       const formattedMinutes = String(minutes).padStart(2, "0");
       const formattedSeconds = String(seconds).padStart(2, "0");
 
-      console.log("formattedMinutes :: "+formattedMinutes);
-      console.log("formattedSeconds :: "+formattedSeconds);
+     // console.log("formattedMinutes :: "+formattedMinutes);
+      //console.log("formattedSeconds :: "+formattedSeconds);
       timerDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
     }
   }
@@ -202,16 +259,19 @@
     timerDisplay.textContent = "00:00";
     startButton.disabled = false;
   }
- var a = 1 * 60;
-  startButton.addEventListener("click", function () {
-    startTimer(a); // Set the countdown duration in seconds (e.g., 5 minutes)
-  });
+ var a = document.getElementById("timer").innerText;
+ //alert(a);
+ let b=a*60;
+  //startButton.addEventListener("click", function () {
+    startTimer(b); // Set the countdown duration in seconds (e.g., 5 minutes)
+ // });
 
   resetButton.addEventListener("click", resetTimer);
 });
+</script>
 
-    </script>
-
+<!--............................... End AjaxCode.................................... -->
+<!--............................... Start Css .................................... -->
 <style>
 	.content {
 		margin-top: 54px;
@@ -283,3 +343,5 @@
 		padding-bottom: 15px;
 	}
 </style>
+<!--............................... End Css .................................... -->
+

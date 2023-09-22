@@ -16,13 +16,12 @@ public class Option {
 	private String op1;
 	private String op2;
 	private String op3;
-	private String op4;
-	
+	private String op4;	
 	
 	public Option() {
 		super();
 	}
-	
+
 	public Option(int id, String op1, String op2, String op3, String op4) {
 		super();
 		this.id = id;
@@ -30,6 +29,7 @@ public class Option {
 		this.op2 = op2;
 		this.op3 = op3;
 		this.op4 = op4;
+		
 	}
 
 	public String getOp1() {
@@ -57,9 +57,8 @@ public class Option {
 		this.op4 = op4;
 	}
 
-	@Override
-	public String toString() {
-		return "Option [id=" + id + ", op1=" + op1 + ", op2=" + op2 + ", op3=" + op3 + ", op4=" + op4 + "]";
-	}	
+	
+
+	
 	
 }

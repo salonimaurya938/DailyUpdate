@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMethodMappingNamingStrategy;
@@ -137,6 +138,9 @@ public class LoginController {
 
 	@Autowired
 	private TimeTableService timeTableService;
+	
+	@Autowired
+	private OptionDao optionDao;
 
 	public LoginController(AdminService adminService, StudentService studentService) {
 		super();
@@ -485,7 +489,7 @@ public class LoginController {
 			String title, String discription, String classes, String lesson, Model model) throws IOException {
 		System.out.println("switching...");
 		UploadCourses upload = new UploadCourses();
-		UploadCourses im = uploadCourseService.updateUploadCourse(upload);
+		UploadCourses im = uploadCourseService.addUploadCourse(upload);
 		im.setUploadCourse(uploadCourse.getOriginalFilename());
 		im.setTitle(title);
 		im.setDiscription(discription);
@@ -620,24 +624,61 @@ public class LoginController {
 	@RequestMapping(value = "/quiz", method = RequestMethod.GET)
 	public String addQuiz(Model model) {
 		model.addAttribute("title", "AddQuiz-School Management System");
-		Quiz quiz = new Quiz();
-		model.addAttribute("quiz", quiz);
 		List<Quiz> quizs = quizService.getQuiz();
 		model.addAttribute("quiz", quizs);
-		System.out.println("quiz details.. " + quizs);
+		System.out.println("quiz details :: " + quizs);
+		
 		List<Category> data = categoryDao.findAll();
 		model.addAttribute("cate", data);
-		System.out.println("Category value..." + data);
+		System.out.println("Category value :: " + data);
+		
+		List<Option> opt=optionDao.findAll();
+		model.addAttribute("opt", opt);
+		System.out.println("Otion Data :: "+ opt);
+		
+		return "admin/quiz";
+	}
+	@RequestMapping(value = "/quiz", method = RequestMethod.POST)
+	public String insertQuiz(@ModelAttribute("admin/quiz")Quiz quiz,Option option,String op1, String op2, String op3,String op4) {		
+		System.out.println("uri section..."+ quiz);	    
+
+	    Option optionsave= optionDao.save(option);	
+	    System.out.println("options insert in table .."+optionsave);
+	    
+	    
+	    Quiz saveFormData= quizService.addQuiz(quiz);
+	    System.out.println("::.."+saveFormData);
+	    
 		return "admin/quiz";
 	}
 
-	@RequestMapping(value = "/quiz", method = RequestMethod.POST)
-	public String insertQuiz(@ModelAttribute("admin/quiz") Quiz quiz, Model model, @RequestBody QuizRequest request) {
-		System.out.println("Quiz Adding...");
-		Quiz quizs = quizDao.save(request.getQuiz());
-		System.out.println("data inserted value ::" + quizs);
-		return "admin/quiz";
-	}
+//	@RequestMapping(value = "/quiz", method = RequestMethod.POST)
+//	public String insertQuiz(@ModelAttribute("admin/quiz") @RequestParam List<Option> option,String question,String answer,String 
+//			category,String  score, String status, String op1, String op2, String op3, String op4, Quiz quisz) {		
+//		System.out.println("uri section..."+ quisz);
+//	    Quiz saveFormData= quizService.addQuiz(quisz);
+//	    System.out.println("::.."+saveFormData);
+//		Quiz quiz = new Quiz();
+//		Quiz im = quizService.addQuiz(quiz);
+//		im.setOption(option);
+//		im.setQuestion(question);
+//		im.setAnswer(answer);
+//		im.setCategory(category);
+//		im.setScore(score);
+//		im.setStatus(status);
+//		Quiz addquiz= quizService.addQuiz(quiz);		
+//		System.out.println("data inserted value ::" + addquiz);
+//		
+//		Option options= new Option();
+//	    Option in= optionDao.save(options);
+//	    in.setOp1(op1);
+//	    in.setOp2(op2);
+//	    in.setOp3(op3);
+//	    in.setOp4(op4);
+//	    Option optionsave= optionDao.save(options);
+//	    System.out.println("options insert in table .."+optionsave);
+//		return "admin/quiz";
+//	}
 
 //	@RequestMapping("/viewQuiz")
 //	public String viewquiz(Model model, Quiz quiz) {
@@ -800,5 +841,21 @@ public class LoginController {
 		return "redirect:home";
 	}
 
+	//...........................Notice Board....................................
+	
+	@RequestMapping("/noticeBoards")
+	public String Notice() {
+		System.out.println("notice board admin section");
+		return "admin/noticeBoards";
+	}
+	
+	//...........................Banner Controller..........................................
+	
+	@RequestMapping("/addBanner")
+	public String banneradd() {
+		System.out.println("Banner Section ...");		
+		return "admin/addBanner";
+	}
+	
 
 }

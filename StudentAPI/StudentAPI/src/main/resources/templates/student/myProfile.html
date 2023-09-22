@@ -21,13 +21,15 @@
 						<div class="card">
 							<div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 								<img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-								<h2 th:text="${username}"></h2>
-								<h3 th:text="${email}"></h3>
+								<!--<h2 th:text="${username}"></h2>
+								<h3 th:text="${email}"></h3>-->
+								<h2 style="color:green;">Saloni Maurya</h2>
+								<h3 style="color:darkorange;">msaloni401@gmail.com</h3>
 								<div class="social-links mt-2">
-									<a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-									<a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-									<a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-									<a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+									<a href="#" class="twitter"><i class="bi bi-twitter text-info"></i></a>
+									<a href="#" class="facebook"><i class="bi bi-facebook text-primary"></i></a>
+									<a href="#" class="instagram"><i class="bi bi-instagram text-danger"></i></a>
+									<a href="#" class="linkedin"><i class="bi bi-linkedin text-primary"></i></a>
 								</div>
 							</div>
 						</div>
@@ -60,23 +62,33 @@
 								<div class="tab-content pt-2">
 
 									<div class="tab-pane fade show active profile-overview" id="profile-overview">
-										<h5 class="card-title">About</h5>
-										<p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam
-											maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor.
-											Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi
-											sed ea saepe at unde.</p>
-
-										<h5 class="card-title">Profile Details</h5>
+										
+										<h5 class="card-title" style="color:rgb(128, 128, 255)">Profile Details</h5>
 
 										<div class="row">
-											<div class="col-lg-3 col-md-4 label ">User Name</div>
-											<div class="col-lg-9 col-md-8" th:text="${username}"></div>
+											<div class="col-lg-3 col-md-4 label ">Student Name</div>
+											<div class="col-lg-9 col-md-8">Saloni Maurya</div>
+										<!--	<div class="col-lg-9 col-md-8" th:text="${username}"></div>-->
 										</div>
 
 										<div class="row">
 											<div class="col-lg-3 col-md-4 label">Email </div>
-											<div class="col-lg-9 col-md-8" th:text="${email}"></div>
+											<div class="col-lg-9 col-md-8">msaloni401@gmail.com</div>
+											<!--<div class="col-lg-9 col-md-8" th:text="${email}"></div>-->
 										</div>
+										
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label ">Address </div>
+											<div class="col-lg-9 col-md-8">Mahaveer Chhapra Gorakhpur.</div>
+										<!--	<div class="col-lg-9 col-md-8" th:text="${username}"></div>-->
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label">Mobile</div>
+											<div class="col-lg-9 col-md-8">+91 9794922937</div>
+											<!--<div class="col-lg-9 col-md-8" th:text="${email}"></div>-->
+										</div>								
+										
 									</div>
 
 									<div class="tab-pane fade profile-edit pt-3" id="profile-edit">
@@ -108,7 +120,8 @@
 													Name</label>
 												<div class="col-md-8 col-lg-9">
 													<input name="username" type="text" class="form-control"
-														id="username" th:value="${username}">
+														id="username" value="Saloni Maurya">
+														<!--th:value="${username}"-->
 												</div>
 											</div>
 
@@ -117,7 +130,8 @@
 													class="col-md-4 col-lg-3 col-form-label">Email</label>
 												<div class="col-md-8 col-lg-9">
 													<input name="email" type="email" class="form-control" id="email"
-														th:value="${email}">
+														value="msaloni401@gmail.com">
+														<!-- th:value="${email}"-->
 												</div>
 											</div>
 											<div class="text-center">

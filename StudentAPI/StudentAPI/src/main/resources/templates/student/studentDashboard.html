@@ -25,7 +25,7 @@
 							<div class="col-xxl-4 col-md-4">
 								<div class="card info-card sales-card">
 									<div class="card-body">
-										<h5 class="card-title">New <span>| Enquiry</span></h5>
+										<h5 class="card-title">Book <span>|List </span></h5>
 
 										<div class="d-flex align-items-center">
 											<div
@@ -33,67 +33,21 @@
 												<i class="bi bi-telephone"></i>
 											</div>
 											<div class="ps-3">
-												<h6>145</h6>
+												<!--<h6 th:text="${#lists.size(addBook)}"></h6>-->
 												<span class="text-success small pt-1 fw-bold"><a
-														href="newAddmission">New Enquiry+</a></span>
+														href="viewBook">Book List</a></span>
 											</div>
 										</div>
 									</div>
 
 								</div>
 							</div><!-- End Sales Card -->
-
-							<!-- Revenue Card -->
-							<div class="col-xxl-4 col-md-4">
-								<div class="card info-card revenue-card">
-
-									<div class="card-body">
-										<h5 class="card-title">New <span>| Addmission</span></h5>
-
-										<div class="d-flex align-items-center">
-											<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-mortarboard"></i>
-											</div>
-											<div class="ps-3">
-												<h6>200</h6>
-												<span class="text-success small pt-1 fw-bold"><a href="newAddmission"
-														style="color:limegreen;">New Addmission+</a></span>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div><!-- End Revenue Card -->
-
-							<!-- Customers Card -->
-							<div class="col-xxl-4 col-xl-4">
-
-								<div class="card info-card customers-card">
-									<div class="card-body">
-										<h5 class="card-title">New <span>| Book</span></h5>
-										<div class="d-flex align-items-center">
-											<div
-												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-menu-button-wide"></i>
-											</div>
-											<div class="ps-3">
-												<h6>1244</h6>
-												<span class="text-success small pt-1 fw-bold"><a href="newAddmission"
-														style="color:darkorange;">Add Book+</a></span>
-											</div>
-										</div>
-
-									</div>
-								</div>
-
-							</div><!-- End Customers Card -->
-
+							
 							<!-- Sales Card -->
 							<div class="col-xxl-4 col-md-4">
 								<div class="card info-card sales-card">
 									<div class="card-body">
-										<h5 class="card-title">New <span>| Chapter</span></h5>
+										<h5 class="card-title">Chapter <span>| List</span></h5>
 
 										<div class="d-flex align-items-center">
 											<div
@@ -102,14 +56,130 @@
 											</div>
 											<div class="ps-3">
 												<h6>15</h6>
-												<span class="text-success small pt-1 fw-bold"><a href="addchapter">Add
-														Chapter+</a></span>
+												<span class="text-success small pt-1 fw-bold"><a href="viewchapters">
+														Chapter List</a></span>
 											</div>
 										</div>
 									</div>
 
 								</div>
 							</div><!-- End Sales Card -->
+							
+							<!-- Revenue Card -->
+							<div class="col-xxl-4 col-md-4">
+								<div class="card info-card revenue-card">
+
+									<div class="card-body">
+										<h5 class="card-title">Homework <span>| List</span></h5>
+
+										<div class="d-flex align-items-center">
+											<div
+												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+												<i class="bi bi-pencil-square"></i>
+											</div>
+											<div class="ps-3">
+											<!--	<h6 th:text="${#lists.size(homework)}"></h6>-->
+												<span class="text-success small pt-1 fw-bold"><a href="viewhomeworks"
+														style="color:limegreen;">Homework</a></span>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div><!-- End Revenue Card -->
+							
+							<!-- Customers Card -->
+							<div class="col-xxl-4 col-xl-4">
+
+								<div class="card info-card customers-card">
+									<div class="card-body">
+										<h5 class="card-title">Result <span>| </span></h5>
+										<div class="d-flex align-items-center">
+											<div
+												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+												<i class="bi bi-bar-chart"></i>
+											</div>
+											<div class="ps-3">
+											<!--	<h6 th:text="${#lists.size(result)}"></h6>-->
+												<span class="text-success small pt-1 fw-bold"><a href="addResult"
+														style="color:darkorange;">Add Result+</a></span>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+							</div><!-- End Customers Card -->
+							
+							<!-- Revenue Card -->
+							<div class="col-xxl-4 col-md-4">
+								<div class="card info-card revenue-card">
+
+									<div class="card-body">
+										<h5 class="card-title">New <span>| Event</span></h5>
+
+										<div class="d-flex align-items-center">
+											<div
+												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+												<i class="bi bi-calendar3-event"></i>
+											</div>
+											<div class="ps-3">
+											<!--	<h6 th:text="${#lists.size(event)}"></h6>-->
+												<span class="text-success small pt-1 fw-bold"><a href="addEvents"
+														style="color:limegreen;">Add Event+</a></span>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div><!-- End Revenue Card -->
+							
+							<!-- Revenue Card -->
+							<div class="col-xxl-4 col-md-4">
+								<div class="card info-card revenue-card">
+
+									<div class="card-body">
+										<h5 class="card-title">New <span>| Course</span></h5>
+
+										<div class="d-flex align-items-center">
+											<div
+												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+												<i class="bi bi-fast-forward-circle"></i>
+											</div>
+											<div class="ps-3">
+												<!--<h6 th:text="${#lists.size(course)}"></h6>-->
+												<span class="text-success small pt-1 fw-bold"><a href="uploadCourses"
+														style="color:limegreen;">Upload Course+</a></span>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div><!-- End Revenue Card -->
+							
+							<!-- Customers Card -->
+							<div class="col-xxl-4 col-xl-4">
+
+								<div class="card info-card customers-card">
+									<div class="card-body">
+										<h5 class="card-title">New <span>| Quiz</span></h5>
+										<div class="d-flex align-items-center">
+											<div
+												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+												<i class="bi bi-patch-question"></i>
+											</div>
+											<div class="ps-3">
+												<!--<h6 th:text="${#lists.size(cate)}"></h6>-->
+												<span class="text-success small pt-1 fw-bold"><a href="quiz"
+														style="color:darkorange;">Add Quiz+</a></span>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+							</div><!-- End Customers Card -->	
+							
 
 							<!-- Revenue Card -->
 							<div class="col-xxl-4 col-md-4">
@@ -134,21 +204,22 @@
 								</div>
 							</div><!-- End Revenue Card -->
 
+							
 							<!-- Customers Card -->
 							<div class="col-xxl-4 col-xl-4">
 
 								<div class="card info-card customers-card">
 									<div class="card-body">
-										<h5 class="card-title">New <span>| Quiz</span></h5>
+										<h5 class="card-title">New <span>| Schedule</span></h5>
 										<div class="d-flex align-items-center">
 											<div
 												class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-												<i class="bi bi-patch-question"></i>
+												<i class="bi bi-calendar"></i>
 											</div>
 											<div class="ps-3">
-												<h6>10</h6>
-												<span class="text-success small pt-1 fw-bold"><a href="newAddmission"
-														style="color:darkorange;">Add Quiz+</a></span>
+											<!--	<h6 th:text="${#lists.size(timetable)}"></h6> -->
+												<span class="text-success small pt-1 fw-bold"><a href="timeTable"
+														style="color:darkorange;">Add Schedule+</a></span>
 											</div>
 										</div>
 
@@ -156,7 +227,6 @@
 								</div>
 
 							</div><!-- End Customers Card -->
-
 
 							<!-- News & Updates Traffic -->
 							<div class="card">

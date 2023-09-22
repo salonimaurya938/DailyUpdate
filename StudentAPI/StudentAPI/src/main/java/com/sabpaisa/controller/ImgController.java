@@ -41,7 +41,7 @@ public class ImgController {
 		Images uploadimg= uploadDao.save(im);
 		if(uploadimg!=null) {			
 			try {
-				File saveFile = new ClassPathResource("static/assets/img").getFile();
+				File saveFile = new ClassPathResource("assets/img").getFile();
 			    Path path=Paths.get(saveFile.getAbsolutePath()+File.separator+img.getOriginalFilename());
 			    System.out.println(path);
 			    Files.copy(img.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
