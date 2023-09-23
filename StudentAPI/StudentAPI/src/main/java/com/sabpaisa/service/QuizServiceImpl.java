@@ -80,18 +80,19 @@ public class QuizServiceImpl implements QuizService {
 		return getById;
 	}
 	
-	@Override
-	public Quiz updateQuizwhenClick(Quiz quiz) {
-		Optional<Quiz> data = quizDao.findById(quiz.getId());		
-		if(data.isPresent()) {			
-			Quiz newData= data.get();
-			newData.setScore("1");
-			newData=quizDao.save(newData);
-			return newData;
-		  }else {
-			  quiz= quizDao.save(quiz);
-			  return quiz;
-		  }
-	}
+//	@Override
+//	public Quiz updateQuizwhenClick(Quiz quiz) {
+//		Optional<Quiz> data = quizDao.findById(quiz.getId());	
+//		System.out.println("service class data :: "+data);
+//		if(data.isPresent()) {			
+//			Quiz newData= data.get();
+//			newData.setScore(quiz.getScore());
+//			newData=quizDao.save(newData);
+//			return newData;
+//		  }else {
+//			  quiz= quizDao.save(quiz);
+//			  return quiz;
+//		  }
+//	}
 
 }

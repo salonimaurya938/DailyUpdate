@@ -31,6 +31,7 @@
 										<button name="previous" id="previous" class="btn btn-info">Previous</button>
 										&nbsp;
 										<button name="next" id="next" class="btn btn-info">Next</button>
+										 <button onclick="submit();" id="sub" style="float:right;display: none;">Submit</button>
 									</form>
 								</div>
 							</div> <!-- End of col-sm-12 -->
@@ -114,11 +115,14 @@
 		}
 		this.checkAnswer = function (option) {
 			var answer = quiz[this.currentque].answer;
-			option = option.replace(/</g, "&lt;") //for <
-			option = option.replace(/>/g, "&gt;") //for >
-			option = option.replace(/"/g, "&quot;")
-			if (option == quiz[this.currentque].answer) {
-				if (quiz[this.currentque].score == "") {
+			var option= $("input[name='option']:checked").val();
+			console.log(option);
+		//	option = option.replace(/</g, "&lt;") //for <
+		//	option = option.replace(/>/g, "&gt;") //for >
+		//	option = option.replace(/"/g, "&quot;")
+			if (option == quiz[this.currentque].answer) {				
+				if (quiz[this.currentque].score == 0) {
+					//alert("okk")
 					quiz[this.currentque].score = 1;
 					quiz[this.currentque].status = "correct";
 					
@@ -148,6 +152,28 @@
 			jsq.checkAnswer(selectedopt);
 		}
 		jsq.changeQuestion(1);
+		
+		var totalque = quiz.length;
+		if(1<=totalque)
+		{
+			document.getElementById("f" + i).style.display = "block";
+		}
+		else {
+			i = 5;
+			document.getElementById("f" + i).style.display = "block";
+			var s;
+			s = confirm("Are you want to Submit ?");
+			if (s) {
+				document.getElementById("sub").style.display = "block";
+				document.getElementById("nx").style.display = "none";
+				document.getElementById("pr").style.display = "none";
+			}
+		}
+	
+		
+		if(totalque){
+			alert("are you sure !!!")
+		}
 	});
 	$('#previous').click(function (e) {
 		e.preventDefault();
@@ -180,7 +206,7 @@
 					}
 				});*/	
        
-        $(document).ready(function () {
+     /*   $(document).ready(function () {
             $("#question-options").click(function () {
 			   var qid=document.getElementById("qid").innerHTML; 
 			   var question = document.getElementById("question").innerHTML;
@@ -207,7 +233,7 @@
 					}
                 });
             });
-        });
+        });*/
 </script>
 <!--............................... End AjaxCode.................................... -->
 <!--............................... Start JavaScript.................................... -->
@@ -344,4 +370,3 @@
 	}
 </style>
 <!--............................... End Css .................................... -->
-

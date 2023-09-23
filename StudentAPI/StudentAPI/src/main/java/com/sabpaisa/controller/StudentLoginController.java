@@ -145,7 +145,7 @@ public class StudentLoginController {
 	    String pass=d.getPassword();
 	    System.out.println("student data "+d);
 	   if(email!=null && pass!=null) {
-		   model.addAttribute("id", d.getId());
+		    model.addAttribute("id", d.getId());
 			model.addAttribute("username", d.getStudentName());
 			model.addAttribute("email", d.getEmail());
 			model.addAttribute("mob", d.getMob());
@@ -351,37 +351,42 @@ public class StudentLoginController {
 		
 		
 		@PostMapping("/testQuiz")
-		public String quizDetail(@RequestBody QuizDto quizDto, @ModelAttribute("student/testQuiz") Quiz quiz) {	
+		public String quizDetail(@RequestBody QuizDto quizDto, Quiz quz) {	
 
-			System.out.println("quissssss........ "+quizDto);
-	    	String id=quizDto.getId();
-	    	System.out.println("ids for quiz Dto :: "+id);
-	    	String question=quizDto.getQuestion();
-	    	String option = quizDto.getOption();
-			System.out.println("Form data received. Id: " + id + ", question: " + question+", Option:"+option);
-			
-		    List<Quiz> quizs = quizService.getQuiz();
-		    Quiz tblbyId = quizs.get(3);		    
-		    int ids = tblbyId.getId();	   
-		    
-		    List<Option> optiontbl =tblbyId.getOption();
-			System.out.println("table id :: "+ids);
-			if(id.equals(ids)) {
-				
-			//System.out.println("get data ::"+ ids + " id :: "+id);
-				
-				if(option.equals(optiontbl)) {		
-					
-					Quiz quizupdate= quizService.updateQuizwhenClick(quiz);
-					
-					System.out.println("quiz update data"+quizupdate);
-				
-				}
-			}
+//			System.out.println("quizsssss........ "+quizDto);
+//	    	String id=quizDto.getId();
+//	    	System.out.println("ids for quiz Dto :: "+id);
+//	    	String question=quizDto.getQuestion();
+//	    	String option = quizDto.getOption();
+//			System.out.println("Form data received. Id: " + id + ", question: " + question+", Option:"+option);
+//					    
+//		    Optional<Quiz> a= quizService.getQuizId(1);
+//		    System.out.println("Get by id single data by tbl...."+a);
+//		    
+//			Quiz ab = a.get();
+//			int ids = ab.getId();
+//			String stringValueId = String.valueOf(ids);
+//			System.out.println("Get ID by tbl data in String:: " + stringValueId);
+//		   
+//			if(id.equalsIgnoreCase(stringValueId)) {				
+//			System.out.println("get data ::"+ ids + " id :: "+stringValueId);	
+//			String answers =ab.getAnswer();
+//			System.out.println("Get by ID answer ::"+ answers);
+//			   if(answers.equalsIgnoreCase(option)) {	
+//				  System.out.println("Correct answer ::"+ answers+"Option :: "+option);
+//				  
+////				 Quiz quizupdate= quizService.updateQuizwhenClick(quiz);					
+////				 System.out.println("quiz update data"+quizupdate);				   
+////				   
+//			   }
+//			}
 			
 			return "student/testQuiz";
 		}
 
+		
+		
+		
 		
 		@RequestMapping(value = "/quizUpdateScore",method=RequestMethod.POST)
 	    public  String processJsonData( ) {	    	
