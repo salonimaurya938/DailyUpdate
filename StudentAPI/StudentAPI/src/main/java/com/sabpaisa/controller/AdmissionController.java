@@ -1,5 +1,6 @@
 package com.sabpaisa.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,13 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sabpaisa.dao.AdmissionEnquiryDao;
 import com.sabpaisa.dao.AdmissionReportDao;
+import com.sabpaisa.entity.Admission;
 import com.sabpaisa.entity.AdmissionEnquiry;
 import com.sabpaisa.entity.AdmissionReport;
 import com.sabpaisa.service.AdmissionEnquiryService;
 import com.sabpaisa.service.AdmissionReportService;
+import com.sabpaisa.service.AdmissionServices;
 
 @Controller
 public class AdmissionController {
@@ -35,13 +39,48 @@ public class AdmissionController {
 	@Autowired
 	private AdmissionReportDao admissionReportDao;
 	
+	@Autowired
+	private AdmissionServices admissionServices;
+	
 	//.........................New Admission Controller...........................
 	
 	@RequestMapping("/newAdmission")
 	public String newAdmission(Model model) {
 		model.addAttribute("title", "Admission : Enquiry");
+		
+		List<Admission> abc= admissionServices.getAdmissions();
+		System.out.println("Admission All Data !!!");
+		System.out.println(abc);
+		model.addAttribute("admission", abc);
+		
 		return "admin/newAdmission";
 	}	
+	
+	@PostMapping("/newAdmission")
+	public String insertNewAdmission(@ModelAttribute("admin/newAdmission")Admission admission,
+			@RequestParam("stdProfile") MultipartFile stdProfile,
+	        @RequestParam("fProfile") MultipartFile fProfile,
+	        @RequestParam("mProfile") MultipartFile mProfile) {
+		
+		
+		try {
+            byte[] studentPicData = stdProfile.getBytes();
+            byte[] fatherPicData = fProfile.getBytes();
+            byte[] motherPicData = mProfile.getBytes();
+            
+//            admissionServices.saveStudentPic(studentPicData);
+//            admissionServices.saveFatherPic(fatherPicData);
+//            admissionServices.saveMotherPic(motherPicData);
+        } catch (IOException e) {
+            // Handle exceptions
+        }		
+		Admission ab=admissionServices.addAdmission(admission);
+		System.out.println("Insert successFully Admission Data !!!");
+		System.out.println(ab);
+		
+		return "admin/newAdmission";
+	}
+	
 	
 	
 	//..........................Admission EnquiryController........................
@@ -65,7 +104,9 @@ public class AdmissionController {
 	public String addAdmissionEnquirys(@ModelAttribute("admin/admissionEnquiry") AdmissionEnquiry admissionEnquiry) {
 		System.out.println("this is inserting page");
 		AdmissionEnquiry as = admissionEnquiryService.addAdmissionEnquiry(admissionEnquiry);
-		System.out.println("Inserted successfully" + as);
+		System.out.println("Successfully Inserted Admission Enquery Data!!!");
+		System.out.println(as);
+		
 		return "admin/admissionEnquiry";
 	}
 	

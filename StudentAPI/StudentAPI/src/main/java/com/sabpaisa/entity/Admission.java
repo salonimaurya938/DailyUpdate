@@ -14,7 +14,9 @@ public class Admission {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String admissionNo;
-	private String stdProfile;
+	private byte[] stdProfile;
+	private byte[] fProfile;
+	private byte[] mProfile;
 	private String name;
 	private String fname;
 	private String mname;
@@ -27,7 +29,6 @@ public class Admission {
 	private String district;
 	private String state;
 	private String pincode;
-	private String smob;
 	private String aadharNo;
 	private String fqulification;
 	private String mqulification;
@@ -35,11 +36,8 @@ public class Admission {
 	private String pmob;
 	private String receiptNo;
 	private String amount;
-	private String stdName;
-	private String AdmissionNo2;
-	private String dateofadmission;
+	private String registrationNo;
 	private String classAdmittedinto;
-	private String section;
 	private String rollNo;
 	
 	public int getId() {
@@ -53,12 +51,6 @@ public class Admission {
 	}
 	public void setAdmissionNo(String admissionNo) {
 		this.admissionNo = admissionNo;
-	}
-	public String getStdProfile() {
-		return stdProfile;
-	}
-	public void setStdProfile(String stdProfile) {
-		this.stdProfile = stdProfile;
 	}
 	public String getName() {
 		return name;
@@ -127,12 +119,6 @@ public class Admission {
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
-	public String getSmob() {
-		return smob;
-	}
-	public void setSmob(String smob) {
-		this.smob = smob;
-	}
 	public String getAadharNo() {
 		return aadharNo;
 	}
@@ -175,36 +161,11 @@ public class Admission {
 	public void setAmount(String amount) {
 		this.amount = amount;
 	}
-	
-	public String getStdName() {
-		return stdName;
-	}
-	public void setStdName(String stdName) {
-		this.stdName = stdName;
-	}
-	public String getAdmissionNo2() {
-		return AdmissionNo2;
-	}
-	public void setAdmissionNo2(String admissionNo2) {
-		AdmissionNo2 = admissionNo2;
-	}
-	public String getDateofadmission() {
-		return dateofadmission;
-	}
-	public void setDateofadmission(String dateofadmission) {
-		this.dateofadmission = dateofadmission;
-	}
 	public String getClassAdmittedinto() {
 		return classAdmittedinto;
 	}
 	public void setClassAdmittedinto(String classAdmittedinto) {
 		this.classAdmittedinto = classAdmittedinto;
-	}
-	public String getSection() {
-		return section;
-	}
-	public void setSection(String section) {
-		this.section = section;
 	}	
 	public String getClasses() {
 		return classes;
@@ -218,10 +179,68 @@ public class Admission {
 	public void setRollNo(String rollNo) {
 		this.rollNo = rollNo;
 	}
+	public String getRegistrationNo() {
+		return registrationNo;
+	}
+	public void setRegistrationNo(String registrationNo) {
+		this.registrationNo = registrationNo;
+	}	
+	public byte[] getStdProfile() {
+		return stdProfile;
+	}
+	public void setStdProfile(byte[] stdProfile) {
+		this.stdProfile = stdProfile;
+	}
+	public byte[] getfProfile() {
+		return fProfile;
+	}
+	public void setfProfile(byte[] fProfile) {
+		this.fProfile = fProfile;
+	}
+	public byte[] getmProfile() {
+		return mProfile;
+	}
+	public void setmProfile(byte[] mProfile) {
+		this.mProfile = mProfile;
+	}
 	public Admission() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	 
+	public Admission(int id, String admissionNo, byte[] stdProfile, byte[] fProfile, byte[] mProfile, String name,
+			String fname, String mname, String dob, String gender, String bloodGroup, String classes, String address,
+			String gmail, String district, String state, String pincode, String aadharNo, String fqulification,
+			String mqulification, String foccupation, String pmob, String receiptNo, String amount,
+			String registrationNo, String classAdmittedinto, String rollNo) {
+		super();
+		this.id = id;
+		this.admissionNo = admissionNo;
+		this.stdProfile = stdProfile;
+		this.fProfile = fProfile;
+		this.mProfile = mProfile;
+		this.name = name;
+		this.fname = fname;
+		this.mname = mname;
+		this.dob = dob;
+		this.gender = gender;
+		this.bloodGroup = bloodGroup;
+		this.classes = classes;
+		this.address = address;
+		this.gmail = gmail;
+		this.district = district;
+		this.state = state;
+		this.pincode = pincode;
+		this.aadharNo = aadharNo;
+		this.fqulification = fqulification;
+		this.mqulification = mqulification;
+		this.foccupation = foccupation;
+		this.pmob = pmob;
+		this.receiptNo = receiptNo;
+		this.amount = amount;
+		this.registrationNo = registrationNo;
+		this.classAdmittedinto = classAdmittedinto;
+		this.rollNo = rollNo;
+	}
+	
+	
 }

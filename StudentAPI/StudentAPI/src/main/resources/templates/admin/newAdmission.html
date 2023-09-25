@@ -11,7 +11,6 @@
 						<li class="breadcrumb-item">New Admission</li>
 					</ol>
 				</nav>
-
 				<!-- Button trigger modal -->
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 					New Addmission+
@@ -31,7 +30,7 @@
 							<div class="modal-body">
 								<div class="container">
 									<div class="my-card mt-2 radius">
-										<form action="" th:action="@{/newAdmission}" method="post" th:object="${user}">
+										<form action="" th:action="@{/newAdmission}" method="post" th:object="${admission}">
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="col-sm-2" style=" height: 220px; float: left;"></div>
@@ -76,7 +75,7 @@
 											<div class="row">
 												<div class="col-sm-6 firstSecondPart">
 													<div class="form-group">
-														<label for="admissionNo">Admission NO</label> <input type="text"
+														<label for="admissionNo">Admission No</label> <input type="text"
 															required name="admissionNo"
 															class="form-control inputbox inputbox" id="admissionNo"
 															aria-describedby="emailHelp"
@@ -102,19 +101,19 @@
 													</div>
 													<div class="form-group">
 														<label for="username">Date of Birth</label> <input
-															type="datetime" required name="dob"
+															type="datetime-local" required name="dob"
 															class="form-control inputbox" id="dob"
 															aria-describedby="emailHelp"
 															placeholder="Enter Date of Birth...">
 													</div>
 													<div class="form-group">
-														<label for="username">Gender</label> <input type="datetime"
-															required name="dob" class="form-control inputbox" id="dob"
+														<label for="gender">Gender</label> <input type="text"
+															required name="gender" class="form-control inputbox" id="dob"
 															aria-describedby="emailHelp"
 															placeholder="Enter Date of Birth...">
 													</div>
 													<div class="form-group">
-														<label for="username">Blood Group</label> <input type="text"
+														<label for="bloodGroup">Blood Group</label> <input type="text"
 															required name="bloodGroup" class="form-control inputbox"
 															id="bloodGroup" aria-describedby="bloodGroup"
 															placeholder="Enter Blood Group...">
@@ -130,16 +129,16 @@
 															required name="address" class="form-control inputbox"
 															id="address" aria-describedby="emailHelp"
 															placeholder="Enter your Home Address...">
-													</div>
-													<div class="form-group">
-														<label for="emailAddress">Email address</label> <input
-															type="email" required name="email"
-															class="form-control inputbox" id="email"
-															aria-describedby="emailHelp" placeholder="Enter email...">
-													</div>
+													</div>													
 												</div>
 
 												<div class="col-sm-6 firstSecondPart">
+													<div class="form-group">
+														<label for="gmail">Email address</label> <input
+															type="email" required name="gmail"
+															class="form-control inputbox" id="gmail"
+															aria-describedby="emailHelp" placeholder="Enter email...">
+													</div>
 													<div class="form-group">
 														<label for="district">District</label> <input type="text"
 															required name="district" class="form-control inputbox"
@@ -157,13 +156,7 @@
 															name="pincode" class="form-control inputbox" id="pincode"
 															aria-describedby="emailHelp"
 															placeholder="Enter your Pincode...">
-													</div>
-													<div class="form-group">
-														<label for="username">Contact No</label> <input type="text"
-															required name="smob" class="form-control inputbox" id="smod"
-															aria-describedby="emailHelp"
-															placeholder="Enter your mobile number...">
-													</div>
+													</div>													
 													<div class="form-group">
 														<label for="aadharNo">AadharCard No</label> <input type="text"
 															required name="aadharNo" class="form-control inputbox"
@@ -191,13 +184,7 @@
 															aria-describedby="emailHelp"
 															placeholder="Enter your father occupation...">
 													</div>
-													<div class="form-group">
-														<label for="moccupation">Mother Occupation</label> <input
-															type="text" required name="moccupation"
-															class="form-control inputbox" id="moccupation"
-															aria-describedby="emailHelp"
-															placeholder="Enter your Mother occupation...">
-													</div>
+									
 													<div class="form-group">
 														<label for="pmob">Contact No</label> <input type="text" required
 															name="pmob" class="form-control inputbox" id="pmob"
@@ -239,10 +226,10 @@
 												</div>
 												<div class="col-sm-5">
 													<div class="form-group">
-														<label for="admissionNo">Registration No</label> <input type="text"
-															required name="admissionNo" class="form-control inputbox"
+														<label for="registrationNo">Registration No</label> <input type="text"
+															required name="registrationNo" class="form-control inputbox"
 															id="admissionNo" aria-describedby="emailHelp"
-															placeholder="Enter Date of Birth...">
+															placeholder="Enter Registration No...">
 													</div>													
 													<div class="form-group">
 														<label for="classAdmittedto">Class Admitted to</label> <input
@@ -251,19 +238,14 @@
 															aria-describedby="emailHelp"
 															placeholder="Enter Father Name...">
 													</div>
-													<div class="form-group">
-														<label for="section">Class Section</label> <input type="text"
-															required name="section" class="form-control inputbox"
-															id="section" aria-describedby="emailHelp"
-															placeholder="Enter Mother Name...">
-													</div>
+													
 
 												</div>
 											</div>
 											<br><br>
 											<div class="form-group form-check text-center">
 												<input type="checkbox" name="agreement" required
-													class="form-check-input"/>
+													class="formss"/>
 												<label class="agreemet">Accept
 													terms and conditions </label>
 											</div>
@@ -280,6 +262,76 @@
 						</div>
 					</div>
 
+				</div>
+			</div>
+			
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-body table-responsive">
+						<h5 class="card-title">Book Details</h5>
+						<table width="100%" style="font-size: 80%" HSPACE=3 VSPACE=4>
+							<thead>
+								<tr>
+									<th>Sr.No</th>
+									<th>Admission No</th>
+									<th>Student Name</th>
+									<th>Father Name</th>
+									<th>Mother Name</th>
+									<th>Date of Birth</th>
+									<th>Gender</th>
+									<th>Blood Group</th>
+									<th>Student Class</th>
+									<th>Address</th>
+									<th>Gmail</th>
+									<th>District</th>
+									<th>State</th>
+									<th>PinCode</th>
+									<th>Aadhar No</th>
+									<th>Father Qulification</th>
+									<th>Mother Qulification</th>
+									<th>Father Occupation</th>
+									<th>Contact No</th>
+									<th>Receipt No</th>
+									<th>Amount</th>
+									<th>Registration No</th>
+									<th>Class Admitted </th>					
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="books,id:${book}">
+									<td th:text="${id.count}"></td>
+									<td th:text="${books.subName}"></td>
+									<td th:text="${books.subIcon}"></td>
+									<td th:text="${books.subTitle}"></td>
+									<td th:text="${books.publisher}"></td>
+									<td th:text="${books.author}"></td>
+									<td th:text="${books.substatus}"></td>
+									<td th:text="${books.bookIssueDate}"></td>
+									<td th:text="${books.bookSubmitDate}"></td>
+									<td>
+										<div class="form">
+											<form th:action="@{/deleteBook{id}}" method="post" th:object="${book}">
+												<input type="hidden" th:value="${books.id}" name="id" />
+												<button type="submit" value="Submit" class="bg-light"><i
+														class="bi bi-trash3 text-danger"></i></button>
+											</form>
+										</div>
+										<div class="form">
+											<button class="bg-light"><a th:href="|@{/bupdate{id}(id=${books.id})}|"
+													style="color: white;"><i
+														class="bi bi-pencil-square text-success"></i></a>&nbsp;</button>
+											<button class="bg-light"><a
+													href="https://www.javatpoint.com/spring-boot-tutorial"
+													download="download" style="color: white;"><i
+														class="bi bi-eye-fill text-info"></i></a>&nbsp;</button>
+										</div>
+									</td>
+								</tr>
+								<!-- Add more rows as needed -->
+							</tbody>
+							</table>
+					</div>
 				</div>
 			</div>
 </div>

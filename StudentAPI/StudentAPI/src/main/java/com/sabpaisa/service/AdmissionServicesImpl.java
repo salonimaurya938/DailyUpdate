@@ -49,5 +49,11 @@ public class AdmissionServicesImpl  implements AdmissionServices{
 		Admission entity= admissionDao.getOne(id);
 		admissionDao.delete(entity);	
 	}
+	
+	public void saveStudentPic(byte[] stdProfile) {
+        Admission student = new Admission();
+        student.setStdProfile(stdProfile);
+        admissionDao.save(student);
+    }
 
 }

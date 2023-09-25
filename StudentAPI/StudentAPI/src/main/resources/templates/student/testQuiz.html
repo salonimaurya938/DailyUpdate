@@ -31,7 +31,8 @@
 										<button name="previous" id="previous" class="btn btn-info">Previous</button>
 										&nbsp;
 										<button name="next" id="next" class="btn btn-info">Next</button>
-										 <button onclick="submit();" id="sub" style="float:right;display: none;">Submit</button>
+										&nbsp;
+										 <button name="submit" value="submit" id="submit" class="btn btn-info" style="display: none;">Submit</button>
 									</form>
 								</div>
 							</div> <!-- End of col-sm-12 -->
@@ -50,25 +51,24 @@
 	/* Quiz source: w3schools.com */
 	/*<![CDATA[*/
     var quiz = /*[[${questionOption}]]*/ '{}';
-    /*]]>*/
-	
+    /*]]>*/	
 	
 	console.log(quiz);	
 	console.log(typeof quiz);	
-	
-
 	var quizApp = function () {
 		this.score = 0;
 		this.qno = 1;
 		this.currentque = 0;
 		var totalque = quiz.length;
+		var id=1;
 		this.displayQuiz = function (cque) {
 			this.currentque = cque;
 			if (this.currentque < totalque) {
 				$("#tque").html(totalque);
 				$("#previous").attr("disabled", false);
 				$("#next").attr("disabled", false);
-				$("#qid").html(quiz[this.currentque].id);
+				$("#qid").html(id++);
+				//$("#qid").html(quiz[this.currentque].id);	   
 				//$("#qid1").html(quiz[this.currentque].id + '.').val();
 				$("#question").html(quiz[this.currentque].question);				
 				$("#question-options").html("");
@@ -92,21 +92,33 @@
 				for (var i = 1; i < totalque; i++) {
 					this.score = this.score + quiz[i].score;
 				}
-				return this.showResult(this.score);
+			if(this.currentque==totalque)	{
+				$("#submit").attr("disabled", true)
+				var s=confirm("Are you want to Submit ?");	
+				if(s){
+					return this.showResult(this.score);
+					}			
+			    }
+				
 			}
-		} 
+		} 		
 		this.showResult = function(scr) {
+			//if(scr==1){
+				//scr =scr.length;
+			//}	
+			var id=1;		
 			$("#result").addClass('result');
-			$("#result").html("<h1 class='res-header'>Total Score: &nbsp;" + scr.length + '/' + totalque + "</h1>");
+			$("#result").html("<h1 class='res-header'>Total Score: &nbsp;" + scr + '/' + totalque + "</h1>");
 			for (var j = 0; j < totalque; j++) {
 				var res;
-				if (quiz[j].score == 0) {
-					res = '<span class="wrong">' + quiz[j].score + '</span><i class="fa fa-remove c-wrong"></i>';
-				} else {
+				if (quiz[j].score == 1) {
 					res = '<span class="correct">' + quiz[j].score + '</span><i class="fa fa-check c-correct"></i>';
+					
+				} else {
+					res = '<span class="wrong">' + quiz[j].score + '</span><i class="fa fa-remove c-wrong"></i>';
 				}
 				$("#result").append(
-					'<div class="result-question"><span>Q ' + quiz[j].id + '</span> &nbsp;' + quiz[j].question + '</div>' +
+					'<div class="result-question"><span>Q ' + id++ + '</span> &nbsp;' + quiz[j].question + '</div>' +
 					'<div><b>Correct answer:</b> &nbsp;' + quiz[j].answer + '</div>' +
 					'<div class="last-row"><b>Score:</b> &nbsp;' + res +
 					'</div>'
@@ -116,14 +128,15 @@
 		this.checkAnswer = function (option) {
 			var answer = quiz[this.currentque].answer;
 			var option= $("input[name='option']:checked").val();
-			console.log(option);
 		//	option = option.replace(/</g, "&lt;") //for <
 		//	option = option.replace(/>/g, "&gt;") //for >
 		//	option = option.replace(/"/g, "&quot;")
 			if (option == quiz[this.currentque].answer) {				
 				if (quiz[this.currentque].score == 0) {
-					//alert("okk")
 					quiz[this.currentque].score = 1;
+					var ab =quiz[this.currentque].answer;
+					var answerSize= ab;
+					console.log(answerSize);
 					quiz[this.currentque].status = "correct";
 					
 				}
@@ -132,18 +145,20 @@
 			}
 		}
 		this.changeQuestion = function (cque) {
-			this.currentque = this.currentque + cque;
-			this.displayQuiz(this.currentque);
+		this.currentque = this.currentque + cque;
+		this.displayQuiz(this.currentque);
 		}
 	}
 	var jsq = new quizApp();
 	var selectedopt;
+	var totalque = quiz.length;	
 	$(document).ready(function () {
 		jsq.displayQuiz(0);
 		$('#question-options').on('change', 'input[type=radio][name=option]', function (e) {
 			//var radio = $(this).find('input:radio');
 			$(this).prop("checked", true);
 			selectedopt = $(this).val();
+			var abc=selectedopt.length;
 		});
 	});
 	$('#next').click(function (e) {
@@ -152,29 +167,8 @@
 			jsq.checkAnswer(selectedopt);
 		}
 		jsq.changeQuestion(1);
-		
-		var totalque = quiz.length;
-		if(1<=totalque)
-		{
-			document.getElementById("f" + i).style.display = "block";
-		}
-		else {
-			i = 5;
-			document.getElementById("f" + i).style.display = "block";
-			var s;
-			s = confirm("Are you want to Submit ?");
-			if (s) {
-				document.getElementById("sub").style.display = "block";
-				document.getElementById("nx").style.display = "none";
-				document.getElementById("pr").style.display = "none";
-			}
-		}
-	
-		
-		if(totalque){
-			alert("are you sure !!!")
-		}
 	});
+	
 	$('#previous').click(function (e) {
 		e.preventDefault();
 		if (selectedopt) {
@@ -182,7 +176,13 @@
 		}
 		jsq.changeQuestion(-1);
 	});
-
+	$('#submit').click(function (e) {
+		e.preventDefault();
+	   if (abc ==totalque) {
+			jsq.checkAnswer(selectedopt);
+		}
+		jsq.changeQuestion(s);
+	});
 </script>
 <!--............................... End JQuery.................................... -->
 <!--............................... Start AjaxCode.................................... -->
