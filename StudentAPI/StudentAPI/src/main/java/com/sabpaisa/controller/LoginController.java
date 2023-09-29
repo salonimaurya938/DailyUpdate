@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.session.SessionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,12 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMethodMappingNamingStrategy;
-import org.w3c.dom.events.Event;
-
 import com.sabpaisa.dao.CategoryDao;
 import com.sabpaisa.dao.ChapterDao;
 import com.sabpaisa.dao.ImagesDao;
@@ -35,7 +33,6 @@ import com.sabpaisa.dao.OptionDao;
 import com.sabpaisa.dao.QuizDao;
 import com.sabpaisa.dao.UploadCourseDao;
 import com.sabpaisa.dao.feeDao;
-import com.sabpaisa.dto.QuizRequest;
 import com.sabpaisa.entity.Admin;
 import com.sabpaisa.entity.Admission;
 import com.sabpaisa.entity.AdmissionEnquiry;
@@ -50,7 +47,6 @@ import com.sabpaisa.entity.Images;
 import com.sabpaisa.entity.Option;
 import com.sabpaisa.entity.Quiz;
 import com.sabpaisa.entity.QuizDetails;
-import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.entity.TimeTable;
 import com.sabpaisa.entity.UploadCourses;
@@ -69,7 +65,6 @@ import com.sabpaisa.service.StudentResultService;
 import com.sabpaisa.service.StudentService;
 import com.sabpaisa.service.TimeTableService;
 import com.sabpaisa.service.UploadCourseService;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -158,13 +153,15 @@ public class LoginController {
 	}
 
 	@PostMapping("/adminlogin")
-	public String saveLogin(Model model, @ModelAttribute("adminlogin") Admin admin) {
+	public String saveLogin(Model model, @ModelAttribute("adminlogin") Admin admin,HttpSession session) {
 		Admin userData = adminService.adminlogin(admin);
 		System.out.println("Admin login :: " + userData);
 		// Admin userData =
 		// adminDao.findByUsernameAndPassword(admin.getUsername(),admin.getPassword());
 
 		if (userData != null) {
+			session.setAttribute("email", userData.getEmail());
+			session.setAttribute("username", userData.getUsername());
 			model.addAttribute("id", userData.getId());
 			model.addAttribute("username", userData.getUsername());
 			model.addAttribute("email", userData.getEmail());
@@ -856,6 +853,4 @@ public class LoginController {
 		System.out.println("Banner Section ...");		
 		return "admin/addBanner";
 	}
-	
-
 }

@@ -1,10 +1,11 @@
 package com.sabpaisa.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.sabpaisa.dao.AdmissionEnquiryDao;
 import com.sabpaisa.dao.AdmissionReportDao;
 import com.sabpaisa.entity.Admission;
@@ -57,31 +57,58 @@ public class AdmissionController {
 	}	
 	
 	@PostMapping("/newAdmission")
-	public String insertNewAdmission(@ModelAttribute("admin/newAdmission")Admission admission,
+	public ResponseEntity<String> insertNewAdmission(
+			@ModelAttribute("admin/newAdmission") 
 			@RequestParam("stdProfile") MultipartFile stdProfile,
-	        @RequestParam("fProfile") MultipartFile fProfile,
-	        @RequestParam("mProfile") MultipartFile mProfile) {
-		
-		
-		try {
-            byte[] studentPicData = stdProfile.getBytes();
-            byte[] fatherPicData = fProfile.getBytes();
-            byte[] motherPicData = mProfile.getBytes();
-            
-//            admissionServices.saveStudentPic(studentPicData);
-//            admissionServices.saveFatherPic(fatherPicData);
-//            admissionServices.saveMotherPic(motherPicData);
-        } catch (IOException e) {
-            // Handle exceptions
-        }		
-		Admission ab=admissionServices.addAdmission(admission);
+			@RequestParam("fProfile") MultipartFile fProfile,
+			@RequestParam("mProfile") MultipartFile mProfile,
+			String admissionNo, String name, String fname, String mname, String dob, String gender, String bloodGroup,
+			String classes, String address, String gmail, String district, String state, String pincode,
+			String aadharNo, String fqulification, String mqulification, String foccupation, String pmob,
+			String receiptNo, String amount, String registrationNo, String classAdmittedinto, String rollNo,String userId, String pass) {
+
+		Admission admission = new Admission();
+		Admission newData = admissionServices.saveAdmission(admission);
+		newData.setAdmissionNo(admissionNo);
+		newData.setName(name);
+		newData.setFname(fname);
+		newData.setMname(mname);
+		newData.setDob(dob);
+		newData.setGender(gender);
+		newData.setBloodGroup(bloodGroup);
+		newData.setClasses(classes);
+		newData.setAddress(address);
+		newData.setGmail(gmail);
+		newData.setDistrict(district);
+		newData.setState(state);
+		newData.setPincode(pincode);
+		newData.setAadharNo(aadharNo);
+		newData.setFqulification(fqulification);
+		newData.setMqulification(mqulification);
+		newData.setFoccupation(foccupation);
+		newData.setPmob(pmob);
+		newData.setReceiptNo(receiptNo);
+		newData.setAmount(amount);
+		newData.setRegistrationNo(registrationNo);
+		newData.setClassAdmittedinto(classAdmittedinto);
+		newData.setRollNo(rollNo);
+		newData.setUserId(userId);
+		newData.setPass(pass);
+		if (newData != null) {
+			try {
+				newData.setStdProfile(admission.getStdProfile());
+				newData.setfProfile(admission.getfProfile());
+				newData.setmProfile(admission.getmProfile());
+			} catch (Exception e) {
+				return ResponseEntity.badRequest().body("Image upload failed: " + e.getMessage());
+			}
+		}
+		newData = admissionServices.saveAdmission(newData);
 		System.out.println("Insert successFully Admission Data !!!");
-		System.out.println(ab);
-		
-		return "admin/newAdmission";
-	}
-	
-	
+		System.out.println(newData);
+
+		return ResponseEntity.ok("admin/newAdmission");
+	}	
 	
 	//..........................Admission EnquiryController........................
 	@GetMapping("/viewAdmissionEnquiry")

@@ -7,39 +7,43 @@
 				<header class="headerTop bg-info" style="border-radius: 5px;">
 					<div class="left-title">Online Test</div>
 					<div class="right-title">Total Questions: <span id="tque"></span></div>
-					<div  class="display-4 fs-5 text-light" th:each="quizDetail,id:${timebyCate}">
-						<span th:text="${quizDetail.totalTime}" th:value="${quizDetail.totalTime}"  id="timer"></span>min</div>
+					<div class="display-4 fs-5 text-light" th:each="quizDetail,id:${timebyCate}">
+						<span th:text="${quizDetail.totalTime}" th:value="${quizDetail.totalTime}" id="timer"></span>min
+					</div>
 					<div class="clearfix"></div>
-			
-			  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>  
+
+					<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
 				</header>
 				<div class="content">
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-sm-12" >
+							<div class="col-sm-12">
 								<div id="result" class="quiz-body">
-									<form name="quizForm" th:action="@{/testQuiz}" onSubmit="" th:object="${category}" id="formId" enctype="multipart/form-data">
+									<form name="quizForm" th:action="@{/testQuiz}" onSubmit="" th:object="${category}"
+										id="formId" enctype="multipart/form-data">
 										<span th:text="${cat}"></span>
 										<fieldset class="form-group">
-											<h4><span id="qid">1</span>.											
-											<span id="question"><!--Question--></span></h4>																						
-											<div class="option-block-container" id="question-options">													
+											<h4><span id="qid">1</span>.
+												<span id="question"><!--Question--></span>
+											</h4>
+											<div class="option-block-container" id="question-options">
 											</div> <!-- End of option block -->
-										</fieldset>										
+										</fieldset>
 										<div class="container mt-5">
-										<button name="previous" id="previous" class="btn btn-info">Previous</button>
-										&nbsp;
-										<button name="next" id="next" class="btn btn-info">Next</button>
-										&nbsp;
-										 <button name="submit" value="submit" id="submit" class="btn btn-info" style="display: none;">Submit</button>
+											<button name="previous" id="previous" class="btn btn-info">Previous</button>
+											&nbsp;
+											<button name="next" id="next" class="btn btn-info">Next</button>
+											&nbsp;
+											<button name="submit" value="submit" id="submit" class="btn btn-info"
+												style="display: none;">Submit</button>
 									</form>
 								</div>
 							</div> <!-- End of col-sm-12 -->
 						</div> <!-- End of row -->
 					</div> <!-- ENd of container fluid -->
 				</div> <!-- End of content -->
-				
+
 			</div><!-- End Page Title -->
 		</main><!-- End #main -->
 	</section>
@@ -50,17 +54,17 @@
 	/* Created and coded by Abhilash Narayan */
 	/* Quiz source: w3schools.com */
 	/*<![CDATA[*/
-    var quiz = /*[[${questionOption}]]*/ '{}';
-    /*]]>*/	
-	
-	console.log(quiz);	
-	console.log(typeof quiz);	
+	var quiz = /*[[${questionOption}]]*/ '{}';
+	/*]]>*/
+
+	console.log(quiz);
+	console.log(typeof quiz);
 	var quizApp = function () {
 		this.score = 0;
 		this.qno = 1;
 		this.currentque = 0;
 		var totalque = quiz.length;
-		var id=1;
+		var id = 1;
 		this.displayQuiz = function (cque) {
 			this.currentque = cque;
 			if (this.currentque < totalque) {
@@ -70,7 +74,7 @@
 				$("#qid").html(id++);
 				//$("#qid").html(quiz[this.currentque].id);	   
 				//$("#qid1").html(quiz[this.currentque].id + '.').val();
-				$("#question").html(quiz[this.currentque].question);				
+				$("#question").html(quiz[this.currentque].question);
 				$("#question-options").html("");
 				for (var key in quiz[this.currentque].option[0]) {
 					if (quiz[this.currentque].option[0].hasOwnProperty(key)) {
@@ -86,34 +90,37 @@
 			}
 			if (this.currentque <= 0) {
 				$("#previous").attr("disabled", true);
+				for (var i = 1; i > totalque; i--) {
+					this.score = this.score - quiz[i].score;
+				}
 			}
 			if (this.currentque >= totalque) {
 				$('#next').attr('disabled', true);
 				for (var i = 1; i < totalque; i++) {
 					this.score = this.score + quiz[i].score;
 				}
-			if(this.currentque==totalque)	{
-				$("#submit").attr("disabled", true)
-				var s=confirm("Are you want to Submit ?");	
-				if(s){
-					return this.showResult(this.score);
-					}			
-			    }
-				
+				if (this.currentque == totalque) {
+					$("#submit").attr("disabled", true);
+					var s = confirm("Are you want to Submit ?");
+					if (s) {
+						return this.showResult(this.score);
+					}
+				}
+
 			}
-		} 		
-		this.showResult = function(scr) {
-			//if(scr==1){
-				//scr =scr.length;
-			//}	
-			var id=1;		
+		}
+		this.showResult = function (scr) {
+			if (scr == 1) {
+				scr = scr.length;
+			}
+			var id = 1;
 			$("#result").addClass('result');
 			$("#result").html("<h1 class='res-header'>Total Score: &nbsp;" + scr + '/' + totalque + "</h1>");
 			for (var j = 0; j < totalque; j++) {
 				var res;
 				if (quiz[j].score == 1) {
 					res = '<span class="correct">' + quiz[j].score + '</span><i class="fa fa-check c-correct"></i>';
-					
+
 				} else {
 					res = '<span class="wrong">' + quiz[j].score + '</span><i class="fa fa-remove c-wrong"></i>';
 				}
@@ -127,38 +134,34 @@
 		}
 		this.checkAnswer = function (option) {
 			var answer = quiz[this.currentque].answer;
-			var option= $("input[name='option']:checked").val();
-		//	option = option.replace(/</g, "&lt;") //for <
-		//	option = option.replace(/>/g, "&gt;") //for >
-		//	option = option.replace(/"/g, "&quot;")
-			if (option == quiz[this.currentque].answer) {				
+			var option = $("input[name='option']:checked").val();
+			if (option == quiz[this.currentque].answer) {
 				if (quiz[this.currentque].score == 0) {
 					quiz[this.currentque].score = 1;
-					var ab =quiz[this.currentque].answer;
-					var answerSize= ab;
+					var ab = quiz[this.currentque].answer;
+					var answerSize = ab;
 					console.log(answerSize);
 					quiz[this.currentque].status = "correct";
-					
 				}
 			} else {
 				quiz[this.currentque].status = "wrong";
 			}
 		}
 		this.changeQuestion = function (cque) {
-		this.currentque = this.currentque + cque;
-		this.displayQuiz(this.currentque);
+			this.currentque = this.currentque + cque;
+			this.displayQuiz(this.currentque);
 		}
 	}
 	var jsq = new quizApp();
 	var selectedopt;
-	var totalque = quiz.length;	
+	var totalque = quiz.length;
 	$(document).ready(function () {
 		jsq.displayQuiz(0);
 		$('#question-options').on('change', 'input[type=radio][name=option]', function (e) {
 			//var radio = $(this).find('input:radio');
 			$(this).prop("checked", true);
 			selectedopt = $(this).val();
-			var abc=selectedopt.length;
+			var abc = selectedopt.length;
 		});
 	});
 	$('#next').click(function (e) {
@@ -168,7 +171,7 @@
 		}
 		jsq.changeQuestion(1);
 	});
-	
+
 	$('#previous').click(function (e) {
 		e.preventDefault();
 		if (selectedopt) {
@@ -178,122 +181,70 @@
 	});
 	$('#submit').click(function (e) {
 		e.preventDefault();
-	   if (abc ==totalque) {
+		if (abc == totalque) {
 			jsq.checkAnswer(selectedopt);
 		}
 		jsq.changeQuestion(s);
 	});
+
+
 </script>
 <!--............................... End JQuery.................................... -->
-<!--............................... Start AjaxCode.................................... -->
-<script>
 
-		/*$(document).on('click', function (e) {
-			var myData = {
-				"x": $("#qid").val,
-				"y": $("#question-options").val
-			}
-			console.log(myData);
-				$.ajax({
-					type: "POST",
-					contentType: 'application/json; charset=utf-8',
-					dataType: 'json',
-					url: "/testQuiz", //assuming your controller is configured to accept requests on this URL
-					data: JSON.stringify(myData), // This converts the payLoad to Json to pass along to Controller
-					success: function (result) {
-						
-						// do what ever you want with data
-					}
-				});*/	
-       
-     /*   $(document).ready(function () {
-            $("#question-options").click(function () {
-			   var qid=document.getElementById("qid").innerHTML; 
-			   var question = document.getElementById("question").innerHTML;
-			   var option = document.querySelector('input[name="option"]:checked').value;
-			  	      
-                var formData = {
-			    id : qid,
-                question : question,
-                option: option              
-                };
-                var jsonData = JSON.stringify(formData);   
-                console.log(formData);           
-                $.ajax({
-					url: '/testQuiz',
-                    type: "POST",
-                    contentType: "application/json",                   
-                    data: jsonData, //send data directly                          
-                    processData: false,
-					success: function (response) {
-						console.log(response);
-					},
-					error: function (error) {						
-						console.error(error);
-					}
-                });
-            });
-        });*/
-</script>
-<!--............................... End AjaxCode.................................... -->
 <!--............................... Start JavaScript.................................... -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-  const timerDisplay = document.getElementById("timer");
-  const startButton = document.getElementById("startButton");
-  const resetButton = document.getElementById("resetButton");
-  let endTime;
-  let timerInterval;
+	document.addEventListener("DOMContentLoaded", function () {
+		const timerDisplay = document.getElementById("timer");
+		const startButton = document.getElementById("startButton");
+		const resetButton = document.getElementById("resetButton");
+		let endTime;
+		let timerInterval;
 
-  function startTimer(durationInSeconds) {
-    endTime = new Date().getTime() + durationInSeconds * 1000;
-    timerInterval = setInterval(updateTimer, 1000);
-    //console.log("timeInterval :: " +timerInterval);
-    //console.log("end time :: " +endTime);
-    startButton.disabled = true;
-  }
+		function startTimer(durationInSeconds) {
+			endTime = new Date().getTime() + durationInSeconds * 1000;
+			timerInterval = setInterval(updateTimer, 1000);
+			startTimer.disabled = false;
+		}
 
-  function updateTimer() {
-    const currentTime = new Date().getTime();
-    const timeLeft = endTime - currentTime;
-  //  console.log("current time :: "+currentTime);
-   // console.log("time left :: "+timeLeft);
+		function updateTimer(funValue) {
+			const currentTime = new Date().getTime();
+			const timeLeft = endTime - currentTime;
+			if (timeLeft <= 0) {
+				clearInterval(timerInterval);
+				timerDisplay.textContent = "00:00";
+				startTimer.disabled = false;
+			} else {
+				const minutes = Math.floor(timeLeft / (1000 * 60));
+				const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      timerDisplay.textContent = "00:00";
-      startButton.disabled = false;
-      // Handle timer completion actions here
-    } else {
-      const minutes = Math.floor(timeLeft / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-      //console.log("minutes :: "+minutes);
-     //// console.log("seconds :: "+seconds);
+				const formattedMinutes = String(minutes).padStart(2, "0");
+				const formattedSeconds = String(seconds).padStart(2, "0");
 
+				timerDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
+				if (formattedMinutes == "00" && formattedSeconds == "00") {
+					var ab = confirm("Your Quiz test is over please Submit Your Quiz Test!!!");
+					if (ab) {
+						alert("okkkkkkkkk")
+						return quizApp.showResult(quiz.score);
+					}
+				}
+			}
+		}
 
-      const formattedMinutes = String(minutes).padStart(2, "0");
-      const formattedSeconds = String(seconds).padStart(2, "0");
+		function resetTimer() {
+			clearInterval(timerInterval);
+			timerDisplay.textContent = "00:00";
+			startTimer.disabled = false;
+		}
+		var a = document.getElementById("timer").innerText;
+		let b = a * 60;
+		//startButton.addEventListener("click", function () {
+		startTimer(b); // Set the countdown duration in seconds (e.g., 5 minutes)
+		// });
 
-     // console.log("formattedMinutes :: "+formattedMinutes);
-      //console.log("formattedSeconds :: "+formattedSeconds);
-      timerDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
-    }
-  }
+		resetButton.addEventListener("click", resetTimer);
+	});
 
-  function resetTimer() {
-    clearInterval(timerInterval);
-    timerDisplay.textContent = "00:00";
-    startButton.disabled = false;
-  }
- var a = document.getElementById("timer").innerText;
- //alert(a);
- let b=a*60;
-  //startButton.addEventListener("click", function () {
-    startTimer(b); // Set the countdown duration in seconds (e.g., 5 minutes)
- // });
-
-  resetButton.addEventListener("click", resetTimer);
-});
 </script>
 
 <!--............................... End AjaxCode.................................... -->
@@ -302,7 +253,6 @@
 	.content {
 		margin-top: 54px;
 	}
-
 	.headerTop {
 		padding: 15px;
 		position: relative;

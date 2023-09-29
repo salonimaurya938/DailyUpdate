@@ -47,13 +47,13 @@ public class StudentServiceImpl implements StudentService {
 		
 	}
 
-	@Override
-	public Student studentLogin(Student student) {
-		System.out.println(student);
-		Student findByUsername= studentDao.findByEmailAndPassword(student.getEmail(),student.getPassword());
-		System.out.println(findByUsername);
-	    return findByUsername;
-	}
+//	@Override
+//	public Student studentLogin(Student student) {
+//		System.out.println(student);
+//		Student findByUsername= studentDao.findByEmailAndPassword(student.getEmail(),student.getPassword());
+//		System.out.println(findByUsername);
+//	    return findByUsername;
+//	}
 	
 
 }

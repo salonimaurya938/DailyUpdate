@@ -19,7 +19,7 @@ public interface StudentService {
 	
 	public void deleteStudent(int Delete_id);
 	
-	public Student studentLogin(Student student);
+	//public Student studentLogin(Student student);
 	
 
 }

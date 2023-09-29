@@ -26,7 +26,7 @@ public class AdmissionServicesImpl  implements AdmissionServices{
 	}
 
 	@Override
-	public Admission addAdmission(Admission admission) {
+	public Admission saveAdmission(Admission admission) {
 		Admission save = admissionDao.save(admission);
 		return save;
 	}
@@ -50,10 +50,25 @@ public class AdmissionServicesImpl  implements AdmissionServices{
 		admissionDao.delete(entity);	
 	}
 	
-	public void saveStudentPic(byte[] stdProfile) {
-        Admission student = new Admission();
-        student.setStdProfile(stdProfile);
-        admissionDao.save(student);
-    }
+//	public void saveStudentPic(byte[] stdProfile) {
+//        Admission student = new Admission();
+//        student.setStdProfile(stdProfile);
+//        admissionDao.save(student);
+//    }
+	
+
+	@Override
+	public List<Admission> saveImagesWithType(List<Admission> admission) {
+		return admissionDao.saveAll(admission);
+		
+	}
+
+	@Override
+	public Admission studentLogin(Admission admission) {
+		Admission xyz=admissionDao.findByUserIdAndPass(admission.getUserId(), admission.getPass());
+		return null;
+	}
+
+	
 
 }

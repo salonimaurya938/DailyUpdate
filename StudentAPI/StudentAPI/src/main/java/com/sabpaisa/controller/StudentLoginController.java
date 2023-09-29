@@ -24,6 +24,7 @@ import com.sabpaisa.entity.Student;
 import com.sabpaisa.entity.StudentResult;
 import com.sabpaisa.entity.TimeTable;
 import com.sabpaisa.entity.UploadCourses;
+import com.sabpaisa.dao.AdmissionDao;
 import com.sabpaisa.dao.CategoryDao;
 import com.sabpaisa.dao.OptionDao;
 import com.sabpaisa.dao.QuizDao;
@@ -31,6 +32,7 @@ import com.sabpaisa.dao.QuizDetailsDao;
 import com.sabpaisa.dao.StudentDao;
 import com.sabpaisa.dao.UploadDao;
 import com.sabpaisa.dto.QuizDto;
+import com.sabpaisa.entity.Admission;
 import com.sabpaisa.entity.Book;
 import com.sabpaisa.entity.Category;
 import com.sabpaisa.entity.Chapter;
@@ -40,6 +42,7 @@ import com.sabpaisa.entity.Images;
 import com.sabpaisa.entity.Option;
 import com.sabpaisa.entity.Quiz;
 import com.sabpaisa.entity.QuizDetails;
+import com.sabpaisa.service.AdmissionServices;
 import com.sabpaisa.service.BookService;
 import com.sabpaisa.service.ChapterService;
 import com.sabpaisa.service.EventsService;
@@ -51,140 +54,169 @@ import com.sabpaisa.service.StudentService;
 import com.sabpaisa.service.TimeTableService;
 import com.sabpaisa.service.UploadCourseService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class StudentLoginController {
-	
+
 	@Autowired
 	private StudentService studentService;
-	
+
 	@Autowired
 	public StudentDao studentDao;
-	
+
 	@Autowired
 	private BookService bookService;
-	
+
 	@Autowired
 	private ChapterService chapterService;
-	
+
 	@Autowired
 	private EventsService eventsService;
-	
+
 	@Autowired
-	public UploadDao uploadDao; 
-	
+	public UploadDao uploadDao;
+
 	@Autowired
 	private HomeWorkService homeWorkService;
-	
+
 	@Autowired
 	private StudentResultService studentResultService;
-	
+
 	@Autowired
 	private TimeTableService timeTableService;
-	
+
 	@Autowired
 	private UploadCourseService uploadCourseService;
-	
+
 	@Autowired
 	private QuizService quizService;
-	
+
 	@Autowired
 	private QuizDao quizDao;
-	
+
 	@Autowired
 	private OptionDao optionDao;
-	
+
 	@Autowired
 	private QuizDetailsDao quizDetailsDao;
-	
+
 	@Autowired
 	private QuizDetailsServices quizDetailsServices;
-	
+
 	@Autowired
 	private CategoryDao categoryDao;
 	
+	@Autowired
+	private AdmissionServices admissionServices;
+	
+	@Autowired
+	private AdmissionDao admissionDao;
+
 //	@RequestMapping("/register")
 //	public String StudentRegistration() {
 //		return "register";
 //	}
 //	
 	@GetMapping("/my-account")
-	public String addstudents(Model model,Student student) {		
+	public String addstudents(Model model, Student student) {
 		model.addAttribute("title", "Registration-School Management System");
-		model.addAttribute("students", student);		
+		model.addAttribute("students", student);
 		return "my-account";
 	}
- 	
+
 	@PostMapping("/my-account")
-	public String addstudent(@ModelAttribute("admin/addEvents") Student student) {		
-		studentService.addStudent(student);		
-		System.out.println("Data Insrted Successfully :: "+studentService.addStudent(student));		
+	public String addstudent(@ModelAttribute("admin/addEvents") Student student) {
+		studentService.addStudent(student);
+		System.out.println("Data Insrted Successfully :: " + studentService.addStudent(student));
 		return "my-account";
 	}
-		
+
 	@RequestMapping("/viewRegistration")
 	public String viewstuden(Model model) {
-		List<Student> as= studentService.getStudents();
+		List<Student> as = studentService.getStudents();
 		model.addAttribute("students", as);
 		return "viewRegistration";
 	}
-	
+
 	@GetMapping("/login")
 	public ModelAndView studentlogin() {
 		System.out.println("Project runing mood....");
 		ModelAndView ma = new ModelAndView("login");
 		ma.addObject("login", new Student());
 		return ma;
-	}	
-	
-	@PostMapping("/login")
-	public String Studentlogin(Model model, @ModelAttribute("login") Student student) {
-		System.out.println(student);
-		Student d = studentService.studentLogin(student);
-	    String email=d.getEmail();
-	    String pass=d.getPassword();
-	    System.out.println("student data "+d);
-	   if(email!=null && pass!=null) {
-		    model.addAttribute("id", d.getId());
-			model.addAttribute("username", d.getStudentName());
-			model.addAttribute("email", d.getEmail());
-			model.addAttribute("mob", d.getMob());
-			model.addAttribute("pass", d.getPassword());
-			return "student/studentDashboard";
-	   }else
-		return "login";
 	}
-	
+
+	@PostMapping("/login")
+	public String Studentlogin(Model model, @ModelAttribute("login")Admission admission,HttpSession session) {
+		System.out.println("Admission details :: "+admission);
+		Admission user = admissionDao.findByUserIdAndPass(admission.getUserId(), admission.getPass());
+		String email = user.getUserId();
+		String pass = user.getPass();
+		System.out.println("Admission data" + user);
+		if (email != null && pass != null) {
+			session.setAttribute("username", user.getUserId());
+			session.setAttribute("name", user.getName());
+			session.setAttribute("email", user.getGmail());
+			session.setAttribute("pass", user.getPass());
+			session.setAttribute("id", user.getId());
+//   	    model.addAttribute("id", d.getId());
+			return "student/studentDashboard";
+		} else
+			return "login";
+	}
+
 	@RequestMapping("/studentDashboard")
 	public String dashBoard() {
 		return "student/studentDashboard";
 	}
-	
+
 	@RequestMapping("/myProfile")
-	public String Student(Student student) {
+	public String Student(Admission admission,HttpSession session,Model model) {
 		ModelAndView ma = new ModelAndView("myProfile");
 		System.out.println("my profile...");
-		Student d = studentService.studentLogin(student);
-		System.out.println("student value"+d);
+		
+		String username = (String) session.getAttribute("username");
+		String email = (String) session.getAttribute("email");
+		//int id = (int) session.getAttribute("id");
+		String mob = (String) session.getAttribute("mob");
+		String pass = (String) session.getAttribute("pass");
+		if(username!=null && email!= null) {
+			
+			model.addAttribute("username", username);
+			model.addAttribute("email", email);
+		}
+		model.addAttribute("mob",mob);
+		//model.addAttribute("id", id);
+		model.addAttribute("pass", pass);
+		System.out.println(" Username :: "+username+"\n Email :: "+email+"\n Password :: "+pass+"\n Mobile :: "+mob);
+		
+		//Student d = studentService.studentLogin(student);
+		//System.out.println("student value" + d);
 		return "student/myProfile";
 	}
-	
+
 	@PostMapping("/myProfile")
-	public String studentProfile(Model model,@ModelAttribute("myProfile")Student student) {
+	public String studentProfile(Model model, @ModelAttribute("student/myProfile") HttpSession session,Admission admission) {
 		System.out.println("my profile...");
-		Student d = studentService.studentLogin(student);
-		System.out.println("student value"+d);
-	    if(d!=null) {	    	
-	    	    model.addAttribute("id", d.getId());
-				model.addAttribute("username", d.getStudentName());
-				model.addAttribute("email", d.getEmail());
-				model.addAttribute("mob", d.getMob());
-				model.addAttribute("pass", d.getPassword());	
-				return "student/myProfile";
-	    }		
+//		Admission user = admissionServices.studentLogin(admission);
+//		System.out.println("student value" + user);
+//		if (user != null) {
+//			session.setAttribute("email", user.getGmail());
+//			session.setAttribute("username", user.getName());
+//			session.setAttribute("mob", user.getPmob());
+//			session.setAttribute("pass", user.getPass());
+//			session.setAttribute("id", user.getId());
+//	    	    model.addAttribute("id", d.getId());
+//				model.addAttribute("username", d.getStudentName());
+//				model.addAttribute("email", d.getEmail());
+//				model.addAttribute("mob", d.getMob());
+//				model.addAttribute("pass", d.getPassword());	
+//			return "student/myProfile";
+//		}
 		return "student/myProfile";
 	}
-	
+
 //	@GetMapping("/students ")
 //	public Optional<Student> student(Student student, @PathVariable("id") int id) {
 //		
@@ -197,7 +229,7 @@ public class StudentLoginController {
 //		return studentData;
 //	}
 
-	//..................Book Controller..............................
+	// ..................Book Controller..............................
 
 	@RequestMapping("/viewBook")
 	public String downloadBook(Model model, Book book) {
@@ -207,8 +239,8 @@ public class StudentLoginController {
 		model.addAttribute("book", book1);
 		return "student/viewBook";
 	}
-	
-	//..................Chapter Controller..............................
+
+	// ..................Chapter Controller..............................
 	@RequestMapping("/viewchapters")
 	public String viewChapters(Model model, Chapter chapter) {
 		model.addAttribute("title", "View Chapter-Student Management System");
@@ -217,38 +249,43 @@ public class StudentLoginController {
 		model.addAttribute("chapter", chapter1);
 		return "student/viewchapters";
 	}
-	//..................Events Controller..............................
+
+	// ..................Events Controller..............................
 	@RequestMapping("/viewEvent")
 	public String viewEvents(Model model) {
-		List<Events> as= eventsService.getEvents();
+		List<Events> as = eventsService.getEvents();
 		model.addAttribute("events", as);
 		return "student/viewEvent";
 	}
-	//..................Gallery Controller..............................
+
+	// ..................Gallery Controller..............................
 	@RequestMapping("/viewimg")
 	public String viewImg(Model model) {
 		List<Images> list = uploadDao.findAll();
-		model.addAttribute("lists", list);		
+		model.addAttribute("lists", list);
 		return "student/viewimg";
-	}	
-	//..................HomeWork Controller..............................
+	}
+
+	// ..................HomeWork Controller..............................
 	@RequestMapping("/viewhomeworks")
 	public String viewhomework(Model model, HomeWork homework) {
 		model.addAttribute("title", "View HomeWork-School Management System");
 		System.out.println("Showing..........homeWork data");
 		List<HomeWork> homework1 = homeWorkService.getHomeWorks();
-		System.out.println("homework data ::"+homework1);
+		System.out.println("homework data ::" + homework1);
 		model.addAttribute("question", homework1);
 		return "student/viewhomeworks";
 	}
-	//..................Result Controller..............................
+
+	// ..................Result Controller..............................
 	@RequestMapping("/viewResults")
 	public String viewResult(Model model) {
 		List<StudentResult> list = studentResultService.getStudentResults();
 		model.addAttribute("lists", list);
 		return "student/viewResults";
 	}
-	//..................TimeTable Controller..............................
+
+	// ..................TimeTable Controller..............................
 	@GetMapping("/viewTimeTable")
 	public String timetableget(Model model) {
 		model.addAttribute("title", "TimeTable");
@@ -257,16 +294,17 @@ public class StudentLoginController {
 		model.addAttribute("timeTables", as);
 		return "student/viewTimeTable";
 	}
-	//.........................Online Courses...................
+
+	// .........................Online Courses...................
 	@RequestMapping("/onlineCourse")
 	public String onlineCourse(Model model) {
 		List<UploadCourses> data = uploadCourseService.getUploadCourse();
 		model.addAttribute("data", data);
 		return "student/onlineCourse";
 	}
-	
-	//..............................Online Quiz...........................
-	
+
+	// ..............................Online Quiz...........................
+
 //		@RequestMapping("/onlineQuiz")
 //		public String onlineQuiz(Model model) {
 //			List<Quiz> quiz = quizDao.findAll();
@@ -287,71 +325,68 @@ public class StudentLoginController {
 ////			a++;
 //			return "student/onlineQuiz";
 //		}
-	
-		@RequestMapping("/onlineQuiz")
-		public String quizDetails(Model model) {
-			List<QuizDetails> quizDetails=quizDetailsServices.getQuizDetails();
-			model.addAttribute("quizDetails", quizDetails);	
-			System.out.println(quizDetails);
-			List<Category> cate = categoryDao.findAll();
-			System.out.println("category :: "+cate);
-			model.addAttribute("cate", cate);
-			return "student/onlineQuiz";
-		}
-		
-		
-		@RequestMapping(value ="/testQuiz{category}", method=RequestMethod.GET)
-		public  String quizss(Model model,Quiz quz, @PathVariable("category") String category) {
-			System.out.println("Quiz Section..."+category);
-			List<QuizDetails> quizdetails= quizDetailsDao.findAll();
-			model.addAttribute("quizdetials", quizdetails);
-			List<QuizDetails> newQuizDetails= new ArrayList<>();
-			List<QuizDetails> quizDetails1= quizDetailsDao.findAll();
-			QuizDetails data= null;
-			for(QuizDetails quizDetails3 : quizDetails1)
-			{
-				if(quizDetails3.getCategory().equals(category)) {
-					data = new QuizDetails();
-					data.setTotalTime(quizDetails3.getTotalTime());
-					data.setCategory(quizDetails3.getCategory());
-					data.setClasses(quizDetails3.getClasses());
-					data.setMarks(quizDetails3.getMarks());
-					data.setNegativeMarks(quizDetails3.getNegativeMarks());
-					data.setSubject(quizDetails3.getSubject());
-					data.setTitle(quizDetails3.getTitle());
-					newQuizDetails.add(quizDetails3);
-				}
-				System.out.println("new quizDetailsData.."+ newQuizDetails);
-				model.addAttribute("timebyCate", newQuizDetails);				
-			}			
-			List<Quiz> quiz = quizDao.findAll();
-			model.addAttribute("quiz", quiz);		
-			System.out.println("Fetech All quiz Data ::" + quiz);				
-			System.out.println("Category..."+category);			
-			List<Quiz> newQuestionList = new ArrayList<>();			
-			List<Quiz> quiz1 = quizDao.findAll();	
-			Quiz quiz2 = null;
-			for(Quiz question : quiz1){
-				if(question.getCategory().equalsIgnoreCase(category)){
-					quiz2=new Quiz();
-					quiz2.setQuestion(question.getQuestion());
-					quiz2.setAnswer(question.getAnswer());
-					quiz2.setCategory(question.getCategory());
-					quiz2.setOption(question.getOption());
-					quiz2.setId(question.getId());
-					quiz2.setScore(question.getScore());
-					quiz2.setStatus(question.getStatus());
-					newQuestionList.add(quiz2);
-				}
+
+	@RequestMapping("/onlineQuiz")
+	public String quizDetails(Model model) {
+		List<QuizDetails> quizDetails = quizDetailsServices.getQuizDetails();
+		model.addAttribute("quizDetails", quizDetails);
+		System.out.println(quizDetails);
+		List<Category> cate = categoryDao.findAll();
+		System.out.println("category :: " + cate);
+		model.addAttribute("cate", cate);
+		return "student/onlineQuiz";
+	}
+
+	@RequestMapping(value = "/testQuiz{category}", method = RequestMethod.GET)
+	public String quizss(Model model, Quiz quz, @PathVariable("category") String category) {
+		System.out.println("Quiz Section..." + category);
+		List<QuizDetails> quizdetails = quizDetailsDao.findAll();
+		model.addAttribute("quizdetials", quizdetails);
+		List<QuizDetails> newQuizDetails = new ArrayList<>();
+		List<QuizDetails> quizDetails1 = quizDetailsDao.findAll();
+		QuizDetails data = null;
+		for (QuizDetails quizDetails3 : quizDetails1) {
+			if (quizDetails3.getCategory().equals(category)) {
+				data = new QuizDetails();
+				data.setTotalTime(quizDetails3.getTotalTime());
+				data.setCategory(quizDetails3.getCategory());
+				data.setClasses(quizDetails3.getClasses());
+				data.setMarks(quizDetails3.getMarks());
+				data.setNegativeMarks(quizDetails3.getNegativeMarks());
+				data.setSubject(quizDetails3.getSubject());
+				data.setTitle(quizDetails3.getTitle());
+				newQuizDetails.add(quizDetails3);
 			}
-			System.out.println("new quiz list.."+newQuestionList);
-			model.addAttribute("questionOption", newQuestionList);
-		return "student/testQuiz";
+			System.out.println("new quizDetailsData.." + newQuizDetails);
+			model.addAttribute("timebyCate", newQuizDetails);
 		}
-		
-		
-		@PostMapping("/testQuiz")
-		public String quizDetail(@RequestBody QuizDto quizDto, Quiz quz) {	
+		List<Quiz> quiz = quizDao.findAll();
+		model.addAttribute("quiz", quiz);
+		System.out.println("Fetech All quiz Data ::" + quiz);
+		System.out.println("Category..." + category);
+		List<Quiz> newQuestionList = new ArrayList<>();
+		List<Quiz> quiz1 = quizDao.findAll();
+		Quiz quiz2 = null;
+		for (Quiz question : quiz1) {
+			if (question.getCategory().equalsIgnoreCase(category)) {
+				quiz2 = new Quiz();
+				quiz2.setQuestion(question.getQuestion());
+				quiz2.setAnswer(question.getAnswer());
+				quiz2.setCategory(question.getCategory());
+				quiz2.setOption(question.getOption());
+				quiz2.setId(question.getId());
+				quiz2.setScore(question.getScore());
+				quiz2.setStatus(question.getStatus());
+				newQuestionList.add(quiz2);
+			}
+		}
+		System.out.println("new quiz list.." + newQuestionList);
+		model.addAttribute("questionOption", newQuestionList);
+		return "student/testQuiz";
+	}
+
+	@PostMapping("/testQuiz")
+	public String quizDetail(@RequestBody QuizDto quizDto, Quiz quz) {
 
 //			System.out.println("quizsssss........ "+quizDto);
 //	    	String id=quizDto.getId();
@@ -380,25 +415,17 @@ public class StudentLoginController {
 ////				   
 //			   }
 //			}
-			
-			return "student/testQuiz";
-		}
 
-		
-		
-		
-		
-		@RequestMapping(value = "/quizUpdateScore",method=RequestMethod.POST)
-	    public  String processJsonData( ) {	    	
-	        // Use requestData object in your controller logic	    	
-	    	
-	    	
-	        return "";
-	    }
-		
-		 
-		
-				
+		return "student/testQuiz";
+	}
+
+	@RequestMapping(value = "/quizUpdateScore", method = RequestMethod.POST)
+	public String processJsonData() {
+		// Use requestData object in your controller logic
+
+		return "";
+	}
+
 //		 System.out.println("Quiz details Saloni ..."+request);			  
 //		 Optional<Quiz> data = quizService.getQuizId(3);
 //		 Quiz as = data.get();
@@ -410,7 +437,6 @@ public class StudentLoginController {
 //			 
 //		 }
 
-			 
 //			 Quiz quiz = new Quiz();
 //			 
 //			 if(request.getScore() != null) {				 
@@ -424,14 +450,13 @@ public class StudentLoginController {
 //			 }
 //			 System.out.println("new quiz list.."+newQuestionList);
 //			 model.addAttribute("quiz", newQuestionList); 		  
-		    
-		
-		//........................Notice Board ..............................
-		
-		@RequestMapping("/noticeBoard")
-		public String Notice() {
-			System.out.println("notice board student section...");
-			return "student/noticeBoard";
-		}
-	
+
+	// ........................Notice Board ..............................
+
+	@RequestMapping("/noticeBoard")
+	public String Notice() {
+		System.out.println("notice board student section...");
+		return "student/noticeBoard";
+	}
+
 }

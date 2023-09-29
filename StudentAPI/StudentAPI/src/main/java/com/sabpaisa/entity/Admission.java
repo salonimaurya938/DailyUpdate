@@ -1,5 +1,7 @@
 package com.sabpaisa.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,9 +16,6 @@ public class Admission {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String admissionNo;
-	private byte[] stdProfile;
-	private byte[] fProfile;
-	private byte[] mProfile;
 	private String name;
 	private String fname;
 	private String mname;
@@ -39,6 +38,11 @@ public class Admission {
 	private String registrationNo;
 	private String classAdmittedinto;
 	private String rollNo;
+	private String userId;
+	private String pass;
+	private byte[] stdProfile;
+	private byte[] fProfile;
+	private byte[] mProfile;
 	
 	public int getId() {
 		return id;
@@ -99,8 +103,7 @@ public class Admission {
 	}
 	public void setGmail(String gmail) {
 		this.gmail = gmail;
-	}
-	
+	}	
 	public String getDistrict() {
 		return district;
 	}
@@ -185,6 +188,18 @@ public class Admission {
 	public void setRegistrationNo(String registrationNo) {
 		this.registrationNo = registrationNo;
 	}	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 	public byte[] getStdProfile() {
 		return stdProfile;
 	}
@@ -202,22 +217,15 @@ public class Admission {
 	}
 	public void setmProfile(byte[] mProfile) {
 		this.mProfile = mProfile;
-	}
-	public Admission() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Admission(int id, String admissionNo, byte[] stdProfile, byte[] fProfile, byte[] mProfile, String name,
-			String fname, String mname, String dob, String gender, String bloodGroup, String classes, String address,
-			String gmail, String district, String state, String pincode, String aadharNo, String fqulification,
-			String mqulification, String foccupation, String pmob, String receiptNo, String amount,
-			String registrationNo, String classAdmittedinto, String rollNo) {
+	}	
+	public Admission(int id, String admissionNo, String name, String fname, String mname, String dob, String gender,
+			String bloodGroup, String classes, String address, String gmail, String district, String state,
+			String pincode, String aadharNo, String fqulification, String mqulification, String foccupation,
+			String pmob, String receiptNo, String amount, String registrationNo, String classAdmittedinto,
+			String rollNo, String userId, String pass, byte[] stdProfile, byte[] fProfile, byte[] mProfile) {
 		super();
 		this.id = id;
 		this.admissionNo = admissionNo;
-		this.stdProfile = stdProfile;
-		this.fProfile = fProfile;
-		this.mProfile = mProfile;
 		this.name = name;
 		this.fname = fname;
 		this.mname = mname;
@@ -240,7 +248,29 @@ public class Admission {
 		this.registrationNo = registrationNo;
 		this.classAdmittedinto = classAdmittedinto;
 		this.rollNo = rollNo;
+		this.userId = userId;
+		this.pass = pass;
+		this.stdProfile = stdProfile;
+		this.fProfile = fProfile;
+		this.mProfile = mProfile;
 	}
+	public Admission() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "Admission [id=" + id + ", admissionNo=" + admissionNo + ", name=" + name + ", fname=" + fname
+				+ ", mname=" + mname + ", dob=" + dob + ", gender=" + gender + ", bloodGroup=" + bloodGroup
+				+ ", classes=" + classes + ", address=" + address + ", gmail=" + gmail + ", district=" + district
+				+ ", state=" + state + ", pincode=" + pincode + ", aadharNo=" + aadharNo + ", fqulification="
+				+ fqulification + ", mqulification=" + mqulification + ", foccupation=" + foccupation + ", pmob=" + pmob
+				+ ", receiptNo=" + receiptNo + ", amount=" + amount + ", registrationNo=" + registrationNo
+				+ ", classAdmittedinto=" + classAdmittedinto + ", rollNo=" + rollNo + ", userId=" + userId + ", pass="
+				+ pass + ", stdProfile=" + stdProfile + ", fProfile=" + fProfile + ", mProfile=" + mProfile + "]";
+	}
+	
+	
 	
 	
 }
