@@ -48,7 +48,7 @@ public class BookController {
 		return "home";
 	}
 	
-//	.......................Start Book handler.................................
+//....................................Start Book handler.................................
 
 	@RequestMapping("/addBook")
 	public String bookBook(Model model,HttpSession session) {
@@ -62,7 +62,7 @@ public class BookController {
 	
 	@PostMapping("/addBook")
 	public String bookSave(@ModelAttribute("admin/addBook")@RequestParam MultipartFile subIcon, String subName,String subTitle,String substatus,String publisher, String author ,String bookIssueDate,String bookSubmitDate,String classes) throws IOException {
-		System.out.println("switching...");	
+		System.out.println("Switching...");	
 		Book book = new Book();
 	    Book im = bookService.addBook(book);
 	    im.setSubIcon(subIcon.getOriginalFilename());

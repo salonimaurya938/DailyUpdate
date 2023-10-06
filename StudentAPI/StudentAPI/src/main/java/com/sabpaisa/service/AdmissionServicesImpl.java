@@ -69,6 +69,39 @@ public class AdmissionServicesImpl  implements AdmissionServices{
 		return null;
 	}
 
+	@Override
+	public Admission updateMyProfile(Admission admission) {
+		
+		Optional<Admission> data = admissionDao.findById(admission.getId());	
+		if(data.isPresent()) {
+			Admission newdata=data.get();
+			newdata.setName(admission.getName());	
+			newdata.setUserId(admission.getUserId());
+			newdata.setFname(admission.getFname());	
+			newdata.setMname(admission.getMname());
+			newdata.setPmob(admission.getPmob());
+			newdata.setGmail(admission.getGmail());
+			newdata=admissionDao.save(newdata);
+			return newdata;
+		}
+		admission=admissionDao.save(admission);
+		return admission;
+		
+	}
+
+	@Override
+	public Admission changePassword(Admission admission) {
+		Optional<Admission> data = admissionDao.findById(admission.getId());	
+		if(data.isPresent()) {
+			Admission newdata=data.get();
+			newdata.setPass(admission.getPass());	
+			newdata=admissionDao.save(newdata);
+			return newdata;
+		}
+		admission=admissionDao.save(admission);
+		return admission;
+	}
+
 	
 
 }

@@ -1,5 +1,5 @@
 <div xmls:th="http://www.thymeleaf.org" th:replace="student/master::layout(~{::section})">
-	
+
 	<section>
 		<main id="main" class="main">
 
@@ -62,46 +62,86 @@
 								<div class="tab-content pt-2">
 
 									<div class="tab-pane fade show active profile-overview" id="profile-overview">
-										
+
 										<h5 class="card-title" style="color:rgb(128, 128, 255)">Profile Details</h5>
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label ">Registration No</div>
+											<div class="col-lg-9 col-md-8" th:text="${registratonNo}"></div>
+										</div>
 
 										<div class="row">
-											<div class="col-lg-3 col-md-4 label ">Student Name</div>											
-										<div class="col-lg-9 col-md-8" th:text="${username}"></div>
+											<div class="col-lg-3 col-md-4 label ">Student Name</div>
+											<div class="col-lg-9 col-md-8" th:text="${name}"></div>
+										</div>
+										
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label ">Father Name</div>
+											<div class="col-lg-9 col-md-8" th:text="${fname}"></div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label">Mother Name</div>
+											<div class="col-lg-9 col-md-8" th:text="${mname}"></div>
 										</div>
 
 										<div class="row">
 											<div class="col-lg-3 col-md-4 label">Email </div>
 											<div class="col-lg-9 col-md-8" th:text="${email}"></div>
 										</div>
-										
+
 										<div class="row">
 											<div class="col-lg-3 col-md-4 label ">Contact No </div>
 											<div class="col-lg-9 col-md-8" th:text="${pmob}"></div>
 										</div>
 
-										<!--<div class="row">
-											<div class="col-lg-3 col-md-4 label">Mobile</div>
-											<div class="col-lg-9 col-md-8" th:text="${email}"></div>
-										</div>-->								
-										
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label">Date of Birth</div>
+											<div class="col-lg-9 col-md-8" th:text="${dob}"></div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label ">Roll No</div>
+											<div class="col-lg-9 col-md-8" th:text="${rollNo}"></div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label ">Gender</div>
+											<div class="col-lg-9 col-md-8" th:text="${gender}"></div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label">Blood Group </div>
+											<div class="col-lg-9 col-md-8" th:text="${bloodGroup}"></div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label ">Student Class </div>
+											<div class="col-lg-9 col-md-8" th:text="${classes}"></div>
+										</div>
+
+										<div class="row">
+											<div class="col-lg-3 col-md-4 label">Home Address</div>
+											<div class="col-lg-9 col-md-8" th:text="${address}"></div>
+										</div>
+
 									</div>
 
 									<div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
 										<!-- Profile Edit Form -->
-										<form th:action="@{/adminDashBoard}" method="post" enctype="multipart/form-data" >
-										
-											<input name="id" type="hidden" class="form-control"
-														id="id" th:value="${id}">
-														
+								 <form th:action="@{/myProfile}" method="post"
+											enctype="multipart/form-data">
+
+											<input name="id" type="hidden" class="form-control" id="id"
+												th:value="${id}">
+
 											<div class="row mb-3">
 												<label for="profileImage"
 													class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
 												<div class="col-md-8 col-lg-9">
 													<img src="assets/img/profile-img.jpg" alt="Profile">
 													<div class="pt-2">
-														<a href="@|${/adminDashBoard}|" class="btn btn-primary btn-sm"
+														<a href="@|${/myProfile}|" class="btn btn-primary btn-sm"
 															title="Upload new profile image"><i
 																class="bi bi-upload"></i></a>
 														<a href="#" class="btn btn-danger btn-sm"
@@ -110,23 +150,63 @@
 													</div>
 												</div>
 											</div>
-
+											<input type="hidden" th:value="${id}" name="id"> 
 											<div class="row mb-3">
-												<label for="username" class="col-md-4 col-lg-3 col-form-label">User
-													Name</label>
+												<label for="registrationNo" class="col-md-4 col-lg-3 col-form-label">Registration No</label>
+													
 												<div class="col-md-8 col-lg-9">
-													<input name="username" type="text" class="form-control"
-														id="username" th:value="${username}" >
-														
+													<input name="registrationNo" readonly type="text" class="form-control"
+														id="registrationNo" th:value="${registratonNo}">
+
 												</div>
 											</div>
+											<div class="row mb-3">
+												<label for="userId" class="col-md-4 col-lg-3 col-form-label">UserId</label>													
+												<div class="col-md-8 col-lg-9">
+													<input name="userId" type="text" class="form-control"
+														id="userId" th:value="${username}">
 
+												</div>
+											</div>
+											<div class="row mb-3">
+												<label for="name" class="col-md-4 col-lg-3 col-form-label">Student Name</label>
+													
+												<div class="col-md-8 col-lg-9">
+													<input name="name" type="text" class="form-control"
+														id="name" th:value="${name}">
+
+												</div>
+											</div>
+												<div class="row mb-3">
+												<label for="fname" class="col-md-4 col-lg-3 col-form-label">Father Name</label>
+												<div class="col-md-8 col-lg-9">
+													<input name="fname" type="text" class="form-control"
+														id="fname" th:value="${fname}">
+
+												</div>
+											</div>	
+											<div class="row mb-3">
+												<label for="mname" class="col-md-4 col-lg-3 col-form-label">Mother Name</label>
+												<div class="col-md-8 col-lg-9">
+													<input name="mname" type="text" class="form-control"
+														id="mname" th:value="${mname}">
+
+												</div>
+											</div>											
+											<div class="row mb-3">
+												<label for="pmob" class="col-md-4 col-lg-3 col-form-label">Contact Number</label>
+												<div class="col-md-8 col-lg-9">
+													<input name="pmob" type="text" class="form-control"
+														id="pmob" th:value="${pmob}">
+
+												</div>
+											</div>									 
 											<div class="row mb-3">
 												<label for="email"
 													class="col-md-4 col-lg-3 col-form-label">Email</label>
 												<div class="col-md-8 col-lg-9">
-													<input name="email" type="email" class="form-control" id="email"
-														th:value="${email}">														
+													<input name="gmail" type="email" class="form-control" id="email"
+														th:value="${email}">
 												</div>
 											</div>
 											<div class="text-center">
@@ -134,19 +214,19 @@
 											</div>
 										</form><!-- End Profile Edit Form -->
 
-									</div>							
+									</div>
 
 									<div class="tab-pane fade pt-3" id="profile-change-password">
 										<!-- Change Password Form -->
-										<form th:action="@{/changePassword}" method="post" enctype="multipart/form-data">
+										<form th:action="@{/changePassword}" method="post"
+											enctype="multipart/form-data">
 
-										<input name="id" type="text" class="form-control"
-														id="id" th:value="${id}">
+											<input name="id" type="hidden" class="form-control" id="id" th:value="${id}">
 											<div class="row mb-3">
 												<label for="currentPassword"
 													class="col-md-4 col-lg-3 col-form-label">Current Password</label>
 												<div class="col-md-8 col-lg-9">
-													<input name="password" type="password" class="form-control"
+													<input name="oldpassword" type="password" class="form-control"
 														id="currentPassword" th:value="${pass}">
 												</div>
 											</div>
@@ -155,7 +235,7 @@
 												<label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New
 													Password</label>
 												<div class="col-md-8 col-lg-9">
-													<input name="newpassword" type="password" class="form-control"
+													<input name="pass" type="password" class="form-control"
 														id="newPassword">
 												</div>
 											</div>

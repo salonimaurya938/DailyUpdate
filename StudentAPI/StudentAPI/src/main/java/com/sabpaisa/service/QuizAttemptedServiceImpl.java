@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sabpaisa.dao.QuizAttemptedDao;
 import com.sabpaisa.entity.QuizAttempted;
-
+@Service
 public class QuizAttemptedServiceImpl implements QuizAttemptedService {
 
 	

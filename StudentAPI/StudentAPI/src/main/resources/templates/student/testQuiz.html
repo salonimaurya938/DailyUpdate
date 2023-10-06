@@ -23,6 +23,8 @@
 									<form name="quizForm" th:action="@{/testQuiz}" onSubmit="" th:object="${category}"
 										id="formId" enctype="multipart/form-data">
 										<span th:text="${cat}"></span>
+										<input type="hidden" th:value="${userId}" id="userId">
+										<input type="hidden" th:value="${category}" id="category">
 										<fieldset class="form-group">
 											<h4><span id="qid">1</span>.
 												<span id="question"><!--Question--></span>
@@ -248,11 +250,56 @@
 </script>
 
 <!--............................... End AjaxCode.................................... -->
+
+<script>
+	$(() => {
+		$("#next").click(function (ev) {
+			var quizId = document.getElementById("qid").innerText;
+			//alert(quizId);
+			var question = document.getElementById("question").innerText;
+			//alert(question);
+			var options = document.getElementById("question-options").innerText;
+			///alert(options);
+			var answer = $("input[name='option']:checked").val();
+			//alert(answer);
+			var category = document.getElementById("category").value;
+			//alert(category);
+			var userId = document.getElementById("userId").value;
+			//alert(userId);
+			
+			var formData = {
+				"quizId": quizId,
+				"question": question,
+				"options": options,
+				"answer": answer,
+				"category": category,
+				"userId": userId
+			};
+			
+			console.log("console testing ::"+formData);
+			$.ajax({
+				type: "POST",
+				url: "/testQuiz",
+				data: JSON.stringify(formData), 
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (response) {
+					alert("Okk")
+					console.log("Response received:", response);
+				},
+			});
+		});
+	});
+
+</script>
+
+<!--............................... End AjaxCode.................................... -->
 <!--............................... Start Css .................................... -->
 <style>
 	.content {
 		margin-top: 54px;
 	}
+
 	.headerTop {
 		padding: 15px;
 		position: relative;

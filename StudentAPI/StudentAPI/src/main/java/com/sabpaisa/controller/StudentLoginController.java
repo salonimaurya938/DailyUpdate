@@ -106,10 +106,10 @@ public class StudentLoginController {
 
 	@Autowired
 	private CategoryDao categoryDao;
-	
+
 	@Autowired
 	private AdmissionServices admissionServices;
-	
+
 	@Autowired
 	private AdmissionDao admissionDao;
 
@@ -117,7 +117,7 @@ public class StudentLoginController {
 //	public String StudentRegistration() {
 //		return "register";
 //	}
-//	
+	
 	@GetMapping("/my-account")
 	public String addstudents(Model model, Student student) {
 		model.addAttribute("title", "Registration-School Management System");
@@ -148,9 +148,11 @@ public class StudentLoginController {
 	}
 
 	@PostMapping("/login")
-	public String Studentlogin(Model model, @ModelAttribute("login")Admission admission,HttpSession session) {
-		System.out.println("Admission details :: "+admission);
+	public String Studentlogin(Model model, @ModelAttribute("login") Admission admission, HttpSession session) {
+		System.out.println("Admission details :: " + admission);
 		Admission user = admissionDao.findByUserIdAndPass(admission.getUserId(), admission.getPass());
+		int userid = user.getId();
+		String id = Integer.toString(userid);
 		String email = user.getUserId();
 		String pass = user.getPass();
 		System.out.println("Admission data" + user);
@@ -159,7 +161,18 @@ public class StudentLoginController {
 			session.setAttribute("name", user.getName());
 			session.setAttribute("email", user.getGmail());
 			session.setAttribute("pass", user.getPass());
-			session.setAttribute("id", user.getId());
+			session.setAttribute("id", id);
+			session.setAttribute("fname", user.getFname());
+			session.setAttribute("mname", user.getMname());
+			session.setAttribute("dob", user.getDob());
+			session.setAttribute("gender", user.getGender());
+			session.setAttribute("bloodGroup", user.getBloodGroup());
+			session.setAttribute("classes", user.getClasses());
+			session.setAttribute("address", user.getAddress());
+			session.setAttribute("rollNo", user.getRollNo());
+			session.setAttribute("pmob", user.getPmob());
+			session.setAttribute("registratonNo", user.getRegistrationNo());
+			session.setAttribute("admissionNo", user.getAdmissionNo());
 //   	    model.addAttribute("id", d.getId());
 			return "student/studentDashboard";
 		} else
@@ -172,48 +185,59 @@ public class StudentLoginController {
 	}
 
 	@RequestMapping("/myProfile")
-	public String Student(Admission admission,HttpSession session,Model model) {
+	public String Student(Admission admission, HttpSession session, Model model) {
 		ModelAndView ma = new ModelAndView("myProfile");
 		System.out.println("my profile...");
-		
+
 		String username = (String) session.getAttribute("username");
 		String email = (String) session.getAttribute("email");
-		//int id = (int) session.getAttribute("id");
-		String mob = (String) session.getAttribute("mob");
+		String id = (String) session.getAttribute("id");
+		// int id = (int) session.getId();
+		String pmob = (String) session.getAttribute("pmob");
+		String name = (String) session.getAttribute("name");
 		String pass = (String) session.getAttribute("pass");
-		if(username!=null && email!= null) {
-			
+		String fname = (String) session.getAttribute("fname");
+		String mname = (String) session.getAttribute("mname");
+		String bloodGroup = (String) session.getAttribute("bloodGroup");
+		String dob = (String) session.getAttribute("dob");
+		String gender = (String) session.getAttribute("gender");
+		String classes = (String) session.getAttribute("classes");
+		String rollNo = (String) session.getAttribute("rollNo");
+		String address = (String) session.getAttribute("address");
+		String registratonNo = (String) session.getAttribute("registratonNo");
+		if (username != null && email != null) {
+
 			model.addAttribute("username", username);
 			model.addAttribute("email", email);
 		}
-		model.addAttribute("mob",mob);
-		//model.addAttribute("id", id);
+		model.addAttribute("pmob", pmob);
 		model.addAttribute("pass", pass);
-		System.out.println(" Username :: "+username+"\n Email :: "+email+"\n Password :: "+pass+"\n Mobile :: "+mob);
-		
-		//Student d = studentService.studentLogin(student);
-		//System.out.println("student value" + d);
+		model.addAttribute("name", name);
+		model.addAttribute("mname", mname);
+		model.addAttribute("fname", fname);
+		model.addAttribute("address", address);
+		model.addAttribute("bloodGroup", bloodGroup);
+		model.addAttribute("dob", dob);
+		model.addAttribute("gender", gender);
+		model.addAttribute("classes", classes);
+		model.addAttribute("rollNo", rollNo);
+		model.addAttribute("registratonNo", registratonNo);
+		model.addAttribute("id", id);
+
+		System.out.println(" Username :: " + username + "\n Email :: " + email + "\n Password :: " + pass
+				+ "\n Mobile :: " + pmob);
+
+		// Student d = studentService.studentLogin(student);
+		// System.out.println("student value" + d);
 		return "student/myProfile";
 	}
 
 	@PostMapping("/myProfile")
-	public String studentProfile(Model model, @ModelAttribute("student/myProfile") HttpSession session,Admission admission) {
+	public String studentProfile(Model model, @ModelAttribute("student/myProfile") HttpSession session,
+			Admission admission) {
 		System.out.println("my profile...");
-//		Admission user = admissionServices.studentLogin(admission);
-//		System.out.println("student value" + user);
-//		if (user != null) {
-//			session.setAttribute("email", user.getGmail());
-//			session.setAttribute("username", user.getName());
-//			session.setAttribute("mob", user.getPmob());
-//			session.setAttribute("pass", user.getPass());
-//			session.setAttribute("id", user.getId());
-//	    	    model.addAttribute("id", d.getId());
-//				model.addAttribute("username", d.getStudentName());
-//				model.addAttribute("email", d.getEmail());
-//				model.addAttribute("mob", d.getMob());
-//				model.addAttribute("pass", d.getPassword());	
-//			return "student/myProfile";
-//		}
+		Admission abc = admissionServices.updateMyProfile(admission);
+		System.out.println("Updated successfully !!! ::" + abc);
 		return "student/myProfile";
 	}
 
@@ -227,8 +251,31 @@ public class StudentLoginController {
 //		
 //		System.out.println(studentData);
 //		return studentData;
-//	}
+//	}.................................
 
+	@RequestMapping("/changePassword")
+	public String changePassword(Admission admission) {
+
+		String oldPassword = admission.getPass();
+	//	String newPassword = admission.getPass();
+	//  String reNewPassword = admission.getPass();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+		if (oldPassword != null) {
+
+			//if (newPassword == reNewPassword) {
+
+				Admission abc = admissionServices.changePassword(admission);
+				System.out.println("Password Change successfully!!!");
+				System.out.println("New Password :: "+abc);
+
+			//}
+		}
+
+		return "student/myProfile";
+	}
+
+	
+	
+	
 	// ..................Book Controller..............................
 
 	@RequestMapping("/viewBook")
@@ -326,19 +373,72 @@ public class StudentLoginController {
 //			return "student/onlineQuiz";
 //		}
 
-	@RequestMapping("/onlineQuiz")
-	public String quizDetails(Model model) {
-		List<QuizDetails> quizDetails = quizDetailsServices.getQuizDetails();
-		model.addAttribute("quizDetails", quizDetails);
-		System.out.println(quizDetails);
+	@RequestMapping(value = "/onlineQuiz", method = RequestMethod.GET)
+	public String quizDetails(Model model, Admission admission) {
+
 		List<Category> cate = categoryDao.findAll();
 		System.out.println("category :: " + cate);
 		model.addAttribute("cate", cate);
+		List<QuizDetails> quizDetails = quizDetailsServices.getQuizDetails();
+		// model.addAttribute("quizDetails", quizDetails);
+		System.out.println("QuizDetails table details" + quizDetails);
+		
+		// dynamic id		
+		//Optional<Admission> data = admissionDao.findById(admission.getId());	
+		//System.out.println("get id Data :: " + data);
+		//Admission studentClass = data.get();
+		
+		Optional<Admission> idData = admissionDao.findById(1);
+		System.out.println("get id Data :: " + idData);
+		Admission studentClass = idData.get();
+		String stdclasses = studentClass.getClasses();
+		System.out.println("get classes by Admission tbl :: " + studentClass);
+
+		List<QuizDetails> newDetailsList = new ArrayList<>();
+		List<QuizDetails> getList = quizDetailsServices.getQuizDetails();
+		QuizDetails quisDetails = null;
+		for (QuizDetails newData : getList) {
+			if (stdclasses.equalsIgnoreCase(newData.getClasses())) {
+				quisDetails = new QuizDetails();
+				quisDetails.setCategory(newData.getCategory());
+				quisDetails.setClasses(newData.getClasses());
+				quisDetails.setMarks(newData.getMarks());
+				quisDetails.setNegativeMarks(newData.getNegativeMarks());
+				quisDetails.setSubject(newData.getSubject());
+				quisDetails.setTitle(newData.getTitle());
+				quisDetails.setTotalTime(newData.getTotalTime());
+				quisDetails.setId(newData.getId());
+				newDetailsList.add(quisDetails);
+			}
+		}
+		System.out.println("New Quiz Details Match By Student Classes Data ::");
+		System.out.println(newDetailsList);
+		model.addAttribute("quizDetails", newDetailsList);
+		
+		
+		
+		
 		return "student/onlineQuiz";
 	}
 
+    @PostMapping("/onlineQuiz")
+	public String OnlineQuizss(Model model, Admission admission) {
+    	
+    	int id= admission.getId();
+    	System.out.println("id get by id ::"+id);
+		return "student/onlineQuiz";
+		
+	}
+	
+	
+	
 	@RequestMapping(value = "/testQuiz{category}", method = RequestMethod.GET)
-	public String quizss(Model model, Quiz quz, @PathVariable("category") String category) {
+	public String quizss(Model model, Quiz quz, @PathVariable("category") String category, HttpSession session) {
+		
+		String username = (String) session.getAttribute("username");
+		model.addAttribute("userId", username);
+		
+		
 		System.out.println("Quiz Section..." + category);
 		List<QuizDetails> quizdetails = quizDetailsDao.findAll();
 		model.addAttribute("quizdetials", quizdetails);
@@ -364,6 +464,9 @@ public class StudentLoginController {
 		model.addAttribute("quiz", quiz);
 		System.out.println("Fetech All quiz Data ::" + quiz);
 		System.out.println("Category..." + category);
+		model.addAttribute("category", category);
+		
+		
 		List<Quiz> newQuestionList = new ArrayList<>();
 		List<Quiz> quiz1 = quizDao.findAll();
 		Quiz quiz2 = null;
@@ -421,9 +524,9 @@ public class StudentLoginController {
 
 	@RequestMapping(value = "/quizUpdateScore", method = RequestMethod.POST)
 	public String processJsonData() {
-		// Use requestData object in your controller logic
+		System.out.println("Ajax Data ...");
 
-		return "";
+		return "student/testQuiz";
 	}
 
 //		 System.out.println("Quiz details Saloni ..."+request);			  

@@ -23,4 +23,8 @@ public interface AdmissionServices {
 	
 	public Admission studentLogin(Admission admission);
 	
+	public Admission updateMyProfile(Admission admission);
+	
+	public Admission changePassword(Admission admission);
+	
 }
