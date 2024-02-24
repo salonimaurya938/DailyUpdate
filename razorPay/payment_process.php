@@ -12,7 +12,10 @@ if(isset($_POST['amt']) && isset($_POST['name'])){
 }
 elseif(isset($_POST['payment_id']) && isset($_SESSION['OID'])){
     $payment_id=$_POST['payment_id'];
-    mysqli_query("UPDATE `payment` SET `payment_status`='Complete',`payment_id`='$payment_id' WHERE `id`='".$_SESSION['OID']"'");
+    mysqli_query("UPDATE `payment` SET `payment_status`='Complete',`payment_id`='$payment_id' WHERE `id`='"$_SESSION['OID']"'");
+    $_SESSION['OID']=mysqli_insert_id($conn);
+}else{
+    echo "Error";
 }
   
 
